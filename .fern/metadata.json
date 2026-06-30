@@ -1,0 +1,15 @@
+{
+  "cliVersion": "5.45.3",
+  "generatorName": "fernapi/fern-go-sdk",
+  "generatorVersion": "1.45.4",
+  "generatorConfig": {
+    "module": {
+      "path": "github.com/wavix/wavix-go-sdk"
+    }
+  },
+  "originGitCommit": "af69033e3cb9260efdbfbf64452f841499bb8fc4",
+  "originGitCommitIsDirty": false,
+  "invokedBy": "manual",
+  "requestedVersion": "v1.0.0",
+  "sdkVersion": "v1.0.0"
+}
