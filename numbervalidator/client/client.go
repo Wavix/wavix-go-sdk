@@ -37,12 +37,12 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-// Validates a single phone number and returns line type, carrier, portability, and reachability details.
+// Validates a single phone number and returns line type, carrier, portability, and reachability details. The response's `error_code` is a per-number result code (`000` success; `013` internal error; `021` invalid format; `041` remote timeout; `042` remote query failed; `091` insufficient funds) — distinct from the HTTP status codes below.
 func (c *Client) Get(
 	ctx context.Context,
 	request *wavixgosdk.GetNumberValidatorRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.GetNumberValidatorResponse, error) {
+) (*wavixgosdk.PhoneValidationResponse, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,

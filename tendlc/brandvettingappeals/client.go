@@ -57,7 +57,7 @@ func (c *Client) Create(
 	ctx context.Context,
 	request *tendlc.TenDlcBrandVettingAppealCreateRequest,
 	opts ...option.RequestOption,
-) (*tendlc.CreateBrandVettingAppealsResponse, error) {
+) (*wavixgosdk.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,

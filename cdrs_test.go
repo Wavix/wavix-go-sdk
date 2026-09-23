@@ -1084,7 +1084,7 @@ func TestSettersCdrSearchRequest(t *testing.T) {
 
 	t.Run("SetDisposition", func(t *testing.T) {
 		obj := &CdrSearchRequest{}
-		var fernTestValueDisposition *CdrSearchRequestDisposition
+		var fernTestValueDisposition *CallDisposition
 		obj.SetDisposition(fernTestValueDisposition)
 		assert.Equal(t, fernTestValueDisposition, obj.Disposition)
 		assert.NotNil(t, obj.explicitFields)
@@ -1092,7 +1092,7 @@ func TestSettersCdrSearchRequest(t *testing.T) {
 
 	t.Run("SetPage", func(t *testing.T) {
 		obj := &CdrSearchRequest{}
-		var fernTestValuePage int
+		var fernTestValuePage *int
 		obj.SetPage(fernTestValuePage)
 		assert.Equal(t, fernTestValuePage, obj.Page)
 		assert.NotNil(t, obj.explicitFields)
@@ -1100,7 +1100,7 @@ func TestSettersCdrSearchRequest(t *testing.T) {
 
 	t.Run("SetPerPage", func(t *testing.T) {
 		obj := &CdrSearchRequest{}
-		var fernTestValuePerPage int
+		var fernTestValuePerPage *int
 		obj.SetPerPage(fernTestValuePerPage)
 		assert.Equal(t, fernTestValuePerPage, obj.PerPage)
 		assert.NotNil(t, obj.explicitFields)
@@ -1392,7 +1392,7 @@ func TestSettersMarkExplicitCdrSearchRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &CdrSearchRequest{}
-		var fernTestValueDisposition *CdrSearchRequestDisposition
+		var fernTestValueDisposition *CallDisposition
 
 		// Act
 		obj.SetDisposition(fernTestValueDisposition)
@@ -1423,7 +1423,7 @@ func TestSettersMarkExplicitCdrSearchRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &CdrSearchRequest{}
-		var fernTestValuePage int
+		var fernTestValuePage *int
 
 		// Act
 		obj.SetPage(fernTestValuePage)
@@ -1454,7 +1454,7 @@ func TestSettersMarkExplicitCdrSearchRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &CdrSearchRequest{}
-		var fernTestValuePerPage int
+		var fernTestValuePerPage *int
 
 		// Act
 		obj.SetPerPage(fernTestValuePerPage)
@@ -6623,56 +6623,6 @@ func TestEnumCallDisposition(t *testing.T) {
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewCallDispositionFromString("answered")
-		assert.NoError(t, err)
-		ptr := val.Ptr()
-		assert.NotNil(t, ptr)
-		assert.Equal(t, val, *ptr)
-	})
-}
-
-func TestEnumCdrSearchRequestDisposition(t *testing.T) {
-	t.Run("NewFromString_answered", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCdrSearchRequestDispositionFromString("answered")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CdrSearchRequestDisposition("answered"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_noanswer", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCdrSearchRequestDispositionFromString("noanswer")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CdrSearchRequestDisposition("noanswer"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_busy", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCdrSearchRequestDispositionFromString("busy")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CdrSearchRequestDisposition("busy"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_failed", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCdrSearchRequestDispositionFromString("failed")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CdrSearchRequestDisposition("failed"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_all", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCdrSearchRequestDispositionFromString("all")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CdrSearchRequestDisposition("all"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewCdrSearchRequestDispositionFromString("invalid_value_that_does_not_exist")
-		assert.Error(t, err)
-	})
-
-	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewCdrSearchRequestDispositionFromString("answered")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)

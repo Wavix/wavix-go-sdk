@@ -325,7 +325,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"dids\": [\n    {\n      \"id\": 541139862174,\n      \"activation_fee\": \"15.0\",\n      \"monthly_fee\": \"10.0\",\n      \"per_min\": \"0.01\",\n      \"channels\": \"4\",\n      \"city\": \"Buenos Aires\",\n      \"country\": \"Argentina\",\n      \"country_short_name\": \"AR\",\n      \"cnam\": false,\n      \"free_min\": 0,\n      \"number\": \"541139862174\",\n      \"require_docs\": [\n        1,\n        3\n      ],\n      \"sms_enabled\": false,\n      \"sms_price\": 0,\n      \"domestic_cli\": false\n    }\n  ],\n  \"doc_types\": [\n    {\n      \"id\": 1,\n      \"name\": \"id\",\n      \"title\": \"Any form of ID\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"address\",\n      \"title\": \"Proof of address\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"localaddress\",\n      \"title\": \"Proof of local address\"\n    }\n  ]\n}",
+        "body": "{\n  \"dids\": [\n    {\n      \"id\": 541139862174,\n      \"activation_fee\": \"15.0\",\n      \"monthly_fee\": \"10.0\",\n      \"per_min\": \"0.01\",\n      \"channels\": \"4\",\n      \"city\": \"Buenos Aires\",\n      \"country\": \"Argentina\",\n      \"country_short_name\": \"AR\",\n      \"cnam\": false,\n      \"free_min\": 0,\n      \"number\": \"541139862174\",\n      \"require_docs\": [\n        \"address\"\n      ],\n      \"sms_enabled\": false,\n      \"sms_price\": 0,\n      \"domestic_cli\": false\n    }\n  ],\n  \"doc_types\": [\n    {\n      \"id\": 1,\n      \"name\": \"id\",\n      \"title\": \"Any form of ID\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"address\",\n      \"title\": \"Proof of address\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"localaddress\",\n      \"title\": \"Proof of local address\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -357,7 +357,7 @@
       },
       "response": {
         "status": 200,
-        "body": "[\n  {\n    \"activation_fee\": \"15.0\",\n    \"channels\": \"4\",\n    \"city\": \"Buenos Aires\",\n    \"cnam\": false,\n    \"country\": \"Argentina\",\n    \"country_short_name\": \"AR\",\n    \"domestic_cli\": false,\n    \"free_min\": 0,\n    \"id\": 541139862174,\n    \"monthly_fee\": \"10.0\",\n    \"number\": \"541139862174\",\n    \"per_min\": \"0.01\",\n    \"sms_enabled\": false,\n    \"sms_price\": 0\n  }\n]",
+        "body": "[\n  {\n    \"id\": 541139862174,\n    \"activation_fee\": \"15.0\",\n    \"monthly_fee\": \"10.0\",\n    \"per_min\": \"0.01\",\n    \"channels\": \"4\",\n    \"city\": \"Buenos Aires\",\n    \"country\": \"Argentina\",\n    \"country_short_name\": \"AR\",\n    \"cnam\": false,\n    \"free_min\": 0,\n    \"number\": \"541139862174\",\n    \"require_docs\": [\n      \"address\"\n    ],\n    \"sms_enabled\": false,\n    \"sms_price\": 0,\n    \"domestic_cli\": false\n  }\n]",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -470,7 +470,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"items\": [\n    {\n      \"id\": 123,\n      \"number\": \"12565378257\",\n      \"activation_fee\": \"0.99\",\n      \"monthly_fee\": \"0.99\",\n      \"per_min\": \"0.01\",\n      \"city\": \"DETROIT, MI\",\n      \"state\": \"example\",\n      \"country\": \"United States\",\n      \"country_short_name\": \"US\",\n      \"destination\": [\n        {\n          \"id\": 1,\n          \"destination\": \"[did]@sipuri.com\",\n          \"priority\": 1,\n          \"transport\": 1,\n          \"trunk_id\": 23123,\n          \"srtp\": false,\n          \"trunk_label\": \"My trunk\"\n        }\n      ],\n      \"channels\": 24,\n      \"require_docs\": [\n        \"1\"\n      ],\n      \"documents\": [\n        {\n          \"id\": 423,\n          \"allow_replace\": false,\n          \"did_number\": \"12565378257\",\n          \"doc_content_type\": \"image/png\",\n          \"doc_file_name\": \"Copy of ID.png\",\n          \"doc_type_id\": 1,\n          \"status\": \"approved\",\n          \"url\": \"https://api.wavix.com/v1/numbers/24882/papers/1\"\n        }\n      ],\n      \"domestic_cli\": true,\n      \"free_min\": 123,\n      \"unlimited\": true,\n      \"label\": \"example\",\n      \"status\": \"example\",\n      \"seconds\": \"example\",\n      \"added\": \"2023-04-10T06:42:59Z\",\n      \"paid_until\": \"2023-12-07\",\n      \"sms_enabled\": false,\n      \"sms_relay_url\": \"https://your-website.com/webhook\",\n      \"cnam\": true,\n      \"call_recording_enabled\": true,\n      \"transcription_enabled\": true,\n      \"transcription_threshold\": 6,\n      \"call_status_url\": \"https://example.com\"\n    }\n  ],\n  \"doc_types\": [\n    {\n      \"id\": 2,\n      \"name\": \"address\",\n      \"title\": \"Proof of address\"\n    }\n  ],\n  \"pagination\": {\n    \"current_page\": 2,\n    \"per_page\": 25,\n    \"total\": 101,\n    \"total_pages\": 5\n  }\n}",
+        "body": "{\n  \"items\": [\n    {\n      \"id\": 123,\n      \"number\": \"12565378257\",\n      \"activation_fee\": \"0.99\",\n      \"monthly_fee\": \"0.99\",\n      \"per_min\": \"0.01\",\n      \"city\": \"DETROIT, MI\",\n      \"state\": \"example\",\n      \"country\": \"United States\",\n      \"country_short_name\": \"US\",\n      \"destination\": [\n        {\n          \"id\": 1,\n          \"destination\": \"[did]@sipuri.com\",\n          \"priority\": 1,\n          \"transport\": 1,\n          \"trunk_id\": 23123,\n          \"srtp\": false,\n          \"trunk_label\": \"My trunk\"\n        }\n      ],\n      \"channels\": 24,\n      \"require_docs\": [\n        \"address\"\n      ],\n      \"documents\": [\n        {\n          \"id\": 423,\n          \"allow_replace\": false,\n          \"did_number\": \"12565378257\",\n          \"doc_content_type\": \"image/png\",\n          \"doc_file_name\": \"Copy of ID.png\",\n          \"doc_type\": \"id\",\n          \"status\": \"approved\",\n          \"url\": \"https://api.wavix.com/v1/numbers/24882/papers/1\"\n        }\n      ],\n      \"domestic_cli\": true,\n      \"free_min\": 123,\n      \"unlimited\": true,\n      \"label\": \"example\",\n      \"status\": \"example\",\n      \"seconds\": \"example\",\n      \"added\": \"2023-04-10T06:42:59Z\",\n      \"paid_until\": \"2023-12-07\",\n      \"sms_enabled\": false,\n      \"sms_relay_url\": \"https://your-website.com/webhook\",\n      \"cnam\": true,\n      \"call_recording_enabled\": true,\n      \"transcription_enabled\": true,\n      \"transcription_threshold\": 6,\n      \"call_status_url\": \"https://example.com\"\n    }\n  ],\n  \"doc_types\": [\n    {\n      \"id\": 2,\n      \"name\": \"address\",\n      \"title\": \"Proof of address\"\n    }\n  ],\n  \"pagination\": {\n    \"current_page\": 2,\n    \"per_page\": 25,\n    \"total\": 101,\n    \"total_pages\": 5\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -538,7 +538,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"items\": [\n    {\n      \"id\": 123,\n      \"number\": \"12565378257\",\n      \"activation_fee\": \"0.99\",\n      \"monthly_fee\": \"0.99\",\n      \"per_min\": \"0.01\",\n      \"city\": \"DETROIT, MI\",\n      \"state\": \"state\",\n      \"country\": \"United States\",\n      \"country_short_name\": \"US\",\n      \"destination\": [\n        {\n          \"id\": 1,\n          \"destination\": \"[did]@sipuri.com\",\n          \"priority\": 1,\n          \"transport\": 1,\n          \"trunk_id\": 23123,\n          \"srtp\": false,\n          \"trunk_label\": \"My trunk\"\n        }\n      ],\n      \"channels\": 24,\n      \"require_docs\": [\n        \"1\"\n      ],\n      \"documents\": [\n        {\n          \"id\": 423,\n          \"allow_replace\": false,\n          \"did_number\": \"12565378257\",\n          \"doc_content_type\": \"image/png\",\n          \"doc_file_name\": \"Copy of ID.png\",\n          \"doc_type_id\": 1,\n          \"status\": \"approved\",\n          \"url\": \"https://api.wavix.com/v1/numbers/24882/papers/1\"\n        }\n      ],\n      \"domestic_cli\": true,\n      \"free_min\": 1,\n      \"unlimited\": true,\n      \"label\": \"label\",\n      \"status\": \"status\",\n      \"seconds\": \"seconds\",\n      \"added\": \"2023-04-10T06:42:59Z\",\n      \"paid_until\": \"2023-12-07\",\n      \"sms_enabled\": false,\n      \"sms_relay_url\": \"https://your-website.com/webhook\",\n      \"cnam\": true,\n      \"call_recording_enabled\": true,\n      \"transcription_enabled\": true,\n      \"transcription_threshold\": 6,\n      \"call_status_url\": \"https://example.com\"\n    }\n  ]\n}",
+        "body": "{\n  \"items\": [\n    {\n      \"id\": 123,\n      \"number\": \"12565378257\",\n      \"activation_fee\": \"0.99\",\n      \"monthly_fee\": \"0.99\",\n      \"per_min\": \"0.01\",\n      \"city\": \"DETROIT, MI\",\n      \"state\": \"state\",\n      \"country\": \"United States\",\n      \"country_short_name\": \"US\",\n      \"destination\": [\n        {\n          \"id\": 1,\n          \"destination\": \"[did]@sipuri.com\",\n          \"priority\": 1,\n          \"transport\": 1,\n          \"trunk_id\": 23123,\n          \"srtp\": false,\n          \"trunk_label\": \"My trunk\"\n        }\n      ],\n      \"channels\": 24,\n      \"require_docs\": [\n        \"address\"\n      ],\n      \"documents\": [\n        {\n          \"id\": 423,\n          \"allow_replace\": false,\n          \"did_number\": \"12565378257\",\n          \"doc_content_type\": \"image/png\",\n          \"doc_file_name\": \"Copy of ID.png\",\n          \"doc_type\": \"id\",\n          \"status\": \"approved\",\n          \"url\": \"https://api.wavix.com/v1/numbers/24882/papers/1\"\n        }\n      ],\n      \"domestic_cli\": true,\n      \"free_min\": 1,\n      \"unlimited\": true,\n      \"label\": \"label\",\n      \"status\": \"status\",\n      \"seconds\": \"seconds\",\n      \"added\": \"2023-04-10T06:42:59Z\",\n      \"paid_until\": \"2023-12-07\",\n      \"sms_enabled\": false,\n      \"sms_relay_url\": \"https://your-website.com/webhook\",\n      \"cnam\": true,\n      \"call_recording_enabled\": true,\n      \"transcription_enabled\": true,\n      \"transcription_threshold\": 6,\n      \"call_status_url\": \"https://example.com\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -574,7 +574,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": 123,\n  \"number\": \"12565378257\",\n  \"activation_fee\": \"0.99\",\n  \"monthly_fee\": \"0.99\",\n  \"per_min\": \"0.01\",\n  \"city\": \"DETROIT, MI\",\n  \"state\": \"example\",\n  \"country\": \"United States\",\n  \"country_short_name\": \"US\",\n  \"destination\": [\n    {\n      \"id\": 1,\n      \"destination\": \"[did]@sipuri.com\",\n      \"priority\": 1,\n      \"transport\": 1,\n      \"trunk_id\": 23123,\n      \"srtp\": false,\n      \"trunk_label\": \"My trunk\"\n    }\n  ],\n  \"channels\": 24,\n  \"require_docs\": [\n    \"1\"\n  ],\n  \"documents\": [\n    {\n      \"id\": 423,\n      \"allow_replace\": false,\n      \"did_number\": \"12565378257\",\n      \"doc_content_type\": \"image/png\",\n      \"doc_file_name\": \"Copy of ID.png\",\n      \"doc_type_id\": 1,\n      \"status\": \"approved\",\n      \"url\": \"https://api.wavix.com/v1/numbers/24882/papers/1\"\n    }\n  ],\n  \"domestic_cli\": true,\n  \"free_min\": 123,\n  \"unlimited\": true,\n  \"label\": \"example\",\n  \"status\": \"example\",\n  \"seconds\": \"example\",\n  \"added\": \"2023-04-10T06:42:59Z\",\n  \"paid_until\": \"2023-12-07\",\n  \"sms_enabled\": false,\n  \"sms_relay_url\": \"https://your-website.com/webhook\",\n  \"cnam\": true,\n  \"call_recording_enabled\": true,\n  \"transcription_enabled\": true,\n  \"transcription_threshold\": 6,\n  \"call_status_url\": \"https://example.com\"\n}",
+        "body": "{\n  \"id\": 123,\n  \"number\": \"12565378257\",\n  \"activation_fee\": \"0.99\",\n  \"monthly_fee\": \"0.99\",\n  \"per_min\": \"0.01\",\n  \"city\": \"DETROIT, MI\",\n  \"state\": \"example\",\n  \"country\": \"United States\",\n  \"country_short_name\": \"US\",\n  \"destination\": [\n    {\n      \"id\": 1,\n      \"destination\": \"[did]@sipuri.com\",\n      \"priority\": 1,\n      \"transport\": 1,\n      \"trunk_id\": 23123,\n      \"srtp\": false,\n      \"trunk_label\": \"My trunk\"\n    }\n  ],\n  \"channels\": 24,\n  \"require_docs\": [\n    \"address\"\n  ],\n  \"documents\": [\n    {\n      \"id\": 423,\n      \"allow_replace\": false,\n      \"did_number\": \"12565378257\",\n      \"doc_content_type\": \"image/png\",\n      \"doc_file_name\": \"Copy of ID.png\",\n      \"doc_type\": \"id\",\n      \"status\": \"approved\",\n      \"url\": \"https://api.wavix.com/v1/numbers/24882/papers/1\"\n    }\n  ],\n  \"domestic_cli\": true,\n  \"free_min\": 123,\n  \"unlimited\": true,\n  \"label\": \"example\",\n  \"status\": \"example\",\n  \"seconds\": \"example\",\n  \"added\": \"2023-04-10T06:42:59Z\",\n  \"paid_until\": \"2023-12-07\",\n  \"sms_enabled\": false,\n  \"sms_relay_url\": \"https://your-website.com/webhook\",\n  \"cnam\": true,\n  \"call_recording_enabled\": true,\n  \"transcription_enabled\": true,\n  \"transcription_threshold\": 6,\n  \"call_status_url\": \"https://example.com\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -610,7 +610,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": 123,\n  \"number\": \"12565378257\",\n  \"activation_fee\": \"0.99\",\n  \"monthly_fee\": \"0.99\",\n  \"per_min\": \"0.01\",\n  \"city\": \"DETROIT, MI\",\n  \"state\": \"state\",\n  \"country\": \"United States\",\n  \"country_short_name\": \"US\",\n  \"destination\": [\n    {\n      \"id\": 1,\n      \"destination\": \"[did]@sipuri.com\",\n      \"priority\": 1,\n      \"transport\": 1,\n      \"trunk_id\": 23123,\n      \"srtp\": false,\n      \"trunk_label\": \"My trunk\"\n    }\n  ],\n  \"channels\": 24,\n  \"require_docs\": [\n    \"1\"\n  ],\n  \"documents\": [\n    {\n      \"id\": 423,\n      \"allow_replace\": false,\n      \"did_number\": \"12565378257\",\n      \"doc_content_type\": \"image/png\",\n      \"doc_file_name\": \"Copy of ID.png\",\n      \"doc_type_id\": 1,\n      \"status\": \"approved\",\n      \"url\": \"https://api.wavix.com/v1/numbers/24882/papers/1\"\n    }\n  ],\n  \"domestic_cli\": true,\n  \"free_min\": 1,\n  \"unlimited\": true,\n  \"label\": \"label\",\n  \"status\": \"status\",\n  \"seconds\": \"seconds\",\n  \"added\": \"2023-04-10T06:42:59Z\",\n  \"paid_until\": \"2023-12-07\",\n  \"sms_enabled\": false,\n  \"sms_relay_url\": \"https://your-website.com/webhook\",\n  \"cnam\": true,\n  \"call_recording_enabled\": true,\n  \"transcription_enabled\": true,\n  \"transcription_threshold\": 6,\n  \"call_status_url\": \"https://example.com\"\n}",
+        "body": "{\n  \"id\": 123,\n  \"number\": \"12565378257\",\n  \"activation_fee\": \"0.99\",\n  \"monthly_fee\": \"0.99\",\n  \"per_min\": \"0.01\",\n  \"city\": \"DETROIT, MI\",\n  \"state\": \"state\",\n  \"country\": \"United States\",\n  \"country_short_name\": \"US\",\n  \"destination\": [\n    {\n      \"id\": 1,\n      \"destination\": \"[did]@sipuri.com\",\n      \"priority\": 1,\n      \"transport\": 1,\n      \"trunk_id\": 23123,\n      \"srtp\": false,\n      \"trunk_label\": \"My trunk\"\n    }\n  ],\n  \"channels\": 24,\n  \"require_docs\": [\n    \"address\"\n  ],\n  \"documents\": [\n    {\n      \"id\": 423,\n      \"allow_replace\": false,\n      \"did_number\": \"12565378257\",\n      \"doc_content_type\": \"image/png\",\n      \"doc_file_name\": \"Copy of ID.png\",\n      \"doc_type\": \"id\",\n      \"status\": \"approved\",\n      \"url\": \"https://api.wavix.com/v1/numbers/24882/papers/1\"\n    }\n  ],\n  \"domestic_cli\": true,\n  \"free_min\": 1,\n  \"unlimited\": true,\n  \"label\": \"label\",\n  \"status\": \"status\",\n  \"seconds\": \"seconds\",\n  \"added\": \"2023-04-10T06:42:59Z\",\n  \"paid_until\": \"2023-12-07\",\n  \"sms_enabled\": false,\n  \"sms_relay_url\": \"https://your-website.com/webhook\",\n  \"cnam\": true,\n  \"call_recording_enabled\": true,\n  \"transcription_enabled\": true,\n  \"transcription_threshold\": 6,\n  \"call_status_url\": \"https://example.com\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -732,7 +732,7 @@
         },
         "pathParameters": {
           "call_id": {
-            "equalTo": "bbaa37bf-430a-46da-ade3-c248e407016"
+            "equalTo": "bbaa37bf-430a-46da-ade3-c248e4070160"
           }
         }
       },
@@ -768,7 +768,7 @@
         },
         "pathParameters": {
           "call_id": {
-            "equalTo": "bbaa37bf-430a-46da-ade3-c248e407016"
+            "equalTo": "bbaa37bf-430a-46da-ade3-c248e4070160"
           }
         }
       },
@@ -1979,7 +1979,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"key\": \"value\"\n}",
+        "body": "{}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -2161,7 +2161,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"dids\": [\n    {\n      \"id\": 541139862174,\n      \"activation_fee\": \"15.0\",\n      \"monthly_fee\": \"10.0\",\n      \"per_min\": \"0.01\",\n      \"channels\": \"4\",\n      \"city\": \"Buenos Aires\",\n      \"country\": \"Argentina\",\n      \"country_short_name\": \"AR\",\n      \"cnam\": false,\n      \"free_min\": 0,\n      \"number\": \"541139862174\",\n      \"require_docs\": [\n        1,\n        3\n      ],\n      \"sms_enabled\": false,\n      \"sms_price\": 0,\n      \"domestic_cli\": false\n    }\n  ],\n  \"pagination\": {\n    \"current_page\": 1,\n    \"per_page\": 50,\n    \"total\": 1,\n    \"total_pages\": 1\n  }\n}",
+        "body": "{\n  \"dids\": [\n    {\n      \"id\": 541139862174,\n      \"activation_fee\": \"15.0\",\n      \"monthly_fee\": \"10.0\",\n      \"per_min\": \"0.01\",\n      \"channels\": \"4\",\n      \"city\": \"Buenos Aires\",\n      \"country\": \"Argentina\",\n      \"country_short_name\": \"AR\",\n      \"cnam\": false,\n      \"free_min\": 0,\n      \"number\": \"541139862174\",\n      \"require_docs\": [\n        \"address\"\n      ],\n      \"sms_enabled\": false,\n      \"sms_price\": 0,\n      \"domestic_cli\": false\n    }\n  ],\n  \"pagination\": {\n    \"current_page\": 1,\n    \"per_page\": 50,\n    \"total\": 1,\n    \"total_pages\": 1\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -2338,7 +2338,7 @@
         },
         "pathParameters": {
           "call_id": {
-            "equalTo": "bbaa37bf-430a-46da-ade3-c248e407016"
+            "equalTo": "bbaa37bf-430a-46da-ade3-c248e4070160"
           }
         }
       },
@@ -2395,7 +2395,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"metrics\": [\n    {\n      \"latitude\": 59.3247,\n      \"longitude\": 18.056,\n      \"operating_system\": \"Mac OS X 10.15\",\n      \"browser\": \"Firefox\",\n      \"language\": \"English\",\n      \"phone\": \"12762025555\",\n      \"utm_campaign\": \"summer\",\n      \"created_at\": \"2023-07-19 18:23:42.120Z\",\n      \"link_hash\": \"hd82Jhs21\",\n      \"user_id\": 100017\n    }\n  ],\n  \"pagination\": {\n    \"current_page\": 2,\n    \"per_page\": 25,\n    \"total\": 101,\n    \"total_pages\": 5\n  }\n}",
+        "body": "{\n  \"metrics\": [\n    {\n      \"latitude\": 59.3247,\n      \"longitude\": 18.056,\n      \"operating_system\": \"Mac OS X 10.15\",\n      \"browser\": \"Firefox\",\n      \"language\": \"English\",\n      \"phone\": \"12762025555\",\n      \"utm_campaign\": \"summer\",\n      \"created_at\": \"2023-07-19 18:23:42\",\n      \"link_hash\": \"hd82Jhs21\",\n      \"user_id\": 100017\n    }\n  ],\n  \"pagination\": {\n    \"current_page\": 2,\n    \"per_page\": 25,\n    \"total\": 101,\n    \"total_pages\": 5\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -2463,7 +2463,7 @@
       },
       "response": {
         "status": 200,
-        "body": "[\n  {\n    \"id\": 101,\n    \"allow_replace\": false,\n    \"did_number\": \"+14062355770\",\n    \"doc_content_type\": \"image/png\",\n    \"doc_file_name\": \"user-id-card.png\",\n    \"doc_type_id\": 1,\n    \"status\": \"pending\",\n    \"url\": \"https://api.wavix.com/v1/numbers/1001/papers/101\"\n  },\n  {\n    \"id\": 102,\n    \"allow_replace\": true,\n    \"did_number\": \"+14062355771\",\n    \"doc_content_type\": \"application/pdf\",\n    \"doc_file_name\": \"driver-license.pdf\",\n    \"doc_type_id\": 2,\n    \"status\": \"approved\",\n    \"url\": \"https://api.wavix.com/v1/numbers/1002/papers/102\"\n  }\n]",
+        "body": "[\n  {\n    \"id\": 101,\n    \"allow_replace\": false,\n    \"did_number\": \"+14062355770\",\n    \"doc_content_type\": \"image/png\",\n    \"doc_file_name\": \"user-id-card.png\",\n    \"doc_type\": \"id\",\n    \"status\": \"pending\",\n    \"url\": \"https://api.wavix.com/v1/numbers/1001/papers/101\"\n  },\n  {\n    \"id\": 102,\n    \"allow_replace\": true,\n    \"did_number\": \"+14062355771\",\n    \"doc_content_type\": \"application/pdf\",\n    \"doc_file_name\": \"driver-license.pdf\",\n    \"doc_type\": \"address\",\n    \"status\": \"approved\",\n    \"url\": \"https://api.wavix.com/v1/numbers/1002/papers/102\"\n  }\n]",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -2764,7 +2764,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"items\": [\n    {\n      \"message_id\": \"3a525ca2-6909-4c72-9399-905adf7f3a74\",\n      \"message_type\": \"sms\",\n      \"from\": \"Sender ID.\",\n      \"to\": \"447537151866\",\n      \"carrier_fees\": \"0.0\",\n      \"direction\": \"outbound\",\n      \"mcc\": \"234\",\n      \"mnc\": \"024\",\n      \"message_body\": {\n        \"text\": \"Please call me back\",\n        \"media\": null\n      },\n      \"tag\": null,\n      \"status\": \"delivered\",\n      \"segments\": 1,\n      \"charge\": \"0.0475\",\n      \"submitted_at\": \"2023-08-29T12:32:44.000Z\",\n      \"sent_at\": \"2023-08-29T12:32:44.000Z\",\n      \"delivered_at\": \"2023-08-29T12:32:45.000Z\",\n      \"error_message\": null\n    }\n  ],\n  \"pagination\": {\n    \"current_page\": 1,\n    \"per_page\": 10,\n    \"total\": 1,\n    \"total_pages\": 1\n  }\n}",
+        "body": "{\n  \"items\": [\n    {\n      \"message_id\": \"3a525ca2-6909-4c72-9399-905adf7f3a74\",\n      \"message_type\": \"sms\",\n      \"from\": \"Sender ID.\",\n      \"to\": \"447537151866\",\n      \"carrier_fees\": \"0.0\",\n      \"direction\": \"outbound\",\n      \"mcc\": \"234\",\n      \"mnc\": \"024\",\n      \"message_body\": {\n        \"text\": \"Please call me back\"\n      },\n      \"tag\": null,\n      \"status\": \"delivered\",\n      \"segments\": 1,\n      \"charge\": \"0.0475\",\n      \"submitted_at\": \"2023-08-29T12:32:44.000Z\",\n      \"sent_at\": \"2023-08-29T12:32:44.000Z\",\n      \"delivered_at\": \"2023-08-29T12:32:45.000Z\",\n      \"error_message\": null\n    }\n  ],\n  \"pagination\": {\n    \"current_page\": 1,\n    \"per_page\": 10,\n    \"total\": 1,\n    \"total_pages\": 1\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -2832,7 +2832,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"message_id\": \"3a525ca2-6909-4c72-9399-905adf7f3a74\",\n  \"message_type\": \"sms\",\n  \"from\": \"15072429497\",\n  \"to\": \"16419252149\",\n  \"direction\": \"outbound\",\n  \"mcc\": \"310\",\n  \"mnc\": \"024\",\n  \"message_body\": {\n    \"text\": \"Hello, this is a test message\",\n    \"media\": null\n  },\n  \"tag\": \"Fall sale\",\n  \"status\": \"delivered\",\n  \"segments\": 1,\n  \"charge\": \"0.01\",\n  \"submitted_at\": \"2022-04-14T13:51:16.096Z\",\n  \"sent_at\": \"2022-04-14T13:51:16.096Z\",\n  \"delivered_at\": \"2022-04-14T13:51:16.096Z\",\n  \"error_message\": null,\n  \"carrier_fees\": \"0.0\"\n}",
+        "body": "{\n  \"message_id\": \"3a525ca2-6909-4c72-9399-905adf7f3a74\",\n  \"message_type\": \"sms\",\n  \"from\": \"15072429497\",\n  \"to\": \"16419252149\",\n  \"direction\": \"outbound\",\n  \"mcc\": \"310\",\n  \"mnc\": \"024\",\n  \"message_body\": {\n    \"text\": \"Hello, this is a test message\"\n  },\n  \"tag\": \"Fall sale\",\n  \"status\": \"delivered\",\n  \"segments\": 1,\n  \"charge\": \"0.01\",\n  \"submitted_at\": \"2022-04-14T13:51:16.096Z\",\n  \"sent_at\": \"2022-04-14T13:51:16.096Z\",\n  \"delivered_at\": \"2022-04-14T13:51:16.096Z\",\n  \"error_message\": null,\n  \"carrier_fees\": \"0.0\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -2919,7 +2919,7 @@
         }
       },
       "response": {
-        "status": 404,
+        "status": 200,
         "body": "{\n  \"key\": \"value\"\n}",
         "headers": {
           "Content-Type": "application/json"
@@ -3257,7 +3257,7 @@
       },
       "response": {
         "status": 200,
-        "body": "[\n  {\n    \"categories\": [\n      \"VERIFY_TAX_ID\"\n    ],\n    \"created_at\": \"2024-08-01T14:09:43Z\",\n    \"evidence\": [\n      \"13d8e00c-3cb4-4dc0-9e26-d5057fa938d9\"\n    ],\n    \"outcome\": {\n      \"optional_attributes\": {\n        \"key\": \"value\"\n      },\n      \"vetting_status\": \"VERIFIED\",\n      \"feedback\": {\n        \"category\": [\n          {\n            \"id\": \"VERIFY_TAX_ID\",\n            \"display_name\": \"Verify tax ID\",\n            \"description\": \"Select this category if the record is UNVERIFIED due to an inability to match the tax ID.\",\n            \"fields\": null,\n            \"errors\": [\n              {\n                \"code\": \"TFTI01\",\n                \"message\": \"The submitted US EIN is invalid.\"\n              }\n            ]\n          }\n        ]\n      }\n    },\n    \"status\": \"COMPLETE\",\n    \"updated_at\": \"2024-08-01T18:33:15Z\",\n    \"explanation\": \"Dear partner, please review the registration docs\"\n  }\n]",
+        "body": "[\n  {\n    \"categories\": [\n      \"VERIFY_TAX_ID\"\n    ],\n    \"created_at\": \"2024-08-01T14:09:43\",\n    \"evidence\": [\n      \"13d8e00c-3cb4-4dc0-9e26-d5057fa938d9\"\n    ],\n    \"outcome\": {\n      \"optional_attributes\": {\n        \"key\": \"value\"\n      },\n      \"vetting_status\": \"VERIFIED\",\n      \"feedback\": {\n        \"category\": [\n          {\n            \"id\": \"VERIFY_TAX_ID\",\n            \"display_name\": \"Verify tax ID\",\n            \"description\": \"Select this category if the record is UNVERIFIED due to an inability to match the tax ID.\",\n            \"fields\": null,\n            \"errors\": [\n              {\n                \"code\": \"TFTI01\",\n                \"message\": \"The submitted US EIN is invalid.\"\n              }\n            ]\n          }\n        ]\n      }\n    },\n    \"status\": \"COMPLETE\",\n    \"updated_at\": \"2024-08-01T18:33:15\",\n    \"explanation\": \"Dear partner, please review the registration docs\"\n  }\n]",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -3329,7 +3329,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"items\": [\n    {\n      \"file_name\": \"file.png\",\n      \"mime_type\": \"image/png\",\n      \"url\": \"https://api.qa1.wavix.dev/v3/10dlc/brands/BRGQVL0/evidence/3d8d97b6-61f7-4f91-8c1c-7ef83828e072\",\n      \"uuid\": \"3d8d97b6-61f7-4f91-8c1c-7ef83828e072\"\n    }\n  ]\n}",
+        "body": "{\n  \"items\": [\n    {\n      \"file_name\": \"file.png\",\n      \"mime_type\": \"image/png\",\n      \"url\": \"https://api.wavix.com/v3/10dlc/brands/BRGQVL0/evidence/3d8d97b6-61f7-4f91-8c1c-7ef83828e072\",\n      \"uuid\": \"3d8d97b6-61f7-4f91-8c1c-7ef83828e072\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -3365,7 +3365,7 @@
       },
       "response": {
         "status": 201,
-        "body": "{\n  \"file_name\": \"image.png\",\n  \"mime_type\": \"image/png\",\n  \"url\": \"https://api.wavix.dev/v3/10dlc/brands/B6AI7PA/evidence/191eb205-8357-4d71-b8da-160a25a000d7\",\n  \"uuid\": \"191eb205-8357-4d71-b8da-160a25a000d7\"\n}",
+        "body": "{\n  \"file_name\": \"image.png\",\n  \"mime_type\": \"image/png\",\n  \"url\": \"https://api.wavix.com/v3/10dlc/brands/B6AI7PA/evidence/191eb205-8357-4d71-b8da-160a25a000d7\",\n  \"uuid\": \"191eb205-8357-4d71-b8da-160a25a000d7\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -3403,7 +3403,7 @@
         }
       },
       "response": {
-        "status": 404,
+        "status": 200,
         "body": "{\n  \"key\": \"value\"\n}",
         "headers": {
           "Content-Type": "application/json"
@@ -3587,7 +3587,7 @@
       },
       "response": {
         "status": 200,
-        "body": "[\n  {\n    \"appeal_outcome\": {\n      \"vet_status\": \"ACTIVE\",\n      \"vet_score\": 80,\n      \"feedback\": {\n        \"reasons\": [\n          \"Company size as reported by government or business sources resulted in a score deduction: size range 6-10.\"\n        ]\n      }\n    },\n    \"appeal_status\": \"COMPLETE\",\n    \"appeal_status_update_date\": \"2024-08-15T08:42:31Z\",\n    \"attachment_uuid_list\": [\n      \"attachment_uuid_list\"\n    ],\n    \"brand_id\": \"BMQFB7X\",\n    \"category_list\": [\n      \"LOW_SCORE\"\n    ],\n    \"create_date\": \"2024-08-15T08:41:05\",\n    \"explanation\": \"This is an API test\",\n    \"evp_id\": \"AEGIS\",\n    \"vetting_class\": \"STANDARD\",\n    \"vetting_id\": \"48c0ffaa-4e51-4d44-3982-08dcb9856232\"\n  }\n]",
+        "body": "[\n  {\n    \"appeal_outcome\": {\n      \"vet_status\": \"ACTIVE\",\n      \"vet_score\": 80,\n      \"feedback\": {\n        \"reasons\": [\n          \"Company size as reported by government or business sources resulted in a score deduction: size range 6-10.\"\n        ]\n      }\n    },\n    \"appeal_status\": \"COMPLETE\",\n    \"appeal_status_update_date\": \"2024-08-15T08:42:31\",\n    \"attachment_uuid_list\": [\n      \"attachment_uuid_list\"\n    ],\n    \"brand_id\": \"BMQFB7X\",\n    \"category_list\": [\n      \"LOW_SCORE\"\n    ],\n    \"create_date\": \"2024-08-15T08:41:05\",\n    \"explanation\": \"This is an API test\",\n    \"evp_id\": \"AEGIS\",\n    \"vetting_class\": \"STANDARD\",\n    \"vetting_id\": \"48c0ffaa-4e51-4d44-3982-08dcb9856232\"\n  }\n]",
         "headers": {
           "Content-Type": "application/json"
         }

@@ -1463,7 +1463,7 @@ func (o OnCallEventPayloadType) Ptr() *OnCallEventPayloadType {
 	return &o
 }
 
-// Language used for text-to-speech synthesis. One of `ru` (Russian), `en` (English), `sp` (Spanish), or `ge` (German).
+// Language used for text-to-speech synthesis. One of `ru` (Russian), `en` (English), `sp` (Spanish), or `ge` (German). `sp` and `ge` are Wavix-specific codes, not the standard ISO 639-1 codes for Spanish (`es`) and German (`de`).
 type TtsLanguage string
 
 const (
@@ -1568,7 +1568,7 @@ var (
 type CallDtmfCollectRequestPrompt struct {
 	// Audio file URL.
 	Play *string `json:"play,omitempty" url:"play,omitempty"`
-	// Text to speak and voice to use.
+	// Text to speak and voice to use. Pick `voice` from the language family matching `language` (for example, a German voice such as `Hans` for `ge`, a Spanish voice such as `Conchita` for `sp`) — Wavix does not validate the pairing itself.
 	Say *CallDtmfCollectRequestPromptSay `json:"say,omitempty" url:"say,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -1662,7 +1662,7 @@ func (c *CallDtmfCollectRequestPrompt) String() string {
 	return fmt.Sprintf("%#v", c)
 }
 
-// Text to speak and voice to use.
+// Text to speak and voice to use. Pick `voice` from the language family matching `language` (for example, a German voice such as `Hans` for `ge`, a Spanish voice such as `Conchita` for `sp`) — Wavix does not validate the pairing itself.
 var (
 	callDtmfCollectRequestPromptSayFieldText     = big.NewInt(1 << 0)
 	callDtmfCollectRequestPromptSayFieldLanguage = big.NewInt(1 << 1)

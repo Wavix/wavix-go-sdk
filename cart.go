@@ -151,12 +151,15 @@ func (r *RemoveCartRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	checkoutCartResponseFieldSuccess = big.NewInt(1 << 0)
+	cartResponseFieldDids     = big.NewInt(1 << 0)
+	cartResponseFieldDocTypes = big.NewInt(1 << 1)
 )
 
-type CheckoutCartResponse struct {
-	// Indicates whether the request was successful.
-	Success bool `json:"success" url:"success"`
+type CartResponse struct {
+	// List of phone numbers in the cart.
+	Dids []*AvailableNumber `json:"dids" url:"dids"`
+	// Document types required to activate phone numbers.
+	DocTypes []*DocumentTypeInfo `json:"doc_types" url:"doc_types"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -165,41 +168,55 @@ type CheckoutCartResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (c *CheckoutCartResponse) GetSuccess() bool {
+func (c *CartResponse) GetDids() []*AvailableNumber {
 	if c == nil {
-		return false
+		return nil
 	}
-	return c.Success
+	return c.Dids
 }
 
-func (c *CheckoutCartResponse) GetExtraProperties() map[string]interface{} {
+func (c *CartResponse) GetDocTypes() []*DocumentTypeInfo {
+	if c == nil {
+		return nil
+	}
+	return c.DocTypes
+}
+
+func (c *CartResponse) GetExtraProperties() map[string]interface{} {
 	if c == nil {
 		return nil
 	}
 	return c.extraProperties
 }
 
-func (c *CheckoutCartResponse) require(field *big.Int) {
+func (c *CartResponse) require(field *big.Int) {
 	if c.explicitFields == nil {
 		c.explicitFields = big.NewInt(0)
 	}
 	c.explicitFields.Or(c.explicitFields, field)
 }
 
-// SetSuccess sets the Success field and marks it as non-optional;
+// SetDids sets the Dids field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CheckoutCartResponse) SetSuccess(success bool) {
-	c.Success = success
-	c.require(checkoutCartResponseFieldSuccess)
+func (c *CartResponse) SetDids(dids []*AvailableNumber) {
+	c.Dids = dids
+	c.require(cartResponseFieldDids)
 }
 
-func (c *CheckoutCartResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler CheckoutCartResponse
+// SetDocTypes sets the DocTypes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CartResponse) SetDocTypes(docTypes []*DocumentTypeInfo) {
+	c.DocTypes = docTypes
+	c.require(cartResponseFieldDocTypes)
+}
+
+func (c *CartResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler CartResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*c = CheckoutCartResponse(value)
+	*c = CartResponse(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *c)
 	if err != nil {
 		return err
@@ -209,8 +226,8 @@ func (c *CheckoutCartResponse) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (c *CheckoutCartResponse) MarshalJSON() ([]byte, error) {
-	type embed CheckoutCartResponse
+func (c *CartResponse) MarshalJSON() ([]byte, error) {
+	type embed CartResponse
 	var marshaler = struct {
 		embed
 	}{
@@ -220,7 +237,7 @@ func (c *CheckoutCartResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
-func (c *CheckoutCartResponse) String() string {
+func (c *CartResponse) String() string {
 	if c == nil {
 		return "<nil>"
 	}
@@ -233,191 +250,4 @@ func (c *CheckoutCartResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", c)
-}
-
-var (
-	getCartResponseFieldDids     = big.NewInt(1 << 0)
-	getCartResponseFieldDocTypes = big.NewInt(1 << 1)
-)
-
-type GetCartResponse struct {
-	// List of phone numbers in the cart.
-	Dids []*AvailableNumber `json:"dids" url:"dids"`
-	// Document types required to activate phone numbers.
-	DocTypes []*DocumentType `json:"doc_types" url:"doc_types"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (g *GetCartResponse) GetDids() []*AvailableNumber {
-	if g == nil {
-		return nil
-	}
-	return g.Dids
-}
-
-func (g *GetCartResponse) GetDocTypes() []*DocumentType {
-	if g == nil {
-		return nil
-	}
-	return g.DocTypes
-}
-
-func (g *GetCartResponse) GetExtraProperties() map[string]interface{} {
-	if g == nil {
-		return nil
-	}
-	return g.extraProperties
-}
-
-func (g *GetCartResponse) require(field *big.Int) {
-	if g.explicitFields == nil {
-		g.explicitFields = big.NewInt(0)
-	}
-	g.explicitFields.Or(g.explicitFields, field)
-}
-
-// SetDids sets the Dids field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetCartResponse) SetDids(dids []*AvailableNumber) {
-	g.Dids = dids
-	g.require(getCartResponseFieldDids)
-}
-
-// SetDocTypes sets the DocTypes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetCartResponse) SetDocTypes(docTypes []*DocumentType) {
-	g.DocTypes = docTypes
-	g.require(getCartResponseFieldDocTypes)
-}
-
-func (g *GetCartResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler GetCartResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*g = GetCartResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *g)
-	if err != nil {
-		return err
-	}
-	g.extraProperties = extraProperties
-	g.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (g *GetCartResponse) MarshalJSON() ([]byte, error) {
-	type embed GetCartResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*g),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (g *GetCartResponse) String() string {
-	if g == nil {
-		return "<nil>"
-	}
-	if len(g.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(g); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", g)
-}
-
-var (
-	removeCartResponseFieldSuccess = big.NewInt(1 << 0)
-)
-
-type RemoveCartResponse struct {
-	// Indicates whether the request was successful.
-	Success bool `json:"success" url:"success"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (r *RemoveCartResponse) GetSuccess() bool {
-	if r == nil {
-		return false
-	}
-	return r.Success
-}
-
-func (r *RemoveCartResponse) GetExtraProperties() map[string]interface{} {
-	if r == nil {
-		return nil
-	}
-	return r.extraProperties
-}
-
-func (r *RemoveCartResponse) require(field *big.Int) {
-	if r.explicitFields == nil {
-		r.explicitFields = big.NewInt(0)
-	}
-	r.explicitFields.Or(r.explicitFields, field)
-}
-
-// SetSuccess sets the Success field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (r *RemoveCartResponse) SetSuccess(success bool) {
-	r.Success = success
-	r.require(removeCartResponseFieldSuccess)
-}
-
-func (r *RemoveCartResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler RemoveCartResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*r = RemoveCartResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *r)
-	if err != nil {
-		return err
-	}
-	r.extraProperties = extraProperties
-	r.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (r *RemoveCartResponse) MarshalJSON() ([]byte, error) {
-	type embed RemoveCartResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*r),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (r *RemoveCartResponse) String() string {
-	if r == nil {
-		return "<nil>"
-	}
-	if len(r.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(r); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", r)
 }

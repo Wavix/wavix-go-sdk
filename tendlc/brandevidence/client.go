@@ -58,7 +58,7 @@ func (c *Client) Upload(
 	ctx context.Context,
 	request *tendlc.UploadBrandEvidenceRequest,
 	opts ...option.RequestOption,
-) (*tendlc.UploadBrandEvidenceResponse, error) {
+) (*wavixgosdk.TenDlcBrandEvidence, error) {
 	response, err := c.WithRawResponse.Upload(
 		ctx,
 		request,
@@ -92,7 +92,7 @@ func (c *Client) Delete(
 	ctx context.Context,
 	request *tendlc.DeleteBrandEvidenceRequest,
 	opts ...option.RequestOption,
-) (*tendlc.DeleteBrandEvidenceResponse, error) {
+) (*wavixgosdk.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,

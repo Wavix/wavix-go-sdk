@@ -40,7 +40,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *tendlc.ListBrandsRequest,
 	opts ...option.RequestOption,
-) (*tendlc.ListBrandsResponse, error) {
+) (*wavixgosdk.TenDlcBrandListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
@@ -52,12 +52,12 @@ func (c *Client) List(
 	return response.Body, nil
 }
 
-// Registers a 10DLC Brand. TCR automatically verifies the brand identity. Only brands with `VERIFIED` or `VETTED_VERIFIED` identity status can register 10DLC Campaigns.
+// Registers a 10DLC Brand. Submits the company's legal identity data (EIN/Tax ID, legal company name, contact and address) to The Campaign Registry (TCR), which verifies the brand identity. Charges a 10DLC brand registration fee on successful submission; fails with an insufficient-funds error when the balance cannot cover it. Only brands with `VERIFIED` or `VETTED_VERIFIED` identity status can register 10DLC Campaigns.
 func (c *Client) Create(
 	ctx context.Context,
 	request *wavixgosdk.TenDlcBrandCreateRequest,
 	opts ...option.RequestOption,
-) (*tendlc.CreateBrandsResponse, error) {
+) (*wavixgosdk.TenDlcBrand, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -74,7 +74,7 @@ func (c *Client) Get(
 	ctx context.Context,
 	request *tendlc.GetBrandsRequest,
 	opts ...option.RequestOption,
-) (*tendlc.GetBrandsResponse, error) {
+) (*wavixgosdk.TenDlcBrand, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,
@@ -91,7 +91,7 @@ func (c *Client) Update(
 	ctx context.Context,
 	request *tendlc.TenDlcBrandUpdateRequest,
 	opts ...option.RequestOption,
-) (*tendlc.UpdateBrandsResponse, error) {
+) (*wavixgosdk.TenDlcBrand, error) {
 	response, err := c.WithRawResponse.Update(
 		ctx,
 		request,
@@ -108,7 +108,7 @@ func (c *Client) Delete(
 	ctx context.Context,
 	request *tendlc.DeleteBrandsRequest,
 	opts ...option.RequestOption,
-) (*tendlc.DeleteBrandsResponse, error) {
+) (*wavixgosdk.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,
@@ -125,7 +125,7 @@ func (c *Client) QualifyUsecase(
 	ctx context.Context,
 	request *tendlc.QualifyUsecaseBrandsRequest,
 	opts ...option.RequestOption,
-) (*tendlc.QualifyUsecaseBrandsResponse, error) {
+) (*wavixgosdk.TenDlcBrandQualificationResult, error) {
 	response, err := c.WithRawResponse.QualifyUsecase(
 		ctx,
 		request,

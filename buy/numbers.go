@@ -3,10 +3,6 @@
 package buy
 
 import (
-	json "encoding/json"
-	fmt "fmt"
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	internal "github.com/wavix/wavix-go-sdk/internal"
 	big "math/big"
 )
 
@@ -74,105 +70,4 @@ func (l *ListNumbersRequest) SetPage(page *int) {
 func (l *ListNumbersRequest) SetPerPage(perPage *int) {
 	l.PerPage = perPage
 	l.require(listNumbersRequestFieldPerPage)
-}
-
-var (
-	listNumbersResponseFieldDids       = big.NewInt(1 << 0)
-	listNumbersResponseFieldPagination = big.NewInt(1 << 1)
-)
-
-type ListNumbersResponse struct {
-	// Phone numbers available for purchase that match the search criteria.
-	Dids       []*wavixgosdk.AvailableNumber `json:"dids" url:"dids"`
-	Pagination *wavixgosdk.Pagination        `json:"pagination" url:"pagination"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (l *ListNumbersResponse) GetDids() []*wavixgosdk.AvailableNumber {
-	if l == nil {
-		return nil
-	}
-	return l.Dids
-}
-
-func (l *ListNumbersResponse) GetPagination() *wavixgosdk.Pagination {
-	if l == nil {
-		return nil
-	}
-	return l.Pagination
-}
-
-func (l *ListNumbersResponse) GetExtraProperties() map[string]interface{} {
-	if l == nil {
-		return nil
-	}
-	return l.extraProperties
-}
-
-func (l *ListNumbersResponse) require(field *big.Int) {
-	if l.explicitFields == nil {
-		l.explicitFields = big.NewInt(0)
-	}
-	l.explicitFields.Or(l.explicitFields, field)
-}
-
-// SetDids sets the Dids field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (l *ListNumbersResponse) SetDids(dids []*wavixgosdk.AvailableNumber) {
-	l.Dids = dids
-	l.require(listNumbersResponseFieldDids)
-}
-
-// SetPagination sets the Pagination field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (l *ListNumbersResponse) SetPagination(pagination *wavixgosdk.Pagination) {
-	l.Pagination = pagination
-	l.require(listNumbersResponseFieldPagination)
-}
-
-func (l *ListNumbersResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler ListNumbersResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*l = ListNumbersResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *l)
-	if err != nil {
-		return err
-	}
-	l.extraProperties = extraProperties
-	l.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (l *ListNumbersResponse) MarshalJSON() ([]byte, error) {
-	type embed ListNumbersResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*l),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (l *ListNumbersResponse) String() string {
-	if l == nil {
-		return "<nil>"
-	}
-	if len(l.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(l); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", l)
 }

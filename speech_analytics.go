@@ -379,139 +379,20 @@ func (f *FileTranscriptTurn) String() string {
 }
 
 var (
-	createSpeechAnalyticsResponseFieldFile      = big.NewInt(1 << 0)
-	createSpeechAnalyticsResponseFieldRequestID = big.NewInt(1 << 1)
-	createSpeechAnalyticsResponseFieldSuccess   = big.NewInt(1 << 2)
+	fileTranscriptionResponseFieldTranscript           = big.NewInt(1 << 0)
+	fileTranscriptionResponseFieldTurns                = big.NewInt(1 << 1)
+	fileTranscriptionResponseFieldRequestID            = big.NewInt(1 << 2)
+	fileTranscriptionResponseFieldLanguage             = big.NewInt(1 << 3)
+	fileTranscriptionResponseFieldDuration             = big.NewInt(1 << 4)
+	fileTranscriptionResponseFieldCharge               = big.NewInt(1 << 5)
+	fileTranscriptionResponseFieldStatus               = big.NewInt(1 << 6)
+	fileTranscriptionResponseFieldTranscriptionDate    = big.NewInt(1 << 7)
+	fileTranscriptionResponseFieldTranscriptionScore   = big.NewInt(1 << 8)
+	fileTranscriptionResponseFieldTranscriptionSummary = big.NewInt(1 << 9)
+	fileTranscriptionResponseFieldOriginalFile         = big.NewInt(1 << 10)
 )
 
-type CreateSpeechAnalyticsResponse struct {
-	// Uploaded file name.
-	File string `json:"file" url:"file"`
-	// Transcription request ID.
-	RequestID string `json:"request_id" url:"request_id"`
-	// Indicates whether the request was successful.
-	Success bool `json:"success" url:"success"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (c *CreateSpeechAnalyticsResponse) GetFile() string {
-	if c == nil {
-		return ""
-	}
-	return c.File
-}
-
-func (c *CreateSpeechAnalyticsResponse) GetRequestID() string {
-	if c == nil {
-		return ""
-	}
-	return c.RequestID
-}
-
-func (c *CreateSpeechAnalyticsResponse) GetSuccess() bool {
-	if c == nil {
-		return false
-	}
-	return c.Success
-}
-
-func (c *CreateSpeechAnalyticsResponse) GetExtraProperties() map[string]interface{} {
-	if c == nil {
-		return nil
-	}
-	return c.extraProperties
-}
-
-func (c *CreateSpeechAnalyticsResponse) require(field *big.Int) {
-	if c.explicitFields == nil {
-		c.explicitFields = big.NewInt(0)
-	}
-	c.explicitFields.Or(c.explicitFields, field)
-}
-
-// SetFile sets the File field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CreateSpeechAnalyticsResponse) SetFile(file string) {
-	c.File = file
-	c.require(createSpeechAnalyticsResponseFieldFile)
-}
-
-// SetRequestID sets the RequestID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CreateSpeechAnalyticsResponse) SetRequestID(requestID string) {
-	c.RequestID = requestID
-	c.require(createSpeechAnalyticsResponseFieldRequestID)
-}
-
-// SetSuccess sets the Success field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CreateSpeechAnalyticsResponse) SetSuccess(success bool) {
-	c.Success = success
-	c.require(createSpeechAnalyticsResponseFieldSuccess)
-}
-
-func (c *CreateSpeechAnalyticsResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler CreateSpeechAnalyticsResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*c = CreateSpeechAnalyticsResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *c)
-	if err != nil {
-		return err
-	}
-	c.extraProperties = extraProperties
-	c.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (c *CreateSpeechAnalyticsResponse) MarshalJSON() ([]byte, error) {
-	type embed CreateSpeechAnalyticsResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*c),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (c *CreateSpeechAnalyticsResponse) String() string {
-	if c == nil {
-		return "<nil>"
-	}
-	if len(c.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(c); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", c)
-}
-
-var (
-	getSpeechAnalyticsResponseFieldTranscript           = big.NewInt(1 << 0)
-	getSpeechAnalyticsResponseFieldTurns                = big.NewInt(1 << 1)
-	getSpeechAnalyticsResponseFieldRequestID            = big.NewInt(1 << 2)
-	getSpeechAnalyticsResponseFieldLanguage             = big.NewInt(1 << 3)
-	getSpeechAnalyticsResponseFieldDuration             = big.NewInt(1 << 4)
-	getSpeechAnalyticsResponseFieldCharge               = big.NewInt(1 << 5)
-	getSpeechAnalyticsResponseFieldStatus               = big.NewInt(1 << 6)
-	getSpeechAnalyticsResponseFieldTranscriptionDate    = big.NewInt(1 << 7)
-	getSpeechAnalyticsResponseFieldTranscriptionScore   = big.NewInt(1 << 8)
-	getSpeechAnalyticsResponseFieldTranscriptionSummary = big.NewInt(1 << 9)
-	getSpeechAnalyticsResponseFieldOriginalFile         = big.NewInt(1 << 10)
-)
-
-type GetSpeechAnalyticsResponse struct {
+type FileTranscriptionResponse struct {
 	// Complete transcription text attributed to each channel.
 	Transcript *FileTranscriptResponse `json:"transcript,omitempty" url:"transcript,omitempty"`
 	// List of transcription turns, including speaker attribution, timestamps, and sentiment.
@@ -519,13 +400,13 @@ type GetSpeechAnalyticsResponse struct {
 	// Transcription request ID.
 	RequestID string `json:"request_id" url:"request_id"`
 	// Transcription language.
-	Language *GetSpeechAnalyticsResponseLanguage `json:"language,omitempty" url:"language,omitempty"`
+	Language *TranscriptionLanguage `json:"language,omitempty" url:"language,omitempty"`
 	// File duration in seconds.
 	Duration *int `json:"duration,omitempty" url:"duration,omitempty"`
 	// Total transcription charge in USD.
 	Charge string `json:"charge" url:"charge"`
 	// Transcription status. Possible values are `completed`, `failed`.
-	Status GetSpeechAnalyticsResponseStatus `json:"status" url:"status"`
+	Status TranscriptionStatus `json:"status" url:"status"`
 	// Date and time of the transcription in ISO 8601 format.
 	TranscriptionDate time.Time `json:"transcription_date" url:"transcription_date"`
 	// Conversation sentiment score. Scores from 1.0 to 3.0 are negative; scores from 4.0 to 5.0 are positive.
@@ -542,275 +423,339 @@ type GetSpeechAnalyticsResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (g *GetSpeechAnalyticsResponse) GetTranscript() *FileTranscriptResponse {
-	if g == nil {
+func (f *FileTranscriptionResponse) GetTranscript() *FileTranscriptResponse {
+	if f == nil {
 		return nil
 	}
-	return g.Transcript
+	return f.Transcript
 }
 
-func (g *GetSpeechAnalyticsResponse) GetTurns() []*FileTranscriptTurn {
-	if g == nil {
+func (f *FileTranscriptionResponse) GetTurns() []*FileTranscriptTurn {
+	if f == nil {
 		return nil
 	}
-	return g.Turns
+	return f.Turns
 }
 
-func (g *GetSpeechAnalyticsResponse) GetRequestID() string {
-	if g == nil {
+func (f *FileTranscriptionResponse) GetRequestID() string {
+	if f == nil {
 		return ""
 	}
-	return g.RequestID
+	return f.RequestID
 }
 
-func (g *GetSpeechAnalyticsResponse) GetLanguage() *GetSpeechAnalyticsResponseLanguage {
-	if g == nil {
+func (f *FileTranscriptionResponse) GetLanguage() *TranscriptionLanguage {
+	if f == nil {
 		return nil
 	}
-	return g.Language
+	return f.Language
 }
 
-func (g *GetSpeechAnalyticsResponse) GetDuration() *int {
-	if g == nil {
+func (f *FileTranscriptionResponse) GetDuration() *int {
+	if f == nil {
 		return nil
 	}
-	return g.Duration
+	return f.Duration
 }
 
-func (g *GetSpeechAnalyticsResponse) GetCharge() string {
-	if g == nil {
+func (f *FileTranscriptionResponse) GetCharge() string {
+	if f == nil {
 		return ""
 	}
-	return g.Charge
+	return f.Charge
 }
 
-func (g *GetSpeechAnalyticsResponse) GetStatus() GetSpeechAnalyticsResponseStatus {
-	if g == nil {
+func (f *FileTranscriptionResponse) GetStatus() TranscriptionStatus {
+	if f == nil {
 		return ""
 	}
-	return g.Status
+	return f.Status
 }
 
-func (g *GetSpeechAnalyticsResponse) GetTranscriptionDate() time.Time {
-	if g == nil {
+func (f *FileTranscriptionResponse) GetTranscriptionDate() time.Time {
+	if f == nil {
 		return time.Time{}
 	}
-	return g.TranscriptionDate
+	return f.TranscriptionDate
 }
 
-func (g *GetSpeechAnalyticsResponse) GetTranscriptionScore() *string {
-	if g == nil {
+func (f *FileTranscriptionResponse) GetTranscriptionScore() *string {
+	if f == nil {
 		return nil
 	}
-	return g.TranscriptionScore
+	return f.TranscriptionScore
 }
 
-func (g *GetSpeechAnalyticsResponse) GetTranscriptionSummary() *string {
-	if g == nil {
+func (f *FileTranscriptionResponse) GetTranscriptionSummary() *string {
+	if f == nil {
 		return nil
 	}
-	return g.TranscriptionSummary
+	return f.TranscriptionSummary
 }
 
-func (g *GetSpeechAnalyticsResponse) GetOriginalFile() string {
-	if g == nil {
+func (f *FileTranscriptionResponse) GetOriginalFile() string {
+	if f == nil {
 		return ""
 	}
-	return g.OriginalFile
+	return f.OriginalFile
 }
 
-func (g *GetSpeechAnalyticsResponse) GetExtraProperties() map[string]interface{} {
-	if g == nil {
+func (f *FileTranscriptionResponse) GetExtraProperties() map[string]interface{} {
+	if f == nil {
 		return nil
 	}
-	return g.extraProperties
+	return f.extraProperties
 }
 
-func (g *GetSpeechAnalyticsResponse) require(field *big.Int) {
-	if g.explicitFields == nil {
-		g.explicitFields = big.NewInt(0)
+func (f *FileTranscriptionResponse) require(field *big.Int) {
+	if f.explicitFields == nil {
+		f.explicitFields = big.NewInt(0)
 	}
-	g.explicitFields.Or(g.explicitFields, field)
+	f.explicitFields.Or(f.explicitFields, field)
 }
 
 // SetTranscript sets the Transcript field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetSpeechAnalyticsResponse) SetTranscript(transcript *FileTranscriptResponse) {
-	g.Transcript = transcript
-	g.require(getSpeechAnalyticsResponseFieldTranscript)
+func (f *FileTranscriptionResponse) SetTranscript(transcript *FileTranscriptResponse) {
+	f.Transcript = transcript
+	f.require(fileTranscriptionResponseFieldTranscript)
 }
 
 // SetTurns sets the Turns field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetSpeechAnalyticsResponse) SetTurns(turns []*FileTranscriptTurn) {
-	g.Turns = turns
-	g.require(getSpeechAnalyticsResponseFieldTurns)
+func (f *FileTranscriptionResponse) SetTurns(turns []*FileTranscriptTurn) {
+	f.Turns = turns
+	f.require(fileTranscriptionResponseFieldTurns)
 }
 
 // SetRequestID sets the RequestID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetSpeechAnalyticsResponse) SetRequestID(requestID string) {
-	g.RequestID = requestID
-	g.require(getSpeechAnalyticsResponseFieldRequestID)
+func (f *FileTranscriptionResponse) SetRequestID(requestID string) {
+	f.RequestID = requestID
+	f.require(fileTranscriptionResponseFieldRequestID)
 }
 
 // SetLanguage sets the Language field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetSpeechAnalyticsResponse) SetLanguage(language *GetSpeechAnalyticsResponseLanguage) {
-	g.Language = language
-	g.require(getSpeechAnalyticsResponseFieldLanguage)
+func (f *FileTranscriptionResponse) SetLanguage(language *TranscriptionLanguage) {
+	f.Language = language
+	f.require(fileTranscriptionResponseFieldLanguage)
 }
 
 // SetDuration sets the Duration field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetSpeechAnalyticsResponse) SetDuration(duration *int) {
-	g.Duration = duration
-	g.require(getSpeechAnalyticsResponseFieldDuration)
+func (f *FileTranscriptionResponse) SetDuration(duration *int) {
+	f.Duration = duration
+	f.require(fileTranscriptionResponseFieldDuration)
 }
 
 // SetCharge sets the Charge field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetSpeechAnalyticsResponse) SetCharge(charge string) {
-	g.Charge = charge
-	g.require(getSpeechAnalyticsResponseFieldCharge)
+func (f *FileTranscriptionResponse) SetCharge(charge string) {
+	f.Charge = charge
+	f.require(fileTranscriptionResponseFieldCharge)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetSpeechAnalyticsResponse) SetStatus(status GetSpeechAnalyticsResponseStatus) {
-	g.Status = status
-	g.require(getSpeechAnalyticsResponseFieldStatus)
+func (f *FileTranscriptionResponse) SetStatus(status TranscriptionStatus) {
+	f.Status = status
+	f.require(fileTranscriptionResponseFieldStatus)
 }
 
 // SetTranscriptionDate sets the TranscriptionDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetSpeechAnalyticsResponse) SetTranscriptionDate(transcriptionDate time.Time) {
-	g.TranscriptionDate = transcriptionDate
-	g.require(getSpeechAnalyticsResponseFieldTranscriptionDate)
+func (f *FileTranscriptionResponse) SetTranscriptionDate(transcriptionDate time.Time) {
+	f.TranscriptionDate = transcriptionDate
+	f.require(fileTranscriptionResponseFieldTranscriptionDate)
 }
 
 // SetTranscriptionScore sets the TranscriptionScore field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetSpeechAnalyticsResponse) SetTranscriptionScore(transcriptionScore *string) {
-	g.TranscriptionScore = transcriptionScore
-	g.require(getSpeechAnalyticsResponseFieldTranscriptionScore)
+func (f *FileTranscriptionResponse) SetTranscriptionScore(transcriptionScore *string) {
+	f.TranscriptionScore = transcriptionScore
+	f.require(fileTranscriptionResponseFieldTranscriptionScore)
 }
 
 // SetTranscriptionSummary sets the TranscriptionSummary field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetSpeechAnalyticsResponse) SetTranscriptionSummary(transcriptionSummary *string) {
-	g.TranscriptionSummary = transcriptionSummary
-	g.require(getSpeechAnalyticsResponseFieldTranscriptionSummary)
+func (f *FileTranscriptionResponse) SetTranscriptionSummary(transcriptionSummary *string) {
+	f.TranscriptionSummary = transcriptionSummary
+	f.require(fileTranscriptionResponseFieldTranscriptionSummary)
 }
 
 // SetOriginalFile sets the OriginalFile field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetSpeechAnalyticsResponse) SetOriginalFile(originalFile string) {
-	g.OriginalFile = originalFile
-	g.require(getSpeechAnalyticsResponseFieldOriginalFile)
+func (f *FileTranscriptionResponse) SetOriginalFile(originalFile string) {
+	f.OriginalFile = originalFile
+	f.require(fileTranscriptionResponseFieldOriginalFile)
 }
 
-func (g *GetSpeechAnalyticsResponse) UnmarshalJSON(data []byte) error {
-	type embed GetSpeechAnalyticsResponse
+func (f *FileTranscriptionResponse) UnmarshalJSON(data []byte) error {
+	type embed FileTranscriptionResponse
 	var unmarshaler = struct {
 		embed
 		TranscriptionDate *internal.DateTime `json:"transcription_date"`
 	}{
-		embed: embed(*g),
+		embed: embed(*f),
 	}
 	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*g = GetSpeechAnalyticsResponse(unmarshaler.embed)
-	g.TranscriptionDate = unmarshaler.TranscriptionDate.Time()
-	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	*f = FileTranscriptionResponse(unmarshaler.embed)
+	f.TranscriptionDate = unmarshaler.TranscriptionDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *f)
 	if err != nil {
 		return err
 	}
-	g.extraProperties = extraProperties
-	g.rawJSON = json.RawMessage(data)
+	f.extraProperties = extraProperties
+	f.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (g *GetSpeechAnalyticsResponse) MarshalJSON() ([]byte, error) {
-	type embed GetSpeechAnalyticsResponse
+func (f *FileTranscriptionResponse) MarshalJSON() ([]byte, error) {
+	type embed FileTranscriptionResponse
 	var marshaler = struct {
 		embed
 		TranscriptionDate *internal.DateTime `json:"transcription_date"`
 	}{
-		embed:             embed(*g),
-		TranscriptionDate: internal.NewDateTime(g.TranscriptionDate),
+		embed:             embed(*f),
+		TranscriptionDate: internal.NewDateTime(f.TranscriptionDate),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, f.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (g *GetSpeechAnalyticsResponse) String() string {
-	if g == nil {
+func (f *FileTranscriptionResponse) String() string {
+	if f == nil {
 		return "<nil>"
 	}
-	if len(g.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+	if len(f.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(f.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(g); err == nil {
+	if value, err := internal.StringifyJSON(f); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", g)
+	return fmt.Sprintf("%#v", f)
 }
 
-// Transcription language.
-type GetSpeechAnalyticsResponseLanguage string
-
-const (
-	GetSpeechAnalyticsResponseLanguageEn GetSpeechAnalyticsResponseLanguage = "en"
-	GetSpeechAnalyticsResponseLanguageDe GetSpeechAnalyticsResponseLanguage = "de"
-	GetSpeechAnalyticsResponseLanguageEs GetSpeechAnalyticsResponseLanguage = "es"
-	GetSpeechAnalyticsResponseLanguageFr GetSpeechAnalyticsResponseLanguage = "fr"
-	GetSpeechAnalyticsResponseLanguageIt GetSpeechAnalyticsResponseLanguage = "it"
+var (
+	submitFileTranscriptionResponseFieldFile      = big.NewInt(1 << 0)
+	submitFileTranscriptionResponseFieldRequestID = big.NewInt(1 << 1)
+	submitFileTranscriptionResponseFieldSuccess   = big.NewInt(1 << 2)
 )
 
-func NewGetSpeechAnalyticsResponseLanguageFromString(s string) (GetSpeechAnalyticsResponseLanguage, error) {
-	switch s {
-	case "en":
-		return GetSpeechAnalyticsResponseLanguageEn, nil
-	case "de":
-		return GetSpeechAnalyticsResponseLanguageDe, nil
-	case "es":
-		return GetSpeechAnalyticsResponseLanguageEs, nil
-	case "fr":
-		return GetSpeechAnalyticsResponseLanguageFr, nil
-	case "it":
-		return GetSpeechAnalyticsResponseLanguageIt, nil
+type SubmitFileTranscriptionResponse struct {
+	// Uploaded file name.
+	File string `json:"file" url:"file"`
+	// Transcription request ID.
+	RequestID string `json:"request_id" url:"request_id"`
+	// Indicates whether the request was successful.
+	Success bool `json:"success" url:"success"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubmitFileTranscriptionResponse) GetFile() string {
+	if s == nil {
+		return ""
 	}
-	var t GetSpeechAnalyticsResponseLanguage
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
+	return s.File
 }
 
-func (g GetSpeechAnalyticsResponseLanguage) Ptr() *GetSpeechAnalyticsResponseLanguage {
-	return &g
-}
-
-// Transcription status. Possible values are `completed`, `failed`.
-type GetSpeechAnalyticsResponseStatus string
-
-const (
-	GetSpeechAnalyticsResponseStatusCompleted GetSpeechAnalyticsResponseStatus = "completed"
-	GetSpeechAnalyticsResponseStatusFailed    GetSpeechAnalyticsResponseStatus = "failed"
-)
-
-func NewGetSpeechAnalyticsResponseStatusFromString(s string) (GetSpeechAnalyticsResponseStatus, error) {
-	switch s {
-	case "completed":
-		return GetSpeechAnalyticsResponseStatusCompleted, nil
-	case "failed":
-		return GetSpeechAnalyticsResponseStatusFailed, nil
+func (s *SubmitFileTranscriptionResponse) GetRequestID() string {
+	if s == nil {
+		return ""
 	}
-	var t GetSpeechAnalyticsResponseStatus
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
+	return s.RequestID
 }
 
-func (g GetSpeechAnalyticsResponseStatus) Ptr() *GetSpeechAnalyticsResponseStatus {
-	return &g
+func (s *SubmitFileTranscriptionResponse) GetSuccess() bool {
+	if s == nil {
+		return false
+	}
+	return s.Success
+}
+
+func (s *SubmitFileTranscriptionResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubmitFileTranscriptionResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetFile sets the File field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitFileTranscriptionResponse) SetFile(file string) {
+	s.File = file
+	s.require(submitFileTranscriptionResponseFieldFile)
+}
+
+// SetRequestID sets the RequestID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitFileTranscriptionResponse) SetRequestID(requestID string) {
+	s.RequestID = requestID
+	s.require(submitFileTranscriptionResponseFieldRequestID)
+}
+
+// SetSuccess sets the Success field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitFileTranscriptionResponse) SetSuccess(success bool) {
+	s.Success = success
+	s.require(submitFileTranscriptionResponseFieldSuccess)
+}
+
+func (s *SubmitFileTranscriptionResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubmitFileTranscriptionResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubmitFileTranscriptionResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubmitFileTranscriptionResponse) MarshalJSON() ([]byte, error) {
+	type embed SubmitFileTranscriptionResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubmitFileTranscriptionResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
 }

@@ -37,7 +37,7 @@ func (r *RawClient) Create(
 	ctx context.Context,
 	request *wavixgosdk.CreateSpeechAnalyticsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.CreateSpeechAnalyticsResponse], error) {
+) (*core.Response[*wavixgosdk.SubmitFileTranscriptionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -66,7 +66,7 @@ func (r *RawClient) Create(
 	}
 	headers.Set("Content-Type", writer.ContentType())
 
-	var response *wavixgosdk.CreateSpeechAnalyticsResponse
+	var response *wavixgosdk.SubmitFileTranscriptionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -86,7 +86,7 @@ func (r *RawClient) Create(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.CreateSpeechAnalyticsResponse]{
+	return &core.Response[*wavixgosdk.SubmitFileTranscriptionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -97,7 +97,7 @@ func (r *RawClient) Get(
 	ctx context.Context,
 	request *wavixgosdk.GetSpeechAnalyticsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.GetSpeechAnalyticsResponse], error) {
+) (*core.Response[*wavixgosdk.FileTranscriptionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -112,7 +112,7 @@ func (r *RawClient) Get(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *wavixgosdk.GetSpeechAnalyticsResponse
+	var response *wavixgosdk.FileTranscriptionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -131,7 +131,7 @@ func (r *RawClient) Get(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.GetSpeechAnalyticsResponse]{
+	return &core.Response[*wavixgosdk.FileTranscriptionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

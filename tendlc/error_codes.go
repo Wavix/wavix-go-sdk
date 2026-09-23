@@ -14,6 +14,11 @@ var ErrorCodes internal.ErrorCodes = internal.ErrorCodes{
 			APIError: apiError,
 		}
 	},
+	401: func(apiError *core.APIError) error {
+		return &wavixgosdk.UnauthorizedError{
+			APIError: apiError,
+		}
+	},
 	403: func(apiError *core.APIError) error {
 		return &wavixgosdk.ForbiddenError{
 			APIError: apiError,

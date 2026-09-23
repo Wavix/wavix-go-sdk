@@ -6,6 +6,7 @@ import (
 	context "context"
 	http "net/http"
 
+	wavixgosdk "github.com/wavix/wavix-go-sdk"
 	core "github.com/wavix/wavix-go-sdk/core"
 	internal "github.com/wavix/wavix-go-sdk/internal"
 	option "github.com/wavix/wavix-go-sdk/option"
@@ -36,7 +37,7 @@ func (r *RawClient) Link(
 	ctx context.Context,
 	request *tendlc.LinkCampaignNumbersRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*tendlc.LinkCampaignNumbersResponse], error) {
+) (*core.Response[*wavixgosdk.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -53,7 +54,7 @@ func (r *RawClient) Link(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *tendlc.LinkCampaignNumbersResponse
+	var response *wavixgosdk.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -72,7 +73,7 @@ func (r *RawClient) Link(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*tendlc.LinkCampaignNumbersResponse]{
+	return &core.Response[*wavixgosdk.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -83,7 +84,7 @@ func (r *RawClient) Unlink(
 	ctx context.Context,
 	request *tendlc.UnlinkCampaignNumbersRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*tendlc.UnlinkCampaignNumbersResponse], error) {
+) (*core.Response[*wavixgosdk.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -100,7 +101,7 @@ func (r *RawClient) Unlink(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *tendlc.UnlinkCampaignNumbersResponse
+	var response *wavixgosdk.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -119,7 +120,7 @@ func (r *RawClient) Unlink(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*tendlc.UnlinkCampaignNumbersResponse]{
+	return &core.Response[*wavixgosdk.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -130,7 +131,7 @@ func (r *RawClient) List(
 	ctx context.Context,
 	request *tendlc.ListCampaignNumbersRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*tendlc.ListCampaignNumbersResponse], error) {
+) (*core.Response[*wavixgosdk.TenDlcCampaignNumberListResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -146,7 +147,7 @@ func (r *RawClient) List(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *tendlc.ListCampaignNumbersResponse
+	var response *wavixgosdk.TenDlcCampaignNumberListResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -165,7 +166,7 @@ func (r *RawClient) List(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*tendlc.ListCampaignNumbersResponse]{
+	return &core.Response[*wavixgosdk.TenDlcCampaignNumberListResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

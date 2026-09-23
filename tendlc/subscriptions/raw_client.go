@@ -78,7 +78,7 @@ func (r *RawClient) Create(
 	ctx context.Context,
 	request *wavixgosdk.TenDlcEventSubscription,
 	opts ...option.RequestOption,
-) (*core.Response[*tendlc.CreateSubscriptionsResponse], error) {
+) (*core.Response[*wavixgosdk.TenDlcEventSubscription], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -90,7 +90,7 @@ func (r *RawClient) Create(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *tendlc.CreateSubscriptionsResponse
+	var response *wavixgosdk.TenDlcEventSubscription
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -110,7 +110,7 @@ func (r *RawClient) Create(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*tendlc.CreateSubscriptionsResponse]{
+	return &core.Response[*wavixgosdk.TenDlcEventSubscription]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -121,7 +121,7 @@ func (r *RawClient) Delete(
 	ctx context.Context,
 	request *tendlc.DeleteSubscriptionsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*tendlc.DeleteSubscriptionsResponse], error) {
+) (*core.Response[*wavixgosdk.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -140,7 +140,7 @@ func (r *RawClient) Delete(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *tendlc.DeleteSubscriptionsResponse
+	var response *wavixgosdk.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -159,7 +159,7 @@ func (r *RawClient) Delete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*tendlc.DeleteSubscriptionsResponse]{
+	return &core.Response[*wavixgosdk.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

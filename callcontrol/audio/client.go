@@ -35,7 +35,7 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-// Plays an audio prompt into the active call identified by `id`.
+// Plays an audio prompt into the active call identified by `id`. The audio is audible to the remote party in real time.
 func (c *Client) Play(
 	ctx context.Context,
 	request *callcontrol.CallAudioPlayRequest,

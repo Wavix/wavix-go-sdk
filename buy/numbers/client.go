@@ -5,6 +5,7 @@ package numbers
 import (
 	context "context"
 
+	wavixgosdk "github.com/wavix/wavix-go-sdk"
 	buy "github.com/wavix/wavix-go-sdk/buy"
 	core "github.com/wavix/wavix-go-sdk/core"
 	internal "github.com/wavix/wavix-go-sdk/internal"
@@ -39,7 +40,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *buy.ListNumbersRequest,
 	opts ...option.RequestOption,
-) (*buy.ListNumbersResponse, error) {
+) (*wavixgosdk.AvailableNumberListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,

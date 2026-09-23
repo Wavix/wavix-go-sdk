@@ -57,7 +57,7 @@ func (c *Client) Create(
 	ctx context.Context,
 	request *wavixgosdk.CreateSpeechAnalyticsRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.CreateSpeechAnalyticsResponse, error) {
+) (*wavixgosdk.SubmitFileTranscriptionResponse, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -74,7 +74,7 @@ func (c *Client) Get(
 	ctx context.Context,
 	request *wavixgosdk.GetSpeechAnalyticsRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.GetSpeechAnalyticsResponse, error) {
+) (*wavixgosdk.FileTranscriptionResponse, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,

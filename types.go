@@ -274,8 +274,8 @@ type AvailableNumber struct {
 	FreeMin int `json:"free_min" url:"free_min"`
 	// Phone number in E.164 format.
 	Number string `json:"number" url:"number"`
-	// Documents required to activate the phone number.
-	RequireDocs []int `json:"require_docs" url:"require_docs"`
+	// Documents to activate the number.
+	RequireDocs []DocumentType `json:"require_docs" url:"require_docs"`
 	// Indicates whether the phone number can receive inbound
 	//
 	//	SMS and MMS messages.
@@ -369,7 +369,7 @@ func (a *AvailableNumber) GetNumber() string {
 	return a.Number
 }
 
-func (a *AvailableNumber) GetRequireDocs() []int {
+func (a *AvailableNumber) GetRequireDocs() []DocumentType {
 	if a == nil {
 		return nil
 	}
@@ -490,7 +490,7 @@ func (a *AvailableNumber) SetNumber(number string) {
 
 // SetRequireDocs sets the RequireDocs field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (a *AvailableNumber) SetRequireDocs(requireDocs []int) {
+func (a *AvailableNumber) SetRequireDocs(requireDocs []DocumentType) {
 	a.RequireDocs = requireDocs
 	a.require(availableNumberFieldRequireDocs)
 }
@@ -657,108 +657,6 @@ func (a *AvailableNumberListResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", a)
-}
-
-var (
-	badRequestErrorBodyFieldSuccess = big.NewInt(1 << 0)
-	badRequestErrorBodyFieldMessage = big.NewInt(1 << 1)
-)
-
-type BadRequestErrorBody struct {
-	// Indicates whether the request was successful. Always `false` for this error.
-	Success bool `json:"success" url:"success"`
-	// Human-readable error description
-	Message string `json:"message" url:"message"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (b *BadRequestErrorBody) GetSuccess() bool {
-	if b == nil {
-		return false
-	}
-	return b.Success
-}
-
-func (b *BadRequestErrorBody) GetMessage() string {
-	if b == nil {
-		return ""
-	}
-	return b.Message
-}
-
-func (b *BadRequestErrorBody) GetExtraProperties() map[string]interface{} {
-	if b == nil {
-		return nil
-	}
-	return b.extraProperties
-}
-
-func (b *BadRequestErrorBody) require(field *big.Int) {
-	if b.explicitFields == nil {
-		b.explicitFields = big.NewInt(0)
-	}
-	b.explicitFields.Or(b.explicitFields, field)
-}
-
-// SetSuccess sets the Success field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (b *BadRequestErrorBody) SetSuccess(success bool) {
-	b.Success = success
-	b.require(badRequestErrorBodyFieldSuccess)
-}
-
-// SetMessage sets the Message field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (b *BadRequestErrorBody) SetMessage(message string) {
-	b.Message = message
-	b.require(badRequestErrorBodyFieldMessage)
-}
-
-func (b *BadRequestErrorBody) UnmarshalJSON(data []byte) error {
-	type unmarshaler BadRequestErrorBody
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*b = BadRequestErrorBody(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *b)
-	if err != nil {
-		return err
-	}
-	b.extraProperties = extraProperties
-	b.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (b *BadRequestErrorBody) MarshalJSON() ([]byte, error) {
-	type embed BadRequestErrorBody
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*b),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (b *BadRequestErrorBody) String() string {
-	if b == nil {
-		return "<nil>"
-	}
-	if len(b.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(b); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", b)
 }
 
 var (
@@ -1731,108 +1629,6 @@ func (c CampaignStatusUpdatedWebhookStatus) Ptr() *CampaignStatusUpdatedWebhookS
 }
 
 var (
-	cartResponseFieldDids     = big.NewInt(1 << 0)
-	cartResponseFieldDocTypes = big.NewInt(1 << 1)
-)
-
-type CartResponse struct {
-	// List of phone numbers in the cart.
-	Dids []*AvailableNumber `json:"dids" url:"dids"`
-	// Document types required to activate phone numbers.
-	DocTypes []*DocumentType `json:"doc_types" url:"doc_types"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (c *CartResponse) GetDids() []*AvailableNumber {
-	if c == nil {
-		return nil
-	}
-	return c.Dids
-}
-
-func (c *CartResponse) GetDocTypes() []*DocumentType {
-	if c == nil {
-		return nil
-	}
-	return c.DocTypes
-}
-
-func (c *CartResponse) GetExtraProperties() map[string]interface{} {
-	if c == nil {
-		return nil
-	}
-	return c.extraProperties
-}
-
-func (c *CartResponse) require(field *big.Int) {
-	if c.explicitFields == nil {
-		c.explicitFields = big.NewInt(0)
-	}
-	c.explicitFields.Or(c.explicitFields, field)
-}
-
-// SetDids sets the Dids field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CartResponse) SetDids(dids []*AvailableNumber) {
-	c.Dids = dids
-	c.require(cartResponseFieldDids)
-}
-
-// SetDocTypes sets the DocTypes field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CartResponse) SetDocTypes(docTypes []*DocumentType) {
-	c.DocTypes = docTypes
-	c.require(cartResponseFieldDocTypes)
-}
-
-func (c *CartResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler CartResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*c = CartResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *c)
-	if err != nil {
-		return err
-	}
-	c.extraProperties = extraProperties
-	c.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (c *CartResponse) MarshalJSON() ([]byte, error) {
-	type embed CartResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*c),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (c *CartResponse) String() string {
-	if c == nil {
-		return "<nil>"
-	}
-	if len(c.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(c); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", c)
-}
-
-var (
 	cdrTranscriptionCompletedWebhookFieldUUID   = big.NewInt(1 << 0)
 	cdrTranscriptionCompletedWebhookFieldStatus = big.NewInt(1 << 1)
 )
@@ -1978,8 +1774,8 @@ type CdrTranscriptionResponse struct {
 	// List of speaker turns with text and start/end times.
 	Turns []*TranscriptTurn `json:"turns" url:"turns"`
 	// Transcription ID.
-	UUID     string                `json:"uuid" url:"uuid"`
-	Language TranscriptionLanguage `json:"language" url:"language"`
+	UUID     string                 `json:"uuid" url:"uuid"`
+	Language *TranscriptionLanguage `json:"language,omitempty" url:"language,omitempty"`
 	// Call duration in seconds.
 	Duration int `json:"duration" url:"duration"`
 	// Total charge for the transcription in USD.
@@ -2026,9 +1822,9 @@ func (c *CdrTranscriptionResponse) GetUUID() string {
 	return c.UUID
 }
 
-func (c *CdrTranscriptionResponse) GetLanguage() TranscriptionLanguage {
+func (c *CdrTranscriptionResponse) GetLanguage() *TranscriptionLanguage {
 	if c == nil {
-		return ""
+		return nil
 	}
 	return c.Language
 }
@@ -2126,7 +1922,7 @@ func (c *CdrTranscriptionResponse) SetUUID(uuid string) {
 
 // SetLanguage sets the Language field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CdrTranscriptionResponse) SetLanguage(language TranscriptionLanguage) {
+func (c *CdrTranscriptionResponse) SetLanguage(language *TranscriptionLanguage) {
 	c.Language = language
 	c.require(cdrTranscriptionResponseFieldLanguage)
 }
@@ -2751,18 +2547,45 @@ func (c *CountryListResponse) String() string {
 	return fmt.Sprintf("%#v", c)
 }
 
-var (
-	documentTypeFieldID    = big.NewInt(1 << 0)
-	documentTypeFieldName  = big.NewInt(1 << 1)
-	documentTypeFieldTitle = big.NewInt(1 << 2)
+// Document type required to activate a phone number. One of: `id` - any form of ID,
+// `address` - proof of address, `localaddress` - proof of local address within the country.
+type DocumentType string
+
+const (
+	DocumentTypeID           DocumentType = "id"
+	DocumentTypeAddress      DocumentType = "address"
+	DocumentTypeLocaladdress DocumentType = "localaddress"
 )
 
-type DocumentType struct {
+func NewDocumentTypeFromString(s string) (DocumentType, error) {
+	switch s {
+	case "id":
+		return DocumentTypeID, nil
+	case "address":
+		return DocumentTypeAddress, nil
+	case "localaddress":
+		return DocumentTypeLocaladdress, nil
+	}
+	var t DocumentType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DocumentType) Ptr() *DocumentType {
+	return &d
+}
+
+// Document type required to activate a phone number.
+var (
+	documentTypeInfoFieldID    = big.NewInt(1 << 0)
+	documentTypeInfoFieldName  = big.NewInt(1 << 1)
+	documentTypeInfoFieldTitle = big.NewInt(1 << 2)
+)
+
+type DocumentTypeInfo struct {
 	// Document type ID.
-	ID int `json:"id" url:"id"`
+	ID   int          `json:"id" url:"id"`
+	Name DocumentType `json:"name" url:"name"`
 	// Document type name.
-	Name string `json:"name" url:"name"`
-	// Human-readable document type name.
 	Title string `json:"title" url:"title"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -2772,35 +2595,35 @@ type DocumentType struct {
 	rawJSON         json.RawMessage
 }
 
-func (d *DocumentType) GetID() int {
+func (d *DocumentTypeInfo) GetID() int {
 	if d == nil {
 		return 0
 	}
 	return d.ID
 }
 
-func (d *DocumentType) GetName() string {
+func (d *DocumentTypeInfo) GetName() DocumentType {
 	if d == nil {
 		return ""
 	}
 	return d.Name
 }
 
-func (d *DocumentType) GetTitle() string {
+func (d *DocumentTypeInfo) GetTitle() string {
 	if d == nil {
 		return ""
 	}
 	return d.Title
 }
 
-func (d *DocumentType) GetExtraProperties() map[string]interface{} {
+func (d *DocumentTypeInfo) GetExtraProperties() map[string]interface{} {
 	if d == nil {
 		return nil
 	}
 	return d.extraProperties
 }
 
-func (d *DocumentType) require(field *big.Int) {
+func (d *DocumentTypeInfo) require(field *big.Int) {
 	if d.explicitFields == nil {
 		d.explicitFields = big.NewInt(0)
 	}
@@ -2809,32 +2632,32 @@ func (d *DocumentType) require(field *big.Int) {
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (d *DocumentType) SetID(id int) {
+func (d *DocumentTypeInfo) SetID(id int) {
 	d.ID = id
-	d.require(documentTypeFieldID)
+	d.require(documentTypeInfoFieldID)
 }
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (d *DocumentType) SetName(name string) {
+func (d *DocumentTypeInfo) SetName(name DocumentType) {
 	d.Name = name
-	d.require(documentTypeFieldName)
+	d.require(documentTypeInfoFieldName)
 }
 
 // SetTitle sets the Title field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (d *DocumentType) SetTitle(title string) {
+func (d *DocumentTypeInfo) SetTitle(title string) {
 	d.Title = title
-	d.require(documentTypeFieldTitle)
+	d.require(documentTypeInfoFieldTitle)
 }
 
-func (d *DocumentType) UnmarshalJSON(data []byte) error {
-	type unmarshaler DocumentType
+func (d *DocumentTypeInfo) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentTypeInfo
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*d = DocumentType(value)
+	*d = DocumentTypeInfo(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
@@ -2844,8 +2667,8 @@ func (d *DocumentType) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (d *DocumentType) MarshalJSON() ([]byte, error) {
-	type embed DocumentType
+func (d *DocumentTypeInfo) MarshalJSON() ([]byte, error) {
+	type embed DocumentTypeInfo
 	var marshaler = struct {
 		embed
 	}{
@@ -2855,7 +2678,7 @@ func (d *DocumentType) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
-func (d *DocumentType) String() string {
+func (d *DocumentTypeInfo) String() string {
 	if d == nil {
 		return "<nil>"
 	}
@@ -2869,10 +2692,6 @@ func (d *DocumentType) String() string {
 	}
 	return fmt.Sprintf("%#v", d)
 }
-
-// Specifies the type of document required to activate the phone number.
-// Possible values are: `1` - Proof of identity, `2` - Proof of address, `3` - Proof of business registration.
-type DocumentTypeID = int
 
 var (
 	fileTranscriptionCompletedWebhookFieldRequestID = big.NewInt(1 << 0)
@@ -2991,324 +2810,6 @@ func (f *FileTranscriptionCompletedWebhook) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", f)
-}
-
-var (
-	fileTranscriptionResponseFieldTranscript           = big.NewInt(1 << 0)
-	fileTranscriptionResponseFieldTurns                = big.NewInt(1 << 1)
-	fileTranscriptionResponseFieldRequestID            = big.NewInt(1 << 2)
-	fileTranscriptionResponseFieldLanguage             = big.NewInt(1 << 3)
-	fileTranscriptionResponseFieldDuration             = big.NewInt(1 << 4)
-	fileTranscriptionResponseFieldCharge               = big.NewInt(1 << 5)
-	fileTranscriptionResponseFieldStatus               = big.NewInt(1 << 6)
-	fileTranscriptionResponseFieldTranscriptionDate    = big.NewInt(1 << 7)
-	fileTranscriptionResponseFieldTranscriptionScore   = big.NewInt(1 << 8)
-	fileTranscriptionResponseFieldTranscriptionSummary = big.NewInt(1 << 9)
-	fileTranscriptionResponseFieldOriginalFile         = big.NewInt(1 << 10)
-)
-
-type FileTranscriptionResponse struct {
-	// Complete transcription text attributed to each channel.
-	Transcript *FileTranscriptResponse `json:"transcript,omitempty" url:"transcript,omitempty"`
-	// List of transcription turns, including speaker attribution, timestamps, and sentiment.
-	Turns []*FileTranscriptTurn `json:"turns,omitempty" url:"turns,omitempty"`
-	// Transcription request ID.
-	RequestID string `json:"request_id" url:"request_id"`
-	// Transcription language.
-	Language FileTranscriptionResponseLanguage `json:"language" url:"language"`
-	// File duration in seconds.
-	Duration *int `json:"duration,omitempty" url:"duration,omitempty"`
-	// Total transcription charge in USD.
-	Charge string `json:"charge" url:"charge"`
-	// Transcription status. Possible values are `completed`, `failed`.
-	Status FileTranscriptionResponseStatus `json:"status" url:"status"`
-	// Date and time of the transcription in ISO 8601 format.
-	TranscriptionDate time.Time `json:"transcription_date" url:"transcription_date"`
-	// Conversation sentiment score. Scores from 1.0 to 3.0 are negative; scores from 4.0 to 5.0 are positive.
-	TranscriptionScore *string `json:"transcription_score,omitempty" url:"transcription_score,omitempty"`
-	// Transcription summary.
-	TranscriptionSummary *string `json:"transcription_summary,omitempty" url:"transcription_summary,omitempty"`
-	// Uploaded file URL.
-	OriginalFile string `json:"original_file" url:"original_file"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (f *FileTranscriptionResponse) GetTranscript() *FileTranscriptResponse {
-	if f == nil {
-		return nil
-	}
-	return f.Transcript
-}
-
-func (f *FileTranscriptionResponse) GetTurns() []*FileTranscriptTurn {
-	if f == nil {
-		return nil
-	}
-	return f.Turns
-}
-
-func (f *FileTranscriptionResponse) GetRequestID() string {
-	if f == nil {
-		return ""
-	}
-	return f.RequestID
-}
-
-func (f *FileTranscriptionResponse) GetLanguage() FileTranscriptionResponseLanguage {
-	if f == nil {
-		return ""
-	}
-	return f.Language
-}
-
-func (f *FileTranscriptionResponse) GetDuration() *int {
-	if f == nil {
-		return nil
-	}
-	return f.Duration
-}
-
-func (f *FileTranscriptionResponse) GetCharge() string {
-	if f == nil {
-		return ""
-	}
-	return f.Charge
-}
-
-func (f *FileTranscriptionResponse) GetStatus() FileTranscriptionResponseStatus {
-	if f == nil {
-		return ""
-	}
-	return f.Status
-}
-
-func (f *FileTranscriptionResponse) GetTranscriptionDate() time.Time {
-	if f == nil {
-		return time.Time{}
-	}
-	return f.TranscriptionDate
-}
-
-func (f *FileTranscriptionResponse) GetTranscriptionScore() *string {
-	if f == nil {
-		return nil
-	}
-	return f.TranscriptionScore
-}
-
-func (f *FileTranscriptionResponse) GetTranscriptionSummary() *string {
-	if f == nil {
-		return nil
-	}
-	return f.TranscriptionSummary
-}
-
-func (f *FileTranscriptionResponse) GetOriginalFile() string {
-	if f == nil {
-		return ""
-	}
-	return f.OriginalFile
-}
-
-func (f *FileTranscriptionResponse) GetExtraProperties() map[string]interface{} {
-	if f == nil {
-		return nil
-	}
-	return f.extraProperties
-}
-
-func (f *FileTranscriptionResponse) require(field *big.Int) {
-	if f.explicitFields == nil {
-		f.explicitFields = big.NewInt(0)
-	}
-	f.explicitFields.Or(f.explicitFields, field)
-}
-
-// SetTranscript sets the Transcript field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (f *FileTranscriptionResponse) SetTranscript(transcript *FileTranscriptResponse) {
-	f.Transcript = transcript
-	f.require(fileTranscriptionResponseFieldTranscript)
-}
-
-// SetTurns sets the Turns field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (f *FileTranscriptionResponse) SetTurns(turns []*FileTranscriptTurn) {
-	f.Turns = turns
-	f.require(fileTranscriptionResponseFieldTurns)
-}
-
-// SetRequestID sets the RequestID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (f *FileTranscriptionResponse) SetRequestID(requestID string) {
-	f.RequestID = requestID
-	f.require(fileTranscriptionResponseFieldRequestID)
-}
-
-// SetLanguage sets the Language field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (f *FileTranscriptionResponse) SetLanguage(language FileTranscriptionResponseLanguage) {
-	f.Language = language
-	f.require(fileTranscriptionResponseFieldLanguage)
-}
-
-// SetDuration sets the Duration field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (f *FileTranscriptionResponse) SetDuration(duration *int) {
-	f.Duration = duration
-	f.require(fileTranscriptionResponseFieldDuration)
-}
-
-// SetCharge sets the Charge field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (f *FileTranscriptionResponse) SetCharge(charge string) {
-	f.Charge = charge
-	f.require(fileTranscriptionResponseFieldCharge)
-}
-
-// SetStatus sets the Status field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (f *FileTranscriptionResponse) SetStatus(status FileTranscriptionResponseStatus) {
-	f.Status = status
-	f.require(fileTranscriptionResponseFieldStatus)
-}
-
-// SetTranscriptionDate sets the TranscriptionDate field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (f *FileTranscriptionResponse) SetTranscriptionDate(transcriptionDate time.Time) {
-	f.TranscriptionDate = transcriptionDate
-	f.require(fileTranscriptionResponseFieldTranscriptionDate)
-}
-
-// SetTranscriptionScore sets the TranscriptionScore field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (f *FileTranscriptionResponse) SetTranscriptionScore(transcriptionScore *string) {
-	f.TranscriptionScore = transcriptionScore
-	f.require(fileTranscriptionResponseFieldTranscriptionScore)
-}
-
-// SetTranscriptionSummary sets the TranscriptionSummary field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (f *FileTranscriptionResponse) SetTranscriptionSummary(transcriptionSummary *string) {
-	f.TranscriptionSummary = transcriptionSummary
-	f.require(fileTranscriptionResponseFieldTranscriptionSummary)
-}
-
-// SetOriginalFile sets the OriginalFile field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (f *FileTranscriptionResponse) SetOriginalFile(originalFile string) {
-	f.OriginalFile = originalFile
-	f.require(fileTranscriptionResponseFieldOriginalFile)
-}
-
-func (f *FileTranscriptionResponse) UnmarshalJSON(data []byte) error {
-	type embed FileTranscriptionResponse
-	var unmarshaler = struct {
-		embed
-		TranscriptionDate *internal.DateTime `json:"transcription_date"`
-	}{
-		embed: embed(*f),
-	}
-	if err := json.Unmarshal(data, &unmarshaler); err != nil {
-		return err
-	}
-	*f = FileTranscriptionResponse(unmarshaler.embed)
-	f.TranscriptionDate = unmarshaler.TranscriptionDate.Time()
-	extraProperties, err := internal.ExtractExtraProperties(data, *f)
-	if err != nil {
-		return err
-	}
-	f.extraProperties = extraProperties
-	f.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (f *FileTranscriptionResponse) MarshalJSON() ([]byte, error) {
-	type embed FileTranscriptionResponse
-	var marshaler = struct {
-		embed
-		TranscriptionDate *internal.DateTime `json:"transcription_date"`
-	}{
-		embed:             embed(*f),
-		TranscriptionDate: internal.NewDateTime(f.TranscriptionDate),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, f.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (f *FileTranscriptionResponse) String() string {
-	if f == nil {
-		return "<nil>"
-	}
-	if len(f.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(f.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(f); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", f)
-}
-
-// Transcription language.
-type FileTranscriptionResponseLanguage string
-
-const (
-	FileTranscriptionResponseLanguageEn FileTranscriptionResponseLanguage = "en"
-	FileTranscriptionResponseLanguageDe FileTranscriptionResponseLanguage = "de"
-	FileTranscriptionResponseLanguageEs FileTranscriptionResponseLanguage = "es"
-	FileTranscriptionResponseLanguageFr FileTranscriptionResponseLanguage = "fr"
-	FileTranscriptionResponseLanguageIt FileTranscriptionResponseLanguage = "it"
-)
-
-func NewFileTranscriptionResponseLanguageFromString(s string) (FileTranscriptionResponseLanguage, error) {
-	switch s {
-	case "en":
-		return FileTranscriptionResponseLanguageEn, nil
-	case "de":
-		return FileTranscriptionResponseLanguageDe, nil
-	case "es":
-		return FileTranscriptionResponseLanguageEs, nil
-	case "fr":
-		return FileTranscriptionResponseLanguageFr, nil
-	case "it":
-		return FileTranscriptionResponseLanguageIt, nil
-	}
-	var t FileTranscriptionResponseLanguage
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (f FileTranscriptionResponseLanguage) Ptr() *FileTranscriptionResponseLanguage {
-	return &f
-}
-
-// Transcription status. Possible values are `completed`, `failed`.
-type FileTranscriptionResponseStatus string
-
-const (
-	FileTranscriptionResponseStatusCompleted FileTranscriptionResponseStatus = "completed"
-	FileTranscriptionResponseStatusFailed    FileTranscriptionResponseStatus = "failed"
-)
-
-func NewFileTranscriptionResponseStatusFromString(s string) (FileTranscriptionResponseStatus, error) {
-	switch s {
-	case "completed":
-		return FileTranscriptionResponseStatusCompleted, nil
-	case "failed":
-		return FileTranscriptionResponseStatusFailed, nil
-	}
-	var t FileTranscriptionResponseStatus
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (f FileTranscriptionResponseStatus) Ptr() *FileTranscriptionResponseStatus {
-	return &f
 }
 
 // Financial transaction.
@@ -5776,108 +5277,6 @@ func (m *MessagesDeliveryReport) String() string {
 }
 
 var (
-	notFoundErrorBodyFieldSuccess = big.NewInt(1 << 0)
-	notFoundErrorBodyFieldMessage = big.NewInt(1 << 1)
-)
-
-type NotFoundErrorBody struct {
-	// Indicates whether the request was successful. Always `false` for this error.
-	Success bool `json:"success" url:"success"`
-	// Human-readable error description
-	Message string `json:"message" url:"message"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (n *NotFoundErrorBody) GetSuccess() bool {
-	if n == nil {
-		return false
-	}
-	return n.Success
-}
-
-func (n *NotFoundErrorBody) GetMessage() string {
-	if n == nil {
-		return ""
-	}
-	return n.Message
-}
-
-func (n *NotFoundErrorBody) GetExtraProperties() map[string]interface{} {
-	if n == nil {
-		return nil
-	}
-	return n.extraProperties
-}
-
-func (n *NotFoundErrorBody) require(field *big.Int) {
-	if n.explicitFields == nil {
-		n.explicitFields = big.NewInt(0)
-	}
-	n.explicitFields.Or(n.explicitFields, field)
-}
-
-// SetSuccess sets the Success field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (n *NotFoundErrorBody) SetSuccess(success bool) {
-	n.Success = success
-	n.require(notFoundErrorBodyFieldSuccess)
-}
-
-// SetMessage sets the Message field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (n *NotFoundErrorBody) SetMessage(message string) {
-	n.Message = message
-	n.require(notFoundErrorBodyFieldMessage)
-}
-
-func (n *NotFoundErrorBody) UnmarshalJSON(data []byte) error {
-	type unmarshaler NotFoundErrorBody
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*n = NotFoundErrorBody(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *n)
-	if err != nil {
-		return err
-	}
-	n.extraProperties = extraProperties
-	n.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (n *NotFoundErrorBody) MarshalJSON() ([]byte, error) {
-	type embed NotFoundErrorBody
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*n),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, n.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (n *NotFoundErrorBody) String() string {
-	if n == nil {
-		return "<nil>"
-	}
-	if len(n.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(n.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(n); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", n)
-}
-
-var (
 	notFoundErrorResponseFieldSuccess = big.NewInt(1 << 0)
 	notFoundErrorResponseFieldMessage = big.NewInt(1 << 1)
 )
@@ -5986,7 +5385,7 @@ var (
 	numberDocumentFieldDidNumber      = big.NewInt(1 << 2)
 	numberDocumentFieldDocContentType = big.NewInt(1 << 3)
 	numberDocumentFieldDocFileName    = big.NewInt(1 << 4)
-	numberDocumentFieldDocTypeID      = big.NewInt(1 << 5)
+	numberDocumentFieldDocType        = big.NewInt(1 << 5)
 	numberDocumentFieldStatus         = big.NewInt(1 << 6)
 	numberDocumentFieldURL            = big.NewInt(1 << 7)
 )
@@ -6001,8 +5400,9 @@ type NumberDocument struct {
 	// The uploaded content type identified by the platform
 	DocContentType string `json:"doc_content_type" url:"doc_content_type"`
 	// The uploaded document name
-	DocFileName string         `json:"doc_file_name" url:"doc_file_name"`
-	DocTypeID   DocumentTypeID `json:"doc_type_id" url:"doc_type_id"`
+	DocFileName string `json:"doc_file_name" url:"doc_file_name"`
+	// Document type.
+	DocType *DocumentType `json:"doc_type,omitempty" url:"doc_type,omitempty"`
 	// Status of the uploaded document. Can be either `approved`, `pending`, or `rejected`
 	Status string `json:"status" url:"status"`
 	// A link to the uploaded document
@@ -6050,11 +5450,11 @@ func (n *NumberDocument) GetDocFileName() string {
 	return n.DocFileName
 }
 
-func (n *NumberDocument) GetDocTypeID() DocumentTypeID {
+func (n *NumberDocument) GetDocType() *DocumentType {
 	if n == nil {
-		return 0
+		return nil
 	}
-	return n.DocTypeID
+	return n.DocType
 }
 
 func (n *NumberDocument) GetStatus() string {
@@ -6120,11 +5520,11 @@ func (n *NumberDocument) SetDocFileName(docFileName string) {
 	n.require(numberDocumentFieldDocFileName)
 }
 
-// SetDocTypeID sets the DocTypeID field and marks it as non-optional;
+// SetDocType sets the DocType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (n *NumberDocument) SetDocTypeID(docTypeID DocumentTypeID) {
-	n.DocTypeID = docTypeID
-	n.require(numberDocumentFieldDocTypeID)
+func (n *NumberDocument) SetDocType(docType *DocumentType) {
+	n.DocType = docType
+	n.require(numberDocumentFieldDocType)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
@@ -7073,373 +6473,6 @@ func (p *PhoneValidationBatchResultResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PhoneValidationBatchResultResponse) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	phoneValidationResponseFieldPhoneNumber      = big.NewInt(1 << 0)
-	phoneValidationResponseFieldValid            = big.NewInt(1 << 1)
-	phoneValidationResponseFieldCountryCode      = big.NewInt(1 << 2)
-	phoneValidationResponseFieldE164Format       = big.NewInt(1 << 3)
-	phoneValidationResponseFieldNationalFormat   = big.NewInt(1 << 4)
-	phoneValidationResponseFieldPorted           = big.NewInt(1 << 5)
-	phoneValidationResponseFieldMcc              = big.NewInt(1 << 6)
-	phoneValidationResponseFieldMnc              = big.NewInt(1 << 7)
-	phoneValidationResponseFieldNumberType       = big.NewInt(1 << 8)
-	phoneValidationResponseFieldCarrierName      = big.NewInt(1 << 9)
-	phoneValidationResponseFieldRiskyDestination = big.NewInt(1 << 10)
-	phoneValidationResponseFieldUnallocatedRange = big.NewInt(1 << 11)
-	phoneValidationResponseFieldReachable        = big.NewInt(1 << 12)
-	phoneValidationResponseFieldRoaming          = big.NewInt(1 << 13)
-	phoneValidationResponseFieldTimezone         = big.NewInt(1 << 14)
-	phoneValidationResponseFieldCharge           = big.NewInt(1 << 15)
-	phoneValidationResponseFieldErrorCode        = big.NewInt(1 << 16)
-)
-
-type PhoneValidationResponse struct {
-	// Phone number.
-	PhoneNumber string `json:"phone_number" url:"phone_number"`
-	// Indicates whether the phone number is valid.
-	Valid bool `json:"valid" url:"valid"`
-	// ISO 3166-1 alpha-2 country code of the phone number.
-	//
-	//	`null` if the number is invalid.
-	CountryCode *string `json:"country_code,omitempty" url:"country_code,omitempty"`
-	// Phone number in international E.164 format.
-	E164Format string `json:"e164_format" url:"e164_format"`
-	// Phone number in the national format of the identified country.
-	NationalFormat string `json:"national_format" url:"national_format"`
-	// Indicates whether the phone number was ported or not. `null` if the phone number is invalid.
-	Ported *bool `json:"ported,omitempty" url:"ported,omitempty"`
-	// Mobile Country Code of the phone number carrier. For mobile phone numbers only. `null` if the phone number is invalid.
-	Mcc *string `json:"mcc,omitempty" url:"mcc,omitempty"`
-	// Mobile Network Code of the phone number carrier. For mobile phone numbers only. `null` if the phone number is invalid
-	Mnc *string `json:"mnc,omitempty" url:"mnc,omitempty"`
-	// Number type. Possible values are `mobile`, `landline`, or `toll-free`. `null` if the phone number is invalid.
-	NumberType *string `json:"number_type,omitempty" url:"number_type,omitempty"`
-	// Name of the phone number carrier. `null` if the phone number is invalid.
-	CarrierName *string `json:"carrier_name,omitempty" url:"carrier_name,omitempty"`
-	// Indicates whether the phone number belongs to a number range associated with traffic pumping. `null` if the number is invalid.
-	RiskyDestination *bool `json:"risky_destination,omitempty" url:"risky_destination,omitempty"`
-	// Indicates whether the phone number belongs to an unallocated number range. `null` if the number is invalid
-	UnallocatedRange *bool `json:"unallocated_range,omitempty" url:"unallocated_range,omitempty"`
-	// Indicates whether the number is registered in a mobile network. For mobile phone numbers only. `null` if the number is invalid
-	Reachable *bool `json:"reachable,omitempty" url:"reachable,omitempty"`
-	// Indicates whether the number is roaming. For mobile phone numbers only. `null` if the number is invalid
-	Roaming *bool `json:"roaming,omitempty" url:"roaming,omitempty"`
-	// Time zone based on the phone number's country and area code.
-	//
-	//	`null` if the number is invalid.
-	Timezone *string `json:"timezone,omitempty" url:"timezone,omitempty"`
-	// Charge for the validation.
-	Charge string `json:"charge" url:"charge"`
-	// Error code for the request. `000` indicates success.
-	// Possible values:
-	// - `013`: — Internal service error
-	// - `021`: — Invalid phone number length or format
-	// - `041`: — Request timeout
-	// - `042`: — Request failed
-	// - `091`: — Insufficient funds
-	ErrorCode string `json:"error_code" url:"error_code"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PhoneValidationResponse) GetPhoneNumber() string {
-	if p == nil {
-		return ""
-	}
-	return p.PhoneNumber
-}
-
-func (p *PhoneValidationResponse) GetValid() bool {
-	if p == nil {
-		return false
-	}
-	return p.Valid
-}
-
-func (p *PhoneValidationResponse) GetCountryCode() *string {
-	if p == nil {
-		return nil
-	}
-	return p.CountryCode
-}
-
-func (p *PhoneValidationResponse) GetE164Format() string {
-	if p == nil {
-		return ""
-	}
-	return p.E164Format
-}
-
-func (p *PhoneValidationResponse) GetNationalFormat() string {
-	if p == nil {
-		return ""
-	}
-	return p.NationalFormat
-}
-
-func (p *PhoneValidationResponse) GetPorted() *bool {
-	if p == nil {
-		return nil
-	}
-	return p.Ported
-}
-
-func (p *PhoneValidationResponse) GetMcc() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Mcc
-}
-
-func (p *PhoneValidationResponse) GetMnc() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Mnc
-}
-
-func (p *PhoneValidationResponse) GetNumberType() *string {
-	if p == nil {
-		return nil
-	}
-	return p.NumberType
-}
-
-func (p *PhoneValidationResponse) GetCarrierName() *string {
-	if p == nil {
-		return nil
-	}
-	return p.CarrierName
-}
-
-func (p *PhoneValidationResponse) GetRiskyDestination() *bool {
-	if p == nil {
-		return nil
-	}
-	return p.RiskyDestination
-}
-
-func (p *PhoneValidationResponse) GetUnallocatedRange() *bool {
-	if p == nil {
-		return nil
-	}
-	return p.UnallocatedRange
-}
-
-func (p *PhoneValidationResponse) GetReachable() *bool {
-	if p == nil {
-		return nil
-	}
-	return p.Reachable
-}
-
-func (p *PhoneValidationResponse) GetRoaming() *bool {
-	if p == nil {
-		return nil
-	}
-	return p.Roaming
-}
-
-func (p *PhoneValidationResponse) GetTimezone() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Timezone
-}
-
-func (p *PhoneValidationResponse) GetCharge() string {
-	if p == nil {
-		return ""
-	}
-	return p.Charge
-}
-
-func (p *PhoneValidationResponse) GetErrorCode() string {
-	if p == nil {
-		return ""
-	}
-	return p.ErrorCode
-}
-
-func (p *PhoneValidationResponse) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PhoneValidationResponse) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetPhoneNumber sets the PhoneNumber field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PhoneValidationResponse) SetPhoneNumber(phoneNumber string) {
-	p.PhoneNumber = phoneNumber
-	p.require(phoneValidationResponseFieldPhoneNumber)
-}
-
-// SetValid sets the Valid field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PhoneValidationResponse) SetValid(valid bool) {
-	p.Valid = valid
-	p.require(phoneValidationResponseFieldValid)
-}
-
-// SetCountryCode sets the CountryCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PhoneValidationResponse) SetCountryCode(countryCode *string) {
-	p.CountryCode = countryCode
-	p.require(phoneValidationResponseFieldCountryCode)
-}
-
-// SetE164Format sets the E164Format field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PhoneValidationResponse) SetE164Format(e164Format string) {
-	p.E164Format = e164Format
-	p.require(phoneValidationResponseFieldE164Format)
-}
-
-// SetNationalFormat sets the NationalFormat field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PhoneValidationResponse) SetNationalFormat(nationalFormat string) {
-	p.NationalFormat = nationalFormat
-	p.require(phoneValidationResponseFieldNationalFormat)
-}
-
-// SetPorted sets the Ported field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PhoneValidationResponse) SetPorted(ported *bool) {
-	p.Ported = ported
-	p.require(phoneValidationResponseFieldPorted)
-}
-
-// SetMcc sets the Mcc field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PhoneValidationResponse) SetMcc(mcc *string) {
-	p.Mcc = mcc
-	p.require(phoneValidationResponseFieldMcc)
-}
-
-// SetMnc sets the Mnc field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PhoneValidationResponse) SetMnc(mnc *string) {
-	p.Mnc = mnc
-	p.require(phoneValidationResponseFieldMnc)
-}
-
-// SetNumberType sets the NumberType field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PhoneValidationResponse) SetNumberType(numberType *string) {
-	p.NumberType = numberType
-	p.require(phoneValidationResponseFieldNumberType)
-}
-
-// SetCarrierName sets the CarrierName field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PhoneValidationResponse) SetCarrierName(carrierName *string) {
-	p.CarrierName = carrierName
-	p.require(phoneValidationResponseFieldCarrierName)
-}
-
-// SetRiskyDestination sets the RiskyDestination field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PhoneValidationResponse) SetRiskyDestination(riskyDestination *bool) {
-	p.RiskyDestination = riskyDestination
-	p.require(phoneValidationResponseFieldRiskyDestination)
-}
-
-// SetUnallocatedRange sets the UnallocatedRange field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PhoneValidationResponse) SetUnallocatedRange(unallocatedRange *bool) {
-	p.UnallocatedRange = unallocatedRange
-	p.require(phoneValidationResponseFieldUnallocatedRange)
-}
-
-// SetReachable sets the Reachable field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PhoneValidationResponse) SetReachable(reachable *bool) {
-	p.Reachable = reachable
-	p.require(phoneValidationResponseFieldReachable)
-}
-
-// SetRoaming sets the Roaming field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PhoneValidationResponse) SetRoaming(roaming *bool) {
-	p.Roaming = roaming
-	p.require(phoneValidationResponseFieldRoaming)
-}
-
-// SetTimezone sets the Timezone field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PhoneValidationResponse) SetTimezone(timezone *string) {
-	p.Timezone = timezone
-	p.require(phoneValidationResponseFieldTimezone)
-}
-
-// SetCharge sets the Charge field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PhoneValidationResponse) SetCharge(charge string) {
-	p.Charge = charge
-	p.require(phoneValidationResponseFieldCharge)
-}
-
-// SetErrorCode sets the ErrorCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PhoneValidationResponse) SetErrorCode(errorCode string) {
-	p.ErrorCode = errorCode
-	p.require(phoneValidationResponseFieldErrorCode)
-}
-
-func (p *PhoneValidationResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler PhoneValidationResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PhoneValidationResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PhoneValidationResponse) MarshalJSON() ([]byte, error) {
-	type embed PhoneValidationResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PhoneValidationResponse) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -9990,125 +9023,6 @@ func (s *SubAccountsTransactionsListResponseTransactionsItem) String() string {
 }
 
 var (
-	submitFileTranscriptionResponseFieldFile      = big.NewInt(1 << 0)
-	submitFileTranscriptionResponseFieldRequestID = big.NewInt(1 << 1)
-	submitFileTranscriptionResponseFieldSuccess   = big.NewInt(1 << 2)
-)
-
-type SubmitFileTranscriptionResponse struct {
-	// Uploaded file name.
-	File string `json:"file" url:"file"`
-	// Transcription request ID.
-	RequestID string `json:"request_id" url:"request_id"`
-	// Indicates whether the request was successful.
-	Success bool `json:"success" url:"success"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (s *SubmitFileTranscriptionResponse) GetFile() string {
-	if s == nil {
-		return ""
-	}
-	return s.File
-}
-
-func (s *SubmitFileTranscriptionResponse) GetRequestID() string {
-	if s == nil {
-		return ""
-	}
-	return s.RequestID
-}
-
-func (s *SubmitFileTranscriptionResponse) GetSuccess() bool {
-	if s == nil {
-		return false
-	}
-	return s.Success
-}
-
-func (s *SubmitFileTranscriptionResponse) GetExtraProperties() map[string]interface{} {
-	if s == nil {
-		return nil
-	}
-	return s.extraProperties
-}
-
-func (s *SubmitFileTranscriptionResponse) require(field *big.Int) {
-	if s.explicitFields == nil {
-		s.explicitFields = big.NewInt(0)
-	}
-	s.explicitFields.Or(s.explicitFields, field)
-}
-
-// SetFile sets the File field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SubmitFileTranscriptionResponse) SetFile(file string) {
-	s.File = file
-	s.require(submitFileTranscriptionResponseFieldFile)
-}
-
-// SetRequestID sets the RequestID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SubmitFileTranscriptionResponse) SetRequestID(requestID string) {
-	s.RequestID = requestID
-	s.require(submitFileTranscriptionResponseFieldRequestID)
-}
-
-// SetSuccess sets the Success field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SubmitFileTranscriptionResponse) SetSuccess(success bool) {
-	s.Success = success
-	s.require(submitFileTranscriptionResponseFieldSuccess)
-}
-
-func (s *SubmitFileTranscriptionResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler SubmitFileTranscriptionResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*s = SubmitFileTranscriptionResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *s)
-	if err != nil {
-		return err
-	}
-	s.extraProperties = extraProperties
-	s.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (s *SubmitFileTranscriptionResponse) MarshalJSON() ([]byte, error) {
-	type embed SubmitFileTranscriptionResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*s),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (s *SubmitFileTranscriptionResponse) String() string {
-	if s == nil {
-		return "<nil>"
-	}
-	if len(s.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(s); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", s)
-}
-
-var (
 	successResponseFieldSuccess = big.NewInt(1 << 0)
 )
 
@@ -10578,7 +9492,7 @@ type TenDlcBrand struct {
 	// ISO 3166-1 alpha-2 country code where the Tax ID was issued.
 	EinTaxidCountry string `json:"ein_taxid_country" url:"ein_taxid_country"`
 	// Brand identity verification status.
-	Status TenDlcBrandStatus `json:"status" url:"status"`
+	Status TenDlcBrandIdentityVerificationStatus `json:"status" url:"status"`
 	// Business website URL.
 	Website *string `json:"website,omitempty" url:"website,omitempty"`
 	// Stock ticker symbol of the company. Required for publicly traded companies.
@@ -10668,7 +9582,7 @@ func (t *TenDlcBrand) GetEinTaxidCountry() string {
 	return t.EinTaxidCountry
 }
 
-func (t *TenDlcBrand) GetStatus() TenDlcBrandStatus {
+func (t *TenDlcBrand) GetStatus() TenDlcBrandIdentityVerificationStatus {
 	if t == nil {
 		return ""
 	}
@@ -10852,7 +9766,7 @@ func (t *TenDlcBrand) SetEinTaxidCountry(einTaxidCountry string) {
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (t *TenDlcBrand) SetStatus(status TenDlcBrandStatus) {
+func (t *TenDlcBrand) SetStatus(status TenDlcBrandIdentityVerificationStatus) {
 	t.Status = status
 	t.require(tenDlcBrandFieldStatus)
 }
@@ -11025,7 +9939,7 @@ type TenDlcBrandAppeal struct {
 	// A list of Brand Identity status appeal categories associated with the original request
 	Categories []string `json:"categories" url:"categories"`
 	// The date and time the appeal request is created
-	CreatedAt time.Time `json:"created_at" url:"created_at"`
+	CreatedAt string `json:"created_at" url:"created_at"`
 	// A list of evidence UUIDs to be associated with the appeal
 	Evidence []string `json:"evidence" url:"evidence"`
 	// The appeal outcome details
@@ -11033,7 +9947,7 @@ type TenDlcBrandAppeal struct {
 	// The appeal status
 	Status string `json:"status" url:"status"`
 	// The date and time the appeal request is updated
-	UpdatedAt time.Time `json:"updated_at" url:"updated_at"`
+	UpdatedAt string `json:"updated_at" url:"updated_at"`
 	// The appeal justification
 	Explanation string `json:"explanation" url:"explanation"`
 
@@ -11051,9 +9965,9 @@ func (t *TenDlcBrandAppeal) GetCategories() []string {
 	return t.Categories
 }
 
-func (t *TenDlcBrandAppeal) GetCreatedAt() time.Time {
+func (t *TenDlcBrandAppeal) GetCreatedAt() string {
 	if t == nil {
-		return time.Time{}
+		return ""
 	}
 	return t.CreatedAt
 }
@@ -11079,9 +9993,9 @@ func (t *TenDlcBrandAppeal) GetStatus() string {
 	return t.Status
 }
 
-func (t *TenDlcBrandAppeal) GetUpdatedAt() time.Time {
+func (t *TenDlcBrandAppeal) GetUpdatedAt() string {
 	if t == nil {
-		return time.Time{}
+		return ""
 	}
 	return t.UpdatedAt
 }
@@ -11116,7 +10030,7 @@ func (t *TenDlcBrandAppeal) SetCategories(categories []string) {
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (t *TenDlcBrandAppeal) SetCreatedAt(createdAt time.Time) {
+func (t *TenDlcBrandAppeal) SetCreatedAt(createdAt string) {
 	t.CreatedAt = createdAt
 	t.require(tenDlcBrandAppealFieldCreatedAt)
 }
@@ -11144,7 +10058,7 @@ func (t *TenDlcBrandAppeal) SetStatus(status string) {
 
 // SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (t *TenDlcBrandAppeal) SetUpdatedAt(updatedAt time.Time) {
+func (t *TenDlcBrandAppeal) SetUpdatedAt(updatedAt string) {
 	t.UpdatedAt = updatedAt
 	t.require(tenDlcBrandAppealFieldUpdatedAt)
 }
@@ -11157,20 +10071,12 @@ func (t *TenDlcBrandAppeal) SetExplanation(explanation string) {
 }
 
 func (t *TenDlcBrandAppeal) UnmarshalJSON(data []byte) error {
-	type embed TenDlcBrandAppeal
-	var unmarshaler = struct {
-		embed
-		CreatedAt *internal.DateTime `json:"created_at"`
-		UpdatedAt *internal.DateTime `json:"updated_at"`
-	}{
-		embed: embed(*t),
-	}
-	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+	type unmarshaler TenDlcBrandAppeal
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*t = TenDlcBrandAppeal(unmarshaler.embed)
-	t.CreatedAt = unmarshaler.CreatedAt.Time()
-	t.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	*t = TenDlcBrandAppeal(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *t)
 	if err != nil {
 		return err
@@ -11184,12 +10090,8 @@ func (t *TenDlcBrandAppeal) MarshalJSON() ([]byte, error) {
 	type embed TenDlcBrandAppeal
 	var marshaler = struct {
 		embed
-		CreatedAt *internal.DateTime `json:"created_at"`
-		UpdatedAt *internal.DateTime `json:"updated_at"`
 	}{
-		embed:     embed(*t),
-		CreatedAt: internal.NewDateTime(t.CreatedAt),
-		UpdatedAt: internal.NewDateTime(t.UpdatedAt),
+		embed: embed(*t),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -11219,7 +10121,7 @@ var (
 
 type TenDlcBrandAppealCreateRequest struct {
 	// List of appeal categories. Allowed values: `VERIFY_TAX_ID`, `VERIFY_NON_PROFIT`, `VERIFY_GOVERNMENT`
-	AppealCategories []string `json:"appeal_categories" url:"appeal_categories"`
+	AppealCategories []TenDlcBrandAppealCreateRequestAppealCategoriesItem `json:"appeal_categories" url:"appeal_categories"`
 	// List of evidence IDs associated with the appeal.
 	Evidence []string `json:"evidence" url:"evidence"`
 	// Appeal comment or justification.
@@ -11232,7 +10134,7 @@ type TenDlcBrandAppealCreateRequest struct {
 	rawJSON         json.RawMessage
 }
 
-func (t *TenDlcBrandAppealCreateRequest) GetAppealCategories() []string {
+func (t *TenDlcBrandAppealCreateRequest) GetAppealCategories() []TenDlcBrandAppealCreateRequestAppealCategoriesItem {
 	if t == nil {
 		return nil
 	}
@@ -11269,7 +10171,7 @@ func (t *TenDlcBrandAppealCreateRequest) require(field *big.Int) {
 
 // SetAppealCategories sets the AppealCategories field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (t *TenDlcBrandAppealCreateRequest) SetAppealCategories(appealCategories []string) {
+func (t *TenDlcBrandAppealCreateRequest) SetAppealCategories(appealCategories []TenDlcBrandAppealCreateRequestAppealCategoriesItem) {
 	t.AppealCategories = appealCategories
 	t.require(tenDlcBrandAppealCreateRequestFieldAppealCategories)
 }
@@ -11330,6 +10232,31 @@ func (t *TenDlcBrandAppealCreateRequest) String() string {
 	return fmt.Sprintf("%#v", t)
 }
 
+type TenDlcBrandAppealCreateRequestAppealCategoriesItem string
+
+const (
+	TenDlcBrandAppealCreateRequestAppealCategoriesItemVerifyTaxID      TenDlcBrandAppealCreateRequestAppealCategoriesItem = "VERIFY_TAX_ID"
+	TenDlcBrandAppealCreateRequestAppealCategoriesItemVerifyNonProfit  TenDlcBrandAppealCreateRequestAppealCategoriesItem = "VERIFY_NON_PROFIT"
+	TenDlcBrandAppealCreateRequestAppealCategoriesItemVerifyGovernment TenDlcBrandAppealCreateRequestAppealCategoriesItem = "VERIFY_GOVERNMENT"
+)
+
+func NewTenDlcBrandAppealCreateRequestAppealCategoriesItemFromString(s string) (TenDlcBrandAppealCreateRequestAppealCategoriesItem, error) {
+	switch s {
+	case "VERIFY_TAX_ID":
+		return TenDlcBrandAppealCreateRequestAppealCategoriesItemVerifyTaxID, nil
+	case "VERIFY_NON_PROFIT":
+		return TenDlcBrandAppealCreateRequestAppealCategoriesItemVerifyNonProfit, nil
+	case "VERIFY_GOVERNMENT":
+		return TenDlcBrandAppealCreateRequestAppealCategoriesItemVerifyGovernment, nil
+	}
+	var t TenDlcBrandAppealCreateRequestAppealCategoriesItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (t TenDlcBrandAppealCreateRequestAppealCategoriesItem) Ptr() *TenDlcBrandAppealCreateRequestAppealCategoriesItem {
+	return &t
+}
+
 // The appeal outcome details
 var (
 	tenDlcBrandAppealOutcomeFieldOptionalAttributes = big.NewInt(1 << 0)
@@ -11341,7 +10268,7 @@ type TenDlcBrandAppealOutcome struct {
 	// An optional attributes that might be returned from TCR
 	OptionalAttributes map[string]any `json:"optional_attributes" url:"optional_attributes"`
 	// Brand Identity Verification appeal outcome
-	VettingStatus TenDlcBrandAppealOutcomeVettingStatus `json:"vetting_status" url:"vetting_status"`
+	VettingStatus TenDlcBrandIdentityVerificationStatus `json:"vetting_status" url:"vetting_status"`
 	// Brand Identity Verification appeal feedback, if any
 	Feedback *TenDlcBrandAppealOutcomeFeedback `json:"feedback" url:"feedback"`
 
@@ -11359,7 +10286,7 @@ func (t *TenDlcBrandAppealOutcome) GetOptionalAttributes() map[string]any {
 	return t.OptionalAttributes
 }
 
-func (t *TenDlcBrandAppealOutcome) GetVettingStatus() TenDlcBrandAppealOutcomeVettingStatus {
+func (t *TenDlcBrandAppealOutcome) GetVettingStatus() TenDlcBrandIdentityVerificationStatus {
 	if t == nil {
 		return ""
 	}
@@ -11396,7 +10323,7 @@ func (t *TenDlcBrandAppealOutcome) SetOptionalAttributes(optionalAttributes map[
 
 // SetVettingStatus sets the VettingStatus field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (t *TenDlcBrandAppealOutcome) SetVettingStatus(vettingStatus TenDlcBrandAppealOutcomeVettingStatus) {
+func (t *TenDlcBrandAppealOutcome) SetVettingStatus(vettingStatus TenDlcBrandIdentityVerificationStatus) {
 	t.VettingStatus = vettingStatus
 	t.require(tenDlcBrandAppealOutcomeFieldVettingStatus)
 }
@@ -11534,38 +10461,6 @@ func (t *TenDlcBrandAppealOutcomeFeedback) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", t)
-}
-
-// Brand Identity Verification appeal outcome
-type TenDlcBrandAppealOutcomeVettingStatus string
-
-const (
-	TenDlcBrandAppealOutcomeVettingStatusReview         TenDlcBrandAppealOutcomeVettingStatus = "REVIEW"
-	TenDlcBrandAppealOutcomeVettingStatusVerified       TenDlcBrandAppealOutcomeVettingStatus = "VERIFIED"
-	TenDlcBrandAppealOutcomeVettingStatusUnverified     TenDlcBrandAppealOutcomeVettingStatus = "UNVERIFIED"
-	TenDlcBrandAppealOutcomeVettingStatusVettedVerified TenDlcBrandAppealOutcomeVettingStatus = "VETTED_VERIFIED"
-	TenDlcBrandAppealOutcomeVettingStatusSuspended      TenDlcBrandAppealOutcomeVettingStatus = "SUSPENDED"
-)
-
-func NewTenDlcBrandAppealOutcomeVettingStatusFromString(s string) (TenDlcBrandAppealOutcomeVettingStatus, error) {
-	switch s {
-	case "REVIEW":
-		return TenDlcBrandAppealOutcomeVettingStatusReview, nil
-	case "VERIFIED":
-		return TenDlcBrandAppealOutcomeVettingStatusVerified, nil
-	case "UNVERIFIED":
-		return TenDlcBrandAppealOutcomeVettingStatusUnverified, nil
-	case "VETTED_VERIFIED":
-		return TenDlcBrandAppealOutcomeVettingStatusVettedVerified, nil
-	case "SUSPENDED":
-		return TenDlcBrandAppealOutcomeVettingStatusSuspended, nil
-	}
-	var t TenDlcBrandAppealOutcomeVettingStatus
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (t TenDlcBrandAppealOutcomeVettingStatus) Ptr() *TenDlcBrandAppealOutcomeVettingStatus {
-	return &t
 }
 
 // 10DLC Brand registration request
@@ -11962,7 +10857,7 @@ func (t TenDlcBrandCreateRequestZeroEntityType) Ptr() *TenDlcBrandCreateRequestZ
 	return &t
 }
 
-// Company entity type.
+// Legal entity type of the 10DLC Brand. One of `PRIVATE_PROFIT` (privately held for-profit company), `PUBLIC_PROFIT` (publicly traded for-profit company), `NON_PROFIT` (non-profit organization), or `GOVERNMENT` (government entity).
 type TenDlcBrandEntityType string
 
 const (
@@ -12524,38 +11419,6 @@ func (t *TenDlcBrandQualificationResult) String() string {
 	return fmt.Sprintf("%#v", t)
 }
 
-// Brand identity verification status.
-type TenDlcBrandStatus string
-
-const (
-	TenDlcBrandStatusReview         TenDlcBrandStatus = "REVIEW"
-	TenDlcBrandStatusVerified       TenDlcBrandStatus = "VERIFIED"
-	TenDlcBrandStatusUnverified     TenDlcBrandStatus = "UNVERIFIED"
-	TenDlcBrandStatusVettedVerified TenDlcBrandStatus = "VETTED_VERIFIED"
-	TenDlcBrandStatusSuspended      TenDlcBrandStatus = "SUSPENDED"
-)
-
-func NewTenDlcBrandStatusFromString(s string) (TenDlcBrandStatus, error) {
-	switch s {
-	case "REVIEW":
-		return TenDlcBrandStatusReview, nil
-	case "VERIFIED":
-		return TenDlcBrandStatusVerified, nil
-	case "UNVERIFIED":
-		return TenDlcBrandStatusUnverified, nil
-	case "VETTED_VERIFIED":
-		return TenDlcBrandStatusVettedVerified, nil
-	case "SUSPENDED":
-		return TenDlcBrandStatusSuspended, nil
-	}
-	var t TenDlcBrandStatus
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (t TenDlcBrandStatus) Ptr() *TenDlcBrandStatus {
-	return &t
-}
-
 // Represents the result of an external vetting performed on a 10DLC brand. Vetting can raise a Brand's trust score and unlock higher messaging throughput.
 var (
 	tenDlcBrandVettingFieldEvpID          = big.NewInt(1 << 0)
@@ -12816,7 +11679,7 @@ type TenDlcBrandVettingAppeal struct {
 	// Current status of the appeal, such as `PENDING` or `COMPLETE`.
 	AppealStatus string `json:"appeal_status" url:"appeal_status"`
 	// Timestamp when the appeal status was last updated, in ISO 8601 format.
-	AppealStatusUpdateDate time.Time `json:"appeal_status_update_date" url:"appeal_status_update_date"`
+	AppealStatusUpdateDate string `json:"appeal_status_update_date" url:"appeal_status_update_date"`
 	// UUIDs of the evidence files submitted in support of the appeal.
 	AttachmentUUIDList []string `json:"attachment_uuid_list" url:"attachment_uuid_list"`
 	// Unique identifier of the Brand the appeal is associated with.
@@ -12855,9 +11718,9 @@ func (t *TenDlcBrandVettingAppeal) GetAppealStatus() string {
 	return t.AppealStatus
 }
 
-func (t *TenDlcBrandVettingAppeal) GetAppealStatusUpdateDate() time.Time {
+func (t *TenDlcBrandVettingAppeal) GetAppealStatusUpdateDate() string {
 	if t == nil {
-		return time.Time{}
+		return ""
 	}
 	return t.AppealStatusUpdateDate
 }
@@ -12948,7 +11811,7 @@ func (t *TenDlcBrandVettingAppeal) SetAppealStatus(appealStatus string) {
 
 // SetAppealStatusUpdateDate sets the AppealStatusUpdateDate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (t *TenDlcBrandVettingAppeal) SetAppealStatusUpdateDate(appealStatusUpdateDate time.Time) {
+func (t *TenDlcBrandVettingAppeal) SetAppealStatusUpdateDate(appealStatusUpdateDate string) {
 	t.AppealStatusUpdateDate = appealStatusUpdateDate
 	t.require(tenDlcBrandVettingAppealFieldAppealStatusUpdateDate)
 }
@@ -13010,18 +11873,12 @@ func (t *TenDlcBrandVettingAppeal) SetVettingID(vettingID string) {
 }
 
 func (t *TenDlcBrandVettingAppeal) UnmarshalJSON(data []byte) error {
-	type embed TenDlcBrandVettingAppeal
-	var unmarshaler = struct {
-		embed
-		AppealStatusUpdateDate *internal.DateTime `json:"appeal_status_update_date"`
-	}{
-		embed: embed(*t),
-	}
-	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+	type unmarshaler TenDlcBrandVettingAppeal
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*t = TenDlcBrandVettingAppeal(unmarshaler.embed)
-	t.AppealStatusUpdateDate = unmarshaler.AppealStatusUpdateDate.Time()
+	*t = TenDlcBrandVettingAppeal(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *t)
 	if err != nil {
 		return err
@@ -13035,10 +11892,8 @@ func (t *TenDlcBrandVettingAppeal) MarshalJSON() ([]byte, error) {
 	type embed TenDlcBrandVettingAppeal
 	var marshaler = struct {
 		embed
-		AppealStatusUpdateDate *internal.DateTime `json:"appeal_status_update_date"`
 	}{
-		embed:                  embed(*t),
-		AppealStatusUpdateDate: internal.NewDateTime(t.AppealStatusUpdateDate),
+		embed: embed(*t),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -15279,6 +14134,108 @@ func (t *TenDlcmnoMetadata) String() string {
 	return fmt.Sprintf("%#v", t)
 }
 
+var (
+	tooManyRequestsErrorResponseFieldSuccess = big.NewInt(1 << 0)
+	tooManyRequestsErrorResponseFieldMessage = big.NewInt(1 << 1)
+)
+
+type TooManyRequestsErrorResponse struct {
+	// Indicates whether the request was successful. Always `false` for this error.
+	Success bool `json:"success" url:"success"`
+	// Human-readable description stating that the rate limit was exceeded.
+	Message string `json:"message" url:"message"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TooManyRequestsErrorResponse) GetSuccess() bool {
+	if t == nil {
+		return false
+	}
+	return t.Success
+}
+
+func (t *TooManyRequestsErrorResponse) GetMessage() string {
+	if t == nil {
+		return ""
+	}
+	return t.Message
+}
+
+func (t *TooManyRequestsErrorResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TooManyRequestsErrorResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetSuccess sets the Success field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TooManyRequestsErrorResponse) SetSuccess(success bool) {
+	t.Success = success
+	t.require(tooManyRequestsErrorResponseFieldSuccess)
+}
+
+// SetMessage sets the Message field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TooManyRequestsErrorResponse) SetMessage(message string) {
+	t.Message = message
+	t.require(tooManyRequestsErrorResponseFieldMessage)
+}
+
+func (t *TooManyRequestsErrorResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler TooManyRequestsErrorResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*t = TooManyRequestsErrorResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TooManyRequestsErrorResponse) MarshalJSON() ([]byte, error) {
+	type embed TooManyRequestsErrorResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TooManyRequestsErrorResponse) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
 // Current status of the transaction. One of `Created` (the transaction was created but not yet processed), `Pending` (the transaction is being processed), `Committed` (the transaction was applied to the balance), or `Reverted` (the transaction was rolled back).
 type TransactionStatus string
 
@@ -15349,6 +14306,7 @@ func (t TransactionStatus) Ptr() *TransactionStatus {
 //   - 53  - Inbound SMS carrier fee
 //   - 54  - Outbound MMS carrier fee
 //   - 55  - Inbound MMS carrier fee
+//   - 56  - 10DLC Campaign vetting fee
 //   - 57  - Outbound SMS segment
 //   - 58  - Inbound SMS segment
 //   - 59  - Outbound MMS segment
@@ -16272,15 +15230,15 @@ func (u *UnauthorizedErrorResponse) String() string {
 }
 
 var (
-	unprocessableEntityErrorBodyFieldSuccess = big.NewInt(1 << 0)
-	unprocessableEntityErrorBodyFieldMessage = big.NewInt(1 << 1)
+	unprocessableEntityErrorBodyFieldError     = big.NewInt(1 << 0)
+	unprocessableEntityErrorBodyFieldErrorDids = big.NewInt(1 << 1)
 )
 
 type UnprocessableEntityErrorBody struct {
-	// Indicates whether the request was successful. Always `false` for this error.
-	Success bool `json:"success" url:"success"`
-	// Human-readable error description
-	Message string `json:"message" url:"message"`
+	// Human-readable error description.
+	Error *string `json:"error,omitempty" url:"error,omitempty"`
+	// Numbers from the cart that could not be purchased.
+	ErrorDids []string `json:"error_dids,omitempty" url:"error_dids,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -16289,18 +15247,18 @@ type UnprocessableEntityErrorBody struct {
 	rawJSON         json.RawMessage
 }
 
-func (u *UnprocessableEntityErrorBody) GetSuccess() bool {
+func (u *UnprocessableEntityErrorBody) GetError() *string {
 	if u == nil {
-		return false
+		return nil
 	}
-	return u.Success
+	return u.Error
 }
 
-func (u *UnprocessableEntityErrorBody) GetMessage() string {
+func (u *UnprocessableEntityErrorBody) GetErrorDids() []string {
 	if u == nil {
-		return ""
+		return nil
 	}
-	return u.Message
+	return u.ErrorDids
 }
 
 func (u *UnprocessableEntityErrorBody) GetExtraProperties() map[string]interface{} {
@@ -16317,18 +15275,18 @@ func (u *UnprocessableEntityErrorBody) require(field *big.Int) {
 	u.explicitFields.Or(u.explicitFields, field)
 }
 
-// SetSuccess sets the Success field and marks it as non-optional;
+// SetError sets the Error field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (u *UnprocessableEntityErrorBody) SetSuccess(success bool) {
-	u.Success = success
-	u.require(unprocessableEntityErrorBodyFieldSuccess)
+func (u *UnprocessableEntityErrorBody) SetError(error_ *string) {
+	u.Error = error_
+	u.require(unprocessableEntityErrorBodyFieldError)
 }
 
-// SetMessage sets the Message field and marks it as non-optional;
+// SetErrorDids sets the ErrorDids field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (u *UnprocessableEntityErrorBody) SetMessage(message string) {
-	u.Message = message
-	u.require(unprocessableEntityErrorBodyFieldMessage)
+func (u *UnprocessableEntityErrorBody) SetErrorDids(errorDids []string) {
+	u.ErrorDids = errorDids
+	u.require(unprocessableEntityErrorBodyFieldErrorDids)
 }
 
 func (u *UnprocessableEntityErrorBody) UnmarshalJSON(data []byte) error {
@@ -16949,4 +15907,2826 @@ func (w *WebRtcTokensListResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", w)
+}
+
+var (
+	whatsAppMessageFieldUUID      = big.NewInt(1 << 0)
+	whatsAppMessageFieldFrom      = big.NewInt(1 << 1)
+	whatsAppMessageFieldTo        = big.NewInt(1 << 2)
+	whatsAppMessageFieldStatus    = big.NewInt(1 << 3)
+	whatsAppMessageFieldTemplate  = big.NewInt(1 << 4)
+	whatsAppMessageFieldCreatedAt = big.NewInt(1 << 5)
+)
+
+type WhatsAppMessage struct {
+	// Message ID.
+	UUID string `json:"uuid" url:"uuid"`
+	// Sender's phone number in E.164 digits.
+	From string `json:"from" url:"from"`
+	// Recipient's phone number in E.164 digits.
+	To string `json:"to" url:"to"`
+	// Message delivery status.
+	Status WhatsAppMessageStatus `json:"status" url:"status"`
+	// Template used to send the message.
+	Template *WhatsAppMessageTemplate `json:"template,omitempty" url:"template,omitempty"`
+	// Date and time the message was created, in ISO 8601 format.
+	CreatedAt string `json:"created_at" url:"created_at"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppMessage) GetUUID() string {
+	if w == nil {
+		return ""
+	}
+	return w.UUID
+}
+
+func (w *WhatsAppMessage) GetFrom() string {
+	if w == nil {
+		return ""
+	}
+	return w.From
+}
+
+func (w *WhatsAppMessage) GetTo() string {
+	if w == nil {
+		return ""
+	}
+	return w.To
+}
+
+func (w *WhatsAppMessage) GetStatus() WhatsAppMessageStatus {
+	if w == nil {
+		return ""
+	}
+	return w.Status
+}
+
+func (w *WhatsAppMessage) GetTemplate() *WhatsAppMessageTemplate {
+	if w == nil {
+		return nil
+	}
+	return w.Template
+}
+
+func (w *WhatsAppMessage) GetCreatedAt() string {
+	if w == nil {
+		return ""
+	}
+	return w.CreatedAt
+}
+
+func (w *WhatsAppMessage) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppMessage) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetUUID sets the UUID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessage) SetUUID(uuid string) {
+	w.UUID = uuid
+	w.require(whatsAppMessageFieldUUID)
+}
+
+// SetFrom sets the From field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessage) SetFrom(from string) {
+	w.From = from
+	w.require(whatsAppMessageFieldFrom)
+}
+
+// SetTo sets the To field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessage) SetTo(to string) {
+	w.To = to
+	w.require(whatsAppMessageFieldTo)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessage) SetStatus(status WhatsAppMessageStatus) {
+	w.Status = status
+	w.require(whatsAppMessageFieldStatus)
+}
+
+// SetTemplate sets the Template field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessage) SetTemplate(template *WhatsAppMessageTemplate) {
+	w.Template = template
+	w.require(whatsAppMessageFieldTemplate)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessage) SetCreatedAt(createdAt string) {
+	w.CreatedAt = createdAt
+	w.require(whatsAppMessageFieldCreatedAt)
+}
+
+func (w *WhatsAppMessage) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppMessage
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppMessage(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppMessage) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppMessage
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppMessage) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+var (
+	whatsAppMessageGetResponseFieldMessage = big.NewInt(1 << 0)
+)
+
+type WhatsAppMessageGetResponse struct {
+	Message *WhatsAppMessageListItem `json:"message" url:"message"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppMessageGetResponse) GetMessage() *WhatsAppMessageListItem {
+	if w == nil {
+		return nil
+	}
+	return w.Message
+}
+
+func (w *WhatsAppMessageGetResponse) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppMessageGetResponse) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetMessage sets the Message field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageGetResponse) SetMessage(message *WhatsAppMessageListItem) {
+	w.Message = message
+	w.require(whatsAppMessageGetResponseFieldMessage)
+}
+
+func (w *WhatsAppMessageGetResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppMessageGetResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppMessageGetResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppMessageGetResponse) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppMessageGetResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppMessageGetResponse) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+var (
+	whatsAppMessageListItemFieldUUID      = big.NewInt(1 << 0)
+	whatsAppMessageListItemFieldDirection = big.NewInt(1 << 1)
+	whatsAppMessageListItemFieldStatus    = big.NewInt(1 << 2)
+	whatsAppMessageListItemFieldFrom      = big.NewInt(1 << 3)
+	whatsAppMessageListItemFieldTo        = big.NewInt(1 << 4)
+	whatsAppMessageListItemFieldCountry   = big.NewInt(1 << 5)
+	whatsAppMessageListItemFieldCreatedAt = big.NewInt(1 << 6)
+)
+
+type WhatsAppMessageListItem struct {
+	// Message ID.
+	UUID string `json:"uuid" url:"uuid"`
+	// Message direction.
+	Direction WhatsAppMessageListItemDirection `json:"direction" url:"direction"`
+	// Message delivery status.
+	Status WhatsAppMessageListItemStatus `json:"status" url:"status"`
+	// For `outbound` messages, the sender's phone number. For `inbound`, the originating phone number.
+	From string `json:"from" url:"from"`
+	// For `outbound` messages, the recipient's phone number. For `inbound`, the sender's phone number.
+	To string `json:"to" url:"to"`
+	// Recipient's country, derived from the phone number.
+	Country *string `json:"country,omitempty" url:"country,omitempty"`
+	// Date and time the message was created, in ISO 8601 format.
+	CreatedAt string `json:"created_at" url:"created_at"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppMessageListItem) GetUUID() string {
+	if w == nil {
+		return ""
+	}
+	return w.UUID
+}
+
+func (w *WhatsAppMessageListItem) GetDirection() WhatsAppMessageListItemDirection {
+	if w == nil {
+		return ""
+	}
+	return w.Direction
+}
+
+func (w *WhatsAppMessageListItem) GetStatus() WhatsAppMessageListItemStatus {
+	if w == nil {
+		return ""
+	}
+	return w.Status
+}
+
+func (w *WhatsAppMessageListItem) GetFrom() string {
+	if w == nil {
+		return ""
+	}
+	return w.From
+}
+
+func (w *WhatsAppMessageListItem) GetTo() string {
+	if w == nil {
+		return ""
+	}
+	return w.To
+}
+
+func (w *WhatsAppMessageListItem) GetCountry() *string {
+	if w == nil {
+		return nil
+	}
+	return w.Country
+}
+
+func (w *WhatsAppMessageListItem) GetCreatedAt() string {
+	if w == nil {
+		return ""
+	}
+	return w.CreatedAt
+}
+
+func (w *WhatsAppMessageListItem) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppMessageListItem) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetUUID sets the UUID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageListItem) SetUUID(uuid string) {
+	w.UUID = uuid
+	w.require(whatsAppMessageListItemFieldUUID)
+}
+
+// SetDirection sets the Direction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageListItem) SetDirection(direction WhatsAppMessageListItemDirection) {
+	w.Direction = direction
+	w.require(whatsAppMessageListItemFieldDirection)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageListItem) SetStatus(status WhatsAppMessageListItemStatus) {
+	w.Status = status
+	w.require(whatsAppMessageListItemFieldStatus)
+}
+
+// SetFrom sets the From field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageListItem) SetFrom(from string) {
+	w.From = from
+	w.require(whatsAppMessageListItemFieldFrom)
+}
+
+// SetTo sets the To field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageListItem) SetTo(to string) {
+	w.To = to
+	w.require(whatsAppMessageListItemFieldTo)
+}
+
+// SetCountry sets the Country field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageListItem) SetCountry(country *string) {
+	w.Country = country
+	w.require(whatsAppMessageListItemFieldCountry)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageListItem) SetCreatedAt(createdAt string) {
+	w.CreatedAt = createdAt
+	w.require(whatsAppMessageListItemFieldCreatedAt)
+}
+
+func (w *WhatsAppMessageListItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppMessageListItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppMessageListItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppMessageListItem) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppMessageListItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppMessageListItem) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Message direction.
+type WhatsAppMessageListItemDirection string
+
+const (
+	WhatsAppMessageListItemDirectionOutbound WhatsAppMessageListItemDirection = "outbound"
+	WhatsAppMessageListItemDirectionInbound  WhatsAppMessageListItemDirection = "inbound"
+)
+
+func NewWhatsAppMessageListItemDirectionFromString(s string) (WhatsAppMessageListItemDirection, error) {
+	switch s {
+	case "outbound":
+		return WhatsAppMessageListItemDirectionOutbound, nil
+	case "inbound":
+		return WhatsAppMessageListItemDirectionInbound, nil
+	}
+	var t WhatsAppMessageListItemDirection
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppMessageListItemDirection) Ptr() *WhatsAppMessageListItemDirection {
+	return &w
+}
+
+// Message delivery status.
+type WhatsAppMessageListItemStatus string
+
+const (
+	WhatsAppMessageListItemStatusFailed      WhatsAppMessageListItemStatus = "failed"
+	WhatsAppMessageListItemStatusSent        WhatsAppMessageListItemStatus = "sent"
+	WhatsAppMessageListItemStatusDelivered   WhatsAppMessageListItemStatus = "delivered"
+	WhatsAppMessageListItemStatusUndelivered WhatsAppMessageListItemStatus = "undelivered"
+	WhatsAppMessageListItemStatusExpired     WhatsAppMessageListItemStatus = "expired"
+	WhatsAppMessageListItemStatusRejected    WhatsAppMessageListItemStatus = "rejected"
+	WhatsAppMessageListItemStatusUnknown     WhatsAppMessageListItemStatus = "unknown"
+)
+
+func NewWhatsAppMessageListItemStatusFromString(s string) (WhatsAppMessageListItemStatus, error) {
+	switch s {
+	case "failed":
+		return WhatsAppMessageListItemStatusFailed, nil
+	case "sent":
+		return WhatsAppMessageListItemStatusSent, nil
+	case "delivered":
+		return WhatsAppMessageListItemStatusDelivered, nil
+	case "undelivered":
+		return WhatsAppMessageListItemStatusUndelivered, nil
+	case "expired":
+		return WhatsAppMessageListItemStatusExpired, nil
+	case "rejected":
+		return WhatsAppMessageListItemStatusRejected, nil
+	case "unknown":
+		return WhatsAppMessageListItemStatusUnknown, nil
+	}
+	var t WhatsAppMessageListItemStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppMessageListItemStatus) Ptr() *WhatsAppMessageListItemStatus {
+	return &w
+}
+
+var (
+	whatsAppMessageListResponseFieldMessages   = big.NewInt(1 << 0)
+	whatsAppMessageListResponseFieldPagination = big.NewInt(1 << 1)
+)
+
+type WhatsAppMessageListResponse struct {
+	// Messages that match the request.
+	Messages   []*WhatsAppMessageListItem `json:"messages" url:"messages"`
+	Pagination *Pagination                `json:"pagination" url:"pagination"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppMessageListResponse) GetMessages() []*WhatsAppMessageListItem {
+	if w == nil {
+		return nil
+	}
+	return w.Messages
+}
+
+func (w *WhatsAppMessageListResponse) GetPagination() *Pagination {
+	if w == nil {
+		return nil
+	}
+	return w.Pagination
+}
+
+func (w *WhatsAppMessageListResponse) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppMessageListResponse) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetMessages sets the Messages field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageListResponse) SetMessages(messages []*WhatsAppMessageListItem) {
+	w.Messages = messages
+	w.require(whatsAppMessageListResponseFieldMessages)
+}
+
+// SetPagination sets the Pagination field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageListResponse) SetPagination(pagination *Pagination) {
+	w.Pagination = pagination
+	w.require(whatsAppMessageListResponseFieldPagination)
+}
+
+func (w *WhatsAppMessageListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppMessageListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppMessageListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppMessageListResponse) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppMessageListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppMessageListResponse) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+var (
+	whatsAppMessageSendRequestFieldFrom     = big.NewInt(1 << 0)
+	whatsAppMessageSendRequestFieldTo       = big.NewInt(1 << 1)
+	whatsAppMessageSendRequestFieldTemplate = big.NewInt(1 << 2)
+)
+
+type WhatsAppMessageSendRequest struct {
+	// Sender's phone number, 6-20 digits.
+	From string `json:"from" url:"from"`
+	// Recipient's phone number, 6-20 digits.
+	To       string                              `json:"to" url:"to"`
+	Template *WhatsAppMessageSendRequestTemplate `json:"template" url:"template"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppMessageSendRequest) GetFrom() string {
+	if w == nil {
+		return ""
+	}
+	return w.From
+}
+
+func (w *WhatsAppMessageSendRequest) GetTo() string {
+	if w == nil {
+		return ""
+	}
+	return w.To
+}
+
+func (w *WhatsAppMessageSendRequest) GetTemplate() *WhatsAppMessageSendRequestTemplate {
+	if w == nil {
+		return nil
+	}
+	return w.Template
+}
+
+func (w *WhatsAppMessageSendRequest) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppMessageSendRequest) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetFrom sets the From field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageSendRequest) SetFrom(from string) {
+	w.From = from
+	w.require(whatsAppMessageSendRequestFieldFrom)
+}
+
+// SetTo sets the To field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageSendRequest) SetTo(to string) {
+	w.To = to
+	w.require(whatsAppMessageSendRequestFieldTo)
+}
+
+// SetTemplate sets the Template field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageSendRequest) SetTemplate(template *WhatsAppMessageSendRequestTemplate) {
+	w.Template = template
+	w.require(whatsAppMessageSendRequestFieldTemplate)
+}
+
+func (w *WhatsAppMessageSendRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppMessageSendRequest
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppMessageSendRequest(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppMessageSendRequest) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppMessageSendRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppMessageSendRequest) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+var (
+	whatsAppMessageSendRequestTemplateFieldName         = big.NewInt(1 << 0)
+	whatsAppMessageSendRequestTemplateFieldLanguage     = big.NewInt(1 << 1)
+	whatsAppMessageSendRequestTemplateFieldPlaceholders = big.NewInt(1 << 2)
+	whatsAppMessageSendRequestTemplateFieldHeader       = big.NewInt(1 << 3)
+	whatsAppMessageSendRequestTemplateFieldButtons      = big.NewInt(1 << 4)
+)
+
+type WhatsAppMessageSendRequestTemplate struct {
+	// Approved template name.
+	Name string `json:"name" url:"name"`
+	// Template language code.
+	Language string `json:"language" url:"language"`
+	// Values substituted into the template body's `{{n}}` placeholders, in order.
+	Placeholders []string `json:"placeholders,omitempty" url:"placeholders,omitempty"`
+	// Header content, required only when the template's `HEADER` component needs one.
+	Header *WhatsAppMessageSendRequestTemplateHeader `json:"header,omitempty" url:"header,omitempty"`
+	// Dynamic values for the template's `BUTTONS` component, one entry per button, matching the template's button order.
+	Buttons []*WhatsAppMessageSendRequestTemplateButtonsItem `json:"buttons,omitempty" url:"buttons,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppMessageSendRequestTemplate) GetName() string {
+	if w == nil {
+		return ""
+	}
+	return w.Name
+}
+
+func (w *WhatsAppMessageSendRequestTemplate) GetLanguage() string {
+	if w == nil {
+		return ""
+	}
+	return w.Language
+}
+
+func (w *WhatsAppMessageSendRequestTemplate) GetPlaceholders() []string {
+	if w == nil {
+		return nil
+	}
+	return w.Placeholders
+}
+
+func (w *WhatsAppMessageSendRequestTemplate) GetHeader() *WhatsAppMessageSendRequestTemplateHeader {
+	if w == nil {
+		return nil
+	}
+	return w.Header
+}
+
+func (w *WhatsAppMessageSendRequestTemplate) GetButtons() []*WhatsAppMessageSendRequestTemplateButtonsItem {
+	if w == nil {
+		return nil
+	}
+	return w.Buttons
+}
+
+func (w *WhatsAppMessageSendRequestTemplate) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppMessageSendRequestTemplate) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageSendRequestTemplate) SetName(name string) {
+	w.Name = name
+	w.require(whatsAppMessageSendRequestTemplateFieldName)
+}
+
+// SetLanguage sets the Language field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageSendRequestTemplate) SetLanguage(language string) {
+	w.Language = language
+	w.require(whatsAppMessageSendRequestTemplateFieldLanguage)
+}
+
+// SetPlaceholders sets the Placeholders field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageSendRequestTemplate) SetPlaceholders(placeholders []string) {
+	w.Placeholders = placeholders
+	w.require(whatsAppMessageSendRequestTemplateFieldPlaceholders)
+}
+
+// SetHeader sets the Header field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageSendRequestTemplate) SetHeader(header *WhatsAppMessageSendRequestTemplateHeader) {
+	w.Header = header
+	w.require(whatsAppMessageSendRequestTemplateFieldHeader)
+}
+
+// SetButtons sets the Buttons field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageSendRequestTemplate) SetButtons(buttons []*WhatsAppMessageSendRequestTemplateButtonsItem) {
+	w.Buttons = buttons
+	w.require(whatsAppMessageSendRequestTemplateFieldButtons)
+}
+
+func (w *WhatsAppMessageSendRequestTemplate) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppMessageSendRequestTemplate
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppMessageSendRequestTemplate(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppMessageSendRequestTemplate) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppMessageSendRequestTemplate
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppMessageSendRequestTemplate) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+var (
+	whatsAppMessageSendRequestTemplateButtonsItemFieldType = big.NewInt(1 << 0)
+)
+
+type WhatsAppMessageSendRequestTemplateButtonsItem struct {
+	Type WhatsAppMessageSendRequestTemplateButtonsItemType `json:"type" url:"type"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	ExtraProperties map[string]interface{} `json:"-" url:"-"`
+
+	rawJSON json.RawMessage
+}
+
+func (w *WhatsAppMessageSendRequestTemplateButtonsItem) GetType() WhatsAppMessageSendRequestTemplateButtonsItemType {
+	if w == nil {
+		return ""
+	}
+	return w.Type
+}
+
+func (w *WhatsAppMessageSendRequestTemplateButtonsItem) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.ExtraProperties
+}
+
+func (w *WhatsAppMessageSendRequestTemplateButtonsItem) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageSendRequestTemplateButtonsItem) SetType(type_ WhatsAppMessageSendRequestTemplateButtonsItemType) {
+	w.Type = type_
+	w.require(whatsAppMessageSendRequestTemplateButtonsItemFieldType)
+}
+
+func (w *WhatsAppMessageSendRequestTemplateButtonsItem) UnmarshalJSON(data []byte) error {
+	type embed WhatsAppMessageSendRequestTemplateButtonsItem
+	var unmarshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*w = WhatsAppMessageSendRequestTemplateButtonsItem(unmarshaler.embed)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.ExtraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppMessageSendRequestTemplateButtonsItem) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppMessageSendRequestTemplateButtonsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return internal.MarshalJSONWithExtraProperties(explicitMarshaler, w.ExtraProperties)
+}
+
+func (w *WhatsAppMessageSendRequestTemplateButtonsItem) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+type WhatsAppMessageSendRequestTemplateButtonsItemType string
+
+const (
+	WhatsAppMessageSendRequestTemplateButtonsItemTypeQuickReply   WhatsAppMessageSendRequestTemplateButtonsItemType = "QUICK_REPLY"
+	WhatsAppMessageSendRequestTemplateButtonsItemTypeURL          WhatsAppMessageSendRequestTemplateButtonsItemType = "URL"
+	WhatsAppMessageSendRequestTemplateButtonsItemTypeCopyCode     WhatsAppMessageSendRequestTemplateButtonsItemType = "COPY_CODE"
+	WhatsAppMessageSendRequestTemplateButtonsItemTypeFlow         WhatsAppMessageSendRequestTemplateButtonsItemType = "FLOW"
+	WhatsAppMessageSendRequestTemplateButtonsItemTypeCatalog      WhatsAppMessageSendRequestTemplateButtonsItemType = "CATALOG"
+	WhatsAppMessageSendRequestTemplateButtonsItemTypeMultiProduct WhatsAppMessageSendRequestTemplateButtonsItemType = "MULTI_PRODUCT"
+	WhatsAppMessageSendRequestTemplateButtonsItemTypeOrderDetails WhatsAppMessageSendRequestTemplateButtonsItemType = "ORDER_DETAILS"
+	WhatsAppMessageSendRequestTemplateButtonsItemTypeVoiceCall    WhatsAppMessageSendRequestTemplateButtonsItemType = "VOICE_CALL"
+)
+
+func NewWhatsAppMessageSendRequestTemplateButtonsItemTypeFromString(s string) (WhatsAppMessageSendRequestTemplateButtonsItemType, error) {
+	switch s {
+	case "QUICK_REPLY":
+		return WhatsAppMessageSendRequestTemplateButtonsItemTypeQuickReply, nil
+	case "URL":
+		return WhatsAppMessageSendRequestTemplateButtonsItemTypeURL, nil
+	case "COPY_CODE":
+		return WhatsAppMessageSendRequestTemplateButtonsItemTypeCopyCode, nil
+	case "FLOW":
+		return WhatsAppMessageSendRequestTemplateButtonsItemTypeFlow, nil
+	case "CATALOG":
+		return WhatsAppMessageSendRequestTemplateButtonsItemTypeCatalog, nil
+	case "MULTI_PRODUCT":
+		return WhatsAppMessageSendRequestTemplateButtonsItemTypeMultiProduct, nil
+	case "ORDER_DETAILS":
+		return WhatsAppMessageSendRequestTemplateButtonsItemTypeOrderDetails, nil
+	case "VOICE_CALL":
+		return WhatsAppMessageSendRequestTemplateButtonsItemTypeVoiceCall, nil
+	}
+	var t WhatsAppMessageSendRequestTemplateButtonsItemType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppMessageSendRequestTemplateButtonsItemType) Ptr() *WhatsAppMessageSendRequestTemplateButtonsItemType {
+	return &w
+}
+
+// Header content, required only when the template's `HEADER` component needs one.
+var (
+	whatsAppMessageSendRequestTemplateHeaderFieldType          = big.NewInt(1 << 0)
+	whatsAppMessageSendRequestTemplateHeaderFieldPlaceholder   = big.NewInt(1 << 1)
+	whatsAppMessageSendRequestTemplateHeaderFieldMediaURL      = big.NewInt(1 << 2)
+	whatsAppMessageSendRequestTemplateHeaderFieldFilename      = big.NewInt(1 << 3)
+	whatsAppMessageSendRequestTemplateHeaderFieldLatitude      = big.NewInt(1 << 4)
+	whatsAppMessageSendRequestTemplateHeaderFieldLongitude     = big.NewInt(1 << 5)
+	whatsAppMessageSendRequestTemplateHeaderFieldParameterName = big.NewInt(1 << 6)
+	whatsAppMessageSendRequestTemplateHeaderFieldText          = big.NewInt(1 << 7)
+)
+
+type WhatsAppMessageSendRequestTemplateHeader struct {
+	Type *WhatsAppMessageSendRequestTemplateHeaderType `json:"type,omitempty" url:"type,omitempty"`
+	// Value for a `TEXT` header's `{{1}}` placeholder.
+	Placeholder *string `json:"placeholder,omitempty" url:"placeholder,omitempty"`
+	// Media URL for an `IMAGE`/`VIDEO`/`DOCUMENT` header.
+	MediaURL *string `json:"mediaUrl,omitempty" url:"mediaUrl,omitempty"`
+	// Filename for a `DOCUMENT` header.
+	Filename *string `json:"filename,omitempty" url:"filename,omitempty"`
+	// Latitude for a `LOCATION` header.
+	Latitude *float64 `json:"latitude,omitempty" url:"latitude,omitempty"`
+	// Longitude for a `LOCATION` header.
+	Longitude *float64 `json:"longitude,omitempty" url:"longitude,omitempty"`
+	// Placeholder name for a named-parameter `TEXT` header.
+	ParameterName *string `json:"parameterName,omitempty" url:"parameterName,omitempty"`
+	// Value for a named-parameter `TEXT` header.
+	Text *string `json:"text,omitempty" url:"text,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppMessageSendRequestTemplateHeader) GetType() *WhatsAppMessageSendRequestTemplateHeaderType {
+	if w == nil {
+		return nil
+	}
+	return w.Type
+}
+
+func (w *WhatsAppMessageSendRequestTemplateHeader) GetPlaceholder() *string {
+	if w == nil {
+		return nil
+	}
+	return w.Placeholder
+}
+
+func (w *WhatsAppMessageSendRequestTemplateHeader) GetMediaURL() *string {
+	if w == nil {
+		return nil
+	}
+	return w.MediaURL
+}
+
+func (w *WhatsAppMessageSendRequestTemplateHeader) GetFilename() *string {
+	if w == nil {
+		return nil
+	}
+	return w.Filename
+}
+
+func (w *WhatsAppMessageSendRequestTemplateHeader) GetLatitude() *float64 {
+	if w == nil {
+		return nil
+	}
+	return w.Latitude
+}
+
+func (w *WhatsAppMessageSendRequestTemplateHeader) GetLongitude() *float64 {
+	if w == nil {
+		return nil
+	}
+	return w.Longitude
+}
+
+func (w *WhatsAppMessageSendRequestTemplateHeader) GetParameterName() *string {
+	if w == nil {
+		return nil
+	}
+	return w.ParameterName
+}
+
+func (w *WhatsAppMessageSendRequestTemplateHeader) GetText() *string {
+	if w == nil {
+		return nil
+	}
+	return w.Text
+}
+
+func (w *WhatsAppMessageSendRequestTemplateHeader) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppMessageSendRequestTemplateHeader) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageSendRequestTemplateHeader) SetType(type_ *WhatsAppMessageSendRequestTemplateHeaderType) {
+	w.Type = type_
+	w.require(whatsAppMessageSendRequestTemplateHeaderFieldType)
+}
+
+// SetPlaceholder sets the Placeholder field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageSendRequestTemplateHeader) SetPlaceholder(placeholder *string) {
+	w.Placeholder = placeholder
+	w.require(whatsAppMessageSendRequestTemplateHeaderFieldPlaceholder)
+}
+
+// SetMediaURL sets the MediaURL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageSendRequestTemplateHeader) SetMediaURL(mediaURL *string) {
+	w.MediaURL = mediaURL
+	w.require(whatsAppMessageSendRequestTemplateHeaderFieldMediaURL)
+}
+
+// SetFilename sets the Filename field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageSendRequestTemplateHeader) SetFilename(filename *string) {
+	w.Filename = filename
+	w.require(whatsAppMessageSendRequestTemplateHeaderFieldFilename)
+}
+
+// SetLatitude sets the Latitude field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageSendRequestTemplateHeader) SetLatitude(latitude *float64) {
+	w.Latitude = latitude
+	w.require(whatsAppMessageSendRequestTemplateHeaderFieldLatitude)
+}
+
+// SetLongitude sets the Longitude field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageSendRequestTemplateHeader) SetLongitude(longitude *float64) {
+	w.Longitude = longitude
+	w.require(whatsAppMessageSendRequestTemplateHeaderFieldLongitude)
+}
+
+// SetParameterName sets the ParameterName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageSendRequestTemplateHeader) SetParameterName(parameterName *string) {
+	w.ParameterName = parameterName
+	w.require(whatsAppMessageSendRequestTemplateHeaderFieldParameterName)
+}
+
+// SetText sets the Text field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageSendRequestTemplateHeader) SetText(text *string) {
+	w.Text = text
+	w.require(whatsAppMessageSendRequestTemplateHeaderFieldText)
+}
+
+func (w *WhatsAppMessageSendRequestTemplateHeader) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppMessageSendRequestTemplateHeader
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppMessageSendRequestTemplateHeader(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppMessageSendRequestTemplateHeader) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppMessageSendRequestTemplateHeader
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppMessageSendRequestTemplateHeader) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+type WhatsAppMessageSendRequestTemplateHeaderType string
+
+const (
+	WhatsAppMessageSendRequestTemplateHeaderTypeText                WhatsAppMessageSendRequestTemplateHeaderType = "TEXT"
+	WhatsAppMessageSendRequestTemplateHeaderTypeTextNamedParameters WhatsAppMessageSendRequestTemplateHeaderType = "TEXT_NAMED_PARAMETERS"
+	WhatsAppMessageSendRequestTemplateHeaderTypeImage               WhatsAppMessageSendRequestTemplateHeaderType = "IMAGE"
+	WhatsAppMessageSendRequestTemplateHeaderTypeVideo               WhatsAppMessageSendRequestTemplateHeaderType = "VIDEO"
+	WhatsAppMessageSendRequestTemplateHeaderTypeDocument            WhatsAppMessageSendRequestTemplateHeaderType = "DOCUMENT"
+	WhatsAppMessageSendRequestTemplateHeaderTypeLocation            WhatsAppMessageSendRequestTemplateHeaderType = "LOCATION"
+)
+
+func NewWhatsAppMessageSendRequestTemplateHeaderTypeFromString(s string) (WhatsAppMessageSendRequestTemplateHeaderType, error) {
+	switch s {
+	case "TEXT":
+		return WhatsAppMessageSendRequestTemplateHeaderTypeText, nil
+	case "TEXT_NAMED_PARAMETERS":
+		return WhatsAppMessageSendRequestTemplateHeaderTypeTextNamedParameters, nil
+	case "IMAGE":
+		return WhatsAppMessageSendRequestTemplateHeaderTypeImage, nil
+	case "VIDEO":
+		return WhatsAppMessageSendRequestTemplateHeaderTypeVideo, nil
+	case "DOCUMENT":
+		return WhatsAppMessageSendRequestTemplateHeaderTypeDocument, nil
+	case "LOCATION":
+		return WhatsAppMessageSendRequestTemplateHeaderTypeLocation, nil
+	}
+	var t WhatsAppMessageSendRequestTemplateHeaderType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppMessageSendRequestTemplateHeaderType) Ptr() *WhatsAppMessageSendRequestTemplateHeaderType {
+	return &w
+}
+
+var (
+	whatsAppMessageSendResponseFieldMessage = big.NewInt(1 << 0)
+)
+
+type WhatsAppMessageSendResponse struct {
+	Message *WhatsAppMessage `json:"message" url:"message"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppMessageSendResponse) GetMessage() *WhatsAppMessage {
+	if w == nil {
+		return nil
+	}
+	return w.Message
+}
+
+func (w *WhatsAppMessageSendResponse) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppMessageSendResponse) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetMessage sets the Message field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageSendResponse) SetMessage(message *WhatsAppMessage) {
+	w.Message = message
+	w.require(whatsAppMessageSendResponseFieldMessage)
+}
+
+func (w *WhatsAppMessageSendResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppMessageSendResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppMessageSendResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppMessageSendResponse) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppMessageSendResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppMessageSendResponse) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Message delivery status.
+type WhatsAppMessageStatus string
+
+const (
+	WhatsAppMessageStatusFailed      WhatsAppMessageStatus = "failed"
+	WhatsAppMessageStatusSent        WhatsAppMessageStatus = "sent"
+	WhatsAppMessageStatusDelivered   WhatsAppMessageStatus = "delivered"
+	WhatsAppMessageStatusUndelivered WhatsAppMessageStatus = "undelivered"
+	WhatsAppMessageStatusExpired     WhatsAppMessageStatus = "expired"
+	WhatsAppMessageStatusRejected    WhatsAppMessageStatus = "rejected"
+	WhatsAppMessageStatusUnknown     WhatsAppMessageStatus = "unknown"
+)
+
+func NewWhatsAppMessageStatusFromString(s string) (WhatsAppMessageStatus, error) {
+	switch s {
+	case "failed":
+		return WhatsAppMessageStatusFailed, nil
+	case "sent":
+		return WhatsAppMessageStatusSent, nil
+	case "delivered":
+		return WhatsAppMessageStatusDelivered, nil
+	case "undelivered":
+		return WhatsAppMessageStatusUndelivered, nil
+	case "expired":
+		return WhatsAppMessageStatusExpired, nil
+	case "rejected":
+		return WhatsAppMessageStatusRejected, nil
+	case "unknown":
+		return WhatsAppMessageStatusUnknown, nil
+	}
+	var t WhatsAppMessageStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppMessageStatus) Ptr() *WhatsAppMessageStatus {
+	return &w
+}
+
+// Template used to send the message.
+var (
+	whatsAppMessageTemplateFieldName     = big.NewInt(1 << 0)
+	whatsAppMessageTemplateFieldLanguage = big.NewInt(1 << 1)
+)
+
+type WhatsAppMessageTemplate struct {
+	// Template name.
+	Name *string `json:"name,omitempty" url:"name,omitempty"`
+	// Template language code.
+	Language *string `json:"language,omitempty" url:"language,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppMessageTemplate) GetName() *string {
+	if w == nil {
+		return nil
+	}
+	return w.Name
+}
+
+func (w *WhatsAppMessageTemplate) GetLanguage() *string {
+	if w == nil {
+		return nil
+	}
+	return w.Language
+}
+
+func (w *WhatsAppMessageTemplate) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppMessageTemplate) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageTemplate) SetName(name *string) {
+	w.Name = name
+	w.require(whatsAppMessageTemplateFieldName)
+}
+
+// SetLanguage sets the Language field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageTemplate) SetLanguage(language *string) {
+	w.Language = language
+	w.require(whatsAppMessageTemplateFieldLanguage)
+}
+
+func (w *WhatsAppMessageTemplate) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppMessageTemplate
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppMessageTemplate(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppMessageTemplate) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppMessageTemplate
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppMessageTemplate) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// RFC 9457 problem document returned by WhatsApp endpoints as `application/problem+json`.
+var (
+	whatsAppProblemFieldType       = big.NewInt(1 << 0)
+	whatsAppProblemFieldTitle      = big.NewInt(1 << 1)
+	whatsAppProblemFieldStatus     = big.NewInt(1 << 2)
+	whatsAppProblemFieldDetail     = big.NewInt(1 << 3)
+	whatsAppProblemFieldInstance   = big.NewInt(1 << 4)
+	whatsAppProblemFieldErrorClass = big.NewInt(1 << 5)
+	whatsAppProblemFieldErrorCode  = big.NewInt(1 << 6)
+)
+
+type WhatsAppProblem struct {
+	// URI identifying the problem type.
+	Type string `json:"type" url:"type"`
+	// Short, human-readable summary of the problem type.
+	Title string `json:"title" url:"title"`
+	// HTTP status code.
+	Status int `json:"status" url:"status"`
+	// Human-readable explanation specific to this occurrence of the problem.
+	Detail string `json:"detail" url:"detail"`
+	// URI identifying this specific occurrence of the problem, such as the request ID.
+	Instance string `json:"instance" url:"instance"`
+	// Machine-readable classification of the error.
+	ErrorClass *WhatsAppProblemErrorClass `json:"error_class,omitempty" url:"error_class,omitempty"`
+	// Stable machine-readable error code, derived from the problem slug.
+	ErrorCode *string `json:"error_code,omitempty" url:"error_code,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppProblem) GetType() string {
+	if w == nil {
+		return ""
+	}
+	return w.Type
+}
+
+func (w *WhatsAppProblem) GetTitle() string {
+	if w == nil {
+		return ""
+	}
+	return w.Title
+}
+
+func (w *WhatsAppProblem) GetStatus() int {
+	if w == nil {
+		return 0
+	}
+	return w.Status
+}
+
+func (w *WhatsAppProblem) GetDetail() string {
+	if w == nil {
+		return ""
+	}
+	return w.Detail
+}
+
+func (w *WhatsAppProblem) GetInstance() string {
+	if w == nil {
+		return ""
+	}
+	return w.Instance
+}
+
+func (w *WhatsAppProblem) GetErrorClass() *WhatsAppProblemErrorClass {
+	if w == nil {
+		return nil
+	}
+	return w.ErrorClass
+}
+
+func (w *WhatsAppProblem) GetErrorCode() *string {
+	if w == nil {
+		return nil
+	}
+	return w.ErrorCode
+}
+
+func (w *WhatsAppProblem) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppProblem) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppProblem) SetType(type_ string) {
+	w.Type = type_
+	w.require(whatsAppProblemFieldType)
+}
+
+// SetTitle sets the Title field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppProblem) SetTitle(title string) {
+	w.Title = title
+	w.require(whatsAppProblemFieldTitle)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppProblem) SetStatus(status int) {
+	w.Status = status
+	w.require(whatsAppProblemFieldStatus)
+}
+
+// SetDetail sets the Detail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppProblem) SetDetail(detail string) {
+	w.Detail = detail
+	w.require(whatsAppProblemFieldDetail)
+}
+
+// SetInstance sets the Instance field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppProblem) SetInstance(instance string) {
+	w.Instance = instance
+	w.require(whatsAppProblemFieldInstance)
+}
+
+// SetErrorClass sets the ErrorClass field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppProblem) SetErrorClass(errorClass *WhatsAppProblemErrorClass) {
+	w.ErrorClass = errorClass
+	w.require(whatsAppProblemFieldErrorClass)
+}
+
+// SetErrorCode sets the ErrorCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppProblem) SetErrorCode(errorCode *string) {
+	w.ErrorCode = errorCode
+	w.require(whatsAppProblemFieldErrorCode)
+}
+
+func (w *WhatsAppProblem) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppProblem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppProblem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppProblem) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppProblem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppProblem) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Machine-readable classification of the error.
+type WhatsAppProblemErrorClass string
+
+const (
+	WhatsAppProblemErrorClassPermanent       WhatsAppProblemErrorClass = "permanent"
+	WhatsAppProblemErrorClassRetriable       WhatsAppProblemErrorClass = "retriable"
+	WhatsAppProblemErrorClassRateLimited     WhatsAppProblemErrorClass = "rate_limited"
+	WhatsAppProblemErrorClassInvalidTemplate WhatsAppProblemErrorClass = "invalid_template"
+)
+
+func NewWhatsAppProblemErrorClassFromString(s string) (WhatsAppProblemErrorClass, error) {
+	switch s {
+	case "permanent":
+		return WhatsAppProblemErrorClassPermanent, nil
+	case "retriable":
+		return WhatsAppProblemErrorClassRetriable, nil
+	case "rate_limited":
+		return WhatsAppProblemErrorClassRateLimited, nil
+	case "invalid_template":
+		return WhatsAppProblemErrorClassInvalidTemplate, nil
+	}
+	var t WhatsAppProblemErrorClass
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppProblemErrorClass) Ptr() *WhatsAppProblemErrorClass {
+	return &w
+}
+
+var (
+	whatsAppSenderFieldPhoneNumber   = big.NewInt(1 << 0)
+	whatsAppSenderFieldDisplayName   = big.NewInt(1 << 1)
+	whatsAppSenderFieldStatus        = big.NewInt(1 << 2)
+	whatsAppSenderFieldQualityRating = big.NewInt(1 << 3)
+	whatsAppSenderFieldMessageTier   = big.NewInt(1 << 4)
+)
+
+type WhatsAppSender struct {
+	// Sender's phone number in E.164 format.
+	PhoneNumber string `json:"phone_number" url:"phone_number"`
+	// Sender's WhatsApp display name.
+	DisplayName *string `json:"display_name,omitempty" url:"display_name,omitempty"`
+	// Sender registration status with the provider.
+	Status WhatsAppSenderStatus `json:"status" url:"status"`
+	// Sender's messaging quality rating.
+	QualityRating *WhatsAppSenderQualityRating `json:"quality_rating,omitempty" url:"quality_rating,omitempty"`
+	// Sender's 24-hour outbound messaging limit tier.
+	MessageTier *WhatsAppSenderMessageTier `json:"message_tier,omitempty" url:"message_tier,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppSender) GetPhoneNumber() string {
+	if w == nil {
+		return ""
+	}
+	return w.PhoneNumber
+}
+
+func (w *WhatsAppSender) GetDisplayName() *string {
+	if w == nil {
+		return nil
+	}
+	return w.DisplayName
+}
+
+func (w *WhatsAppSender) GetStatus() WhatsAppSenderStatus {
+	if w == nil {
+		return ""
+	}
+	return w.Status
+}
+
+func (w *WhatsAppSender) GetQualityRating() *WhatsAppSenderQualityRating {
+	if w == nil {
+		return nil
+	}
+	return w.QualityRating
+}
+
+func (w *WhatsAppSender) GetMessageTier() *WhatsAppSenderMessageTier {
+	if w == nil {
+		return nil
+	}
+	return w.MessageTier
+}
+
+func (w *WhatsAppSender) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppSender) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetPhoneNumber sets the PhoneNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSender) SetPhoneNumber(phoneNumber string) {
+	w.PhoneNumber = phoneNumber
+	w.require(whatsAppSenderFieldPhoneNumber)
+}
+
+// SetDisplayName sets the DisplayName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSender) SetDisplayName(displayName *string) {
+	w.DisplayName = displayName
+	w.require(whatsAppSenderFieldDisplayName)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSender) SetStatus(status WhatsAppSenderStatus) {
+	w.Status = status
+	w.require(whatsAppSenderFieldStatus)
+}
+
+// SetQualityRating sets the QualityRating field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSender) SetQualityRating(qualityRating *WhatsAppSenderQualityRating) {
+	w.QualityRating = qualityRating
+	w.require(whatsAppSenderFieldQualityRating)
+}
+
+// SetMessageTier sets the MessageTier field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSender) SetMessageTier(messageTier *WhatsAppSenderMessageTier) {
+	w.MessageTier = messageTier
+	w.require(whatsAppSenderFieldMessageTier)
+}
+
+func (w *WhatsAppSender) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppSender
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppSender(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppSender) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppSender
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppSender) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Sender's 24-hour outbound messaging limit tier.
+type WhatsAppSenderMessageTier string
+
+const (
+	WhatsAppSenderMessageTierLimitNa   WhatsAppSenderMessageTier = "limit_na"
+	WhatsAppSenderMessageTierLimit250  WhatsAppSenderMessageTier = "limit_250"
+	WhatsAppSenderMessageTierLimit2K   WhatsAppSenderMessageTier = "limit_2k"
+	WhatsAppSenderMessageTierLimit10K  WhatsAppSenderMessageTier = "limit_10k"
+	WhatsAppSenderMessageTierLimit100K WhatsAppSenderMessageTier = "limit_100k"
+	WhatsAppSenderMessageTierUnlimited WhatsAppSenderMessageTier = "unlimited"
+)
+
+func NewWhatsAppSenderMessageTierFromString(s string) (WhatsAppSenderMessageTier, error) {
+	switch s {
+	case "limit_na":
+		return WhatsAppSenderMessageTierLimitNa, nil
+	case "limit_250":
+		return WhatsAppSenderMessageTierLimit250, nil
+	case "limit_2k":
+		return WhatsAppSenderMessageTierLimit2K, nil
+	case "limit_10k":
+		return WhatsAppSenderMessageTierLimit10K, nil
+	case "limit_100k":
+		return WhatsAppSenderMessageTierLimit100K, nil
+	case "unlimited":
+		return WhatsAppSenderMessageTierUnlimited, nil
+	}
+	var t WhatsAppSenderMessageTier
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppSenderMessageTier) Ptr() *WhatsAppSenderMessageTier {
+	return &w
+}
+
+// Sender's messaging quality rating.
+type WhatsAppSenderQualityRating string
+
+const (
+	WhatsAppSenderQualityRatingHigh    WhatsAppSenderQualityRating = "high"
+	WhatsAppSenderQualityRatingMedium  WhatsAppSenderQualityRating = "medium"
+	WhatsAppSenderQualityRatingLow     WhatsAppSenderQualityRating = "low"
+	WhatsAppSenderQualityRatingUnknown WhatsAppSenderQualityRating = "unknown"
+)
+
+func NewWhatsAppSenderQualityRatingFromString(s string) (WhatsAppSenderQualityRating, error) {
+	switch s {
+	case "high":
+		return WhatsAppSenderQualityRatingHigh, nil
+	case "medium":
+		return WhatsAppSenderQualityRatingMedium, nil
+	case "low":
+		return WhatsAppSenderQualityRatingLow, nil
+	case "unknown":
+		return WhatsAppSenderQualityRatingUnknown, nil
+	}
+	var t WhatsAppSenderQualityRating
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppSenderQualityRating) Ptr() *WhatsAppSenderQualityRating {
+	return &w
+}
+
+// Sender registration status with the provider.
+type WhatsAppSenderStatus string
+
+const (
+	WhatsAppSenderStatusBanned       WhatsAppSenderStatus = "banned"
+	WhatsAppSenderStatusConnected    WhatsAppSenderStatus = "connected"
+	WhatsAppSenderStatusDeleted      WhatsAppSenderStatus = "deleted"
+	WhatsAppSenderStatusDisconnected WhatsAppSenderStatus = "disconnected"
+	WhatsAppSenderStatusFlagged      WhatsAppSenderStatus = "flagged"
+	WhatsAppSenderStatusMigrated     WhatsAppSenderStatus = "migrated"
+	WhatsAppSenderStatusPending      WhatsAppSenderStatus = "pending"
+	WhatsAppSenderStatusRateLimited  WhatsAppSenderStatus = "rate_limited"
+	WhatsAppSenderStatusRestricted   WhatsAppSenderStatus = "restricted"
+	WhatsAppSenderStatusUnknown      WhatsAppSenderStatus = "unknown"
+	WhatsAppSenderStatusUnverified   WhatsAppSenderStatus = "unverified"
+)
+
+func NewWhatsAppSenderStatusFromString(s string) (WhatsAppSenderStatus, error) {
+	switch s {
+	case "banned":
+		return WhatsAppSenderStatusBanned, nil
+	case "connected":
+		return WhatsAppSenderStatusConnected, nil
+	case "deleted":
+		return WhatsAppSenderStatusDeleted, nil
+	case "disconnected":
+		return WhatsAppSenderStatusDisconnected, nil
+	case "flagged":
+		return WhatsAppSenderStatusFlagged, nil
+	case "migrated":
+		return WhatsAppSenderStatusMigrated, nil
+	case "pending":
+		return WhatsAppSenderStatusPending, nil
+	case "rate_limited":
+		return WhatsAppSenderStatusRateLimited, nil
+	case "restricted":
+		return WhatsAppSenderStatusRestricted, nil
+	case "unknown":
+		return WhatsAppSenderStatusUnknown, nil
+	case "unverified":
+		return WhatsAppSenderStatusUnverified, nil
+	}
+	var t WhatsAppSenderStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppSenderStatus) Ptr() *WhatsAppSenderStatus {
+	return &w
+}
+
+var (
+	whatsAppTemplateFieldUUID          = big.NewInt(1 << 0)
+	whatsAppTemplateFieldName          = big.NewInt(1 << 1)
+	whatsAppTemplateFieldLanguage      = big.NewInt(1 << 2)
+	whatsAppTemplateFieldCategory      = big.NewInt(1 << 3)
+	whatsAppTemplateFieldStatus        = big.NewInt(1 << 4)
+	whatsAppTemplateFieldQualityRating = big.NewInt(1 << 5)
+	whatsAppTemplateFieldSubmittedAt   = big.NewInt(1 << 6)
+	whatsAppTemplateFieldComponents    = big.NewInt(1 << 7)
+	whatsAppTemplateFieldCreatedAt     = big.NewInt(1 << 8)
+)
+
+type WhatsAppTemplate struct {
+	// Template ID.
+	UUID string `json:"uuid" url:"uuid"`
+	// Template name.
+	Name string `json:"name" url:"name"`
+	// Template language code.
+	Language string `json:"language" url:"language"`
+	// Template category.
+	Category WhatsAppTemplateCategory `json:"category" url:"category"`
+	// Template review/approval status.
+	Status WhatsAppTemplateStatus `json:"status" url:"status"`
+	// Template's messaging quality rating.
+	QualityRating *WhatsAppTemplateQualityRating `json:"quality_rating,omitempty" url:"quality_rating,omitempty"`
+	// Date and time the template was submitted for review, in ISO 8601 format.
+	SubmittedAt *string `json:"submitted_at,omitempty" url:"submitted_at,omitempty"`
+	// Structural components of the template.
+	Components []*WhatsAppTemplateComponent `json:"components" url:"components"`
+	// Date and time the template was created, in ISO 8601 format.
+	CreatedAt string `json:"created_at" url:"created_at"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppTemplate) GetUUID() string {
+	if w == nil {
+		return ""
+	}
+	return w.UUID
+}
+
+func (w *WhatsAppTemplate) GetName() string {
+	if w == nil {
+		return ""
+	}
+	return w.Name
+}
+
+func (w *WhatsAppTemplate) GetLanguage() string {
+	if w == nil {
+		return ""
+	}
+	return w.Language
+}
+
+func (w *WhatsAppTemplate) GetCategory() WhatsAppTemplateCategory {
+	if w == nil {
+		return ""
+	}
+	return w.Category
+}
+
+func (w *WhatsAppTemplate) GetStatus() WhatsAppTemplateStatus {
+	if w == nil {
+		return ""
+	}
+	return w.Status
+}
+
+func (w *WhatsAppTemplate) GetQualityRating() *WhatsAppTemplateQualityRating {
+	if w == nil {
+		return nil
+	}
+	return w.QualityRating
+}
+
+func (w *WhatsAppTemplate) GetSubmittedAt() *string {
+	if w == nil {
+		return nil
+	}
+	return w.SubmittedAt
+}
+
+func (w *WhatsAppTemplate) GetComponents() []*WhatsAppTemplateComponent {
+	if w == nil {
+		return nil
+	}
+	return w.Components
+}
+
+func (w *WhatsAppTemplate) GetCreatedAt() string {
+	if w == nil {
+		return ""
+	}
+	return w.CreatedAt
+}
+
+func (w *WhatsAppTemplate) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppTemplate) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetUUID sets the UUID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplate) SetUUID(uuid string) {
+	w.UUID = uuid
+	w.require(whatsAppTemplateFieldUUID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplate) SetName(name string) {
+	w.Name = name
+	w.require(whatsAppTemplateFieldName)
+}
+
+// SetLanguage sets the Language field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplate) SetLanguage(language string) {
+	w.Language = language
+	w.require(whatsAppTemplateFieldLanguage)
+}
+
+// SetCategory sets the Category field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplate) SetCategory(category WhatsAppTemplateCategory) {
+	w.Category = category
+	w.require(whatsAppTemplateFieldCategory)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplate) SetStatus(status WhatsAppTemplateStatus) {
+	w.Status = status
+	w.require(whatsAppTemplateFieldStatus)
+}
+
+// SetQualityRating sets the QualityRating field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplate) SetQualityRating(qualityRating *WhatsAppTemplateQualityRating) {
+	w.QualityRating = qualityRating
+	w.require(whatsAppTemplateFieldQualityRating)
+}
+
+// SetSubmittedAt sets the SubmittedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplate) SetSubmittedAt(submittedAt *string) {
+	w.SubmittedAt = submittedAt
+	w.require(whatsAppTemplateFieldSubmittedAt)
+}
+
+// SetComponents sets the Components field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplate) SetComponents(components []*WhatsAppTemplateComponent) {
+	w.Components = components
+	w.require(whatsAppTemplateFieldComponents)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplate) SetCreatedAt(createdAt string) {
+	w.CreatedAt = createdAt
+	w.require(whatsAppTemplateFieldCreatedAt)
+}
+
+func (w *WhatsAppTemplate) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppTemplate
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppTemplate(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppTemplate) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppTemplate
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppTemplate) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Template category.
+type WhatsAppTemplateCategory string
+
+const (
+	WhatsAppTemplateCategoryMarketing      WhatsAppTemplateCategory = "marketing"
+	WhatsAppTemplateCategoryAuthentication WhatsAppTemplateCategory = "authentication"
+	WhatsAppTemplateCategoryUtility        WhatsAppTemplateCategory = "utility"
+)
+
+func NewWhatsAppTemplateCategoryFromString(s string) (WhatsAppTemplateCategory, error) {
+	switch s {
+	case "marketing":
+		return WhatsAppTemplateCategoryMarketing, nil
+	case "authentication":
+		return WhatsAppTemplateCategoryAuthentication, nil
+	case "utility":
+		return WhatsAppTemplateCategoryUtility, nil
+	}
+	var t WhatsAppTemplateCategory
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppTemplateCategory) Ptr() *WhatsAppTemplateCategory {
+	return &w
+}
+
+// One structural component (header, body, footer, or buttons) of a WhatsApp message template.
+var (
+	whatsAppTemplateComponentFieldType    = big.NewInt(1 << 0)
+	whatsAppTemplateComponentFieldFormat  = big.NewInt(1 << 1)
+	whatsAppTemplateComponentFieldText    = big.NewInt(1 << 2)
+	whatsAppTemplateComponentFieldExample = big.NewInt(1 << 3)
+	whatsAppTemplateComponentFieldButtons = big.NewInt(1 << 4)
+)
+
+type WhatsAppTemplateComponent struct {
+	// Component type.
+	Type WhatsAppTemplateComponentType `json:"type" url:"type"`
+	// Header content format. Present on `HEADER` components only.
+	Format *WhatsAppTemplateComponentFormat `json:"format,omitempty" url:"format,omitempty"`
+	// Component text, with `{{n}}` placeholders where applicable.
+	Text *string `json:"text,omitempty" url:"text,omitempty"`
+	// Sample values for the component's placeholders, in the shape the provider expects.
+	Example map[string]any `json:"example,omitempty" url:"example,omitempty"`
+	// Button definitions. Present on `BUTTONS` components only.
+	Buttons []map[string]any `json:"buttons,omitempty" url:"buttons,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppTemplateComponent) GetType() WhatsAppTemplateComponentType {
+	if w == nil {
+		return ""
+	}
+	return w.Type
+}
+
+func (w *WhatsAppTemplateComponent) GetFormat() *WhatsAppTemplateComponentFormat {
+	if w == nil {
+		return nil
+	}
+	return w.Format
+}
+
+func (w *WhatsAppTemplateComponent) GetText() *string {
+	if w == nil {
+		return nil
+	}
+	return w.Text
+}
+
+func (w *WhatsAppTemplateComponent) GetExample() map[string]any {
+	if w == nil {
+		return nil
+	}
+	return w.Example
+}
+
+func (w *WhatsAppTemplateComponent) GetButtons() []map[string]any {
+	if w == nil {
+		return nil
+	}
+	return w.Buttons
+}
+
+func (w *WhatsAppTemplateComponent) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppTemplateComponent) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateComponent) SetType(type_ WhatsAppTemplateComponentType) {
+	w.Type = type_
+	w.require(whatsAppTemplateComponentFieldType)
+}
+
+// SetFormat sets the Format field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateComponent) SetFormat(format *WhatsAppTemplateComponentFormat) {
+	w.Format = format
+	w.require(whatsAppTemplateComponentFieldFormat)
+}
+
+// SetText sets the Text field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateComponent) SetText(text *string) {
+	w.Text = text
+	w.require(whatsAppTemplateComponentFieldText)
+}
+
+// SetExample sets the Example field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateComponent) SetExample(example map[string]any) {
+	w.Example = example
+	w.require(whatsAppTemplateComponentFieldExample)
+}
+
+// SetButtons sets the Buttons field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateComponent) SetButtons(buttons []map[string]any) {
+	w.Buttons = buttons
+	w.require(whatsAppTemplateComponentFieldButtons)
+}
+
+func (w *WhatsAppTemplateComponent) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppTemplateComponent
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppTemplateComponent(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppTemplateComponent) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppTemplateComponent
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppTemplateComponent) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Header content format. Present on `HEADER` components only.
+type WhatsAppTemplateComponentFormat string
+
+const (
+	WhatsAppTemplateComponentFormatText     WhatsAppTemplateComponentFormat = "TEXT"
+	WhatsAppTemplateComponentFormatImage    WhatsAppTemplateComponentFormat = "IMAGE"
+	WhatsAppTemplateComponentFormatVideo    WhatsAppTemplateComponentFormat = "VIDEO"
+	WhatsAppTemplateComponentFormatDocument WhatsAppTemplateComponentFormat = "DOCUMENT"
+	WhatsAppTemplateComponentFormatLocation WhatsAppTemplateComponentFormat = "LOCATION"
+)
+
+func NewWhatsAppTemplateComponentFormatFromString(s string) (WhatsAppTemplateComponentFormat, error) {
+	switch s {
+	case "TEXT":
+		return WhatsAppTemplateComponentFormatText, nil
+	case "IMAGE":
+		return WhatsAppTemplateComponentFormatImage, nil
+	case "VIDEO":
+		return WhatsAppTemplateComponentFormatVideo, nil
+	case "DOCUMENT":
+		return WhatsAppTemplateComponentFormatDocument, nil
+	case "LOCATION":
+		return WhatsAppTemplateComponentFormatLocation, nil
+	}
+	var t WhatsAppTemplateComponentFormat
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppTemplateComponentFormat) Ptr() *WhatsAppTemplateComponentFormat {
+	return &w
+}
+
+// Component type.
+type WhatsAppTemplateComponentType string
+
+const (
+	WhatsAppTemplateComponentTypeHeader  WhatsAppTemplateComponentType = "HEADER"
+	WhatsAppTemplateComponentTypeBody    WhatsAppTemplateComponentType = "BODY"
+	WhatsAppTemplateComponentTypeFooter  WhatsAppTemplateComponentType = "FOOTER"
+	WhatsAppTemplateComponentTypeButtons WhatsAppTemplateComponentType = "BUTTONS"
+)
+
+func NewWhatsAppTemplateComponentTypeFromString(s string) (WhatsAppTemplateComponentType, error) {
+	switch s {
+	case "HEADER":
+		return WhatsAppTemplateComponentTypeHeader, nil
+	case "BODY":
+		return WhatsAppTemplateComponentTypeBody, nil
+	case "FOOTER":
+		return WhatsAppTemplateComponentTypeFooter, nil
+	case "BUTTONS":
+		return WhatsAppTemplateComponentTypeButtons, nil
+	}
+	var t WhatsAppTemplateComponentType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppTemplateComponentType) Ptr() *WhatsAppTemplateComponentType {
+	return &w
+}
+
+var (
+	whatsAppTemplateCreateRequestFieldName       = big.NewInt(1 << 0)
+	whatsAppTemplateCreateRequestFieldLanguage   = big.NewInt(1 << 1)
+	whatsAppTemplateCreateRequestFieldCategory   = big.NewInt(1 << 2)
+	whatsAppTemplateCreateRequestFieldComponents = big.NewInt(1 << 3)
+)
+
+type WhatsAppTemplateCreateRequest struct {
+	// Template name.
+	Name string `json:"name" url:"name"`
+	// Template language code.
+	Language string `json:"language" url:"language"`
+	// Template category.
+	Category WhatsAppTemplateCreateRequestCategory `json:"category" url:"category"`
+	// Structural components of the template. Must include a `BODY` component.
+	Components []*WhatsAppTemplateComponent `json:"components" url:"components"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppTemplateCreateRequest) GetName() string {
+	if w == nil {
+		return ""
+	}
+	return w.Name
+}
+
+func (w *WhatsAppTemplateCreateRequest) GetLanguage() string {
+	if w == nil {
+		return ""
+	}
+	return w.Language
+}
+
+func (w *WhatsAppTemplateCreateRequest) GetCategory() WhatsAppTemplateCreateRequestCategory {
+	if w == nil {
+		return ""
+	}
+	return w.Category
+}
+
+func (w *WhatsAppTemplateCreateRequest) GetComponents() []*WhatsAppTemplateComponent {
+	if w == nil {
+		return nil
+	}
+	return w.Components
+}
+
+func (w *WhatsAppTemplateCreateRequest) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppTemplateCreateRequest) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateCreateRequest) SetName(name string) {
+	w.Name = name
+	w.require(whatsAppTemplateCreateRequestFieldName)
+}
+
+// SetLanguage sets the Language field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateCreateRequest) SetLanguage(language string) {
+	w.Language = language
+	w.require(whatsAppTemplateCreateRequestFieldLanguage)
+}
+
+// SetCategory sets the Category field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateCreateRequest) SetCategory(category WhatsAppTemplateCreateRequestCategory) {
+	w.Category = category
+	w.require(whatsAppTemplateCreateRequestFieldCategory)
+}
+
+// SetComponents sets the Components field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateCreateRequest) SetComponents(components []*WhatsAppTemplateComponent) {
+	w.Components = components
+	w.require(whatsAppTemplateCreateRequestFieldComponents)
+}
+
+func (w *WhatsAppTemplateCreateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppTemplateCreateRequest
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppTemplateCreateRequest(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppTemplateCreateRequest) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppTemplateCreateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppTemplateCreateRequest) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Template category.
+type WhatsAppTemplateCreateRequestCategory string
+
+const (
+	WhatsAppTemplateCreateRequestCategoryMarketing      WhatsAppTemplateCreateRequestCategory = "marketing"
+	WhatsAppTemplateCreateRequestCategoryAuthentication WhatsAppTemplateCreateRequestCategory = "authentication"
+	WhatsAppTemplateCreateRequestCategoryUtility        WhatsAppTemplateCreateRequestCategory = "utility"
+)
+
+func NewWhatsAppTemplateCreateRequestCategoryFromString(s string) (WhatsAppTemplateCreateRequestCategory, error) {
+	switch s {
+	case "marketing":
+		return WhatsAppTemplateCreateRequestCategoryMarketing, nil
+	case "authentication":
+		return WhatsAppTemplateCreateRequestCategoryAuthentication, nil
+	case "utility":
+		return WhatsAppTemplateCreateRequestCategoryUtility, nil
+	}
+	var t WhatsAppTemplateCreateRequestCategory
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppTemplateCreateRequestCategory) Ptr() *WhatsAppTemplateCreateRequestCategory {
+	return &w
+}
+
+var (
+	whatsAppTemplateListResponseFieldTemplates = big.NewInt(1 << 0)
+)
+
+type WhatsAppTemplateListResponse struct {
+	// Templates registered for the sender.
+	Templates []*WhatsAppTemplate `json:"templates" url:"templates"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppTemplateListResponse) GetTemplates() []*WhatsAppTemplate {
+	if w == nil {
+		return nil
+	}
+	return w.Templates
+}
+
+func (w *WhatsAppTemplateListResponse) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppTemplateListResponse) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetTemplates sets the Templates field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateListResponse) SetTemplates(templates []*WhatsAppTemplate) {
+	w.Templates = templates
+	w.require(whatsAppTemplateListResponseFieldTemplates)
+}
+
+func (w *WhatsAppTemplateListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppTemplateListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppTemplateListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppTemplateListResponse) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppTemplateListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppTemplateListResponse) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Template's messaging quality rating.
+type WhatsAppTemplateQualityRating string
+
+const (
+	WhatsAppTemplateQualityRatingHigh    WhatsAppTemplateQualityRating = "high"
+	WhatsAppTemplateQualityRatingMedium  WhatsAppTemplateQualityRating = "medium"
+	WhatsAppTemplateQualityRatingLow     WhatsAppTemplateQualityRating = "low"
+	WhatsAppTemplateQualityRatingUnknown WhatsAppTemplateQualityRating = "unknown"
+)
+
+func NewWhatsAppTemplateQualityRatingFromString(s string) (WhatsAppTemplateQualityRating, error) {
+	switch s {
+	case "high":
+		return WhatsAppTemplateQualityRatingHigh, nil
+	case "medium":
+		return WhatsAppTemplateQualityRatingMedium, nil
+	case "low":
+		return WhatsAppTemplateQualityRatingLow, nil
+	case "unknown":
+		return WhatsAppTemplateQualityRatingUnknown, nil
+	}
+	var t WhatsAppTemplateQualityRating
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppTemplateQualityRating) Ptr() *WhatsAppTemplateQualityRating {
+	return &w
+}
+
+var (
+	whatsAppTemplateResponseFieldTemplate = big.NewInt(1 << 0)
+)
+
+type WhatsAppTemplateResponse struct {
+	Template *WhatsAppTemplate `json:"template" url:"template"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppTemplateResponse) GetTemplate() *WhatsAppTemplate {
+	if w == nil {
+		return nil
+	}
+	return w.Template
+}
+
+func (w *WhatsAppTemplateResponse) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppTemplateResponse) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetTemplate sets the Template field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateResponse) SetTemplate(template *WhatsAppTemplate) {
+	w.Template = template
+	w.require(whatsAppTemplateResponseFieldTemplate)
+}
+
+func (w *WhatsAppTemplateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppTemplateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppTemplateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppTemplateResponse) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppTemplateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppTemplateResponse) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Template review/approval status.
+type WhatsAppTemplateStatus string
+
+const (
+	WhatsAppTemplateStatusDraft           WhatsAppTemplateStatus = "draft"
+	WhatsAppTemplateStatusPending         WhatsAppTemplateStatus = "pending"
+	WhatsAppTemplateStatusApproved        WhatsAppTemplateStatus = "approved"
+	WhatsAppTemplateStatusRejected        WhatsAppTemplateStatus = "rejected"
+	WhatsAppTemplateStatusPaused          WhatsAppTemplateStatus = "paused"
+	WhatsAppTemplateStatusFlagged         WhatsAppTemplateStatus = "flagged"
+	WhatsAppTemplateStatusDisabled        WhatsAppTemplateStatus = "disabled"
+	WhatsAppTemplateStatusInAppeal        WhatsAppTemplateStatus = "in_appeal"
+	WhatsAppTemplateStatusPendingDeletion WhatsAppTemplateStatus = "pending_deletion"
+	WhatsAppTemplateStatusDeleted         WhatsAppTemplateStatus = "deleted"
+	WhatsAppTemplateStatusUnknown         WhatsAppTemplateStatus = "unknown"
+)
+
+func NewWhatsAppTemplateStatusFromString(s string) (WhatsAppTemplateStatus, error) {
+	switch s {
+	case "draft":
+		return WhatsAppTemplateStatusDraft, nil
+	case "pending":
+		return WhatsAppTemplateStatusPending, nil
+	case "approved":
+		return WhatsAppTemplateStatusApproved, nil
+	case "rejected":
+		return WhatsAppTemplateStatusRejected, nil
+	case "paused":
+		return WhatsAppTemplateStatusPaused, nil
+	case "flagged":
+		return WhatsAppTemplateStatusFlagged, nil
+	case "disabled":
+		return WhatsAppTemplateStatusDisabled, nil
+	case "in_appeal":
+		return WhatsAppTemplateStatusInAppeal, nil
+	case "pending_deletion":
+		return WhatsAppTemplateStatusPendingDeletion, nil
+	case "deleted":
+		return WhatsAppTemplateStatusDeleted, nil
+	case "unknown":
+		return WhatsAppTemplateStatusUnknown, nil
+	}
+	var t WhatsAppTemplateStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppTemplateStatus) Ptr() *WhatsAppTemplateStatus {
+	return &w
 }

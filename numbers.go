@@ -510,9 +510,9 @@ type Number struct {
 	Destination []*InboundCallDestination `json:"destination" url:"destination"`
 	// Maximum number of concurrent inbound calls.
 	Channels int `json:"channels" url:"channels"`
-	// Documents required to activate the phone number.
-	RequireDocs []string `json:"require_docs" url:"require_docs"`
-	// Uploaded documents for the phone number.
+	// Documents to activate the number.
+	RequireDocs []DocumentType `json:"require_docs" url:"require_docs"`
+	// Uploaded documents.
 	Documents []*NumberDocument `json:"documents" url:"documents"`
 	// Indicates whether the number can be used as the Caller ID for local calls.
 	DomesticCli bool `json:"domestic_cli" url:"domestic_cli"`
@@ -629,7 +629,7 @@ func (n *Number) GetChannels() int {
 	return n.Channels
 }
 
-func (n *Number) GetRequireDocs() []string {
+func (n *Number) GetRequireDocs() []DocumentType {
 	if n == nil {
 		return nil
 	}
@@ -841,7 +841,7 @@ func (n *Number) SetChannels(channels int) {
 
 // SetRequireDocs sets the RequireDocs field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (n *Number) SetRequireDocs(requireDocs []string) {
+func (n *Number) SetRequireDocs(requireDocs []DocumentType) {
 	n.RequireDocs = requireDocs
 	n.require(numberFieldRequireDocs)
 }
@@ -1158,8 +1158,8 @@ type NumberListResponse struct {
 	// List of phone numbers on the account.
 	Items []*Number `json:"items" url:"items"`
 	// Documents required to activate phone numbers.
-	DocTypes   []*DocumentType `json:"doc_types" url:"doc_types"`
-	Pagination *Pagination     `json:"pagination" url:"pagination"`
+	DocTypes   []*DocumentTypeInfo `json:"doc_types" url:"doc_types"`
+	Pagination *Pagination         `json:"pagination" url:"pagination"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1175,7 +1175,7 @@ func (n *NumberListResponse) GetItems() []*Number {
 	return n.Items
 }
 
-func (n *NumberListResponse) GetDocTypes() []*DocumentType {
+func (n *NumberListResponse) GetDocTypes() []*DocumentTypeInfo {
 	if n == nil {
 		return nil
 	}
@@ -1212,7 +1212,7 @@ func (n *NumberListResponse) SetItems(items []*Number) {
 
 // SetDocTypes sets the DocTypes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (n *NumberListResponse) SetDocTypes(docTypes []*DocumentType) {
+func (n *NumberListResponse) SetDocTypes(docTypes []*DocumentTypeInfo) {
 	n.DocTypes = docTypes
 	n.require(numberListResponseFieldDocTypes)
 }
@@ -1349,91 +1349,6 @@ func (b *BulkUpdateNumbersResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", b)
-}
-
-var (
-	deleteNumbersResponseFieldSuccess = big.NewInt(1 << 0)
-)
-
-type DeleteNumbersResponse struct {
-	// Indicates whether the request was successful.
-	Success bool `json:"success" url:"success"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (d *DeleteNumbersResponse) GetSuccess() bool {
-	if d == nil {
-		return false
-	}
-	return d.Success
-}
-
-func (d *DeleteNumbersResponse) GetExtraProperties() map[string]interface{} {
-	if d == nil {
-		return nil
-	}
-	return d.extraProperties
-}
-
-func (d *DeleteNumbersResponse) require(field *big.Int) {
-	if d.explicitFields == nil {
-		d.explicitFields = big.NewInt(0)
-	}
-	d.explicitFields.Or(d.explicitFields, field)
-}
-
-// SetSuccess sets the Success field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (d *DeleteNumbersResponse) SetSuccess(success bool) {
-	d.Success = success
-	d.require(deleteNumbersResponseFieldSuccess)
-}
-
-func (d *DeleteNumbersResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler DeleteNumbersResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*d = DeleteNumbersResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *d)
-	if err != nil {
-		return err
-	}
-	d.extraProperties = extraProperties
-	d.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (d *DeleteNumbersResponse) MarshalJSON() ([]byte, error) {
-	type embed DeleteNumbersResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*d),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (d *DeleteNumbersResponse) String() string {
-	if d == nil {
-		return "<nil>"
-	}
-	if len(d.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(d); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", d)
 }
 
 var (

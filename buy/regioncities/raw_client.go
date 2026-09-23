@@ -6,6 +6,7 @@ import (
 	context "context"
 	http "net/http"
 
+	wavixgosdk "github.com/wavix/wavix-go-sdk"
 	buy "github.com/wavix/wavix-go-sdk/buy"
 	core "github.com/wavix/wavix-go-sdk/core"
 	internal "github.com/wavix/wavix-go-sdk/internal"
@@ -36,7 +37,7 @@ func (r *RawClient) List(
 	ctx context.Context,
 	request *buy.ListRegionCitiesRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*buy.ListRegionCitiesResponse], error) {
+) (*core.Response[*wavixgosdk.CityListResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -59,7 +60,7 @@ func (r *RawClient) List(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *buy.ListRegionCitiesResponse
+	var response *wavixgosdk.CityListResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -78,7 +79,7 @@ func (r *RawClient) List(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*buy.ListRegionCitiesResponse]{
+	return &core.Response[*wavixgosdk.CityListResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

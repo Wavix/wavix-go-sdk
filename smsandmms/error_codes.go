@@ -9,13 +9,18 @@ import (
 )
 
 var ErrorCodes internal.ErrorCodes = internal.ErrorCodes{
-	403: func(apiError *core.APIError) error {
-		return &wavixgosdk.ForbiddenError{
+	400: func(apiError *core.APIError) error {
+		return &wavixgosdk.BadRequestError{
 			APIError: apiError,
 		}
 	},
-	400: func(apiError *core.APIError) error {
-		return &wavixgosdk.BadRequestError{
+	401: func(apiError *core.APIError) error {
+		return &wavixgosdk.UnauthorizedError{
+			APIError: apiError,
+		}
+	},
+	403: func(apiError *core.APIError) error {
+		return &wavixgosdk.ForbiddenError{
 			APIError: apiError,
 		}
 	},
@@ -26,6 +31,11 @@ var ErrorCodes internal.ErrorCodes = internal.ErrorCodes{
 	},
 	422: func(apiError *core.APIError) error {
 		return &wavixgosdk.UnprocessableEntityError{
+			APIError: apiError,
+		}
+	},
+	429: func(apiError *core.APIError) error {
+		return &wavixgosdk.TooManyRequestsError{
 			APIError: apiError,
 		}
 	},

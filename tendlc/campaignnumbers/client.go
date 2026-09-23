@@ -5,6 +5,7 @@ package campaignnumbers
 import (
 	context "context"
 
+	wavixgosdk "github.com/wavix/wavix-go-sdk"
 	core "github.com/wavix/wavix-go-sdk/core"
 	internal "github.com/wavix/wavix-go-sdk/internal"
 	option "github.com/wavix/wavix-go-sdk/option"
@@ -39,7 +40,7 @@ func (c *Client) Link(
 	ctx context.Context,
 	request *tendlc.LinkCampaignNumbersRequest,
 	opts ...option.RequestOption,
-) (*tendlc.LinkCampaignNumbersResponse, error) {
+) (*wavixgosdk.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Link(
 		ctx,
 		request,
@@ -56,7 +57,7 @@ func (c *Client) Unlink(
 	ctx context.Context,
 	request *tendlc.UnlinkCampaignNumbersRequest,
 	opts ...option.RequestOption,
-) (*tendlc.UnlinkCampaignNumbersResponse, error) {
+) (*wavixgosdk.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Unlink(
 		ctx,
 		request,
@@ -73,7 +74,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *tendlc.ListCampaignNumbersRequest,
 	opts ...option.RequestOption,
-) (*tendlc.ListCampaignNumbersResponse, error) {
+) (*wavixgosdk.TenDlcCampaignNumberListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,

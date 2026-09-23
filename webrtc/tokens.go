@@ -19,7 +19,7 @@ type WebRtcTokenCreateRequest struct {
 	SipTrunk string `json:"sip_trunk" url:"-"`
 	// Arbitrary client-defined data to associate with the token.
 	Payload map[string]any `json:"payload,omitempty" url:"-"`
-	// Time to live in seconds. Pass `null` for no expiration.
+	// Time to live in seconds. Default `3600`. Pass `null` for no expiration.
 	TTL *int `json:"ttl,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -125,6 +125,42 @@ func (g *GetTokensRequest) require(field *big.Int) {
 func (g *GetTokensRequest) SetID(id string) {
 	g.ID = id
 	g.require(getTokensRequestFieldID)
+}
+
+var (
+	listTokensRequestFieldPage    = big.NewInt(1 << 0)
+	listTokensRequestFieldPerPage = big.NewInt(1 << 1)
+)
+
+type ListTokensRequest struct {
+	// Page number to retrieve. Default `1`.
+	Page *int `json:"-" url:"page,omitempty"`
+	// Number of records to return per page. Default `25`.
+	PerPage *int `json:"-" url:"per_page,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (l *ListTokensRequest) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
+	}
+	l.explicitFields.Or(l.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListTokensRequest) SetPage(page *int) {
+	l.Page = page
+	l.require(listTokensRequestFieldPage)
+}
+
+// SetPerPage sets the PerPage field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListTokensRequest) SetPerPage(perPage *int) {
+	l.PerPage = perPage
+	l.require(listTokensRequestFieldPerPage)
 }
 
 var (

@@ -978,6 +978,10 @@ func (a APIKeyScopePermissionAllow) Ptr() *APIKeyScopePermissionAllow {
 	return &a
 }
 
+// API key details, including the secret `value`. Returned only at creation time —
+// store it securely, it cannot be retrieved again.
+type APIKeyWithSecret = *APIKey
+
 var (
 	aPIKeyUpdateRequestFieldID            = big.NewInt(1 << 0)
 	aPIKeyUpdateRequestFieldActive        = big.NewInt(1 << 1)

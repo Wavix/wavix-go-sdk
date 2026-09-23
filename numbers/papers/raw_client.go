@@ -4,7 +4,6 @@ package papers
 
 import (
 	context "context"
-	fmt "fmt"
 	http "net/http"
 
 	wavixgosdk "github.com/wavix/wavix-go-sdk"
@@ -57,7 +56,7 @@ func (r *RawClient) Upload(
 	if err := writer.WriteFile("doc_attachment", request.DocAttachment); err != nil {
 		return nil, err
 	}
-	if err := writer.WriteField("doc_id", fmt.Sprintf("%v", request.DocID)); err != nil {
+	if err := writer.WriteJSON("doc_id", string(request.DocID)); err != nil {
 		return nil, err
 	}
 	if err := writer.Close(); err != nil {

@@ -65,8 +65,8 @@ func (r *RequestOptions) cloneHeader() http.Header {
 	headers := r.HTTPHeader.Clone()
 	headers.Set("X-Fern-Language", "Go")
 	headers.Set("X-Fern-SDK-Name", "github.com/wavix/wavix-go-sdk")
-	headers.Set("X-Fern-SDK-Version", "v1.0.0")
-	headers.Set("User-Agent", "github.com/wavix/wavix-go-sdk/v1.0.0")
+	headers.Set("X-Fern-SDK-Version", "v1.1.1")
+	headers.Set("User-Agent", "github.com/wavix/wavix-go-sdk/1.1.1")
 	return headers
 }
 

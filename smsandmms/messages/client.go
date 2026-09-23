@@ -40,7 +40,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *smsandmms.ListMessagesRequest,
 	opts ...option.RequestOption,
-) (*smsandmms.ListMessagesResponse, error) {
+) (*wavixgosdk.MessageListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
@@ -52,8 +52,7 @@ func (c *Client) List(
 	return response.Body, nil
 }
 
-// Sends an SMS or MMS message. MMS is supported for U.S. numbers only. Track delivery using the returned `message_id` and the message status callback.
-// **Rate limit**: 20 messages per phone number in 24 hours.
+// Sends an SMS or MMS message. MMS is supported for U.S. numbers only. Track delivery using the returned `message_id` and the message status callback. The recipient must be opted in to receive messages from the account; sending to an opted-out number fails.
 func (c *Client) Send(
 	ctx context.Context,
 	request *smsandmms.SendMessagesRequest,
@@ -75,7 +74,7 @@ func (c *Client) Get(
 	ctx context.Context,
 	request *smsandmms.GetMessagesRequest,
 	opts ...option.RequestOption,
-) (*smsandmms.GetMessagesResponse, error) {
+) (*wavixgosdk.MessageResponse, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,

@@ -17,13 +17,13 @@ var (
 )
 
 type PhoneValidationRequest struct {
-	// List of phone numbers to get detailed information about.
+	// List of phone numbers to get detailed information about. Maximum 1000 numbers per request.
 	PhoneNumbers []string                  `json:"phone_numbers" url:"-"`
 	Type         PhoneNumberValidationType `json:"type" url:"-"`
-	// Indicates whether the request should be executed asynchronously. If `true`, the response will include a `request_uuid` that can be used to poll for results. If `false`, the response will include validation results directly.
-	Async bool `json:"async" url:"-"`
-	// Indicates whether to force a fresh validation instead of returning a previously cached result.
-	Force bool `json:"force" url:"-"`
+	// Indicates whether the request should be executed asynchronously. If `true`, the response will include a `request_uuid` that can be used to poll for results. If `false` (default), the response will include validation results directly.
+	Async *bool `json:"async,omitempty" url:"-"`
+	// Indicates whether to force a fresh validation instead of returning a previously cached result. Defaults to `false`.
+	Force *bool `json:"force,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -52,14 +52,14 @@ func (p *PhoneValidationRequest) SetType(type_ PhoneNumberValidationType) {
 
 // SetAsync sets the Async field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PhoneValidationRequest) SetAsync(async bool) {
+func (p *PhoneValidationRequest) SetAsync(async *bool) {
 	p.Async = async
 	p.require(phoneValidationRequestFieldAsync)
 }
 
 // SetForce sets the Force field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PhoneValidationRequest) SetForce(force bool) {
+func (p *PhoneValidationRequest) SetForce(force *bool) {
 	p.Force = force
 	p.require(phoneValidationRequestFieldForce)
 }
@@ -433,26 +433,26 @@ func (p *PhoneValidationBatchResponse) String() string {
 }
 
 var (
-	getNumberValidatorResponseFieldPhoneNumber      = big.NewInt(1 << 0)
-	getNumberValidatorResponseFieldValid            = big.NewInt(1 << 1)
-	getNumberValidatorResponseFieldCountryCode      = big.NewInt(1 << 2)
-	getNumberValidatorResponseFieldE164Format       = big.NewInt(1 << 3)
-	getNumberValidatorResponseFieldNationalFormat   = big.NewInt(1 << 4)
-	getNumberValidatorResponseFieldPorted           = big.NewInt(1 << 5)
-	getNumberValidatorResponseFieldMcc              = big.NewInt(1 << 6)
-	getNumberValidatorResponseFieldMnc              = big.NewInt(1 << 7)
-	getNumberValidatorResponseFieldNumberType       = big.NewInt(1 << 8)
-	getNumberValidatorResponseFieldCarrierName      = big.NewInt(1 << 9)
-	getNumberValidatorResponseFieldRiskyDestination = big.NewInt(1 << 10)
-	getNumberValidatorResponseFieldUnallocatedRange = big.NewInt(1 << 11)
-	getNumberValidatorResponseFieldReachable        = big.NewInt(1 << 12)
-	getNumberValidatorResponseFieldRoaming          = big.NewInt(1 << 13)
-	getNumberValidatorResponseFieldTimezone         = big.NewInt(1 << 14)
-	getNumberValidatorResponseFieldCharge           = big.NewInt(1 << 15)
-	getNumberValidatorResponseFieldErrorCode        = big.NewInt(1 << 16)
+	phoneValidationResponseFieldPhoneNumber      = big.NewInt(1 << 0)
+	phoneValidationResponseFieldValid            = big.NewInt(1 << 1)
+	phoneValidationResponseFieldCountryCode      = big.NewInt(1 << 2)
+	phoneValidationResponseFieldE164Format       = big.NewInt(1 << 3)
+	phoneValidationResponseFieldNationalFormat   = big.NewInt(1 << 4)
+	phoneValidationResponseFieldPorted           = big.NewInt(1 << 5)
+	phoneValidationResponseFieldMcc              = big.NewInt(1 << 6)
+	phoneValidationResponseFieldMnc              = big.NewInt(1 << 7)
+	phoneValidationResponseFieldNumberType       = big.NewInt(1 << 8)
+	phoneValidationResponseFieldCarrierName      = big.NewInt(1 << 9)
+	phoneValidationResponseFieldRiskyDestination = big.NewInt(1 << 10)
+	phoneValidationResponseFieldUnallocatedRange = big.NewInt(1 << 11)
+	phoneValidationResponseFieldReachable        = big.NewInt(1 << 12)
+	phoneValidationResponseFieldRoaming          = big.NewInt(1 << 13)
+	phoneValidationResponseFieldTimezone         = big.NewInt(1 << 14)
+	phoneValidationResponseFieldCharge           = big.NewInt(1 << 15)
+	phoneValidationResponseFieldErrorCode        = big.NewInt(1 << 16)
 )
 
-type GetNumberValidatorResponse struct {
+type PhoneValidationResponse struct {
 	// Phone number.
 	PhoneNumber string `json:"phone_number" url:"phone_number"`
 	// Indicates whether the phone number is valid.
@@ -505,296 +505,296 @@ type GetNumberValidatorResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (g *GetNumberValidatorResponse) GetPhoneNumber() string {
-	if g == nil {
+func (p *PhoneValidationResponse) GetPhoneNumber() string {
+	if p == nil {
 		return ""
 	}
-	return g.PhoneNumber
+	return p.PhoneNumber
 }
 
-func (g *GetNumberValidatorResponse) GetValid() bool {
-	if g == nil {
+func (p *PhoneValidationResponse) GetValid() bool {
+	if p == nil {
 		return false
 	}
-	return g.Valid
+	return p.Valid
 }
 
-func (g *GetNumberValidatorResponse) GetCountryCode() *string {
-	if g == nil {
+func (p *PhoneValidationResponse) GetCountryCode() *string {
+	if p == nil {
 		return nil
 	}
-	return g.CountryCode
+	return p.CountryCode
 }
 
-func (g *GetNumberValidatorResponse) GetE164Format() string {
-	if g == nil {
+func (p *PhoneValidationResponse) GetE164Format() string {
+	if p == nil {
 		return ""
 	}
-	return g.E164Format
+	return p.E164Format
 }
 
-func (g *GetNumberValidatorResponse) GetNationalFormat() string {
-	if g == nil {
+func (p *PhoneValidationResponse) GetNationalFormat() string {
+	if p == nil {
 		return ""
 	}
-	return g.NationalFormat
+	return p.NationalFormat
 }
 
-func (g *GetNumberValidatorResponse) GetPorted() *bool {
-	if g == nil {
+func (p *PhoneValidationResponse) GetPorted() *bool {
+	if p == nil {
 		return nil
 	}
-	return g.Ported
+	return p.Ported
 }
 
-func (g *GetNumberValidatorResponse) GetMcc() *string {
-	if g == nil {
+func (p *PhoneValidationResponse) GetMcc() *string {
+	if p == nil {
 		return nil
 	}
-	return g.Mcc
+	return p.Mcc
 }
 
-func (g *GetNumberValidatorResponse) GetMnc() *string {
-	if g == nil {
+func (p *PhoneValidationResponse) GetMnc() *string {
+	if p == nil {
 		return nil
 	}
-	return g.Mnc
+	return p.Mnc
 }
 
-func (g *GetNumberValidatorResponse) GetNumberType() *string {
-	if g == nil {
+func (p *PhoneValidationResponse) GetNumberType() *string {
+	if p == nil {
 		return nil
 	}
-	return g.NumberType
+	return p.NumberType
 }
 
-func (g *GetNumberValidatorResponse) GetCarrierName() *string {
-	if g == nil {
+func (p *PhoneValidationResponse) GetCarrierName() *string {
+	if p == nil {
 		return nil
 	}
-	return g.CarrierName
+	return p.CarrierName
 }
 
-func (g *GetNumberValidatorResponse) GetRiskyDestination() *bool {
-	if g == nil {
+func (p *PhoneValidationResponse) GetRiskyDestination() *bool {
+	if p == nil {
 		return nil
 	}
-	return g.RiskyDestination
+	return p.RiskyDestination
 }
 
-func (g *GetNumberValidatorResponse) GetUnallocatedRange() *bool {
-	if g == nil {
+func (p *PhoneValidationResponse) GetUnallocatedRange() *bool {
+	if p == nil {
 		return nil
 	}
-	return g.UnallocatedRange
+	return p.UnallocatedRange
 }
 
-func (g *GetNumberValidatorResponse) GetReachable() *bool {
-	if g == nil {
+func (p *PhoneValidationResponse) GetReachable() *bool {
+	if p == nil {
 		return nil
 	}
-	return g.Reachable
+	return p.Reachable
 }
 
-func (g *GetNumberValidatorResponse) GetRoaming() *bool {
-	if g == nil {
+func (p *PhoneValidationResponse) GetRoaming() *bool {
+	if p == nil {
 		return nil
 	}
-	return g.Roaming
+	return p.Roaming
 }
 
-func (g *GetNumberValidatorResponse) GetTimezone() *string {
-	if g == nil {
+func (p *PhoneValidationResponse) GetTimezone() *string {
+	if p == nil {
 		return nil
 	}
-	return g.Timezone
+	return p.Timezone
 }
 
-func (g *GetNumberValidatorResponse) GetCharge() string {
-	if g == nil {
+func (p *PhoneValidationResponse) GetCharge() string {
+	if p == nil {
 		return ""
 	}
-	return g.Charge
+	return p.Charge
 }
 
-func (g *GetNumberValidatorResponse) GetErrorCode() string {
-	if g == nil {
+func (p *PhoneValidationResponse) GetErrorCode() string {
+	if p == nil {
 		return ""
 	}
-	return g.ErrorCode
+	return p.ErrorCode
 }
 
-func (g *GetNumberValidatorResponse) GetExtraProperties() map[string]interface{} {
-	if g == nil {
+func (p *PhoneValidationResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
 		return nil
 	}
-	return g.extraProperties
+	return p.extraProperties
 }
 
-func (g *GetNumberValidatorResponse) require(field *big.Int) {
-	if g.explicitFields == nil {
-		g.explicitFields = big.NewInt(0)
+func (p *PhoneValidationResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
 	}
-	g.explicitFields.Or(g.explicitFields, field)
+	p.explicitFields.Or(p.explicitFields, field)
 }
 
 // SetPhoneNumber sets the PhoneNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetNumberValidatorResponse) SetPhoneNumber(phoneNumber string) {
-	g.PhoneNumber = phoneNumber
-	g.require(getNumberValidatorResponseFieldPhoneNumber)
+func (p *PhoneValidationResponse) SetPhoneNumber(phoneNumber string) {
+	p.PhoneNumber = phoneNumber
+	p.require(phoneValidationResponseFieldPhoneNumber)
 }
 
 // SetValid sets the Valid field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetNumberValidatorResponse) SetValid(valid bool) {
-	g.Valid = valid
-	g.require(getNumberValidatorResponseFieldValid)
+func (p *PhoneValidationResponse) SetValid(valid bool) {
+	p.Valid = valid
+	p.require(phoneValidationResponseFieldValid)
 }
 
 // SetCountryCode sets the CountryCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetNumberValidatorResponse) SetCountryCode(countryCode *string) {
-	g.CountryCode = countryCode
-	g.require(getNumberValidatorResponseFieldCountryCode)
+func (p *PhoneValidationResponse) SetCountryCode(countryCode *string) {
+	p.CountryCode = countryCode
+	p.require(phoneValidationResponseFieldCountryCode)
 }
 
 // SetE164Format sets the E164Format field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetNumberValidatorResponse) SetE164Format(e164Format string) {
-	g.E164Format = e164Format
-	g.require(getNumberValidatorResponseFieldE164Format)
+func (p *PhoneValidationResponse) SetE164Format(e164Format string) {
+	p.E164Format = e164Format
+	p.require(phoneValidationResponseFieldE164Format)
 }
 
 // SetNationalFormat sets the NationalFormat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetNumberValidatorResponse) SetNationalFormat(nationalFormat string) {
-	g.NationalFormat = nationalFormat
-	g.require(getNumberValidatorResponseFieldNationalFormat)
+func (p *PhoneValidationResponse) SetNationalFormat(nationalFormat string) {
+	p.NationalFormat = nationalFormat
+	p.require(phoneValidationResponseFieldNationalFormat)
 }
 
 // SetPorted sets the Ported field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetNumberValidatorResponse) SetPorted(ported *bool) {
-	g.Ported = ported
-	g.require(getNumberValidatorResponseFieldPorted)
+func (p *PhoneValidationResponse) SetPorted(ported *bool) {
+	p.Ported = ported
+	p.require(phoneValidationResponseFieldPorted)
 }
 
 // SetMcc sets the Mcc field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetNumberValidatorResponse) SetMcc(mcc *string) {
-	g.Mcc = mcc
-	g.require(getNumberValidatorResponseFieldMcc)
+func (p *PhoneValidationResponse) SetMcc(mcc *string) {
+	p.Mcc = mcc
+	p.require(phoneValidationResponseFieldMcc)
 }
 
 // SetMnc sets the Mnc field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetNumberValidatorResponse) SetMnc(mnc *string) {
-	g.Mnc = mnc
-	g.require(getNumberValidatorResponseFieldMnc)
+func (p *PhoneValidationResponse) SetMnc(mnc *string) {
+	p.Mnc = mnc
+	p.require(phoneValidationResponseFieldMnc)
 }
 
 // SetNumberType sets the NumberType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetNumberValidatorResponse) SetNumberType(numberType *string) {
-	g.NumberType = numberType
-	g.require(getNumberValidatorResponseFieldNumberType)
+func (p *PhoneValidationResponse) SetNumberType(numberType *string) {
+	p.NumberType = numberType
+	p.require(phoneValidationResponseFieldNumberType)
 }
 
 // SetCarrierName sets the CarrierName field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetNumberValidatorResponse) SetCarrierName(carrierName *string) {
-	g.CarrierName = carrierName
-	g.require(getNumberValidatorResponseFieldCarrierName)
+func (p *PhoneValidationResponse) SetCarrierName(carrierName *string) {
+	p.CarrierName = carrierName
+	p.require(phoneValidationResponseFieldCarrierName)
 }
 
 // SetRiskyDestination sets the RiskyDestination field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetNumberValidatorResponse) SetRiskyDestination(riskyDestination *bool) {
-	g.RiskyDestination = riskyDestination
-	g.require(getNumberValidatorResponseFieldRiskyDestination)
+func (p *PhoneValidationResponse) SetRiskyDestination(riskyDestination *bool) {
+	p.RiskyDestination = riskyDestination
+	p.require(phoneValidationResponseFieldRiskyDestination)
 }
 
 // SetUnallocatedRange sets the UnallocatedRange field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetNumberValidatorResponse) SetUnallocatedRange(unallocatedRange *bool) {
-	g.UnallocatedRange = unallocatedRange
-	g.require(getNumberValidatorResponseFieldUnallocatedRange)
+func (p *PhoneValidationResponse) SetUnallocatedRange(unallocatedRange *bool) {
+	p.UnallocatedRange = unallocatedRange
+	p.require(phoneValidationResponseFieldUnallocatedRange)
 }
 
 // SetReachable sets the Reachable field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetNumberValidatorResponse) SetReachable(reachable *bool) {
-	g.Reachable = reachable
-	g.require(getNumberValidatorResponseFieldReachable)
+func (p *PhoneValidationResponse) SetReachable(reachable *bool) {
+	p.Reachable = reachable
+	p.require(phoneValidationResponseFieldReachable)
 }
 
 // SetRoaming sets the Roaming field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetNumberValidatorResponse) SetRoaming(roaming *bool) {
-	g.Roaming = roaming
-	g.require(getNumberValidatorResponseFieldRoaming)
+func (p *PhoneValidationResponse) SetRoaming(roaming *bool) {
+	p.Roaming = roaming
+	p.require(phoneValidationResponseFieldRoaming)
 }
 
 // SetTimezone sets the Timezone field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetNumberValidatorResponse) SetTimezone(timezone *string) {
-	g.Timezone = timezone
-	g.require(getNumberValidatorResponseFieldTimezone)
+func (p *PhoneValidationResponse) SetTimezone(timezone *string) {
+	p.Timezone = timezone
+	p.require(phoneValidationResponseFieldTimezone)
 }
 
 // SetCharge sets the Charge field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetNumberValidatorResponse) SetCharge(charge string) {
-	g.Charge = charge
-	g.require(getNumberValidatorResponseFieldCharge)
+func (p *PhoneValidationResponse) SetCharge(charge string) {
+	p.Charge = charge
+	p.require(phoneValidationResponseFieldCharge)
 }
 
 // SetErrorCode sets the ErrorCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetNumberValidatorResponse) SetErrorCode(errorCode string) {
-	g.ErrorCode = errorCode
-	g.require(getNumberValidatorResponseFieldErrorCode)
+func (p *PhoneValidationResponse) SetErrorCode(errorCode string) {
+	p.ErrorCode = errorCode
+	p.require(phoneValidationResponseFieldErrorCode)
 }
 
-func (g *GetNumberValidatorResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler GetNumberValidatorResponse
+func (p *PhoneValidationResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PhoneValidationResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*g = GetNumberValidatorResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	*p = PhoneValidationResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
 	}
-	g.extraProperties = extraProperties
-	g.rawJSON = json.RawMessage(data)
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
 	return nil
 }
 
-func (g *GetNumberValidatorResponse) MarshalJSON() ([]byte, error) {
-	type embed GetNumberValidatorResponse
+func (p *PhoneValidationResponse) MarshalJSON() ([]byte, error) {
+	type embed PhoneValidationResponse
 	var marshaler = struct {
 		embed
 	}{
-		embed: embed(*g),
+		embed: embed(*p),
 	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
-func (g *GetNumberValidatorResponse) String() string {
-	if g == nil {
+func (p *PhoneValidationResponse) String() string {
+	if p == nil {
 		return "<nil>"
 	}
-	if len(g.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
 			return value
 		}
 	}
-	if value, err := internal.StringifyJSON(g); err == nil {
+	if value, err := internal.StringifyJSON(p); err == nil {
 		return value
 	}
-	return fmt.Sprintf("%#v", g)
+	return fmt.Sprintf("%#v", p)
 }

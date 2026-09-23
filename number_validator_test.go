@@ -28,7 +28,7 @@ func TestSettersPhoneValidationRequest(t *testing.T) {
 
 	t.Run("SetAsync", func(t *testing.T) {
 		obj := &PhoneValidationRequest{}
-		var fernTestValueAsync bool
+		var fernTestValueAsync *bool
 		obj.SetAsync(fernTestValueAsync)
 		assert.Equal(t, fernTestValueAsync, obj.Async)
 		assert.NotNil(t, obj.explicitFields)
@@ -36,7 +36,7 @@ func TestSettersPhoneValidationRequest(t *testing.T) {
 
 	t.Run("SetForce", func(t *testing.T) {
 		obj := &PhoneValidationRequest{}
-		var fernTestValueForce bool
+		var fernTestValueForce *bool
 		obj.SetForce(fernTestValueForce)
 		assert.Equal(t, fernTestValueForce, obj.Force)
 		assert.NotNil(t, obj.explicitFields)
@@ -111,7 +111,7 @@ func TestSettersMarkExplicitPhoneValidationRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &PhoneValidationRequest{}
-		var fernTestValueAsync bool
+		var fernTestValueAsync *bool
 
 		// Act
 		obj.SetAsync(fernTestValueAsync)
@@ -142,7 +142,7 @@ func TestSettersMarkExplicitPhoneValidationRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &PhoneValidationRequest{}
-		var fernTestValueForce bool
+		var fernTestValueForce *bool
 
 		// Act
 		obj.SetForce(fernTestValueForce)
@@ -672,9 +672,9 @@ func TestSettersMarkExplicitPhoneValidationBatchResponse(t *testing.T) {
 
 }
 
-func TestSettersGetNumberValidatorResponse(t *testing.T) {
+func TestSettersPhoneValidationResponse(t *testing.T) {
 	t.Run("SetPhoneNumber", func(t *testing.T) {
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValuePhoneNumber string
 		obj.SetPhoneNumber(fernTestValuePhoneNumber)
 		assert.Equal(t, fernTestValuePhoneNumber, obj.PhoneNumber)
@@ -682,7 +682,7 @@ func TestSettersGetNumberValidatorResponse(t *testing.T) {
 	})
 
 	t.Run("SetValid", func(t *testing.T) {
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueValid bool
 		obj.SetValid(fernTestValueValid)
 		assert.Equal(t, fernTestValueValid, obj.Valid)
@@ -690,7 +690,7 @@ func TestSettersGetNumberValidatorResponse(t *testing.T) {
 	})
 
 	t.Run("SetCountryCode", func(t *testing.T) {
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueCountryCode *string
 		obj.SetCountryCode(fernTestValueCountryCode)
 		assert.Equal(t, fernTestValueCountryCode, obj.CountryCode)
@@ -698,7 +698,7 @@ func TestSettersGetNumberValidatorResponse(t *testing.T) {
 	})
 
 	t.Run("SetE164Format", func(t *testing.T) {
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueE164Format string
 		obj.SetE164Format(fernTestValueE164Format)
 		assert.Equal(t, fernTestValueE164Format, obj.E164Format)
@@ -706,7 +706,7 @@ func TestSettersGetNumberValidatorResponse(t *testing.T) {
 	})
 
 	t.Run("SetNationalFormat", func(t *testing.T) {
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueNationalFormat string
 		obj.SetNationalFormat(fernTestValueNationalFormat)
 		assert.Equal(t, fernTestValueNationalFormat, obj.NationalFormat)
@@ -714,7 +714,7 @@ func TestSettersGetNumberValidatorResponse(t *testing.T) {
 	})
 
 	t.Run("SetPorted", func(t *testing.T) {
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValuePorted *bool
 		obj.SetPorted(fernTestValuePorted)
 		assert.Equal(t, fernTestValuePorted, obj.Ported)
@@ -722,7 +722,7 @@ func TestSettersGetNumberValidatorResponse(t *testing.T) {
 	})
 
 	t.Run("SetMcc", func(t *testing.T) {
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueMcc *string
 		obj.SetMcc(fernTestValueMcc)
 		assert.Equal(t, fernTestValueMcc, obj.Mcc)
@@ -730,7 +730,7 @@ func TestSettersGetNumberValidatorResponse(t *testing.T) {
 	})
 
 	t.Run("SetMnc", func(t *testing.T) {
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueMnc *string
 		obj.SetMnc(fernTestValueMnc)
 		assert.Equal(t, fernTestValueMnc, obj.Mnc)
@@ -738,7 +738,7 @@ func TestSettersGetNumberValidatorResponse(t *testing.T) {
 	})
 
 	t.Run("SetNumberType", func(t *testing.T) {
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueNumberType *string
 		obj.SetNumberType(fernTestValueNumberType)
 		assert.Equal(t, fernTestValueNumberType, obj.NumberType)
@@ -746,7 +746,7 @@ func TestSettersGetNumberValidatorResponse(t *testing.T) {
 	})
 
 	t.Run("SetCarrierName", func(t *testing.T) {
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueCarrierName *string
 		obj.SetCarrierName(fernTestValueCarrierName)
 		assert.Equal(t, fernTestValueCarrierName, obj.CarrierName)
@@ -754,7 +754,7 @@ func TestSettersGetNumberValidatorResponse(t *testing.T) {
 	})
 
 	t.Run("SetRiskyDestination", func(t *testing.T) {
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueRiskyDestination *bool
 		obj.SetRiskyDestination(fernTestValueRiskyDestination)
 		assert.Equal(t, fernTestValueRiskyDestination, obj.RiskyDestination)
@@ -762,7 +762,7 @@ func TestSettersGetNumberValidatorResponse(t *testing.T) {
 	})
 
 	t.Run("SetUnallocatedRange", func(t *testing.T) {
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueUnallocatedRange *bool
 		obj.SetUnallocatedRange(fernTestValueUnallocatedRange)
 		assert.Equal(t, fernTestValueUnallocatedRange, obj.UnallocatedRange)
@@ -770,7 +770,7 @@ func TestSettersGetNumberValidatorResponse(t *testing.T) {
 	})
 
 	t.Run("SetReachable", func(t *testing.T) {
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueReachable *bool
 		obj.SetReachable(fernTestValueReachable)
 		assert.Equal(t, fernTestValueReachable, obj.Reachable)
@@ -778,7 +778,7 @@ func TestSettersGetNumberValidatorResponse(t *testing.T) {
 	})
 
 	t.Run("SetRoaming", func(t *testing.T) {
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueRoaming *bool
 		obj.SetRoaming(fernTestValueRoaming)
 		assert.Equal(t, fernTestValueRoaming, obj.Roaming)
@@ -786,7 +786,7 @@ func TestSettersGetNumberValidatorResponse(t *testing.T) {
 	})
 
 	t.Run("SetTimezone", func(t *testing.T) {
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueTimezone *string
 		obj.SetTimezone(fernTestValueTimezone)
 		assert.Equal(t, fernTestValueTimezone, obj.Timezone)
@@ -794,7 +794,7 @@ func TestSettersGetNumberValidatorResponse(t *testing.T) {
 	})
 
 	t.Run("SetCharge", func(t *testing.T) {
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueCharge string
 		obj.SetCharge(fernTestValueCharge)
 		assert.Equal(t, fernTestValueCharge, obj.Charge)
@@ -802,7 +802,7 @@ func TestSettersGetNumberValidatorResponse(t *testing.T) {
 	})
 
 	t.Run("SetErrorCode", func(t *testing.T) {
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueErrorCode string
 		obj.SetErrorCode(fernTestValueErrorCode)
 		assert.Equal(t, fernTestValueErrorCode, obj.ErrorCode)
@@ -811,11 +811,11 @@ func TestSettersGetNumberValidatorResponse(t *testing.T) {
 
 }
 
-func TestGettersGetNumberValidatorResponse(t *testing.T) {
+func TestGettersPhoneValidationResponse(t *testing.T) {
 	t.Run("GetPhoneNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var expected string
 		obj.PhoneNumber = expected
 
@@ -825,7 +825,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 
 	t.Run("GetPhoneNumber_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetNumberValidatorResponse
+		var obj *PhoneValidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -838,7 +838,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetValid", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var expected bool
 		obj.Valid = expected
 
@@ -848,7 +848,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 
 	t.Run("GetValid_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetNumberValidatorResponse
+		var obj *PhoneValidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -861,7 +861,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetCountryCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var expected *string
 		obj.CountryCode = expected
 
@@ -872,7 +872,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetCountryCode_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		obj.CountryCode = nil
 
 		// Act & Assert
@@ -881,7 +881,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 
 	t.Run("GetCountryCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetNumberValidatorResponse
+		var obj *PhoneValidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -894,7 +894,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetE164Format", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var expected string
 		obj.E164Format = expected
 
@@ -904,7 +904,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 
 	t.Run("GetE164Format_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetNumberValidatorResponse
+		var obj *PhoneValidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -917,7 +917,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetNationalFormat", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var expected string
 		obj.NationalFormat = expected
 
@@ -927,7 +927,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 
 	t.Run("GetNationalFormat_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetNumberValidatorResponse
+		var obj *PhoneValidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -940,7 +940,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetPorted", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var expected *bool
 		obj.Ported = expected
 
@@ -951,7 +951,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetPorted_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		obj.Ported = nil
 
 		// Act & Assert
@@ -960,7 +960,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 
 	t.Run("GetPorted_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetNumberValidatorResponse
+		var obj *PhoneValidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -973,7 +973,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetMcc", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var expected *string
 		obj.Mcc = expected
 
@@ -984,7 +984,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetMcc_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		obj.Mcc = nil
 
 		// Act & Assert
@@ -993,7 +993,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 
 	t.Run("GetMcc_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetNumberValidatorResponse
+		var obj *PhoneValidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1006,7 +1006,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetMnc", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var expected *string
 		obj.Mnc = expected
 
@@ -1017,7 +1017,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetMnc_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		obj.Mnc = nil
 
 		// Act & Assert
@@ -1026,7 +1026,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 
 	t.Run("GetMnc_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetNumberValidatorResponse
+		var obj *PhoneValidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1039,7 +1039,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetNumberType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var expected *string
 		obj.NumberType = expected
 
@@ -1050,7 +1050,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetNumberType_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		obj.NumberType = nil
 
 		// Act & Assert
@@ -1059,7 +1059,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 
 	t.Run("GetNumberType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetNumberValidatorResponse
+		var obj *PhoneValidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1072,7 +1072,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetCarrierName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var expected *string
 		obj.CarrierName = expected
 
@@ -1083,7 +1083,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetCarrierName_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		obj.CarrierName = nil
 
 		// Act & Assert
@@ -1092,7 +1092,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 
 	t.Run("GetCarrierName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetNumberValidatorResponse
+		var obj *PhoneValidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1105,7 +1105,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetRiskyDestination", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var expected *bool
 		obj.RiskyDestination = expected
 
@@ -1116,7 +1116,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetRiskyDestination_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		obj.RiskyDestination = nil
 
 		// Act & Assert
@@ -1125,7 +1125,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 
 	t.Run("GetRiskyDestination_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetNumberValidatorResponse
+		var obj *PhoneValidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1138,7 +1138,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetUnallocatedRange", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var expected *bool
 		obj.UnallocatedRange = expected
 
@@ -1149,7 +1149,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetUnallocatedRange_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		obj.UnallocatedRange = nil
 
 		// Act & Assert
@@ -1158,7 +1158,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 
 	t.Run("GetUnallocatedRange_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetNumberValidatorResponse
+		var obj *PhoneValidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1171,7 +1171,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetReachable", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var expected *bool
 		obj.Reachable = expected
 
@@ -1182,7 +1182,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetReachable_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		obj.Reachable = nil
 
 		// Act & Assert
@@ -1191,7 +1191,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 
 	t.Run("GetReachable_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetNumberValidatorResponse
+		var obj *PhoneValidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1204,7 +1204,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetRoaming", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var expected *bool
 		obj.Roaming = expected
 
@@ -1215,7 +1215,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetRoaming_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		obj.Roaming = nil
 
 		// Act & Assert
@@ -1224,7 +1224,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 
 	t.Run("GetRoaming_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetNumberValidatorResponse
+		var obj *PhoneValidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1237,7 +1237,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetTimezone", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var expected *string
 		obj.Timezone = expected
 
@@ -1248,7 +1248,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetTimezone_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		obj.Timezone = nil
 
 		// Act & Assert
@@ -1257,7 +1257,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 
 	t.Run("GetTimezone_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetNumberValidatorResponse
+		var obj *PhoneValidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1270,7 +1270,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetCharge", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var expected string
 		obj.Charge = expected
 
@@ -1280,7 +1280,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 
 	t.Run("GetCharge_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetNumberValidatorResponse
+		var obj *PhoneValidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1293,7 +1293,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 	t.Run("GetErrorCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var expected string
 		obj.ErrorCode = expected
 
@@ -1303,7 +1303,7 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 
 	t.Run("GetErrorCode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetNumberValidatorResponse
+		var obj *PhoneValidationResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1315,11 +1315,11 @@ func TestGettersGetNumberValidatorResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitGetNumberValidatorResponse(t *testing.T) {
+func TestSettersMarkExplicitPhoneValidationResponse(t *testing.T) {
 	t.Run("SetPhoneNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValuePhoneNumber string
 
 		// Act
@@ -1350,7 +1350,7 @@ func TestSettersMarkExplicitGetNumberValidatorResponse(t *testing.T) {
 	t.Run("SetValid_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueValid bool
 
 		// Act
@@ -1381,7 +1381,7 @@ func TestSettersMarkExplicitGetNumberValidatorResponse(t *testing.T) {
 	t.Run("SetCountryCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueCountryCode *string
 
 		// Act
@@ -1412,7 +1412,7 @@ func TestSettersMarkExplicitGetNumberValidatorResponse(t *testing.T) {
 	t.Run("SetE164Format_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueE164Format string
 
 		// Act
@@ -1443,7 +1443,7 @@ func TestSettersMarkExplicitGetNumberValidatorResponse(t *testing.T) {
 	t.Run("SetNationalFormat_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueNationalFormat string
 
 		// Act
@@ -1474,7 +1474,7 @@ func TestSettersMarkExplicitGetNumberValidatorResponse(t *testing.T) {
 	t.Run("SetPorted_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValuePorted *bool
 
 		// Act
@@ -1505,7 +1505,7 @@ func TestSettersMarkExplicitGetNumberValidatorResponse(t *testing.T) {
 	t.Run("SetMcc_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueMcc *string
 
 		// Act
@@ -1536,7 +1536,7 @@ func TestSettersMarkExplicitGetNumberValidatorResponse(t *testing.T) {
 	t.Run("SetMnc_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueMnc *string
 
 		// Act
@@ -1567,7 +1567,7 @@ func TestSettersMarkExplicitGetNumberValidatorResponse(t *testing.T) {
 	t.Run("SetNumberType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueNumberType *string
 
 		// Act
@@ -1598,7 +1598,7 @@ func TestSettersMarkExplicitGetNumberValidatorResponse(t *testing.T) {
 	t.Run("SetCarrierName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueCarrierName *string
 
 		// Act
@@ -1629,7 +1629,7 @@ func TestSettersMarkExplicitGetNumberValidatorResponse(t *testing.T) {
 	t.Run("SetRiskyDestination_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueRiskyDestination *bool
 
 		// Act
@@ -1660,7 +1660,7 @@ func TestSettersMarkExplicitGetNumberValidatorResponse(t *testing.T) {
 	t.Run("SetUnallocatedRange_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueUnallocatedRange *bool
 
 		// Act
@@ -1691,7 +1691,7 @@ func TestSettersMarkExplicitGetNumberValidatorResponse(t *testing.T) {
 	t.Run("SetReachable_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueReachable *bool
 
 		// Act
@@ -1722,7 +1722,7 @@ func TestSettersMarkExplicitGetNumberValidatorResponse(t *testing.T) {
 	t.Run("SetRoaming_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueRoaming *bool
 
 		// Act
@@ -1753,7 +1753,7 @@ func TestSettersMarkExplicitGetNumberValidatorResponse(t *testing.T) {
 	t.Run("SetTimezone_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueTimezone *string
 
 		// Act
@@ -1784,7 +1784,7 @@ func TestSettersMarkExplicitGetNumberValidatorResponse(t *testing.T) {
 	t.Run("SetCharge_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueCharge string
 
 		// Act
@@ -1815,7 +1815,7 @@ func TestSettersMarkExplicitGetNumberValidatorResponse(t *testing.T) {
 	t.Run("SetErrorCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetNumberValidatorResponse{}
+		obj := &PhoneValidationResponse{}
 		var fernTestValueErrorCode string
 
 		// Act
@@ -1843,39 +1843,6 @@ func TestSettersMarkExplicitGetNumberValidatorResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-}
-
-func TestJSONMarshalingGetNumberValidatorResponse(t *testing.T) {
-	t.Run("MarshalUnmarshal", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &GetNumberValidatorResponse{}
-
-		// Act - Marshal to JSON
-		data, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed")
-		assert.NotNil(t, data, "marshaled data should not be nil")
-		assert.NotEmpty(t, data, "marshaled data should not be empty")
-
-		// Unmarshal back and verify round-trip
-		var unmarshaled GetNumberValidatorResponse
-		err = json.Unmarshal(data, &unmarshaled)
-		assert.NoError(t, err, "round-trip unmarshal should succeed")
-	})
-
-	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
-		t.Parallel()
-		var obj GetNumberValidatorResponse
-		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
-		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
-	})
-
-	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
-		t.Parallel()
-		var obj GetNumberValidatorResponse
-		err := json.Unmarshal([]byte(`{}`), &obj)
-		assert.NoError(t, err, "unmarshaling empty object should succeed")
-	})
 }
 
 func TestJSONMarshalingNumberValidatorCreateBulkResponseRequestID(t *testing.T) {
@@ -1944,19 +1911,36 @@ func TestJSONMarshalingPhoneValidationBatchResponse(t *testing.T) {
 	})
 }
 
-func TestStringGetNumberValidatorResponse(t *testing.T) {
-	t.Run("StringMethod", func(t *testing.T) {
+func TestJSONMarshalingPhoneValidationResponse(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
-		obj := &GetNumberValidatorResponse{}
-		result := obj.String()
-		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+		// Arrange
+		obj := &PhoneValidationResponse{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled PhoneValidationResponse
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
-	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetNumberValidatorResponse
-		result := obj.String()
-		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+		var obj PhoneValidationResponse
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj PhoneValidationResponse
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
@@ -1987,6 +1971,22 @@ func TestStringPhoneValidationBatchResponse(t *testing.T) {
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *PhoneValidationBatchResponse
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringPhoneValidationResponse(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &PhoneValidationResponse{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PhoneValidationResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -2025,29 +2025,6 @@ func TestEnumPhoneNumberValidationType(t *testing.T) {
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
 		assert.Equal(t, val, *ptr)
-	})
-}
-
-func TestExtraPropertiesGetNumberValidatorResponse(t *testing.T) {
-	t.Run("GetExtraProperties", func(t *testing.T) {
-		t.Parallel()
-		obj := &GetNumberValidatorResponse{}
-		// Should not panic when calling GetExtraProperties()
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("GetExtraProperties() panicked: %v", r)
-			}
-		}()
-		extraProps := obj.GetExtraProperties()
-		// Result can be nil or an empty/non-empty map
-		_ = extraProps
-	})
-
-	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *GetNumberValidatorResponse
-		extraProps := obj.GetExtraProperties()
-		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
@@ -2092,6 +2069,29 @@ func TestExtraPropertiesPhoneValidationBatchResponse(t *testing.T) {
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *PhoneValidationBatchResponse
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesPhoneValidationResponse(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &PhoneValidationResponse{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PhoneValidationResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

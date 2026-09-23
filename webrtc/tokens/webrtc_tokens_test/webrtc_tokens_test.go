@@ -89,8 +89,10 @@ func TestWebrtcTokensListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
+	request := &webrtc.ListTokensRequest{}
 	_, invocationErr := client.Webrtc.Tokens.List(
 		context.TODO(),
+		request,
 		option.WithHTTPHeader(
 			http.Header{"X-Test-Id": []string{"TestWebrtcTokensListWithWireMock"}},
 		),

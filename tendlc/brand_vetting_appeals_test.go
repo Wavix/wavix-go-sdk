@@ -20,7 +20,7 @@ func TestSettersTenDlcBrandVettingAppealCreateRequest(t *testing.T) {
 
 	t.Run("SetAppealCategories", func(t *testing.T) {
 		obj := &TenDlcBrandVettingAppealCreateRequest{}
-		var fernTestValueAppealCategories []string
+		var fernTestValueAppealCategories []TenDlcBrandVettingAppealCreateRequestAppealCategoriesItem
 		obj.SetAppealCategories(fernTestValueAppealCategories)
 		assert.Equal(t, fernTestValueAppealCategories, obj.AppealCategories)
 		assert.NotNil(t, obj.explicitFields)
@@ -96,7 +96,7 @@ func TestSettersMarkExplicitTenDlcBrandVettingAppealCreateRequest(t *testing.T) 
 		t.Parallel()
 		// Arrange
 		obj := &TenDlcBrandVettingAppealCreateRequest{}
-		var fernTestValueAppealCategories []string
+		var fernTestValueAppealCategories []TenDlcBrandVettingAppealCreateRequestAppealCategoriesItem
 
 		// Act
 		obj.SetAppealCategories(fernTestValueAppealCategories)
@@ -294,145 +294,45 @@ func TestSettersMarkExplicitListBrandVettingAppealsRequest(t *testing.T) {
 
 }
 
-func TestSettersCreateBrandVettingAppealsResponse(t *testing.T) {
-	t.Run("SetSuccess", func(t *testing.T) {
-		obj := &CreateBrandVettingAppealsResponse{}
-		var fernTestValueSuccess bool
-		obj.SetSuccess(fernTestValueSuccess)
-		assert.Equal(t, fernTestValueSuccess, obj.Success)
-		assert.NotNil(t, obj.explicitFields)
+func TestEnumTenDlcBrandVettingAppealCreateRequestAppealCategoriesItem(t *testing.T) {
+	t.Run("NewFromString_VERIFY_TAX_ID", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTenDlcBrandVettingAppealCreateRequestAppealCategoriesItemFromString("VERIFY_TAX_ID")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TenDlcBrandVettingAppealCreateRequestAppealCategoriesItem("VERIFY_TAX_ID"), val, "enum value should match expected wire value")
 	})
 
-}
-
-func TestGettersCreateBrandVettingAppealsResponse(t *testing.T) {
-	t.Run("GetSuccess", func(t *testing.T) {
+	t.Run("NewFromString_VERIFY_NON_PROFIT", func(t *testing.T) {
 		t.Parallel()
-		// Arrange
-		obj := &CreateBrandVettingAppealsResponse{}
-		var expected bool
-		obj.Success = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetSuccess(), "getter should return the property value")
+		val, err := NewTenDlcBrandVettingAppealCreateRequestAppealCategoriesItemFromString("VERIFY_NON_PROFIT")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TenDlcBrandVettingAppealCreateRequestAppealCategoriesItem("VERIFY_NON_PROFIT"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("GetSuccess_NilReceiver", func(t *testing.T) {
+	t.Run("NewFromString_VERIFY_GOVERNMENT", func(t *testing.T) {
 		t.Parallel()
-		var obj *CreateBrandVettingAppealsResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetSuccess() // Should return zero value
+		val, err := NewTenDlcBrandVettingAppealCreateRequestAppealCategoriesItemFromString("VERIFY_GOVERNMENT")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TenDlcBrandVettingAppealCreateRequestAppealCategoriesItem("VERIFY_GOVERNMENT"), val, "enum value should match expected wire value")
 	})
 
-}
-
-func TestSettersMarkExplicitCreateBrandVettingAppealsResponse(t *testing.T) {
-	t.Run("SetSuccess_MarksExplicit", func(t *testing.T) {
+	t.Run("NewFromString_LOW_SCORE", func(t *testing.T) {
 		t.Parallel()
-		// Arrange
-		obj := &CreateBrandVettingAppealsResponse{}
-		var fernTestValueSuccess bool
-
-		// Act
-		obj.SetSuccess(fernTestValueSuccess)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
+		val, err := NewTenDlcBrandVettingAppealCreateRequestAppealCategoriesItemFromString("LOW_SCORE")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TenDlcBrandVettingAppealCreateRequestAppealCategoriesItem("LOW_SCORE"), val, "enum value should match expected wire value")
 	})
 
-}
-
-func TestJSONMarshalingCreateBrandVettingAppealsResponse(t *testing.T) {
-	t.Run("MarshalUnmarshal", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &CreateBrandVettingAppealsResponse{}
-
-		// Act - Marshal to JSON
-		data, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed")
-		assert.NotNil(t, data, "marshaled data should not be nil")
-		assert.NotEmpty(t, data, "marshaled data should not be empty")
-
-		// Unmarshal back and verify round-trip
-		var unmarshaled CreateBrandVettingAppealsResponse
-		err = json.Unmarshal(data, &unmarshaled)
-		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewTenDlcBrandVettingAppealCreateRequestAppealCategoriesItemFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
 	})
 
-	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
-		t.Parallel()
-		var obj CreateBrandVettingAppealsResponse
-		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
-		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
-	})
-
-	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
-		t.Parallel()
-		var obj CreateBrandVettingAppealsResponse
-		err := json.Unmarshal([]byte(`{}`), &obj)
-		assert.NoError(t, err, "unmarshaling empty object should succeed")
-	})
-}
-
-func TestStringCreateBrandVettingAppealsResponse(t *testing.T) {
-	t.Run("StringMethod", func(t *testing.T) {
-		t.Parallel()
-		obj := &CreateBrandVettingAppealsResponse{}
-		result := obj.String()
-		assert.NotEmpty(t, result, "String() should return a non-empty representation")
-	})
-
-	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *CreateBrandVettingAppealsResponse
-		result := obj.String()
-		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
-	})
-}
-
-func TestExtraPropertiesCreateBrandVettingAppealsResponse(t *testing.T) {
-	t.Run("GetExtraProperties", func(t *testing.T) {
-		t.Parallel()
-		obj := &CreateBrandVettingAppealsResponse{}
-		// Should not panic when calling GetExtraProperties()
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("GetExtraProperties() panicked: %v", r)
-			}
-		}()
-		extraProps := obj.GetExtraProperties()
-		// Result can be nil or an empty/non-empty map
-		_ = extraProps
-	})
-
-	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *CreateBrandVettingAppealsResponse
-		extraProps := obj.GetExtraProperties()
-		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewTenDlcBrandVettingAppealCreateRequestAppealCategoriesItemFromString("VERIFY_TAX_ID")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
 	})
 }

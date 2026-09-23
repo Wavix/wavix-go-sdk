@@ -35,7 +35,7 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 func (r *RawClient) Get(
 	ctx context.Context,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.GetCartResponse], error) {
+) (*core.Response[*wavixgosdk.CartResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -47,7 +47,7 @@ func (r *RawClient) Get(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *wavixgosdk.GetCartResponse
+	var response *wavixgosdk.CartResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -66,7 +66,7 @@ func (r *RawClient) Get(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.GetCartResponse]{
+	return &core.Response[*wavixgosdk.CartResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -77,7 +77,7 @@ func (r *RawClient) Add(
 	ctx context.Context,
 	request *wavixgosdk.AddCartRequest,
 	opts ...option.RequestOption,
-) (*core.Response[[]any], error) {
+) (*core.Response[[]*wavixgosdk.AvailableNumber], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -90,7 +90,7 @@ func (r *RawClient) Add(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response []any
+	var response []*wavixgosdk.AvailableNumber
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -110,7 +110,7 @@ func (r *RawClient) Add(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[[]any]{
+	return &core.Response[[]*wavixgosdk.AvailableNumber]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -121,7 +121,7 @@ func (r *RawClient) Remove(
 	ctx context.Context,
 	request *wavixgosdk.RemoveCartRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.RemoveCartResponse], error) {
+) (*core.Response[*wavixgosdk.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -134,7 +134,7 @@ func (r *RawClient) Remove(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *wavixgosdk.RemoveCartResponse
+	var response *wavixgosdk.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -154,7 +154,7 @@ func (r *RawClient) Remove(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.RemoveCartResponse]{
+	return &core.Response[*wavixgosdk.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -165,7 +165,7 @@ func (r *RawClient) Checkout(
 	ctx context.Context,
 	request *wavixgosdk.CheckoutCartRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.CheckoutCartResponse], error) {
+) (*core.Response[*wavixgosdk.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -178,7 +178,7 @@ func (r *RawClient) Checkout(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *wavixgosdk.CheckoutCartResponse
+	var response *wavixgosdk.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -198,7 +198,7 @@ func (r *RawClient) Checkout(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.CheckoutCartResponse]{
+	return &core.Response[*wavixgosdk.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

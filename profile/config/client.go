@@ -5,10 +5,10 @@ package config
 import (
 	context "context"
 
+	wavixgosdk "github.com/wavix/wavix-go-sdk"
 	core "github.com/wavix/wavix-go-sdk/core"
 	internal "github.com/wavix/wavix-go-sdk/internal"
 	option "github.com/wavix/wavix-go-sdk/option"
-	profile "github.com/wavix/wavix-go-sdk/profile"
 )
 
 type Client struct {
@@ -38,7 +38,7 @@ func NewClient(options *core.RequestOptions) *Client {
 func (c *Client) Get(
 	ctx context.Context,
 	opts ...option.RequestOption,
-) (*profile.GetConfigResponse, error) {
+) (*wavixgosdk.ProfileConfigResponse, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		opts...,

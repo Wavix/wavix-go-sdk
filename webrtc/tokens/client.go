@@ -35,13 +35,15 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-// Returns a paginated list of active Wavix Embeddable widget tokens for the authenticated account.
+// Returns a paginated list of Wavix Embeddable widget tokens for the authenticated account.
 func (c *Client) List(
 	ctx context.Context,
+	request *webrtc.ListTokensRequest,
 	opts ...option.RequestOption,
 ) (*wavixgosdk.WebRtcTokensListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
+		request,
 		opts...,
 	)
 	if err != nil {

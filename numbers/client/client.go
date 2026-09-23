@@ -59,7 +59,7 @@ func (c *Client) Delete(
 	ctx context.Context,
 	request *wavixgosdk.DeleteNumbersRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.DeleteNumbersResponse, error) {
+) (*wavixgosdk.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,

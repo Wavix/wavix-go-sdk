@@ -173,8 +173,10 @@ func TestSubAccountsUpdateWithWireMock(
 		option.WithToken("test-token"),
 	)
 	request := &wavixgosdk.SubAccountsUpdateRequest{
-		ID:     123,
-		Name:   "Updated Company Name",
+		ID: 123,
+		Name: wavixgosdk.String(
+			"Updated Company Name",
+		),
 		Status: wavixgosdk.SubAccountsUpdateRequestStatusEnabled.Ptr(),
 		DefaultDestinations: &wavixgosdk.SubAccountsUpdateRequestDefaultDestinations{
 			SmsEndpoint: wavixgosdk.String(

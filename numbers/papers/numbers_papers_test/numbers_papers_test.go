@@ -12,6 +12,7 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
+	wavixgosdk "github.com/wavix/wavix-go-sdk"
 	client "github.com/wavix/wavix-go-sdk/client"
 	numbers "github.com/wavix/wavix-go-sdk/numbers"
 	option "github.com/wavix/wavix-go-sdk/option"
@@ -94,7 +95,7 @@ func TestNumbersPapersUploadWithWireMock(
 			"",
 		),
 		DidIDs: "did_ids",
-		DocID:  1,
+		DocID:  wavixgosdk.DocumentTypeID,
 	}
 	_, invocationErr := client.Numbers.Papers.Upload(
 		context.TODO(),

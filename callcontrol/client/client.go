@@ -55,7 +55,7 @@ func (c *Client) List(
 	return response.Body, nil
 }
 
-// Places an outbound call. Returns the call with its `uuid` for tracking and control.
+// Places a real, billable outbound PSTN call. Returns the call with its `uuid` for tracking and control.
 func (c *Client) Create(
 	ctx context.Context,
 	request *wavixgosdk.CallRequest,
@@ -89,7 +89,7 @@ func (c *Client) Get(
 	return response.Body, nil
 }
 
-// Ends the active call identified by `id` by hanging up.
+// Ends the active call identified by `id` by hanging up. Irreversible — the call cannot be resumed once ended.
 func (c *Client) Delete(
 	ctx context.Context,
 	request *wavixgosdk.DeleteCallControlRequest,
@@ -123,7 +123,7 @@ func (c *Client) Update(
 	return response.Body, nil
 }
 
-// Answers the inbound call identified by `id`. Optionally starts media streaming on answer.
+// Answers the inbound call identified by `id`. Optionally starts recording, post-call transcription, or live media streaming on answer.
 func (c *Client) Answer(
 	ctx context.Context,
 	request *wavixgosdk.CallAnswerRequest,
