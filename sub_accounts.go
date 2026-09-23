@@ -94,12 +94,18 @@ func (g *GetSubAccountsRequest) SetID(id int) {
 }
 
 var (
-	listSubAccountsRequestFieldStatus = big.NewInt(1 << 0)
+	listSubAccountsRequestFieldStatus  = big.NewInt(1 << 0)
+	listSubAccountsRequestFieldPage    = big.NewInt(1 << 1)
+	listSubAccountsRequestFieldPerPage = big.NewInt(1 << 2)
 )
 
 type ListSubAccountsRequest struct {
 	// Filters sub-accounts by status. One of `enabled` (the sub-account is active) or `disabled` (the sub-account is suspended).
 	Status *ListSubAccountsRequestStatus `json:"-" url:"status,omitempty"`
+	// Page number to retrieve. Default `1`.
+	Page *int `json:"-" url:"page,omitempty"`
+	// Number of records to return per page. Default `25`.
+	PerPage *int `json:"-" url:"per_page,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -117,6 +123,20 @@ func (l *ListSubAccountsRequest) require(field *big.Int) {
 func (l *ListSubAccountsRequest) SetStatus(status *ListSubAccountsRequestStatus) {
 	l.Status = status
 	l.require(listSubAccountsRequestFieldStatus)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListSubAccountsRequest) SetPage(page *int) {
+	l.Page = page
+	l.require(listSubAccountsRequestFieldPage)
+}
+
+// SetPerPage sets the PerPage field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListSubAccountsRequest) SetPerPage(perPage *int) {
+	l.PerPage = perPage
+	l.require(listSubAccountsRequestFieldPerPage)
 }
 
 var (
@@ -804,7 +824,7 @@ type SubAccountsUpdateRequest struct {
 	// The unique ID of the sub-account.
 	ID int `json:"-" url:"-"`
 	// Sub-account name.
-	Name string `json:"name" url:"-"`
+	Name *string `json:"name,omitempty" url:"-"`
 	// Status of the subaccount. One of `enabled` (the subaccount is active and can be used) or `disabled` (the subaccount is suspended).
 	Status *SubAccountsUpdateRequestStatus `json:"status,omitempty" url:"-"`
 	// Default webhook URLs for inbound messages and delivery reports.
@@ -830,7 +850,7 @@ func (s *SubAccountsUpdateRequest) SetID(id int) {
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SubAccountsUpdateRequest) SetName(name string) {
+func (s *SubAccountsUpdateRequest) SetName(name *string) {
 	s.Name = name
 	s.require(subAccountsUpdateRequestFieldName)
 }

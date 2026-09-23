@@ -167,7 +167,7 @@ func (r *RawClient) Delete(
 	ctx context.Context,
 	request *smsandmms.DeleteSenderIDsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*smsandmms.DeleteSenderIDsResponse], error) {
+) (*core.Response[*wavixgosdk.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -182,7 +182,7 @@ func (r *RawClient) Delete(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *smsandmms.DeleteSenderIDsResponse
+	var response *wavixgosdk.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -201,7 +201,7 @@ func (r *RawClient) Delete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*smsandmms.DeleteSenderIDsResponse]{
+	return &core.Response[*wavixgosdk.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

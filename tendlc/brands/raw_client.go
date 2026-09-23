@@ -37,7 +37,7 @@ func (r *RawClient) List(
 	ctx context.Context,
 	request *tendlc.ListBrandsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*tendlc.ListBrandsResponse], error) {
+) (*core.Response[*wavixgosdk.TenDlcBrandListResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -56,7 +56,7 @@ func (r *RawClient) List(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *tendlc.ListBrandsResponse
+	var response *wavixgosdk.TenDlcBrandListResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -75,7 +75,7 @@ func (r *RawClient) List(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*tendlc.ListBrandsResponse]{
+	return &core.Response[*wavixgosdk.TenDlcBrandListResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -86,7 +86,7 @@ func (r *RawClient) Create(
 	ctx context.Context,
 	request *wavixgosdk.TenDlcBrandCreateRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*tendlc.CreateBrandsResponse], error) {
+) (*core.Response[*wavixgosdk.TenDlcBrand], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -98,7 +98,7 @@ func (r *RawClient) Create(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *tendlc.CreateBrandsResponse
+	var response *wavixgosdk.TenDlcBrand
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -118,7 +118,7 @@ func (r *RawClient) Create(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*tendlc.CreateBrandsResponse]{
+	return &core.Response[*wavixgosdk.TenDlcBrand]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -129,7 +129,7 @@ func (r *RawClient) Get(
 	ctx context.Context,
 	request *tendlc.GetBrandsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*tendlc.GetBrandsResponse], error) {
+) (*core.Response[*wavixgosdk.TenDlcBrand], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -144,7 +144,7 @@ func (r *RawClient) Get(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *tendlc.GetBrandsResponse
+	var response *wavixgosdk.TenDlcBrand
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -163,7 +163,7 @@ func (r *RawClient) Get(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*tendlc.GetBrandsResponse]{
+	return &core.Response[*wavixgosdk.TenDlcBrand]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -174,7 +174,7 @@ func (r *RawClient) Update(
 	ctx context.Context,
 	request *tendlc.TenDlcBrandUpdateRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*tendlc.UpdateBrandsResponse], error) {
+) (*core.Response[*wavixgosdk.TenDlcBrand], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -190,7 +190,7 @@ func (r *RawClient) Update(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *tendlc.UpdateBrandsResponse
+	var response *wavixgosdk.TenDlcBrand
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -210,7 +210,7 @@ func (r *RawClient) Update(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*tendlc.UpdateBrandsResponse]{
+	return &core.Response[*wavixgosdk.TenDlcBrand]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -221,7 +221,7 @@ func (r *RawClient) Delete(
 	ctx context.Context,
 	request *tendlc.DeleteBrandsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*tendlc.DeleteBrandsResponse], error) {
+) (*core.Response[*wavixgosdk.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -236,7 +236,7 @@ func (r *RawClient) Delete(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *tendlc.DeleteBrandsResponse
+	var response *wavixgosdk.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -255,7 +255,7 @@ func (r *RawClient) Delete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*tendlc.DeleteBrandsResponse]{
+	return &core.Response[*wavixgosdk.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -266,7 +266,7 @@ func (r *RawClient) QualifyUsecase(
 	ctx context.Context,
 	request *tendlc.QualifyUsecaseBrandsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*tendlc.QualifyUsecaseBrandsResponse], error) {
+) (*core.Response[*wavixgosdk.TenDlcBrandQualificationResult], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -282,7 +282,7 @@ func (r *RawClient) QualifyUsecase(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *tendlc.QualifyUsecaseBrandsResponse
+	var response *wavixgosdk.TenDlcBrandQualificationResult
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -301,7 +301,7 @@ func (r *RawClient) QualifyUsecase(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*tendlc.QualifyUsecaseBrandsResponse]{
+	return &core.Response[*wavixgosdk.TenDlcBrandQualificationResult]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

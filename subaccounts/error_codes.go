@@ -9,6 +9,11 @@ import (
 )
 
 var ErrorCodes internal.ErrorCodes = internal.ErrorCodes{
+	400: func(apiError *core.APIError) error {
+		return &wavixgosdk.BadRequestError{
+			APIError: apiError,
+		}
+	},
 	401: func(apiError *core.APIError) error {
 		return &wavixgosdk.UnauthorizedError{
 			APIError: apiError,

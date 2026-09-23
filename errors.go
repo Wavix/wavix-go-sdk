@@ -103,14 +103,14 @@ func (s *ServiceUnavailableError) Unwrap() error {
 	return s.APIError
 }
 
-// Returns when the request exceeds the rate limit. Only one nudge per Campaign is allowed every 24 hours.
+// Too many requests
 type TooManyRequestsError struct {
 	*core.APIError
-	Body *ValidationErrorResponse
+	Body any
 }
 
 func (t *TooManyRequestsError) UnmarshalJSON(data []byte) error {
-	var body *ValidationErrorResponse
+	var body any
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}

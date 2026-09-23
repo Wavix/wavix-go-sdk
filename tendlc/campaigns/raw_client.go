@@ -37,7 +37,7 @@ func (r *RawClient) List(
 	ctx context.Context,
 	request *tendlc.ListCampaignsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*tendlc.ListCampaignsResponse], error) {
+) (*core.Response[*wavixgosdk.TenDlcCampaignListResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -56,7 +56,7 @@ func (r *RawClient) List(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *tendlc.ListCampaignsResponse
+	var response *wavixgosdk.TenDlcCampaignListResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -75,7 +75,7 @@ func (r *RawClient) List(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*tendlc.ListCampaignsResponse]{
+	return &core.Response[*wavixgosdk.TenDlcCampaignListResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -86,7 +86,7 @@ func (r *RawClient) ListByBrand(
 	ctx context.Context,
 	request *tendlc.ListByBrandCampaignsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*tendlc.ListByBrandCampaignsResponse], error) {
+) (*core.Response[*wavixgosdk.TenDlcCampaignListResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -108,7 +108,7 @@ func (r *RawClient) ListByBrand(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *tendlc.ListByBrandCampaignsResponse
+	var response *wavixgosdk.TenDlcCampaignListResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -127,7 +127,7 @@ func (r *RawClient) ListByBrand(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*tendlc.ListByBrandCampaignsResponse]{
+	return &core.Response[*wavixgosdk.TenDlcCampaignListResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -138,7 +138,7 @@ func (r *RawClient) Create(
 	ctx context.Context,
 	request *tendlc.TenDlcCampaignCreateRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*tendlc.CreateCampaignsResponse], error) {
+) (*core.Response[*wavixgosdk.TenDlcCampaign], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -154,7 +154,7 @@ func (r *RawClient) Create(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *tendlc.CreateCampaignsResponse
+	var response *wavixgosdk.TenDlcCampaign
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -174,7 +174,7 @@ func (r *RawClient) Create(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*tendlc.CreateCampaignsResponse]{
+	return &core.Response[*wavixgosdk.TenDlcCampaign]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -185,7 +185,7 @@ func (r *RawClient) Get(
 	ctx context.Context,
 	request *tendlc.GetCampaignsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*tendlc.GetCampaignsResponse], error) {
+) (*core.Response[*wavixgosdk.TenDlcCampaign], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -201,7 +201,7 @@ func (r *RawClient) Get(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *tendlc.GetCampaignsResponse
+	var response *wavixgosdk.TenDlcCampaign
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -220,7 +220,7 @@ func (r *RawClient) Get(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*tendlc.GetCampaignsResponse]{
+	return &core.Response[*wavixgosdk.TenDlcCampaign]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -231,7 +231,7 @@ func (r *RawClient) Update(
 	ctx context.Context,
 	request *tendlc.TenDlcCampaignUpdateRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*tendlc.UpdateCampaignsResponse], error) {
+) (*core.Response[*wavixgosdk.TenDlcCampaign], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -248,7 +248,7 @@ func (r *RawClient) Update(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *tendlc.UpdateCampaignsResponse
+	var response *wavixgosdk.TenDlcCampaign
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -268,7 +268,7 @@ func (r *RawClient) Update(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*tendlc.UpdateCampaignsResponse]{
+	return &core.Response[*wavixgosdk.TenDlcCampaign]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -279,7 +279,7 @@ func (r *RawClient) Delete(
 	ctx context.Context,
 	request *tendlc.DeleteCampaignsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*tendlc.DeleteCampaignsResponse], error) {
+) (*core.Response[*wavixgosdk.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -295,7 +295,7 @@ func (r *RawClient) Delete(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *tendlc.DeleteCampaignsResponse
+	var response *wavixgosdk.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -314,7 +314,7 @@ func (r *RawClient) Delete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*tendlc.DeleteCampaignsResponse]{
+	return &core.Response[*wavixgosdk.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

@@ -85,7 +85,7 @@ func (c *Client) Get(
 	return response.Body, nil
 }
 
-// Deletes the call recording identified by `id`. Deletion is permanent and removes the recording file.
+// Deletes the call recording identified by `id`. Deletion is permanent — the audio file is unrecoverable.
 func (c *Client) Delete(
 	ctx context.Context,
 	request *wavixgosdk.DeleteCallRecordingRequest,

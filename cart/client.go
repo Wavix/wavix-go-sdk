@@ -38,7 +38,7 @@ func NewClient(options *core.RequestOptions) *Client {
 func (c *Client) Get(
 	ctx context.Context,
 	opts ...option.RequestOption,
-) (*wavixgosdk.GetCartResponse, error) {
+) (*wavixgosdk.CartResponse, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		opts...,
@@ -54,7 +54,7 @@ func (c *Client) Add(
 	ctx context.Context,
 	request *wavixgosdk.AddCartRequest,
 	opts ...option.RequestOption,
-) ([]any, error) {
+) ([]*wavixgosdk.AvailableNumber, error) {
 	response, err := c.WithRawResponse.Add(
 		ctx,
 		request,
@@ -71,7 +71,7 @@ func (c *Client) Remove(
 	ctx context.Context,
 	request *wavixgosdk.RemoveCartRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.RemoveCartResponse, error) {
+) (*wavixgosdk.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Remove(
 		ctx,
 		request,
@@ -83,12 +83,12 @@ func (c *Client) Remove(
 	return response.Body, nil
 }
 
-// Purchases the listed phone numbers from the cart. Activation and monthly fees are deducted from the account balance.
+// Purchases the listed phone numbers from the cart. Activation and monthly fees are debited from the account balance immediately, and the purchase cannot be reversed through this API.
 func (c *Client) Checkout(
 	ctx context.Context,
 	request *wavixgosdk.CheckoutCartRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.CheckoutCartResponse, error) {
+) (*wavixgosdk.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Checkout(
 		ctx,
 		request,

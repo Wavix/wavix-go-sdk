@@ -35,7 +35,7 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-// Creates a 2FA verification and sends a one-time password (OTP) to the destination phone number over the selected channel. Requires a 2FA service configured in the Wavix portal; the service is reused to generate and validate OTPs.
+// Creates a 2FA verification and sends a real one-time password (OTP) to the destination phone number over the selected channel; this bills the account per OTP sent. Requires a 2FA service configured in the Wavix portal; the service is reused to generate and validate OTPs.
 //
 // The verification proceeds through three steps:
 // 1. Create a verification to generate and send an OTP.
@@ -45,7 +45,7 @@ func (c *Client) Create(
 	ctx context.Context,
 	request *twofa.TwoFactorVerificationCreateRequest,
 	opts ...option.RequestOption,
-) (*twofa.CreateVerificationResponse, error) {
+) (*wavixgosdk.TwoFactorVerificationResponse, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -62,7 +62,7 @@ func (c *Client) Resend(
 	ctx context.Context,
 	request *twofa.TwoFactorVerificationResendRequest,
 	opts ...option.RequestOption,
-) (*twofa.ResendVerificationResponse, error) {
+) (*wavixgosdk.TwoFactorVerificationResendResponse, error) {
 	response, err := c.WithRawResponse.Resend(
 		ctx,
 		request,
@@ -74,12 +74,12 @@ func (c *Client) Resend(
 	return response.Body, nil
 }
 
-// Validates the OTP submitted by the end user against the verification identified by `session_id`.
+// Validates the OTP submitted by the end user against the verification identified by `session_id`. Non-idempotent — each call consumes one of a limited number of attempts tracked server-side; once exhausted, the verification returns `429` until a new verification is created.
 func (c *Client) Check(
 	ctx context.Context,
 	request *twofa.TwoFactorVerificationCheckRequest,
 	opts ...option.RequestOption,
-) (*twofa.CheckVerificationResponse, error) {
+) (*wavixgosdk.TwoFactorVerificationCheckResponse, error) {
 	response, err := c.WithRawResponse.Check(
 		ctx,
 		request,

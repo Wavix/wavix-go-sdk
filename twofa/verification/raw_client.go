@@ -37,7 +37,7 @@ func (r *RawClient) Create(
 	ctx context.Context,
 	request *twofa.TwoFactorVerificationCreateRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*twofa.CreateVerificationResponse], error) {
+) (*core.Response[*wavixgosdk.TwoFactorVerificationResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -50,7 +50,7 @@ func (r *RawClient) Create(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *twofa.CreateVerificationResponse
+	var response *wavixgosdk.TwoFactorVerificationResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -70,7 +70,7 @@ func (r *RawClient) Create(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*twofa.CreateVerificationResponse]{
+	return &core.Response[*wavixgosdk.TwoFactorVerificationResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -81,7 +81,7 @@ func (r *RawClient) Resend(
 	ctx context.Context,
 	request *twofa.TwoFactorVerificationResendRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*twofa.ResendVerificationResponse], error) {
+) (*core.Response[*wavixgosdk.TwoFactorVerificationResendResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -97,7 +97,7 @@ func (r *RawClient) Resend(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *twofa.ResendVerificationResponse
+	var response *wavixgosdk.TwoFactorVerificationResendResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -117,7 +117,7 @@ func (r *RawClient) Resend(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*twofa.ResendVerificationResponse]{
+	return &core.Response[*wavixgosdk.TwoFactorVerificationResendResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -128,7 +128,7 @@ func (r *RawClient) Check(
 	ctx context.Context,
 	request *twofa.TwoFactorVerificationCheckRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*twofa.CheckVerificationResponse], error) {
+) (*core.Response[*wavixgosdk.TwoFactorVerificationCheckResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -144,7 +144,7 @@ func (r *RawClient) Check(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *twofa.CheckVerificationResponse
+	var response *wavixgosdk.TwoFactorVerificationCheckResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -164,7 +164,7 @@ func (r *RawClient) Check(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*twofa.CheckVerificationResponse]{
+	return &core.Response[*wavixgosdk.TwoFactorVerificationCheckResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

@@ -116,8 +116,8 @@ func TestTenDlcBrandVettingAppealsCreateWithWireMock(
 	)
 	request := &tendlc.TenDlcBrandVettingAppealCreateRequest{
 		BrandID: "B6AI7PA",
-		AppealCategories: []string{
-			"VERIFY_TAX_ID",
+		AppealCategories: []tendlc.TenDlcBrandVettingAppealCreateRequestAppealCategoriesItem{
+			tendlc.TenDlcBrandVettingAppealCreateRequestAppealCategoriesItemVerifyTaxID,
 		},
 		Evidence: []string{
 			"855dff49-c097-4645-3983-08dcb9856232",

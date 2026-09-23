@@ -40,7 +40,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *tendlc.ListCampaignsRequest,
 	opts ...option.RequestOption,
-) (*tendlc.ListCampaignsResponse, error) {
+) (*wavixgosdk.TenDlcCampaignListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
@@ -57,7 +57,7 @@ func (c *Client) ListByBrand(
 	ctx context.Context,
 	request *tendlc.ListByBrandCampaignsRequest,
 	opts ...option.RequestOption,
-) (*tendlc.ListByBrandCampaignsResponse, error) {
+) (*wavixgosdk.TenDlcCampaignListResponse, error) {
 	response, err := c.WithRawResponse.ListByBrand(
 		ctx,
 		request,
@@ -74,7 +74,7 @@ func (c *Client) Create(
 	ctx context.Context,
 	request *tendlc.TenDlcCampaignCreateRequest,
 	opts ...option.RequestOption,
-) (*tendlc.CreateCampaignsResponse, error) {
+) (*wavixgosdk.TenDlcCampaign, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -91,7 +91,7 @@ func (c *Client) Get(
 	ctx context.Context,
 	request *tendlc.GetCampaignsRequest,
 	opts ...option.RequestOption,
-) (*tendlc.GetCampaignsResponse, error) {
+) (*wavixgosdk.TenDlcCampaign, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,
@@ -108,7 +108,7 @@ func (c *Client) Update(
 	ctx context.Context,
 	request *tendlc.TenDlcCampaignUpdateRequest,
 	opts ...option.RequestOption,
-) (*tendlc.UpdateCampaignsResponse, error) {
+) (*wavixgosdk.TenDlcCampaign, error) {
 	response, err := c.WithRawResponse.Update(
 		ctx,
 		request,
@@ -125,7 +125,7 @@ func (c *Client) Delete(
 	ctx context.Context,
 	request *tendlc.DeleteCampaignsRequest,
 	opts ...option.RequestOption,
-) (*tendlc.DeleteCampaignsResponse, error) {
+) (*wavixgosdk.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,

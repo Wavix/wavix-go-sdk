@@ -84,7 +84,7 @@ func (r *RawClient) Upload(
 	ctx context.Context,
 	request *tendlc.UploadBrandEvidenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*tendlc.UploadBrandEvidenceResponse], error) {
+) (*core.Response[*wavixgosdk.TenDlcBrandEvidence], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -108,7 +108,7 @@ func (r *RawClient) Upload(
 	}
 	headers.Set("Content-Type", writer.ContentType())
 
-	var response *tendlc.UploadBrandEvidenceResponse
+	var response *wavixgosdk.TenDlcBrandEvidence
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -128,7 +128,7 @@ func (r *RawClient) Upload(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*tendlc.UploadBrandEvidenceResponse]{
+	return &core.Response[*wavixgosdk.TenDlcBrandEvidence]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -185,7 +185,7 @@ func (r *RawClient) Delete(
 	ctx context.Context,
 	request *tendlc.DeleteBrandEvidenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*tendlc.DeleteBrandEvidenceResponse], error) {
+) (*core.Response[*wavixgosdk.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -201,7 +201,7 @@ func (r *RawClient) Delete(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *tendlc.DeleteBrandEvidenceResponse
+	var response *wavixgosdk.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -220,7 +220,7 @@ func (r *RawClient) Delete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*tendlc.DeleteBrandEvidenceResponse]{
+	return &core.Response[*wavixgosdk.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

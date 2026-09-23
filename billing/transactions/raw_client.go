@@ -6,6 +6,7 @@ import (
 	context "context"
 	http "net/http"
 
+	wavixgosdk "github.com/wavix/wavix-go-sdk"
 	billing "github.com/wavix/wavix-go-sdk/billing"
 	core "github.com/wavix/wavix-go-sdk/core"
 	internal "github.com/wavix/wavix-go-sdk/internal"
@@ -36,7 +37,7 @@ func (r *RawClient) List(
 	ctx context.Context,
 	request *billing.ListTransactionsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*billing.ListTransactionsResponse], error) {
+) (*core.Response[*wavixgosdk.BillingTransactionListResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -55,7 +56,7 @@ func (r *RawClient) List(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *billing.ListTransactionsResponse
+	var response *wavixgosdk.BillingTransactionListResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -74,7 +75,7 @@ func (r *RawClient) List(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*billing.ListTransactionsResponse]{
+	return &core.Response[*wavixgosdk.BillingTransactionListResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

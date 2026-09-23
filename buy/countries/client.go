@@ -5,6 +5,7 @@ package countries
 import (
 	context "context"
 
+	wavixgosdk "github.com/wavix/wavix-go-sdk"
 	buy "github.com/wavix/wavix-go-sdk/buy"
 	core "github.com/wavix/wavix-go-sdk/core"
 	internal "github.com/wavix/wavix-go-sdk/internal"
@@ -39,7 +40,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *buy.ListCountriesRequest,
 	opts ...option.RequestOption,
-) (*buy.ListCountriesResponse, error) {
+) (*wavixgosdk.CountryListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,

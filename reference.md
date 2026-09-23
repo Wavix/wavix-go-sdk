@@ -63,7 +63,7 @@ client.APIKeys.List(
 </dl>
 </details>
 
-<details><summary><code>client.APIKeys.Create(request) -> *wavixgosdk.APIKey</code></summary>
+<details><summary><code>client.APIKeys.Create(request) -> wavixgosdk.APIKeyWithSecret</code></summary>
 <dl>
 <dd>
 
@@ -676,7 +676,6 @@ request := &wavixgosdk.SipTrunkCreateRequest{
         IPRestrict: false,
         DidinfoEnabled: true,
         CallRestrict: true,
-        CostLimit: true,
         ChannelsRestrict: false,
         RewriteEnabled: true,
         TranscriptionEnabled: true,
@@ -810,7 +809,6 @@ request := &wavixgosdk.UpdateSipTrunksRequest{
             IPRestrict: false,
             DidinfoEnabled: true,
             CallRestrict: true,
-            CostLimit: true,
             ChannelsRestrict: false,
             RewriteEnabled: true,
             TranscriptionEnabled: true,
@@ -918,7 +916,7 @@ client.SipTrunks.Delete(
 </details>
 
 ## Cart
-<details><summary><code>client.Cart.Get() -> *wavixgosdk.GetCartResponse</code></summary>
+<details><summary><code>client.Cart.Get() -> *wavixgosdk.CartResponse</code></summary>
 <dl>
 <dd>
 
@@ -960,7 +958,7 @@ client.Cart.Get(
 </dl>
 </details>
 
-<details><summary><code>client.Cart.Add(request) -> []any</code></summary>
+<details><summary><code>client.Cart.Add(request) -> []*wavixgosdk.AvailableNumber</code></summary>
 <dl>
 <dd>
 
@@ -1024,7 +1022,7 @@ client.Cart.Add(
 </dl>
 </details>
 
-<details><summary><code>client.Cart.Remove(request) -> *wavixgosdk.RemoveCartResponse</code></summary>
+<details><summary><code>client.Cart.Remove(request) -> *wavixgosdk.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -1088,7 +1086,7 @@ client.Cart.Remove(
 </dl>
 </details>
 
-<details><summary><code>client.Cart.Checkout(request) -> *wavixgosdk.CheckoutCartResponse</code></summary>
+<details><summary><code>client.Cart.Checkout(request) -> *wavixgosdk.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -1100,7 +1098,7 @@ client.Cart.Remove(
 <dl>
 <dd>
 
-Purchases the listed phone numbers from the cart. Activation and monthly fees are deducted from the account balance.
+Purchases the listed phone numbers from the cart. Activation and monthly fees are debited from the account balance immediately, and the purchase cannot be reversed through this API.
 </dd>
 </dl>
 </dd>
@@ -1271,7 +1269,7 @@ client.Numbers.List(
 </dl>
 </details>
 
-<details><summary><code>client.Numbers.Delete() -> *wavixgosdk.DeleteNumbersResponse</code></summary>
+<details><summary><code>client.Numbers.Delete() -> *wavixgosdk.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -1741,7 +1739,7 @@ client.Cdrs.List(
 <dl>
 <dd>
 
-**disposition:** `*wavixgosdk.CallDisposition` — Filters CDRs by call disposition. One of `answered` (the called party answered), `busy` (the called party was busy), `rejected` (the call was declined), `failed` (the call could not be routed), or `all` (no disposition filter).
+**disposition:** `*wavixgosdk.CallDisposition` — Filters CDRs by call disposition. One of `answered` (the called party answered), `noanswer` (no answer within the ring timeout), `busy` (the called party was busy), `failed` (the call could not be routed), or `all` (no disposition filter).
     
 </dd>
 </dl>
@@ -1836,8 +1834,6 @@ request := &wavixgosdk.CdrSearchRequest{
         To: wavixgosdk.MustParseDate(
             "2023-08-31",
         ),
-        Page: 1,
-        PerPage: 50,
     }
 client.Cdrs.Search(
         context.TODO(),
@@ -1930,10 +1926,10 @@ client.Cdrs.Search(
 <dl>
 <dd>
 
-**disposition:** `*wavixgosdk.CdrSearchRequestDisposition` 
+**disposition:** `*wavixgosdk.CallDisposition` 
 
 Call disposition to filter results.  If omitted, returns only answered
- calls. Allowed values: `answered`, `busy`, `rejected`,
+ calls. Allowed values: `answered`, `noanswer`, `busy`,
   `failed`, `all`. Use `all` to return calls
    regardless of their disposition.
     
@@ -1943,7 +1939,7 @@ Call disposition to filter results.  If omitted, returns only answered
 <dl>
 <dd>
 
-**page:** `int` — Page number to retrieve.
+**page:** `*int` — Page number to retrieve.
     
 </dd>
 </dl>
@@ -1951,7 +1947,7 @@ Call disposition to filter results.  If omitted, returns only answered
 <dl>
 <dd>
 
-**perPage:** `int` — Number of records per page.
+**perPage:** `*int` — Number of records per page.
     
 </dd>
 </dl>
@@ -1975,7 +1971,7 @@ Call disposition to filter results.  If omitted, returns only answered
 <dl>
 <dd>
 
-Transcribes the recording of the call identified by `call_id`. Transcription is asynchronous; poll the transcription endpoint for the result.
+Transcribes the recording of the call identified by `call_id`. Transcription is asynchronous; poll the transcription endpoint for the result. Billed per minute at the account's call-transcription rate; fails with an insufficient-funds error when the balance cannot cover it.
 </dd>
 </dl>
 </dd>
@@ -1991,7 +1987,7 @@ Transcribes the recording of the call identified by `call_id`. Transcription is 
 
 ```go
 request := &wavixgosdk.CdrRetranscriptionRequest{
-        CallID: "bbaa37bf-430a-46da-ade3-c248e407016",
+        CallID: "bbaa37bf-430a-46da-ade3-c248e4070160",
     }
 client.Cdrs.Retranscribe(
         context.TODO(),
@@ -2068,7 +2064,7 @@ Returns the transcription of the recorded call identified by `call_id`. Alias of
 
 ```go
 request := &wavixgosdk.TranscriptionsCdrsRequest{
-        CallID: "bbaa37bf-430a-46da-ade3-c248e407016",
+        CallID: "bbaa37bf-430a-46da-ade3-c248e4070160",
     }
 client.Cdrs.Transcriptions(
         context.TODO(),
@@ -2270,7 +2266,7 @@ client.Cdrs.ListAll(
 <dl>
 <dd>
 
-**disposition:** `*wavixgosdk.CallDisposition` — Filters CDRs by call disposition. One of `answered` (the called party answered), `busy` (the called party was busy), `rejected` (the call was declined), `failed` (the call could not be routed), or `all` (no disposition filter).
+**disposition:** `*wavixgosdk.CallDisposition` — Filters CDRs by call disposition. One of `answered` (the called party answered), `noanswer` (no answer within the ring timeout), `busy` (the called party was busy), `failed` (the call could not be routed), or `all` (no disposition filter).
     
 </dd>
 </dl>
@@ -2606,7 +2602,7 @@ client.CallRecording.Get(
 <dl>
 <dd>
 
-Deletes the call recording identified by `id`. Deletion is permanent and removes the recording file.
+Deletes the call recording identified by `id`. Deletion is permanent — the audio file is unrecoverable.
 </dd>
 </dl>
 </dd>
@@ -2656,7 +2652,7 @@ client.CallRecording.Delete(
 </details>
 
 ## Speech Analytics
-<details><summary><code>client.SpeechAnalytics.Create(request) -> *wavixgosdk.CreateSpeechAnalyticsResponse</code></summary>
+<details><summary><code>client.SpeechAnalytics.Create(request) -> *wavixgosdk.SubmitFileTranscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -2718,7 +2714,7 @@ client.SpeechAnalytics.Create(
 </dl>
 </details>
 
-<details><summary><code>client.SpeechAnalytics.Get(RequestID) -> *wavixgosdk.GetSpeechAnalyticsResponse</code></summary>
+<details><summary><code>client.SpeechAnalytics.Get(RequestID) -> *wavixgosdk.FileTranscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -2912,7 +2908,7 @@ client.CallWebhooks.List(
 <dl>
 <dd>
 
-Registers a callback URL for the `on-call` or `post-call` event. Wavix sends a POST callback to the URL when the event occurs.
+Registers a callback URL for the `on-call` or `post-call` event. Wavix sends a POST callback to the URL when the event occurs. Creates persistent configuration that forwards call metadata to the URL on every matching call until the webhook is deleted.
 </dd>
 </dl>
 </dd>
@@ -3093,7 +3089,7 @@ client.CallControl.List(
 <dl>
 <dd>
 
-Places an outbound call. Returns the call with its `uuid` for tracking and control.
+Places a real, billable outbound PSTN call. Returns the call with its `uuid` for tracking and control.
 </dd>
 </dl>
 </dd>
@@ -3265,7 +3261,7 @@ client.CallControl.Get(
 <dl>
 <dd>
 
-Ends the active call identified by `id` by hanging up.
+Ends the active call identified by `id` by hanging up. Irreversible — the call cannot be resumed once ended.
 </dd>
 </dl>
 </dd>
@@ -3396,7 +3392,7 @@ client.CallControl.Update(
 <dl>
 <dd>
 
-Answers the inbound call identified by `id`. Optionally starts media streaming on answer.
+Answers the inbound call identified by `id`. Optionally starts recording, post-call transcription, or live media streaming on answer.
 </dd>
 </dl>
 </dd>
@@ -3590,7 +3586,7 @@ Prompt to play before collecting digits.
 </details>
 
 ## NumberValidator
-<details><summary><code>client.NumberValidator.Get() -> *wavixgosdk.GetNumberValidatorResponse</code></summary>
+<details><summary><code>client.NumberValidator.Get() -> *wavixgosdk.PhoneValidationResponse</code></summary>
 <dl>
 <dd>
 
@@ -3602,7 +3598,7 @@ Prompt to play before collecting digits.
 <dl>
 <dd>
 
-Validates a single phone number and returns line type, carrier, portability, and reachability details.
+Validates a single phone number and returns line type, carrier, portability, and reachability details. The response's `error_code` is a per-number result code (`000` success; `013` internal error; `021` invalid format; `041` remote timeout; `042` remote query failed; `091` insufficient funds) — distinct from the HTTP status codes below.
 </dd>
 </dl>
 </dd>
@@ -3693,8 +3689,6 @@ request := &wavixgosdk.PhoneValidationRequest{
             "971504359195",
         },
         Type: wavixgosdk.PhoneNumberValidationTypeFormat,
-        Async: true,
-        Force: true,
     }
 client.NumberValidator.CreateBulk(
         context.TODO(),
@@ -3715,7 +3709,7 @@ client.NumberValidator.CreateBulk(
 <dl>
 <dd>
 
-**phoneNumbers:** `[]string` — List of phone numbers to get detailed information about.
+**phoneNumbers:** `[]string` — List of phone numbers to get detailed information about. Maximum 1000 numbers per request.
     
 </dd>
 </dl>
@@ -3731,7 +3725,7 @@ client.NumberValidator.CreateBulk(
 <dl>
 <dd>
 
-**async:** `bool` — Indicates whether the request should be executed asynchronously. If `true`, the response will include a `request_uuid` that can be used to poll for results. If `false`, the response will include validation results directly.
+**async:** `*bool` — Indicates whether the request should be executed asynchronously. If `true`, the response will include a `request_uuid` that can be used to poll for results. If `false` (default), the response will include validation results directly.
     
 </dd>
 </dl>
@@ -3739,7 +3733,7 @@ client.NumberValidator.CreateBulk(
 <dl>
 <dd>
 
-**force:** `bool` — Indicates whether to force a fresh validation instead of returning a previously cached result.
+**force:** `*bool` — Indicates whether to force a fresh validation instead of returning a previously cached result. Defaults to `false`.
     
 </dd>
 </dl>
@@ -3764,7 +3758,7 @@ client.NumberValidator.CreateBulk(
 <dl>
 <dd>
 
-Launches a voice campaign that places an outbound call using a pre-configured scenario. Track progress with the returned voice campaign `id`.
+Launches a voice campaign that places a real outbound call using a pre-configured scenario. Track progress with the returned voice campaign `id`.
 </dd>
 </dl>
 </dd>
@@ -3928,7 +3922,7 @@ client.LinkShortener.Create(
 <dl>
 <dd>
 
-**link:** `string` — Target URL to shorten.
+**link:** `string` — Target URL to shorten. Must be `https://` — the short link is publicly resolvable and redirects any visitor here, so only pass URLs you trust; this endpoint is a common target for open-redirect and phishing abuse.
     
 </dd>
 </dl>
@@ -3944,7 +3938,7 @@ client.LinkShortener.Create(
 <dl>
 <dd>
 
-**fallbackURL:** `*string` — Fallback URL for expired or invalid links.
+**fallbackURL:** `*string` — Fallback URL for expired or invalid links. Must be `https://` — same open-redirect/phishing considerations as `link` apply.
     
 </dd>
 </dl>
@@ -3952,7 +3946,7 @@ client.LinkShortener.Create(
 <dl>
 <dd>
 
-**phone:** `*string` — Phone number for the short link.
+**phone:** `*string` — Phone number the short link is associated with, in E.164 format (without the leading `+`). Used to attribute click metrics returned by short link metrics list.
     
 </dd>
 </dl>
@@ -4206,6 +4200,22 @@ client.SubAccounts.List(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**page:** `*int` — Page number to retrieve. Default `1`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**perPage:** `*int` — Number of records to return per page. Default `25`.
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4381,7 +4391,9 @@ Replaces the configuration of the sub-account identified by `id`. Omitted fields
 ```go
 request := &wavixgosdk.SubAccountsUpdateRequest{
         ID: 123,
-        Name: "Updated Company Name",
+        Name: wavixgosdk.String(
+            "Updated Company Name",
+        ),
         Status: wavixgosdk.SubAccountsUpdateRequestStatusEnabled.Ptr(),
         DefaultDestinations: &wavixgosdk.SubAccountsUpdateRequestDefaultDestinations{
             SmsEndpoint: wavixgosdk.String(
@@ -4419,7 +4431,7 @@ client.SubAccounts.Update(
 <dl>
 <dd>
 
-**name:** `string` — Sub-account name.
+**name:** `*string` — Sub-account name.
     
 </dd>
 </dl>
@@ -4448,7 +4460,7 @@ client.SubAccounts.Update(
 </details>
 
 ## Billing Transactions
-<details><summary><code>client.Billing.Transactions.List() -> *billing.ListTransactionsResponse</code></summary>
+<details><summary><code>client.Billing.Transactions.List() -> *wavixgosdk.BillingTransactionListResponse</code></summary>
 <dl>
 <dd>
 
@@ -4575,7 +4587,7 @@ client.Billing.Transactions.List(
 </details>
 
 ## Billing Invoices
-<details><summary><code>client.Billing.Invoices.List() -> *billing.ListInvoicesResponse</code></summary>
+<details><summary><code>client.Billing.Invoices.List() -> *wavixgosdk.InvoiceListResponse</code></summary>
 <dl>
 <dd>
 
@@ -4711,7 +4723,7 @@ client.Billing.Invoices.Download(
 </details>
 
 ## Buy Countries
-<details><summary><code>client.Buy.Countries.List() -> *buy.ListCountriesResponse</code></summary>
+<details><summary><code>client.Buy.Countries.List() -> *wavixgosdk.CountryListResponse</code></summary>
 <dl>
 <dd>
 
@@ -4771,7 +4783,7 @@ client.Buy.Countries.List(
 </details>
 
 ## Buy Regions
-<details><summary><code>client.Buy.Regions.List(CountryID) -> *buy.ListRegionsResponse</code></summary>
+<details><summary><code>client.Buy.Regions.List(CountryID) -> *wavixgosdk.RegionListResponse</code></summary>
 <dl>
 <dd>
 
@@ -4841,7 +4853,7 @@ client.Buy.Regions.List(
 </details>
 
 ## Buy Cities
-<details><summary><code>client.Buy.Cities.List(CountryID) -> *buy.ListCitiesResponse</code></summary>
+<details><summary><code>client.Buy.Cities.List(CountryID) -> *wavixgosdk.CityListResponse</code></summary>
 <dl>
 <dd>
 
@@ -4912,7 +4924,7 @@ client.Buy.Cities.List(
 </details>
 
 ## Buy RegionCities
-<details><summary><code>client.Buy.RegionCities.List(CountryID, RegionID) -> *buy.ListRegionCitiesResponse</code></summary>
+<details><summary><code>client.Buy.RegionCities.List(CountryID, RegionID) -> *wavixgosdk.CityListResponse</code></summary>
 <dl>
 <dd>
 
@@ -4991,7 +5003,7 @@ client.Buy.RegionCities.List(
 </details>
 
 ## Buy Numbers
-<details><summary><code>client.Buy.Numbers.List(CountryID, CityID) -> *buy.ListNumbersResponse</code></summary>
+<details><summary><code>client.Buy.Numbers.List(CountryID, CityID) -> *wavixgosdk.AvailableNumberListResponse</code></summary>
 <dl>
 <dd>
 
@@ -5098,7 +5110,7 @@ client.Buy.Numbers.List(
 <dl>
 <dd>
 
-Starts streaming the media of the call identified by `call_id` to the configured destination. Returns the `stream_id`.
+Starts streaming the audio of the call identified by `call_id` to a WebSocket destination you supply, in the direction (`stream_type`) and channel (`stream_channel`) you configure. The destination can be any URL you specify — Wavix does not restrict it. Returns the `stream_id`.
 </dd>
 </dl>
 </dd>
@@ -5257,7 +5269,7 @@ client.CallControl.Streams.Delete(
 <dl>
 <dd>
 
-Plays an audio prompt into the active call identified by `id`.
+Plays an audio prompt into the active call identified by `id`. The audio is audible to the remote party in real time.
 </dd>
 </dl>
 </dd>
@@ -5405,7 +5417,7 @@ Returns the transcription of the recorded call identified by `call_id`, includin
 
 ```go
 request := &cdrs.GetTranscriptionRequest{
-        CallID: "bbaa37bf-430a-46da-ade3-c248e407016",
+        CallID: "bbaa37bf-430a-46da-ade3-c248e4070160",
     }
 client.Cdrs.Transcription.Get(
         context.TODO(),
@@ -5657,7 +5669,7 @@ request := &numbers.UploadPapersRequest{
             "",
         ),
         DidIDs: "did_ids",
-        DocID: 1,
+        DocID: wavixgosdk.DocumentTypeID,
     }
 client.Numbers.Papers.Upload(
         context.TODO(),
@@ -5676,7 +5688,7 @@ client.Numbers.Papers.Upload(
 </details>
 
 ## Profile Config
-<details><summary><code>client.Profile.Config.Get() -> *profile.GetConfigResponse</code></summary>
+<details><summary><code>client.Profile.Config.Get() -> *wavixgosdk.ProfileConfigResponse</code></summary>
 <dl>
 <dd>
 
@@ -5773,7 +5785,7 @@ client.SmsAndMms.SenderIDs.List(
 <dl>
 <dd>
 
-Creates a Sender ID. Use the 10DLC API to create Sender IDs in the US.
+Creates a Sender ID. Use the 10DLC API to create Sender IDs in the US. Registering a Sender ID incurs a recurring monthly fee, billed to the account balance.
 </dd>
 </dl>
 </dd>
@@ -5928,7 +5940,7 @@ client.SmsAndMms.SenderIDs.Get(
 </dl>
 </details>
 
-<details><summary><code>client.SmsAndMms.SenderIDs.Delete(ID) -> *smsandmms.DeleteSenderIDsResponse</code></summary>
+<details><summary><code>client.SmsAndMms.SenderIDs.Delete(ID) -> *wavixgosdk.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -6106,7 +6118,7 @@ client.SmsAndMms.OptOuts.List(
 </dl>
 </details>
 
-<details><summary><code>client.SmsAndMms.OptOuts.Create(request) -> *smsandmms.CreateOptOutsResponse</code></summary>
+<details><summary><code>client.SmsAndMms.OptOuts.Create(request) -> *wavixgosdk.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -6173,7 +6185,7 @@ client.SmsAndMms.OptOuts.Create(
 </details>
 
 ## SmsAndMms Messages
-<details><summary><code>client.SmsAndMms.Messages.List() -> *smsandmms.ListMessagesResponse</code></summary>
+<details><summary><code>client.SmsAndMms.Messages.List() -> *wavixgosdk.MessageListResponse</code></summary>
 <dl>
 <dd>
 
@@ -6201,11 +6213,15 @@ Returns a paginated list of SMS and MMS messages for the authenticated account, 
 
 ```go
 request := &smsandmms.ListMessagesRequest{
-        SentAfter: wavixgosdk.String(
-            "2023-04-10",
+        SentAfter: wavixgosdk.Time(
+            wavixgosdk.MustParseDate(
+                "2023-04-10",
+            ),
         ),
-        SentBefore: wavixgosdk.String(
-            "2023-04-13",
+        SentBefore: wavixgosdk.Time(
+            wavixgosdk.MustParseDate(
+                "2023-04-13",
+            ),
         ),
         Type: "outbound",
         From: wavixgosdk.String(
@@ -6243,7 +6259,7 @@ client.SmsAndMms.Messages.List(
 <dl>
 <dd>
 
-**sentAfter:** `*string` — Returns messages sent on or after this date, in `YYYY-MM-DD` format.
+**sentAfter:** `*time.Time` — Returns messages sent on or after this date, in `YYYY-MM-DD` format.
     
 </dd>
 </dl>
@@ -6251,7 +6267,7 @@ client.SmsAndMms.Messages.List(
 <dl>
 <dd>
 
-**sentBefore:** `*string` — Returns messages sent on or before this date, in `YYYY-MM-DD` format.
+**sentBefore:** `*time.Time` — Returns messages sent on or before this date, in `YYYY-MM-DD` format.
     
 </dd>
 </dl>
@@ -6339,8 +6355,7 @@ client.SmsAndMms.Messages.List(
 <dl>
 <dd>
 
-Sends an SMS or MMS message. MMS is supported for U.S. numbers only. Track delivery using the returned `message_id` and the message status callback.
-**Rate limit**: 20 messages per phone number in 24 hours.
+Sends an SMS or MMS message. MMS is supported for U.S. numbers only. Track delivery using the returned `message_id` and the message status callback. The recipient must be opted in to receive messages from the account; sending to an opted-out number fails.
 </dd>
 </dl>
 </dd>
@@ -6442,7 +6457,7 @@ client.SmsAndMms.Messages.Send(
 </dl>
 </details>
 
-<details><summary><code>client.SmsAndMms.Messages.Get(ID) -> *smsandmms.GetMessagesResponse</code></summary>
+<details><summary><code>client.SmsAndMms.Messages.Get(ID) -> *wavixgosdk.MessageResponse</code></summary>
 <dl>
 <dd>
 
@@ -6817,7 +6832,7 @@ client.SubAccounts.Transactions.List(
 </details>
 
 ## TenDlc Brands
-<details><summary><code>client.TenDlc.Brands.List() -> *tendlc.ListBrandsResponse</code></summary>
+<details><summary><code>client.TenDlc.Brands.List() -> *wavixgosdk.TenDlcBrandListResponse</code></summary>
 <dl>
 <dd>
 
@@ -7001,7 +7016,7 @@ client.TenDlc.Brands.List(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Brands.Create(request) -> *tendlc.CreateBrandsResponse</code></summary>
+<details><summary><code>client.TenDlc.Brands.Create(request) -> *wavixgosdk.TenDlcBrand</code></summary>
 <dl>
 <dd>
 
@@ -7013,7 +7028,7 @@ client.TenDlc.Brands.List(
 <dl>
 <dd>
 
-Registers a 10DLC Brand. TCR automatically verifies the brand identity. Only brands with `VERIFIED` or `VETTED_VERIFIED` identity status can register 10DLC Campaigns.
+Registers a 10DLC Brand. Submits the company's legal identity data (EIN/Tax ID, legal company name, contact and address) to The Campaign Registry (TCR), which verifies the brand identity. Charges a 10DLC brand registration fee on successful submission; fails with an insufficient-funds error when the balance cannot cover it. Only brands with `VERIFIED` or `VETTED_VERIFIED` identity status can register 10DLC Campaigns.
 </dd>
 </dl>
 </dd>
@@ -7062,7 +7077,7 @@ client.TenDlc.Brands.Create(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Brands.Get(BrandID) -> *tendlc.GetBrandsResponse</code></summary>
+<details><summary><code>client.TenDlc.Brands.Get(BrandID) -> *wavixgosdk.TenDlcBrand</code></summary>
 <dl>
 <dd>
 
@@ -7123,7 +7138,7 @@ client.TenDlc.Brands.Get(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Brands.Update(BrandID, request) -> *tendlc.UpdateBrandsResponse</code></summary>
+<details><summary><code>client.TenDlc.Brands.Update(BrandID, request) -> *wavixgosdk.TenDlcBrand</code></summary>
 <dl>
 <dd>
 
@@ -7348,7 +7363,7 @@ Business segment the Brand operates in. One of:
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Brands.Delete(BrandID) -> *tendlc.DeleteBrandsResponse</code></summary>
+<details><summary><code>client.TenDlc.Brands.Delete(BrandID) -> *wavixgosdk.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -7409,7 +7424,7 @@ client.TenDlc.Brands.Delete(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Brands.QualifyUsecase(BrandID, UseCase) -> *tendlc.QualifyUsecaseBrandsResponse</code></summary>
+<details><summary><code>client.TenDlc.Brands.QualifyUsecase(BrandID, UseCase) -> *wavixgosdk.TenDlcBrandQualificationResult</code></summary>
 <dl>
 <dd>
 
@@ -7541,7 +7556,7 @@ client.TenDlc.BrandAppeals.List(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.BrandAppeals.Create(BrandID, request) -> *tendlc.CreateBrandAppealsResponse</code></summary>
+<details><summary><code>client.TenDlc.BrandAppeals.Create(BrandID, request) -> *wavixgosdk.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -7556,7 +7571,7 @@ client.TenDlc.BrandAppeals.List(
 Submits an appeal for 10DLC brand identity verification. Provide any additional documentation to support the appeal. Use `appeal_category` to specify the appeal type:
 - `VERIFY_TAX_ID` — Use if the brand is UNVERIFIED due to a tax ID mismatch. Applies to private companies, public companies, non-profits, and government entities.
 - `VERIFY_NON_PROFIT` — Use if a non-profit brand is UNVERIFIED or VERIFIED but missing tax-exempt status.
-- `VERIFY_GOVERNMENT` — Use if a government brand is UNVERIFIED or VERIFIED but missing government entity status.      
+- `VERIFY_GOVERNMENT` — Use if a government brand is UNVERIFIED or VERIFIED but missing government entity status.
 </dd>
 </dl>
 </dd>
@@ -7573,8 +7588,8 @@ Submits an appeal for 10DLC brand identity verification. Provide any additional 
 ```go
 request := &tendlc.CreateBrandAppealsRequest{
         BrandID: "BM20QP9",
-        AppealCategories: []string{
-            "VERIFY_TAX_ID",
+        AppealCategories: []tendlc.CreateBrandAppealsRequestAppealCategoriesItem{
+            tendlc.CreateBrandAppealsRequestAppealCategoriesItemVerifyTaxID,
         },
         Evidence: []string{
             "855dff49-c097-4645-3983-08dcb9856232",
@@ -7607,7 +7622,7 @@ client.TenDlc.BrandAppeals.Create(
 <dl>
 <dd>
 
-**appealCategories:** `[]string` — List of appeal categories. Allowed values: `VERIFY_TAX_ID`, `VERIFY_NON_PROFIT`, `VERIFY_GOVERNMENT`
+**appealCategories:** `[]*tendlc.CreateBrandAppealsRequestAppealCategoriesItem` — List of appeal categories. Allowed values: `VERIFY_TAX_ID`, `VERIFY_NON_PROFIT`, `VERIFY_GOVERNMENT`
     
 </dd>
 </dl>
@@ -7697,7 +7712,7 @@ client.TenDlc.BrandEvidence.List(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.BrandEvidence.Upload(BrandID, request) -> *tendlc.UploadBrandEvidenceResponse</code></summary>
+<details><summary><code>client.TenDlc.BrandEvidence.Upload(BrandID, request) -> *wavixgosdk.TenDlcBrandEvidence</code></summary>
 <dl>
 <dd>
 
@@ -7831,7 +7846,7 @@ client.TenDlc.BrandEvidence.Get(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.BrandEvidence.Delete(BrandID, ID) -> *tendlc.DeleteBrandEvidenceResponse</code></summary>
+<details><summary><code>client.TenDlc.BrandEvidence.Delete(BrandID, ID) -> *wavixgosdk.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -7975,7 +7990,7 @@ client.TenDlc.BrandVettings.List(
 <dl>
 <dd>
 
-Requests external vetting for a 10DLC Brand. Supported providers: `AEGIS`, `CV`, `WMC`. Supported classes: `STANDARD`, `ENHANCED`.
+Requests external vetting for a 10DLC Brand. Supported providers: `AEGIS`, `CV`, `WMC`. Supported classes: `STANDARD`, `ENHANCED`. Charges a 10DLC brand vetting fee (Standard or Enhanced); fails with an insufficient-funds error when the balance cannot cover it.
 </dd>
 </dl>
 </dd>
@@ -8192,7 +8207,7 @@ client.TenDlc.BrandVettingAppeals.List(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.BrandVettingAppeals.Create(BrandID, request) -> *tendlc.CreateBrandVettingAppealsResponse</code></summary>
+<details><summary><code>client.TenDlc.BrandVettingAppeals.Create(BrandID, request) -> *wavixgosdk.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -8221,8 +8236,8 @@ Submits an appeal for an external vetting of the 10DLC Brand identified by `bran
 ```go
 request := &tendlc.TenDlcBrandVettingAppealCreateRequest{
         BrandID: "B6AI7PA",
-        AppealCategories: []string{
-            "VERIFY_TAX_ID",
+        AppealCategories: []tendlc.TenDlcBrandVettingAppealCreateRequestAppealCategoriesItem{
+            tendlc.TenDlcBrandVettingAppealCreateRequestAppealCategoriesItemVerifyTaxID,
         },
         Evidence: []string{
             "855dff49-c097-4645-3983-08dcb9856232",
@@ -8255,7 +8270,7 @@ client.TenDlc.BrandVettingAppeals.Create(
 <dl>
 <dd>
 
-**appealCategories:** `[]string` — List of appeal categories. Allowed values: `VERIFY_TAX_ID`, `VERIFY_NON_PROFIT`, `VERIFY_GOVERNMENT`, `LOW_SCORE`.
+**appealCategories:** `[]*tendlc.TenDlcBrandVettingAppealCreateRequestAppealCategoriesItem` — List of appeal categories. Allowed values: `VERIFY_TAX_ID`, `VERIFY_NON_PROFIT`, `VERIFY_GOVERNMENT`, `LOW_SCORE`. `LOW_SCORE` is only valid for vetting appeals — brand identity appeals (`ten_dlc_brand_appeals_create`) do not accept it.
     
 </dd>
 </dl>
@@ -8300,7 +8315,7 @@ client.TenDlc.BrandVettingAppeals.Create(
 </details>
 
 ## TenDlc Campaigns
-<details><summary><code>client.TenDlc.Campaigns.List() -> *tendlc.ListCampaignsResponse</code></summary>
+<details><summary><code>client.TenDlc.Campaigns.List() -> *wavixgosdk.TenDlcCampaignListResponse</code></summary>
 <dl>
 <dd>
 
@@ -8444,7 +8459,7 @@ client.TenDlc.Campaigns.List(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Campaigns.ListByBrand(BrandID) -> *tendlc.ListByBrandCampaignsResponse</code></summary>
+<details><summary><code>client.TenDlc.Campaigns.ListByBrand(BrandID) -> *wavixgosdk.TenDlcCampaignListResponse</code></summary>
 <dl>
 <dd>
 
@@ -8597,7 +8612,7 @@ client.TenDlc.Campaigns.ListByBrand(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Campaigns.Create(BrandID, request) -> *tendlc.CreateCampaignsResponse</code></summary>
+<details><summary><code>client.TenDlc.Campaigns.Create(BrandID, request) -> *wavixgosdk.TenDlcCampaign</code></summary>
 <dl>
 <dd>
 
@@ -8924,7 +8939,7 @@ client.TenDlc.Campaigns.Create(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Campaigns.Get(BrandID, CampaignID) -> *tendlc.GetCampaignsResponse</code></summary>
+<details><summary><code>client.TenDlc.Campaigns.Get(BrandID, CampaignID) -> *wavixgosdk.TenDlcCampaign</code></summary>
 <dl>
 <dd>
 
@@ -8994,7 +9009,7 @@ client.TenDlc.Campaigns.Get(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Campaigns.Update(BrandID, CampaignID, request) -> *tendlc.UpdateCampaignsResponse</code></summary>
+<details><summary><code>client.TenDlc.Campaigns.Update(BrandID, CampaignID, request) -> *wavixgosdk.TenDlcCampaign</code></summary>
 <dl>
 <dd>
 
@@ -9272,7 +9287,7 @@ client.TenDlc.Campaigns.Update(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Campaigns.Delete(BrandID, CampaignID) -> *tendlc.DeleteCampaignsResponse</code></summary>
+<details><summary><code>client.TenDlc.Campaigns.Delete(BrandID, CampaignID) -> *wavixgosdk.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -9480,7 +9495,7 @@ client.TenDlc.Subscriptions.List(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Subscriptions.Create(request) -> *tendlc.CreateSubscriptionsResponse</code></summary>
+<details><summary><code>client.TenDlc.Subscriptions.Create(request) -> *wavixgosdk.TenDlcEventSubscription</code></summary>
 <dl>
 <dd>
 
@@ -9542,7 +9557,7 @@ client.TenDlc.Subscriptions.Create(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Subscriptions.Delete() -> *tendlc.DeleteSubscriptionsResponse</code></summary>
+<details><summary><code>client.TenDlc.Subscriptions.Delete() -> *wavixgosdk.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -9604,7 +9619,7 @@ client.TenDlc.Subscriptions.Delete(
 </details>
 
 ## TenDlc CampaignNumbers
-<details><summary><code>client.TenDlc.CampaignNumbers.Link(BrandID, CampaignID, Number) -> *tendlc.LinkCampaignNumbersResponse</code></summary>
+<details><summary><code>client.TenDlc.CampaignNumbers.Link(BrandID, CampaignID, Number) -> *wavixgosdk.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -9683,7 +9698,7 @@ client.TenDlc.CampaignNumbers.Link(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.CampaignNumbers.Unlink(BrandID, CampaignID, Number) -> *tendlc.UnlinkCampaignNumbersResponse</code></summary>
+<details><summary><code>client.TenDlc.CampaignNumbers.Unlink(BrandID, CampaignID, Number) -> *wavixgosdk.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -9762,7 +9777,7 @@ client.TenDlc.CampaignNumbers.Unlink(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.CampaignNumbers.List(BrandID, CampaignID) -> *tendlc.ListCampaignNumbersResponse</code></summary>
+<details><summary><code>client.TenDlc.CampaignNumbers.List(BrandID, CampaignID) -> *wavixgosdk.TenDlcCampaignNumberListResponse</code></summary>
 <dl>
 <dd>
 
@@ -9833,7 +9848,7 @@ client.TenDlc.CampaignNumbers.List(
 </details>
 
 ## TwoFa Verification
-<details><summary><code>client.TwoFa.Verification.Create(request) -> *twofa.CreateVerificationResponse</code></summary>
+<details><summary><code>client.TwoFa.Verification.Create(request) -> *wavixgosdk.TwoFactorVerificationResponse</code></summary>
 <dl>
 <dd>
 
@@ -9845,7 +9860,7 @@ client.TenDlc.CampaignNumbers.List(
 <dl>
 <dd>
 
-Creates a 2FA verification and sends a one-time password (OTP) to the destination phone number over the selected channel. Requires a 2FA service configured in the Wavix portal; the service is reused to generate and validate OTPs.
+Creates a 2FA verification and sends a real one-time password (OTP) to the destination phone number over the selected channel; this bills the account per OTP sent. Requires a 2FA service configured in the Wavix portal; the service is reused to generate and validate OTPs.
 
 The verification proceeds through three steps:
 1. Create a verification to generate and send an OTP.
@@ -9917,7 +9932,7 @@ client.TwoFa.Verification.Create(
 </dl>
 </details>
 
-<details><summary><code>client.TwoFa.Verification.Resend(SessionID, request) -> *twofa.ResendVerificationResponse</code></summary>
+<details><summary><code>client.TwoFa.Verification.Resend(SessionID, request) -> *wavixgosdk.TwoFactorVerificationResendResponse</code></summary>
 <dl>
 <dd>
 
@@ -9987,7 +10002,7 @@ client.TwoFa.Verification.Resend(
 </dl>
 </details>
 
-<details><summary><code>client.TwoFa.Verification.Check(SessionID, request) -> *twofa.CheckVerificationResponse</code></summary>
+<details><summary><code>client.TwoFa.Verification.Check(SessionID, request) -> *wavixgosdk.TwoFactorVerificationCheckResponse</code></summary>
 <dl>
 <dd>
 
@@ -9999,7 +10014,7 @@ client.TwoFa.Verification.Resend(
 <dl>
 <dd>
 
-Validates the OTP submitted by the end user against the verification identified by `session_id`.
+Validates the OTP submitted by the end user against the verification identified by `session_id`. Non-idempotent — each call consumes one of a limited number of attempts tracked server-side; once exhausted, the verification returns `429` until a new verification is created.
 </dd>
 </dl>
 </dd>
@@ -10277,7 +10292,7 @@ client.TwoFa.Events.List(
 <dl>
 <dd>
 
-Returns a paginated list of active Wavix Embeddable widget tokens for the authenticated account.
+Returns a paginated list of Wavix Embeddable widget tokens for the authenticated account.
 </dd>
 </dl>
 </dd>
@@ -10292,11 +10307,36 @@ Returns a paginated list of active Wavix Embeddable widget tokens for the authen
 <dd>
 
 ```go
+request := &webrtc.ListTokensRequest{}
 client.Webrtc.Tokens.List(
         context.TODO(),
+        request,
     )
 }
 ```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int` — Page number to retrieve. Default `1`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**perPage:** `*int` — Number of records to return per page. Default `25`.
+    
 </dd>
 </dl>
 </dd>
@@ -10378,7 +10418,7 @@ client.Webrtc.Tokens.Create(
 <dl>
 <dd>
 
-**ttl:** `*int` — Time to live in seconds. Pass `null` for no expiration.
+**ttl:** `*int` — Time to live in seconds. Default `3600`. Pass `null` for no expiration.
     
 </dd>
 </dl>

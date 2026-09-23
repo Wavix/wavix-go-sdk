@@ -5,6 +5,7 @@ package regioncities
 import (
 	context "context"
 
+	wavixgosdk "github.com/wavix/wavix-go-sdk"
 	buy "github.com/wavix/wavix-go-sdk/buy"
 	core "github.com/wavix/wavix-go-sdk/core"
 	internal "github.com/wavix/wavix-go-sdk/internal"
@@ -39,7 +40,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *buy.ListRegionCitiesRequest,
 	opts ...option.RequestOption,
-) (*buy.ListRegionCitiesResponse, error) {
+) (*wavixgosdk.CityListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,

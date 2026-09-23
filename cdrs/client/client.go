@@ -71,7 +71,7 @@ func (c *Client) Search(
 	return response.Body, nil
 }
 
-// Transcribes the recording of the call identified by `call_id`. Transcription is asynchronous; poll the transcription endpoint for the result.
+// Transcribes the recording of the call identified by `call_id`. Transcription is asynchronous; poll the transcription endpoint for the result. Billed per minute at the account's call-transcription rate; fails with an insufficient-funds error when the balance cannot cover it.
 func (c *Client) Retranscribe(
 	ctx context.Context,
 	request *wavixgosdk.CdrRetranscriptionRequest,

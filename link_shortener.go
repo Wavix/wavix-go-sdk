@@ -19,13 +19,13 @@ var (
 )
 
 type ShortLinkCreateRequest struct {
-	// Target URL to shorten.
+	// Target URL to shorten. Must be `https://` — the short link is publicly resolvable and redirects any visitor here, so only pass URLs you trust; this endpoint is a common target for open-redirect and phishing abuse.
 	Link string `json:"link" url:"-"`
 	// Expiration date and time in ISO 8601 format.
 	ExpirationTime *time.Time `json:"expiration_time,omitempty" url:"-"`
-	// Fallback URL for expired or invalid links.
+	// Fallback URL for expired or invalid links. Must be `https://` — same open-redirect/phishing considerations as `link` apply.
 	FallbackURL *string `json:"fallback_url,omitempty" url:"-"`
-	// Phone number for the short link.
+	// Phone number the short link is associated with, in E.164 format (without the leading `+`). Used to attribute click metrics returned by short link metrics list.
 	Phone *string `json:"phone,omitempty" url:"-"`
 	// UTM campaign name for tracking insights.
 	UtmCampaign *string `json:"utm_campaign,omitempty" url:"-"`

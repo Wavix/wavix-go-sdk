@@ -120,9 +120,7 @@ func TestNumberValidatorCreateBulkWithWireMock(
 			"971501390098",
 			"971504359195",
 		},
-		Type:  wavixgosdk.PhoneNumberValidationTypeFormat,
-		Async: true,
-		Force: true,
+		Type: wavixgosdk.PhoneNumberValidationTypeFormat,
 	}
 	_, invocationErr := client.NumberValidator.CreateBulk(
 		context.TODO(),

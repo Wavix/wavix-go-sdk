@@ -144,80 +144,9 @@ func TestSettersMarkExplicitRemoveCartRequest(t *testing.T) {
 
 }
 
-func TestSettersCheckoutCartResponse(t *testing.T) {
-	t.Run("SetSuccess", func(t *testing.T) {
-		obj := &CheckoutCartResponse{}
-		var fernTestValueSuccess bool
-		obj.SetSuccess(fernTestValueSuccess)
-		assert.Equal(t, fernTestValueSuccess, obj.Success)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestGettersCheckoutCartResponse(t *testing.T) {
-	t.Run("GetSuccess", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &CheckoutCartResponse{}
-		var expected bool
-		obj.Success = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetSuccess(), "getter should return the property value")
-	})
-
-	t.Run("GetSuccess_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *CheckoutCartResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetSuccess() // Should return zero value
-	})
-
-}
-
-func TestSettersMarkExplicitCheckoutCartResponse(t *testing.T) {
-	t.Run("SetSuccess_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &CheckoutCartResponse{}
-		var fernTestValueSuccess bool
-
-		// Act
-		obj.SetSuccess(fernTestValueSuccess)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersGetCartResponse(t *testing.T) {
+func TestSettersCartResponse(t *testing.T) {
 	t.Run("SetDids", func(t *testing.T) {
-		obj := &GetCartResponse{}
+		obj := &CartResponse{}
 		var fernTestValueDids []*AvailableNumber
 		obj.SetDids(fernTestValueDids)
 		assert.Equal(t, fernTestValueDids, obj.Dids)
@@ -225,8 +154,8 @@ func TestSettersGetCartResponse(t *testing.T) {
 	})
 
 	t.Run("SetDocTypes", func(t *testing.T) {
-		obj := &GetCartResponse{}
-		var fernTestValueDocTypes []*DocumentType
+		obj := &CartResponse{}
+		var fernTestValueDocTypes []*DocumentTypeInfo
 		obj.SetDocTypes(fernTestValueDocTypes)
 		assert.Equal(t, fernTestValueDocTypes, obj.DocTypes)
 		assert.NotNil(t, obj.explicitFields)
@@ -234,11 +163,11 @@ func TestSettersGetCartResponse(t *testing.T) {
 
 }
 
-func TestGettersGetCartResponse(t *testing.T) {
+func TestGettersCartResponse(t *testing.T) {
 	t.Run("GetDids", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetCartResponse{}
+		obj := &CartResponse{}
 		var expected []*AvailableNumber
 		obj.Dids = expected
 
@@ -249,7 +178,7 @@ func TestGettersGetCartResponse(t *testing.T) {
 	t.Run("GetDids_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetCartResponse{}
+		obj := &CartResponse{}
 		obj.Dids = nil
 
 		// Act & Assert
@@ -258,7 +187,7 @@ func TestGettersGetCartResponse(t *testing.T) {
 
 	t.Run("GetDids_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetCartResponse
+		var obj *CartResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -271,8 +200,8 @@ func TestGettersGetCartResponse(t *testing.T) {
 	t.Run("GetDocTypes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetCartResponse{}
-		var expected []*DocumentType
+		obj := &CartResponse{}
+		var expected []*DocumentTypeInfo
 		obj.DocTypes = expected
 
 		// Act & Assert
@@ -282,7 +211,7 @@ func TestGettersGetCartResponse(t *testing.T) {
 	t.Run("GetDocTypes_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetCartResponse{}
+		obj := &CartResponse{}
 		obj.DocTypes = nil
 
 		// Act & Assert
@@ -291,7 +220,7 @@ func TestGettersGetCartResponse(t *testing.T) {
 
 	t.Run("GetDocTypes_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetCartResponse
+		var obj *CartResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -303,11 +232,11 @@ func TestGettersGetCartResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitGetCartResponse(t *testing.T) {
+func TestSettersMarkExplicitCartResponse(t *testing.T) {
 	t.Run("SetDids_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetCartResponse{}
+		obj := &CartResponse{}
 		var fernTestValueDids []*AvailableNumber
 
 		// Act
@@ -338,8 +267,8 @@ func TestSettersMarkExplicitGetCartResponse(t *testing.T) {
 	t.Run("SetDocTypes_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetCartResponse{}
-		var fernTestValueDocTypes []*DocumentType
+		obj := &CartResponse{}
+		var fernTestValueDocTypes []*DocumentTypeInfo
 
 		// Act
 		obj.SetDocTypes(fernTestValueDocTypes)
@@ -368,82 +297,11 @@ func TestSettersMarkExplicitGetCartResponse(t *testing.T) {
 
 }
 
-func TestSettersRemoveCartResponse(t *testing.T) {
-	t.Run("SetSuccess", func(t *testing.T) {
-		obj := &RemoveCartResponse{}
-		var fernTestValueSuccess bool
-		obj.SetSuccess(fernTestValueSuccess)
-		assert.Equal(t, fernTestValueSuccess, obj.Success)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestGettersRemoveCartResponse(t *testing.T) {
-	t.Run("GetSuccess", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &RemoveCartResponse{}
-		var expected bool
-		obj.Success = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetSuccess(), "getter should return the property value")
-	})
-
-	t.Run("GetSuccess_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *RemoveCartResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetSuccess() // Should return zero value
-	})
-
-}
-
-func TestSettersMarkExplicitRemoveCartResponse(t *testing.T) {
-	t.Run("SetSuccess_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &RemoveCartResponse{}
-		var fernTestValueSuccess bool
-
-		// Act
-		obj.SetSuccess(fernTestValueSuccess)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestJSONMarshalingCheckoutCartResponse(t *testing.T) {
+func TestJSONMarshalingCartResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &CheckoutCartResponse{}
+		obj := &CartResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -452,144 +310,46 @@ func TestJSONMarshalingCheckoutCartResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled CheckoutCartResponse
+		var unmarshaled CartResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj CheckoutCartResponse
+		var obj CartResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj CheckoutCartResponse
+		var obj CartResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingGetCartResponse(t *testing.T) {
-	t.Run("MarshalUnmarshal", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &GetCartResponse{}
-
-		// Act - Marshal to JSON
-		data, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed")
-		assert.NotNil(t, data, "marshaled data should not be nil")
-		assert.NotEmpty(t, data, "marshaled data should not be empty")
-
-		// Unmarshal back and verify round-trip
-		var unmarshaled GetCartResponse
-		err = json.Unmarshal(data, &unmarshaled)
-		assert.NoError(t, err, "round-trip unmarshal should succeed")
-	})
-
-	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
-		t.Parallel()
-		var obj GetCartResponse
-		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
-		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
-	})
-
-	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
-		t.Parallel()
-		var obj GetCartResponse
-		err := json.Unmarshal([]byte(`{}`), &obj)
-		assert.NoError(t, err, "unmarshaling empty object should succeed")
-	})
-}
-
-func TestJSONMarshalingRemoveCartResponse(t *testing.T) {
-	t.Run("MarshalUnmarshal", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &RemoveCartResponse{}
-
-		// Act - Marshal to JSON
-		data, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed")
-		assert.NotNil(t, data, "marshaled data should not be nil")
-		assert.NotEmpty(t, data, "marshaled data should not be empty")
-
-		// Unmarshal back and verify round-trip
-		var unmarshaled RemoveCartResponse
-		err = json.Unmarshal(data, &unmarshaled)
-		assert.NoError(t, err, "round-trip unmarshal should succeed")
-	})
-
-	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
-		t.Parallel()
-		var obj RemoveCartResponse
-		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
-		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
-	})
-
-	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
-		t.Parallel()
-		var obj RemoveCartResponse
-		err := json.Unmarshal([]byte(`{}`), &obj)
-		assert.NoError(t, err, "unmarshaling empty object should succeed")
-	})
-}
-
-func TestStringCheckoutCartResponse(t *testing.T) {
+func TestStringCartResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &CheckoutCartResponse{}
+		obj := &CartResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *CheckoutCartResponse
+		var obj *CartResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringGetCartResponse(t *testing.T) {
-	t.Run("StringMethod", func(t *testing.T) {
-		t.Parallel()
-		obj := &GetCartResponse{}
-		result := obj.String()
-		assert.NotEmpty(t, result, "String() should return a non-empty representation")
-	})
-
-	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *GetCartResponse
-		result := obj.String()
-		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
-	})
-}
-
-func TestStringRemoveCartResponse(t *testing.T) {
-	t.Run("StringMethod", func(t *testing.T) {
-		t.Parallel()
-		obj := &RemoveCartResponse{}
-		result := obj.String()
-		assert.NotEmpty(t, result, "String() should return a non-empty representation")
-	})
-
-	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *RemoveCartResponse
-		result := obj.String()
-		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
-	})
-}
-
-func TestExtraPropertiesCheckoutCartResponse(t *testing.T) {
+func TestExtraPropertiesCartResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &CheckoutCartResponse{}
+		obj := &CartResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -603,53 +363,7 @@ func TestExtraPropertiesCheckoutCartResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *CheckoutCartResponse
-		extraProps := obj.GetExtraProperties()
-		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
-	})
-}
-
-func TestExtraPropertiesGetCartResponse(t *testing.T) {
-	t.Run("GetExtraProperties", func(t *testing.T) {
-		t.Parallel()
-		obj := &GetCartResponse{}
-		// Should not panic when calling GetExtraProperties()
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("GetExtraProperties() panicked: %v", r)
-			}
-		}()
-		extraProps := obj.GetExtraProperties()
-		// Result can be nil or an empty/non-empty map
-		_ = extraProps
-	})
-
-	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *GetCartResponse
-		extraProps := obj.GetExtraProperties()
-		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
-	})
-}
-
-func TestExtraPropertiesRemoveCartResponse(t *testing.T) {
-	t.Run("GetExtraProperties", func(t *testing.T) {
-		t.Parallel()
-		obj := &RemoveCartResponse{}
-		// Should not panic when calling GetExtraProperties()
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("GetExtraProperties() panicked: %v", r)
-			}
-		}()
-		extraProps := obj.GetExtraProperties()
-		// Result can be nil or an empty/non-empty map
-		_ = extraProps
-	})
-
-	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *RemoveCartResponse
+		var obj *CartResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

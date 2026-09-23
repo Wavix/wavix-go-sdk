@@ -89,7 +89,7 @@ func TestCdrsTranscriptionGetWithWireMock(
 		option.WithToken("test-token"),
 	)
 	request := &cdrs.GetTranscriptionRequest{
-		CallID: "bbaa37bf-430a-46da-ade3-c248e407016",
+		CallID: "bbaa37bf-430a-46da-ade3-c248e4070160",
 	}
 	_, invocationErr := client.Cdrs.Transcription.Get(
 		context.TODO(),
@@ -100,5 +100,5 @@ func TestCdrsTranscriptionGetWithWireMock(
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCdrsTranscriptionGetWithWireMock", "GET", "/v1/cdrs/bbaa37bf-430a-46da-ade3-c248e407016/transcription", nil, 1)
+	VerifyRequestCount(t, "TestCdrsTranscriptionGetWithWireMock", "GET", "/v1/cdrs/bbaa37bf-430a-46da-ade3-c248e4070160/transcription", nil, 1)
 }

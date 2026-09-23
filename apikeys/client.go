@@ -56,7 +56,7 @@ func (c *Client) Create(
 	ctx context.Context,
 	request *wavixgosdk.APIKeyCreateRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.APIKey, error) {
+) (wavixgosdk.APIKeyWithSecret, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,

@@ -60,7 +60,7 @@ func (c *Client) Create(
 	ctx context.Context,
 	request *tendlc.CreateBrandAppealsRequest,
 	opts ...option.RequestOption,
-) (*tendlc.CreateBrandAppealsResponse, error) {
+) (*wavixgosdk.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,

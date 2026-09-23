@@ -35,6 +35,7 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 
 func (r *RawClient) List(
 	ctx context.Context,
+	request *webrtc.ListTokensRequest,
 	opts ...option.RequestOption,
 ) (*core.Response[*wavixgosdk.WebRtcTokensListResponse], error) {
 	options := core.NewRequestOptions(opts...)
@@ -44,6 +45,13 @@ func (r *RawClient) List(
 		"https://api.wavix.com",
 	)
 	endpointURL := baseURL + "/v2/webrtc/tokens"
+	queryParams, err := internal.QueryValues(request)
+	if err != nil {
+		return nil, err
+	}
+	if len(queryParams) > 0 {
+		endpointURL += "?" + queryParams.Encode()
+	}
 	headers := internal.MergeHeaders(
 		r.options.ToHeader(),
 		options.ToHeader(),

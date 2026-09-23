@@ -4,7 +4,6 @@ package smsandmms
 
 import (
 	json "encoding/json"
-	fmt "fmt"
 	wavixgosdk "github.com/wavix/wavix-go-sdk"
 	internal "github.com/wavix/wavix-go-sdk/internal"
 	big "math/big"
@@ -131,89 +130,4 @@ func (l *ListOptOutsRequest) SetPage(page *int) {
 func (l *ListOptOutsRequest) SetPerPage(perPage *int) {
 	l.PerPage = perPage
 	l.require(listOptOutsRequestFieldPerPage)
-}
-
-var (
-	createOptOutsResponseFieldSuccess = big.NewInt(1 << 0)
-)
-
-type CreateOptOutsResponse struct {
-	// Indicates whether the request was successful.
-	Success bool `json:"success" url:"success"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (c *CreateOptOutsResponse) GetSuccess() bool {
-	if c == nil {
-		return false
-	}
-	return c.Success
-}
-
-func (c *CreateOptOutsResponse) GetExtraProperties() map[string]interface{} {
-	if c == nil {
-		return nil
-	}
-	return c.extraProperties
-}
-
-func (c *CreateOptOutsResponse) require(field *big.Int) {
-	if c.explicitFields == nil {
-		c.explicitFields = big.NewInt(0)
-	}
-	c.explicitFields.Or(c.explicitFields, field)
-}
-
-// SetSuccess sets the Success field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CreateOptOutsResponse) SetSuccess(success bool) {
-	c.Success = success
-	c.require(createOptOutsResponseFieldSuccess)
-}
-
-func (c *CreateOptOutsResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler CreateOptOutsResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*c = CreateOptOutsResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *c)
-	if err != nil {
-		return err
-	}
-	c.extraProperties = extraProperties
-	c.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (c *CreateOptOutsResponse) MarshalJSON() ([]byte, error) {
-	type embed CreateOptOutsResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*c),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (c *CreateOptOutsResponse) String() string {
-	if c == nil {
-		return "<nil>"
-	}
-	if len(c.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(c); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", c)
 }

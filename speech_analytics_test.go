@@ -630,204 +630,9 @@ func TestSettersMarkExplicitFileTranscriptTurn(t *testing.T) {
 
 }
 
-func TestSettersCreateSpeechAnalyticsResponse(t *testing.T) {
-	t.Run("SetFile", func(t *testing.T) {
-		obj := &CreateSpeechAnalyticsResponse{}
-		var fernTestValueFile string
-		obj.SetFile(fernTestValueFile)
-		assert.Equal(t, fernTestValueFile, obj.File)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetRequestID", func(t *testing.T) {
-		obj := &CreateSpeechAnalyticsResponse{}
-		var fernTestValueRequestID string
-		obj.SetRequestID(fernTestValueRequestID)
-		assert.Equal(t, fernTestValueRequestID, obj.RequestID)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetSuccess", func(t *testing.T) {
-		obj := &CreateSpeechAnalyticsResponse{}
-		var fernTestValueSuccess bool
-		obj.SetSuccess(fernTestValueSuccess)
-		assert.Equal(t, fernTestValueSuccess, obj.Success)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestGettersCreateSpeechAnalyticsResponse(t *testing.T) {
-	t.Run("GetFile", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &CreateSpeechAnalyticsResponse{}
-		var expected string
-		obj.File = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetFile(), "getter should return the property value")
-	})
-
-	t.Run("GetFile_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *CreateSpeechAnalyticsResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetFile() // Should return zero value
-	})
-
-	t.Run("GetRequestID", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &CreateSpeechAnalyticsResponse{}
-		var expected string
-		obj.RequestID = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetRequestID(), "getter should return the property value")
-	})
-
-	t.Run("GetRequestID_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *CreateSpeechAnalyticsResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetRequestID() // Should return zero value
-	})
-
-	t.Run("GetSuccess", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &CreateSpeechAnalyticsResponse{}
-		var expected bool
-		obj.Success = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetSuccess(), "getter should return the property value")
-	})
-
-	t.Run("GetSuccess_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *CreateSpeechAnalyticsResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetSuccess() // Should return zero value
-	})
-
-}
-
-func TestSettersMarkExplicitCreateSpeechAnalyticsResponse(t *testing.T) {
-	t.Run("SetFile_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &CreateSpeechAnalyticsResponse{}
-		var fernTestValueFile string
-
-		// Act
-		obj.SetFile(fernTestValueFile)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetRequestID_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &CreateSpeechAnalyticsResponse{}
-		var fernTestValueRequestID string
-
-		// Act
-		obj.SetRequestID(fernTestValueRequestID)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetSuccess_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &CreateSpeechAnalyticsResponse{}
-		var fernTestValueSuccess bool
-
-		// Act
-		obj.SetSuccess(fernTestValueSuccess)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersGetSpeechAnalyticsResponse(t *testing.T) {
+func TestSettersFileTranscriptionResponse(t *testing.T) {
 	t.Run("SetTranscript", func(t *testing.T) {
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var fernTestValueTranscript *FileTranscriptResponse
 		obj.SetTranscript(fernTestValueTranscript)
 		assert.Equal(t, fernTestValueTranscript, obj.Transcript)
@@ -835,7 +640,7 @@ func TestSettersGetSpeechAnalyticsResponse(t *testing.T) {
 	})
 
 	t.Run("SetTurns", func(t *testing.T) {
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var fernTestValueTurns []*FileTranscriptTurn
 		obj.SetTurns(fernTestValueTurns)
 		assert.Equal(t, fernTestValueTurns, obj.Turns)
@@ -843,7 +648,7 @@ func TestSettersGetSpeechAnalyticsResponse(t *testing.T) {
 	})
 
 	t.Run("SetRequestID", func(t *testing.T) {
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var fernTestValueRequestID string
 		obj.SetRequestID(fernTestValueRequestID)
 		assert.Equal(t, fernTestValueRequestID, obj.RequestID)
@@ -851,15 +656,15 @@ func TestSettersGetSpeechAnalyticsResponse(t *testing.T) {
 	})
 
 	t.Run("SetLanguage", func(t *testing.T) {
-		obj := &GetSpeechAnalyticsResponse{}
-		var fernTestValueLanguage *GetSpeechAnalyticsResponseLanguage
+		obj := &FileTranscriptionResponse{}
+		var fernTestValueLanguage *TranscriptionLanguage
 		obj.SetLanguage(fernTestValueLanguage)
 		assert.Equal(t, fernTestValueLanguage, obj.Language)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetDuration", func(t *testing.T) {
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var fernTestValueDuration *int
 		obj.SetDuration(fernTestValueDuration)
 		assert.Equal(t, fernTestValueDuration, obj.Duration)
@@ -867,7 +672,7 @@ func TestSettersGetSpeechAnalyticsResponse(t *testing.T) {
 	})
 
 	t.Run("SetCharge", func(t *testing.T) {
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var fernTestValueCharge string
 		obj.SetCharge(fernTestValueCharge)
 		assert.Equal(t, fernTestValueCharge, obj.Charge)
@@ -875,15 +680,15 @@ func TestSettersGetSpeechAnalyticsResponse(t *testing.T) {
 	})
 
 	t.Run("SetStatus", func(t *testing.T) {
-		obj := &GetSpeechAnalyticsResponse{}
-		var fernTestValueStatus GetSpeechAnalyticsResponseStatus
+		obj := &FileTranscriptionResponse{}
+		var fernTestValueStatus TranscriptionStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTranscriptionDate", func(t *testing.T) {
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var fernTestValueTranscriptionDate time.Time
 		obj.SetTranscriptionDate(fernTestValueTranscriptionDate)
 		assert.Equal(t, fernTestValueTranscriptionDate, obj.TranscriptionDate)
@@ -891,7 +696,7 @@ func TestSettersGetSpeechAnalyticsResponse(t *testing.T) {
 	})
 
 	t.Run("SetTranscriptionScore", func(t *testing.T) {
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var fernTestValueTranscriptionScore *string
 		obj.SetTranscriptionScore(fernTestValueTranscriptionScore)
 		assert.Equal(t, fernTestValueTranscriptionScore, obj.TranscriptionScore)
@@ -899,7 +704,7 @@ func TestSettersGetSpeechAnalyticsResponse(t *testing.T) {
 	})
 
 	t.Run("SetTranscriptionSummary", func(t *testing.T) {
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var fernTestValueTranscriptionSummary *string
 		obj.SetTranscriptionSummary(fernTestValueTranscriptionSummary)
 		assert.Equal(t, fernTestValueTranscriptionSummary, obj.TranscriptionSummary)
@@ -907,7 +712,7 @@ func TestSettersGetSpeechAnalyticsResponse(t *testing.T) {
 	})
 
 	t.Run("SetOriginalFile", func(t *testing.T) {
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var fernTestValueOriginalFile string
 		obj.SetOriginalFile(fernTestValueOriginalFile)
 		assert.Equal(t, fernTestValueOriginalFile, obj.OriginalFile)
@@ -916,11 +721,11 @@ func TestSettersGetSpeechAnalyticsResponse(t *testing.T) {
 
 }
 
-func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
+func TestGettersFileTranscriptionResponse(t *testing.T) {
 	t.Run("GetTranscript", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var expected *FileTranscriptResponse
 		obj.Transcript = expected
 
@@ -931,7 +736,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("GetTranscript_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		obj.Transcript = nil
 
 		// Act & Assert
@@ -940,7 +745,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 
 	t.Run("GetTranscript_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetSpeechAnalyticsResponse
+		var obj *FileTranscriptionResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -953,7 +758,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("GetTurns", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var expected []*FileTranscriptTurn
 		obj.Turns = expected
 
@@ -964,7 +769,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("GetTurns_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		obj.Turns = nil
 
 		// Act & Assert
@@ -973,7 +778,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 
 	t.Run("GetTurns_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetSpeechAnalyticsResponse
+		var obj *FileTranscriptionResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -986,7 +791,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("GetRequestID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var expected string
 		obj.RequestID = expected
 
@@ -996,7 +801,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 
 	t.Run("GetRequestID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetSpeechAnalyticsResponse
+		var obj *FileTranscriptionResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1009,8 +814,8 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("GetLanguage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
-		var expected *GetSpeechAnalyticsResponseLanguage
+		obj := &FileTranscriptionResponse{}
+		var expected *TranscriptionLanguage
 		obj.Language = expected
 
 		// Act & Assert
@@ -1020,7 +825,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("GetLanguage_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		obj.Language = nil
 
 		// Act & Assert
@@ -1029,7 +834,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 
 	t.Run("GetLanguage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetSpeechAnalyticsResponse
+		var obj *FileTranscriptionResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1042,7 +847,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("GetDuration", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var expected *int
 		obj.Duration = expected
 
@@ -1053,7 +858,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("GetDuration_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		obj.Duration = nil
 
 		// Act & Assert
@@ -1062,7 +867,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 
 	t.Run("GetDuration_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetSpeechAnalyticsResponse
+		var obj *FileTranscriptionResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1075,7 +880,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("GetCharge", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var expected string
 		obj.Charge = expected
 
@@ -1085,7 +890,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 
 	t.Run("GetCharge_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetSpeechAnalyticsResponse
+		var obj *FileTranscriptionResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1098,8 +903,8 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("GetStatus", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
-		var expected GetSpeechAnalyticsResponseStatus
+		obj := &FileTranscriptionResponse{}
+		var expected TranscriptionStatus
 		obj.Status = expected
 
 		// Act & Assert
@@ -1108,7 +913,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 
 	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetSpeechAnalyticsResponse
+		var obj *FileTranscriptionResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1121,7 +926,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("GetTranscriptionDate", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var expected time.Time
 		obj.TranscriptionDate = expected
 
@@ -1131,7 +936,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 
 	t.Run("GetTranscriptionDate_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetSpeechAnalyticsResponse
+		var obj *FileTranscriptionResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1144,7 +949,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("GetTranscriptionScore", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var expected *string
 		obj.TranscriptionScore = expected
 
@@ -1155,7 +960,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("GetTranscriptionScore_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		obj.TranscriptionScore = nil
 
 		// Act & Assert
@@ -1164,7 +969,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 
 	t.Run("GetTranscriptionScore_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetSpeechAnalyticsResponse
+		var obj *FileTranscriptionResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1177,7 +982,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("GetTranscriptionSummary", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var expected *string
 		obj.TranscriptionSummary = expected
 
@@ -1188,7 +993,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("GetTranscriptionSummary_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		obj.TranscriptionSummary = nil
 
 		// Act & Assert
@@ -1197,7 +1002,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 
 	t.Run("GetTranscriptionSummary_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetSpeechAnalyticsResponse
+		var obj *FileTranscriptionResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1210,7 +1015,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("GetOriginalFile", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var expected string
 		obj.OriginalFile = expected
 
@@ -1220,7 +1025,7 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 
 	t.Run("GetOriginalFile_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetSpeechAnalyticsResponse
+		var obj *FileTranscriptionResponse
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1232,11 +1037,11 @@ func TestGettersGetSpeechAnalyticsResponse(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitGetSpeechAnalyticsResponse(t *testing.T) {
+func TestSettersMarkExplicitFileTranscriptionResponse(t *testing.T) {
 	t.Run("SetTranscript_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var fernTestValueTranscript *FileTranscriptResponse
 
 		// Act
@@ -1267,7 +1072,7 @@ func TestSettersMarkExplicitGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("SetTurns_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var fernTestValueTurns []*FileTranscriptTurn
 
 		// Act
@@ -1298,7 +1103,7 @@ func TestSettersMarkExplicitGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("SetRequestID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var fernTestValueRequestID string
 
 		// Act
@@ -1329,8 +1134,8 @@ func TestSettersMarkExplicitGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("SetLanguage_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
-		var fernTestValueLanguage *GetSpeechAnalyticsResponseLanguage
+		obj := &FileTranscriptionResponse{}
+		var fernTestValueLanguage *TranscriptionLanguage
 
 		// Act
 		obj.SetLanguage(fernTestValueLanguage)
@@ -1360,7 +1165,7 @@ func TestSettersMarkExplicitGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("SetDuration_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var fernTestValueDuration *int
 
 		// Act
@@ -1391,7 +1196,7 @@ func TestSettersMarkExplicitGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("SetCharge_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var fernTestValueCharge string
 
 		// Act
@@ -1422,8 +1227,8 @@ func TestSettersMarkExplicitGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
-		var fernTestValueStatus GetSpeechAnalyticsResponseStatus
+		obj := &FileTranscriptionResponse{}
+		var fernTestValueStatus TranscriptionStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -1453,7 +1258,7 @@ func TestSettersMarkExplicitGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("SetTranscriptionDate_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var fernTestValueTranscriptionDate time.Time
 
 		// Act
@@ -1484,7 +1289,7 @@ func TestSettersMarkExplicitGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("SetTranscriptionScore_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var fernTestValueTranscriptionScore *string
 
 		// Act
@@ -1515,7 +1320,7 @@ func TestSettersMarkExplicitGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("SetTranscriptionSummary_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var fernTestValueTranscriptionSummary *string
 
 		// Act
@@ -1546,7 +1351,7 @@ func TestSettersMarkExplicitGetSpeechAnalyticsResponse(t *testing.T) {
 	t.Run("SetOriginalFile_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		var fernTestValueOriginalFile string
 
 		// Act
@@ -1576,37 +1381,199 @@ func TestSettersMarkExplicitGetSpeechAnalyticsResponse(t *testing.T) {
 
 }
 
-func TestJSONMarshalingCreateSpeechAnalyticsResponse(t *testing.T) {
-	t.Run("MarshalUnmarshal", func(t *testing.T) {
+func TestSettersSubmitFileTranscriptionResponse(t *testing.T) {
+	t.Run("SetFile", func(t *testing.T) {
+		obj := &SubmitFileTranscriptionResponse{}
+		var fernTestValueFile string
+		obj.SetFile(fernTestValueFile)
+		assert.Equal(t, fernTestValueFile, obj.File)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRequestID", func(t *testing.T) {
+		obj := &SubmitFileTranscriptionResponse{}
+		var fernTestValueRequestID string
+		obj.SetRequestID(fernTestValueRequestID)
+		assert.Equal(t, fernTestValueRequestID, obj.RequestID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSuccess", func(t *testing.T) {
+		obj := &SubmitFileTranscriptionResponse{}
+		var fernTestValueSuccess bool
+		obj.SetSuccess(fernTestValueSuccess)
+		assert.Equal(t, fernTestValueSuccess, obj.Success)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersSubmitFileTranscriptionResponse(t *testing.T) {
+	t.Run("GetFile", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &CreateSpeechAnalyticsResponse{}
+		obj := &SubmitFileTranscriptionResponse{}
+		var expected string
+		obj.File = expected
 
-		// Act - Marshal to JSON
-		data, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed")
-		assert.NotNil(t, data, "marshaled data should not be nil")
-		assert.NotEmpty(t, data, "marshaled data should not be empty")
-
-		// Unmarshal back and verify round-trip
-		var unmarshaled CreateSpeechAnalyticsResponse
-		err = json.Unmarshal(data, &unmarshaled)
-		assert.NoError(t, err, "round-trip unmarshal should succeed")
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFile(), "getter should return the property value")
 	})
 
-	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+	t.Run("GetFile_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj CreateSpeechAnalyticsResponse
-		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
-		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+		var obj *SubmitFileTranscriptionResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFile() // Should return zero value
 	})
 
-	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+	t.Run("GetRequestID", func(t *testing.T) {
 		t.Parallel()
-		var obj CreateSpeechAnalyticsResponse
-		err := json.Unmarshal([]byte(`{}`), &obj)
-		assert.NoError(t, err, "unmarshaling empty object should succeed")
+		// Arrange
+		obj := &SubmitFileTranscriptionResponse{}
+		var expected string
+		obj.RequestID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRequestID(), "getter should return the property value")
 	})
+
+	t.Run("GetRequestID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitFileTranscriptionResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRequestID() // Should return zero value
+	})
+
+	t.Run("GetSuccess", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitFileTranscriptionResponse{}
+		var expected bool
+		obj.Success = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSuccess(), "getter should return the property value")
+	})
+
+	t.Run("GetSuccess_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitFileTranscriptionResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSuccess() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitSubmitFileTranscriptionResponse(t *testing.T) {
+	t.Run("SetFile_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitFileTranscriptionResponse{}
+		var fernTestValueFile string
+
+		// Act
+		obj.SetFile(fernTestValueFile)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRequestID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitFileTranscriptionResponse{}
+		var fernTestValueRequestID string
+
+		// Act
+		obj.SetRequestID(fernTestValueRequestID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSuccess_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitFileTranscriptionResponse{}
+		var fernTestValueSuccess bool
+
+		// Act
+		obj.SetSuccess(fernTestValueSuccess)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 }
 
 func TestJSONMarshalingFileTranscriptResponse(t *testing.T) {
@@ -1675,11 +1642,11 @@ func TestJSONMarshalingFileTranscriptTurn(t *testing.T) {
 	})
 }
 
-func TestJSONMarshalingGetSpeechAnalyticsResponse(t *testing.T) {
+func TestJSONMarshalingFileTranscriptionResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -1688,39 +1655,56 @@ func TestJSONMarshalingGetSpeechAnalyticsResponse(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled GetSpeechAnalyticsResponse
+		var unmarshaled FileTranscriptionResponse
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj GetSpeechAnalyticsResponse
+		var obj FileTranscriptionResponse
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj GetSpeechAnalyticsResponse
+		var obj FileTranscriptionResponse
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestStringCreateSpeechAnalyticsResponse(t *testing.T) {
-	t.Run("StringMethod", func(t *testing.T) {
+func TestJSONMarshalingSubmitFileTranscriptionResponse(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
-		obj := &CreateSpeechAnalyticsResponse{}
-		result := obj.String()
-		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+		// Arrange
+		obj := &SubmitFileTranscriptionResponse{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled SubmitFileTranscriptionResponse
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
-	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj *CreateSpeechAnalyticsResponse
-		result := obj.String()
-		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+		var obj SubmitFileTranscriptionResponse
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj SubmitFileTranscriptionResponse
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
@@ -1756,121 +1740,35 @@ func TestStringFileTranscriptTurn(t *testing.T) {
 	})
 }
 
-func TestStringGetSpeechAnalyticsResponse(t *testing.T) {
+func TestStringFileTranscriptionResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetSpeechAnalyticsResponse
+		var obj *FileTranscriptionResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestEnumGetSpeechAnalyticsResponseLanguage(t *testing.T) {
-	t.Run("NewFromString_en", func(t *testing.T) {
+func TestStringSubmitFileTranscriptionResponse(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewGetSpeechAnalyticsResponseLanguageFromString("en")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, GetSpeechAnalyticsResponseLanguage("en"), val, "enum value should match expected wire value")
+		obj := &SubmitFileTranscriptionResponse{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
-	t.Run("NewFromString_de", func(t *testing.T) {
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewGetSpeechAnalyticsResponseLanguageFromString("de")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, GetSpeechAnalyticsResponseLanguage("de"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_es", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewGetSpeechAnalyticsResponseLanguageFromString("es")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, GetSpeechAnalyticsResponseLanguage("es"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_fr", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewGetSpeechAnalyticsResponseLanguageFromString("fr")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, GetSpeechAnalyticsResponseLanguage("fr"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_it", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewGetSpeechAnalyticsResponseLanguageFromString("it")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, GetSpeechAnalyticsResponseLanguage("it"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewGetSpeechAnalyticsResponseLanguageFromString("invalid_value_that_does_not_exist")
-		assert.Error(t, err)
-	})
-
-	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewGetSpeechAnalyticsResponseLanguageFromString("en")
-		assert.NoError(t, err)
-		ptr := val.Ptr()
-		assert.NotNil(t, ptr)
-		assert.Equal(t, val, *ptr)
-	})
-}
-
-func TestEnumGetSpeechAnalyticsResponseStatus(t *testing.T) {
-	t.Run("NewFromString_completed", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewGetSpeechAnalyticsResponseStatusFromString("completed")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, GetSpeechAnalyticsResponseStatus("completed"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_failed", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewGetSpeechAnalyticsResponseStatusFromString("failed")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, GetSpeechAnalyticsResponseStatus("failed"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewGetSpeechAnalyticsResponseStatusFromString("invalid_value_that_does_not_exist")
-		assert.Error(t, err)
-	})
-
-	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewGetSpeechAnalyticsResponseStatusFromString("completed")
-		assert.NoError(t, err)
-		ptr := val.Ptr()
-		assert.NotNil(t, ptr)
-		assert.Equal(t, val, *ptr)
-	})
-}
-
-func TestExtraPropertiesCreateSpeechAnalyticsResponse(t *testing.T) {
-	t.Run("GetExtraProperties", func(t *testing.T) {
-		t.Parallel()
-		obj := &CreateSpeechAnalyticsResponse{}
-		// Should not panic when calling GetExtraProperties()
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("GetExtraProperties() panicked: %v", r)
-			}
-		}()
-		extraProps := obj.GetExtraProperties()
-		// Result can be nil or an empty/non-empty map
-		_ = extraProps
-	})
-
-	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *CreateSpeechAnalyticsResponse
-		extraProps := obj.GetExtraProperties()
-		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+		var obj *SubmitFileTranscriptionResponse
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
@@ -1920,10 +1818,10 @@ func TestExtraPropertiesFileTranscriptTurn(t *testing.T) {
 	})
 }
 
-func TestExtraPropertiesGetSpeechAnalyticsResponse(t *testing.T) {
+func TestExtraPropertiesFileTranscriptionResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &GetSpeechAnalyticsResponse{}
+		obj := &FileTranscriptionResponse{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -1937,7 +1835,30 @@ func TestExtraPropertiesGetSpeechAnalyticsResponse(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *GetSpeechAnalyticsResponse
+		var obj *FileTranscriptionResponse
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesSubmitFileTranscriptionResponse(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &SubmitFileTranscriptionResponse{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitFileTranscriptionResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

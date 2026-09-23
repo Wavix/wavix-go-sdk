@@ -55,7 +55,7 @@ func (c *Client) Create(
 	ctx context.Context,
 	request *wavixgosdk.TenDlcEventSubscription,
 	opts ...option.RequestOption,
-) (*tendlc.CreateSubscriptionsResponse, error) {
+) (*wavixgosdk.TenDlcEventSubscription, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -72,7 +72,7 @@ func (c *Client) Delete(
 	ctx context.Context,
 	request *tendlc.DeleteSubscriptionsRequest,
 	opts ...option.RequestOption,
-) (*tendlc.DeleteSubscriptionsResponse, error) {
+) (*wavixgosdk.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,

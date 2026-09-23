@@ -146,8 +146,6 @@ func TestCdrsSearchWithWireMock(
 		To: wavixgosdk.MustParseDate(
 			"2023-08-31",
 		),
-		Page:    1,
-		PerPage: 50,
 	}
 	_, invocationErr := client.Cdrs.Search(
 		context.TODO(),
@@ -173,7 +171,7 @@ func TestCdrsRetranscribeWithWireMock(
 		option.WithToken("test-token"),
 	)
 	request := &wavixgosdk.CdrRetranscriptionRequest{
-		CallID: "bbaa37bf-430a-46da-ade3-c248e407016",
+		CallID: "bbaa37bf-430a-46da-ade3-c248e4070160",
 	}
 	_, invocationErr := client.Cdrs.Retranscribe(
 		context.TODO(),
@@ -184,7 +182,7 @@ func TestCdrsRetranscribeWithWireMock(
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCdrsRetranscribeWithWireMock", "PUT", "/v1/cdrs/bbaa37bf-430a-46da-ade3-c248e407016/retranscribe", nil, 1)
+	VerifyRequestCount(t, "TestCdrsRetranscribeWithWireMock", "PUT", "/v1/cdrs/bbaa37bf-430a-46da-ade3-c248e4070160/retranscribe", nil, 1)
 }
 
 func TestCdrsTranscriptionsWithWireMock(
@@ -199,7 +197,7 @@ func TestCdrsTranscriptionsWithWireMock(
 		option.WithToken("test-token"),
 	)
 	request := &wavixgosdk.TranscriptionsCdrsRequest{
-		CallID: "bbaa37bf-430a-46da-ade3-c248e407016",
+		CallID: "bbaa37bf-430a-46da-ade3-c248e4070160",
 	}
 	_, invocationErr := client.Cdrs.Transcriptions(
 		context.TODO(),
@@ -210,7 +208,7 @@ func TestCdrsTranscriptionsWithWireMock(
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCdrsTranscriptionsWithWireMock", "GET", "/v1/cdrs/bbaa37bf-430a-46da-ade3-c248e407016/transcriptions", nil, 1)
+	VerifyRequestCount(t, "TestCdrsTranscriptionsWithWireMock", "GET", "/v1/cdrs/bbaa37bf-430a-46da-ade3-c248e4070160/transcriptions", nil, 1)
 }
 
 func TestCdrsGetWithWireMock(

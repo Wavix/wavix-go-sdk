@@ -249,7 +249,7 @@ type SipTrunkCreateRequest struct {
 	// Maximum call duration for the SIP trunk, in seconds. Must not exceed the maximum duration set for the account. Ignored when `call_restrict` is `false`.
 	CallLimit *int `json:"call_limit,omitempty" url:"call_limit,omitempty"`
 	// Indicates if the max cost limit for an outbound call limit is activated for the SIP trunk.
-	CostLimit bool `json:"cost_limit" url:"cost_limit"`
+	CostLimit *bool `json:"cost_limit,omitempty" url:"cost_limit,omitempty"`
 	// Maximum cost for an outbound call, in USD
 	MaxCallCost *float64 `json:"max_call_cost,omitempty" url:"max_call_cost,omitempty"`
 	// Indicates whether a limit on the number of concurrent outbound calls is enforced for the SIP trunk
@@ -353,9 +353,9 @@ func (s *SipTrunkCreateRequest) GetCallLimit() *int {
 	return s.CallLimit
 }
 
-func (s *SipTrunkCreateRequest) GetCostLimit() bool {
+func (s *SipTrunkCreateRequest) GetCostLimit() *bool {
 	if s == nil {
-		return false
+		return nil
 	}
 	return s.CostLimit
 }
@@ -523,7 +523,7 @@ func (s *SipTrunkCreateRequest) SetCallLimit(callLimit *int) {
 
 // SetCostLimit sets the CostLimit field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetCostLimit(costLimit bool) {
+func (s *SipTrunkCreateRequest) SetCostLimit(costLimit *bool) {
 	s.CostLimit = costLimit
 	s.require(sipTrunkCreateRequestFieldCostLimit)
 }

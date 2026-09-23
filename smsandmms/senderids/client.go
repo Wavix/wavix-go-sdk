@@ -50,7 +50,7 @@ func (c *Client) List(
 	return response.Body, nil
 }
 
-// Creates a Sender ID. Use the 10DLC API to create Sender IDs in the US.
+// Creates a Sender ID. Use the 10DLC API to create Sender IDs in the US. Registering a Sender ID incurs a recurring monthly fee, billed to the account balance.
 func (c *Client) Create(
 	ctx context.Context,
 	request *smsandmms.SenderIDCreateRequest,
@@ -89,7 +89,7 @@ func (c *Client) Delete(
 	ctx context.Context,
 	request *smsandmms.DeleteSenderIDsRequest,
 	opts ...option.RequestOption,
-) (*smsandmms.DeleteSenderIDsResponse, error) {
+) (*wavixgosdk.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,

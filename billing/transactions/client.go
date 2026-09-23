@@ -5,6 +5,7 @@ package transactions
 import (
 	context "context"
 
+	wavixgosdk "github.com/wavix/wavix-go-sdk"
 	billing "github.com/wavix/wavix-go-sdk/billing"
 	core "github.com/wavix/wavix-go-sdk/core"
 	internal "github.com/wavix/wavix-go-sdk/internal"
@@ -39,7 +40,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *billing.ListTransactionsRequest,
 	opts ...option.RequestOption,
-) (*billing.ListTransactionsResponse, error) {
+) (*wavixgosdk.BillingTransactionListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,

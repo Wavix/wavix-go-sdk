@@ -400,7 +400,7 @@ func TestSettersSipTrunkCreateRequest(t *testing.T) {
 
 	t.Run("SetCostLimit", func(t *testing.T) {
 		obj := &SipTrunkCreateRequest{}
-		var fernTestValueCostLimit bool
+		var fernTestValueCostLimit *bool
 		obj.SetCostLimit(fernTestValueCostLimit)
 		assert.Equal(t, fernTestValueCostLimit, obj.CostLimit)
 		assert.NotNil(t, obj.explicitFields)
@@ -771,11 +771,21 @@ func TestGettersSipTrunkCreateRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SipTrunkCreateRequest{}
-		var expected bool
+		var expected *bool
 		obj.CostLimit = expected
 
 		// Act & Assert
 		assert.Equal(t, expected, obj.GetCostLimit(), "getter should return the property value")
+	})
+
+	t.Run("GetCostLimit_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SipTrunkCreateRequest{}
+		obj.CostLimit = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCostLimit(), "getter should return nil when property is nil")
 	})
 
 	t.Run("GetCostLimit_NilReceiver", func(t *testing.T) {
@@ -1430,7 +1440,7 @@ func TestSettersMarkExplicitSipTrunkCreateRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SipTrunkCreateRequest{}
-		var fernTestValueCostLimit bool
+		var fernTestValueCostLimit *bool
 
 		// Act
 		obj.SetCostLimit(fernTestValueCostLimit)

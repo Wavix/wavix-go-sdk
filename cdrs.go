@@ -66,7 +66,7 @@ type ListCdrsRequest struct {
 	To time.Time `json:"-" url:"to" format:"date"`
 	// Filters CDRs by call direction. One of `placed` (outbound calls dialed by the account) or `received` (inbound calls answered by the account).
 	Type string `json:"-" url:"type"`
-	// Filters CDRs by call disposition. One of `answered` (the called party answered), `busy` (the called party was busy), `rejected` (the call was declined), `failed` (the call could not be routed), or `all` (no disposition filter).
+	// Filters CDRs by call disposition. One of `answered` (the called party answered), `noanswer` (no answer within the ring timeout), `busy` (the called party was busy), `failed` (the call could not be routed), or `all` (no disposition filter).
 	Disposition *CallDisposition `json:"-" url:"disposition,omitempty"`
 	// Filters CDRs by originating phone number. Accepts a full or partial number.
 	FromSearch *string `json:"-" url:"from_search,omitempty"`
@@ -182,7 +182,7 @@ type ListAllCdrsRequest struct {
 	To time.Time `json:"-" url:"to" format:"date"`
 	// Filters CDRs by call direction. One of `placed` (outbound calls dialed by the account) or `received` (inbound calls answered by the account).
 	Type string `json:"-" url:"type"`
-	// Filters CDRs by call disposition. One of `answered` (the called party answered), `busy` (the called party was busy), `rejected` (the call was declined), `failed` (the call could not be routed), or `all` (no disposition filter).
+	// Filters CDRs by call disposition. One of `answered` (the called party answered), `noanswer` (no answer within the ring timeout), `busy` (the called party was busy), `failed` (the call could not be routed), or `all` (no disposition filter).
 	Disposition *CallDisposition `json:"-" url:"disposition,omitempty"`
 	// Filters CDRs by originating phone number. Accepts a full or partial number.
 	FromSearch *string `json:"-" url:"from_search,omitempty"`
@@ -379,14 +379,14 @@ type CdrSearchRequest struct {
 	UUID *string `json:"uuid,omitempty" url:"-"`
 	// Call disposition to filter results.  If omitted, returns only answered
 	//
-	//	calls. Allowed values: `answered`, `busy`, `rejected`,
+	//	calls. Allowed values: `answered`, `noanswer`, `busy`,
 	//	 `failed`, `all`. Use `all` to return calls
 	//	  regardless of their disposition.
-	Disposition *CdrSearchRequestDisposition `json:"disposition,omitempty" url:"-"`
+	Disposition *CallDisposition `json:"disposition,omitempty" url:"-"`
 	// Page number to retrieve.
-	Page int `json:"page" url:"-"`
+	Page *int `json:"page,omitempty" url:"-"`
 	// Number of records per page.
-	PerPage int `json:"per_page" url:"-"`
+	PerPage *int `json:"per_page,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -464,21 +464,21 @@ func (c *CdrSearchRequest) SetUUID(uuid *string) {
 
 // SetDisposition sets the Disposition field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CdrSearchRequest) SetDisposition(disposition *CdrSearchRequestDisposition) {
+func (c *CdrSearchRequest) SetDisposition(disposition *CallDisposition) {
 	c.Disposition = disposition
 	c.require(cdrSearchRequestFieldDisposition)
 }
 
 // SetPage sets the Page field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CdrSearchRequest) SetPage(page int) {
+func (c *CdrSearchRequest) SetPage(page *int) {
 	c.Page = page
 	c.require(cdrSearchRequestFieldPage)
 }
 
 // SetPerPage sets the PerPage field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CdrSearchRequest) SetPerPage(perPage int) {
+func (c *CdrSearchRequest) SetPerPage(perPage *int) {
 	c.PerPage = perPage
 	c.require(cdrSearchRequestFieldPerPage)
 }
@@ -1830,11 +1830,11 @@ var (
 
 type TranscriptionFilter struct {
 	// Search in an agent's spoken words and phrases
-	Agent *TranscriptionFilterAgent `json:"agent" url:"agent"`
+	Agent *TranscriptionFilterAgent `json:"agent,omitempty" url:"agent,omitempty"`
 	// Search in an customer's spoken words and phrases
-	Client *TranscriptionFilterClient `json:"client" url:"client"`
+	Client *TranscriptionFilterClient `json:"client,omitempty" url:"client,omitempty"`
 	// Search in both speakers' spoken words and phrases
-	Any *TranscriptionFilterAny `json:"any" url:"any"`
+	Any *TranscriptionFilterAny `json:"any,omitempty" url:"any,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2401,42 +2401,6 @@ func (t *TranscriptionReference) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", t)
-}
-
-// Call disposition to filter results.  If omitted, returns only answered
-//
-//	calls. Allowed values: `answered`, `busy`, `rejected`,
-//	 `failed`, `all`. Use `all` to return calls
-//	  regardless of their disposition.
-type CdrSearchRequestDisposition string
-
-const (
-	CdrSearchRequestDispositionAnswered CdrSearchRequestDisposition = "answered"
-	CdrSearchRequestDispositionNoanswer CdrSearchRequestDisposition = "noanswer"
-	CdrSearchRequestDispositionBusy     CdrSearchRequestDisposition = "busy"
-	CdrSearchRequestDispositionFailed   CdrSearchRequestDisposition = "failed"
-	CdrSearchRequestDispositionAll      CdrSearchRequestDisposition = "all"
-)
-
-func NewCdrSearchRequestDispositionFromString(s string) (CdrSearchRequestDisposition, error) {
-	switch s {
-	case "answered":
-		return CdrSearchRequestDispositionAnswered, nil
-	case "noanswer":
-		return CdrSearchRequestDispositionNoanswer, nil
-	case "busy":
-		return CdrSearchRequestDispositionBusy, nil
-	case "failed":
-		return CdrSearchRequestDispositionFailed, nil
-	case "all":
-		return CdrSearchRequestDispositionAll, nil
-	}
-	var t CdrSearchRequestDisposition
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (c CdrSearchRequestDisposition) Ptr() *CdrSearchRequestDisposition {
-	return &c
 }
 
 // Filters by call type. One of `placed` (outbound calls dialed by the account) or `received` (inbound calls answered by the account).

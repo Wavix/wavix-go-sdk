@@ -36,7 +36,7 @@ func (r *RawClient) Get(
 	ctx context.Context,
 	request *wavixgosdk.GetNumberValidatorRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.GetNumberValidatorResponse], error) {
+) (*core.Response[*wavixgosdk.PhoneValidationResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -55,7 +55,7 @@ func (r *RawClient) Get(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *wavixgosdk.GetNumberValidatorResponse
+	var response *wavixgosdk.PhoneValidationResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -74,7 +74,7 @@ func (r *RawClient) Get(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.GetNumberValidatorResponse]{
+	return &core.Response[*wavixgosdk.PhoneValidationResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

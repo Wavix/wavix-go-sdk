@@ -3,10 +3,6 @@
 package buy
 
 import (
-	json "encoding/json"
-	fmt "fmt"
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	internal "github.com/wavix/wavix-go-sdk/internal"
 	big "math/big"
 )
 
@@ -54,89 +50,4 @@ func (l *ListRegionCitiesRequest) SetRegionID(regionID int) {
 func (l *ListRegionCitiesRequest) SetTextEnabledOnly(textEnabledOnly *bool) {
 	l.TextEnabledOnly = textEnabledOnly
 	l.require(listRegionCitiesRequestFieldTextEnabledOnly)
-}
-
-var (
-	listRegionCitiesResponseFieldCities = big.NewInt(1 << 0)
-)
-
-type ListRegionCitiesResponse struct {
-	// Cities available for the requested country or region.
-	Cities []*wavixgosdk.City `json:"cities" url:"cities"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (l *ListRegionCitiesResponse) GetCities() []*wavixgosdk.City {
-	if l == nil {
-		return nil
-	}
-	return l.Cities
-}
-
-func (l *ListRegionCitiesResponse) GetExtraProperties() map[string]interface{} {
-	if l == nil {
-		return nil
-	}
-	return l.extraProperties
-}
-
-func (l *ListRegionCitiesResponse) require(field *big.Int) {
-	if l.explicitFields == nil {
-		l.explicitFields = big.NewInt(0)
-	}
-	l.explicitFields.Or(l.explicitFields, field)
-}
-
-// SetCities sets the Cities field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (l *ListRegionCitiesResponse) SetCities(cities []*wavixgosdk.City) {
-	l.Cities = cities
-	l.require(listRegionCitiesResponseFieldCities)
-}
-
-func (l *ListRegionCitiesResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler ListRegionCitiesResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*l = ListRegionCitiesResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *l)
-	if err != nil {
-		return err
-	}
-	l.extraProperties = extraProperties
-	l.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (l *ListRegionCitiesResponse) MarshalJSON() ([]byte, error) {
-	type embed ListRegionCitiesResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*l),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (l *ListRegionCitiesResponse) String() string {
-	if l == nil {
-		return "<nil>"
-	}
-	if len(l.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(l); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", l)
 }

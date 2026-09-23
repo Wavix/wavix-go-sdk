@@ -52,7 +52,7 @@ func (c *Client) List(
 	return response.Body, nil
 }
 
-// Requests external vetting for a 10DLC Brand. Supported providers: `AEGIS`, `CV`, `WMC`. Supported classes: `STANDARD`, `ENHANCED`.
+// Requests external vetting for a 10DLC Brand. Supported providers: `AEGIS`, `CV`, `WMC`. Supported classes: `STANDARD`, `ENHANCED`. Charges a 10DLC brand vetting fee (Standard or Enhanced); fails with an insufficient-funds error when the balance cannot cover it.
 func (c *Client) Create(
 	ctx context.Context,
 	request *tendlc.TenDlcBrandVettingCreateRequest,

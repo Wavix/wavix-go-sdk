@@ -82,7 +82,7 @@ func (r *RawClient) Create(
 	ctx context.Context,
 	request *tendlc.CreateBrandAppealsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*tendlc.CreateBrandAppealsResponse], error) {
+) (*core.Response[*wavixgosdk.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -98,7 +98,7 @@ func (r *RawClient) Create(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *tendlc.CreateBrandAppealsResponse
+	var response *wavixgosdk.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -118,7 +118,7 @@ func (r *RawClient) Create(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*tendlc.CreateBrandAppealsResponse]{
+	return &core.Response[*wavixgosdk.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

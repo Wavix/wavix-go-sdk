@@ -20,7 +20,7 @@ type CreateBrandAppealsRequest struct {
 	// The unique ID of the 10DLC Brand.
 	BrandID string `json:"-" url:"-"`
 	// List of appeal categories. Allowed values: `VERIFY_TAX_ID`, `VERIFY_NON_PROFIT`, `VERIFY_GOVERNMENT`
-	AppealCategories []string `json:"appeal_categories" url:"-"`
+	AppealCategories []CreateBrandAppealsRequestAppealCategoriesItem `json:"appeal_categories" url:"-"`
 	// List of evidence IDs associated with the appeal.
 	Evidence []string `json:"evidence" url:"-"`
 	// Appeal comment or justification.
@@ -46,7 +46,7 @@ func (c *CreateBrandAppealsRequest) SetBrandID(brandID string) {
 
 // SetAppealCategories sets the AppealCategories field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CreateBrandAppealsRequest) SetAppealCategories(appealCategories []string) {
+func (c *CreateBrandAppealsRequest) SetAppealCategories(appealCategories []CreateBrandAppealsRequestAppealCategoriesItem) {
 	c.AppealCategories = appealCategories
 	c.require(createBrandAppealsRequestFieldAppealCategories)
 }
@@ -112,87 +112,27 @@ func (l *ListBrandAppealsRequest) SetBrandID(brandID string) {
 	l.require(listBrandAppealsRequestFieldBrandID)
 }
 
-var (
-	createBrandAppealsResponseFieldSuccess = big.NewInt(1 << 0)
+type CreateBrandAppealsRequestAppealCategoriesItem string
+
+const (
+	CreateBrandAppealsRequestAppealCategoriesItemVerifyTaxID      CreateBrandAppealsRequestAppealCategoriesItem = "VERIFY_TAX_ID"
+	CreateBrandAppealsRequestAppealCategoriesItemVerifyNonProfit  CreateBrandAppealsRequestAppealCategoriesItem = "VERIFY_NON_PROFIT"
+	CreateBrandAppealsRequestAppealCategoriesItemVerifyGovernment CreateBrandAppealsRequestAppealCategoriesItem = "VERIFY_GOVERNMENT"
 )
 
-type CreateBrandAppealsResponse struct {
-	// Indicates whether the request was successful.
-	Success bool `json:"success" url:"success"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
+func NewCreateBrandAppealsRequestAppealCategoriesItemFromString(s string) (CreateBrandAppealsRequestAppealCategoriesItem, error) {
+	switch s {
+	case "VERIFY_TAX_ID":
+		return CreateBrandAppealsRequestAppealCategoriesItemVerifyTaxID, nil
+	case "VERIFY_NON_PROFIT":
+		return CreateBrandAppealsRequestAppealCategoriesItemVerifyNonProfit, nil
+	case "VERIFY_GOVERNMENT":
+		return CreateBrandAppealsRequestAppealCategoriesItemVerifyGovernment, nil
+	}
+	var t CreateBrandAppealsRequestAppealCategoriesItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
-func (c *CreateBrandAppealsResponse) GetSuccess() bool {
-	if c == nil {
-		return false
-	}
-	return c.Success
-}
-
-func (c *CreateBrandAppealsResponse) GetExtraProperties() map[string]interface{} {
-	if c == nil {
-		return nil
-	}
-	return c.extraProperties
-}
-
-func (c *CreateBrandAppealsResponse) require(field *big.Int) {
-	if c.explicitFields == nil {
-		c.explicitFields = big.NewInt(0)
-	}
-	c.explicitFields.Or(c.explicitFields, field)
-}
-
-// SetSuccess sets the Success field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CreateBrandAppealsResponse) SetSuccess(success bool) {
-	c.Success = success
-	c.require(createBrandAppealsResponseFieldSuccess)
-}
-
-func (c *CreateBrandAppealsResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler CreateBrandAppealsResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*c = CreateBrandAppealsResponse(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *c)
-	if err != nil {
-		return err
-	}
-	c.extraProperties = extraProperties
-	c.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (c *CreateBrandAppealsResponse) MarshalJSON() ([]byte, error) {
-	type embed CreateBrandAppealsResponse
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*c),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (c *CreateBrandAppealsResponse) String() string {
-	if c == nil {
-		return "<nil>"
-	}
-	if len(c.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(c); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", c)
+func (c CreateBrandAppealsRequestAppealCategoriesItem) Ptr() *CreateBrandAppealsRequestAppealCategoriesItem {
+	return &c
 }

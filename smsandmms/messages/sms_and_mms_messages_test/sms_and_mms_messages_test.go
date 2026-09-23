@@ -90,11 +90,15 @@ func TestSmsAndMmsMessagesListWithWireMock(
 		option.WithToken("test-token"),
 	)
 	request := &smsandmms.ListMessagesRequest{
-		SentAfter: wavixgosdk.String(
-			"2023-04-10",
+		SentAfter: wavixgosdk.Time(
+			wavixgosdk.MustParseDate(
+				"2023-04-10",
+			),
 		),
-		SentBefore: wavixgosdk.String(
-			"2023-04-13",
+		SentBefore: wavixgosdk.Time(
+			wavixgosdk.MustParseDate(
+				"2023-04-13",
+			),
 		),
 		Type: "outbound",
 		From: wavixgosdk.String(

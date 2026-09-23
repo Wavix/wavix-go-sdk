@@ -85,7 +85,7 @@ func (r *RawClient) Create(
 	ctx context.Context,
 	request *wavixgosdk.APIKeyCreateRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.APIKey], error) {
+) (*core.Response[wavixgosdk.APIKeyWithSecret], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -98,7 +98,7 @@ func (r *RawClient) Create(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *wavixgosdk.APIKey
+	var response wavixgosdk.APIKeyWithSecret
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -118,7 +118,7 @@ func (r *RawClient) Create(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.APIKey]{
+	return &core.Response[wavixgosdk.APIKeyWithSecret]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

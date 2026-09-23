@@ -57,7 +57,7 @@ func (c *Client) Create(
 	ctx context.Context,
 	request *smsandmms.OptOutCreateRequest,
 	opts ...option.RequestOption,
-) (*smsandmms.CreateOptOutsResponse, error) {
+) (*wavixgosdk.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
