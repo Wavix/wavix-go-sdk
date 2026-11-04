@@ -11,6 +11,266 @@ import (
 )
 
 var (
+	sipTrunkCreateRequestFieldLabel                   = big.NewInt(1 << 0)
+	sipTrunkCreateRequestFieldPassword                = big.NewInt(1 << 1)
+	sipTrunkCreateRequestFieldHostRequest             = big.NewInt(1 << 2)
+	sipTrunkCreateRequestFieldCallerid                = big.NewInt(1 << 3)
+	sipTrunkCreateRequestFieldMultipleNumbers         = big.NewInt(1 << 4)
+	sipTrunkCreateRequestFieldIPRestrict              = big.NewInt(1 << 5)
+	sipTrunkCreateRequestFieldAllowedIps              = big.NewInt(1 << 6)
+	sipTrunkCreateRequestFieldDidinfoEnabled          = big.NewInt(1 << 7)
+	sipTrunkCreateRequestFieldCallRestrict            = big.NewInt(1 << 8)
+	sipTrunkCreateRequestFieldCallLimit               = big.NewInt(1 << 9)
+	sipTrunkCreateRequestFieldCostLimit               = big.NewInt(1 << 10)
+	sipTrunkCreateRequestFieldMaxCallCost             = big.NewInt(1 << 11)
+	sipTrunkCreateRequestFieldChannelsRestrict        = big.NewInt(1 << 12)
+	sipTrunkCreateRequestFieldMaxChannels             = big.NewInt(1 << 13)
+	sipTrunkCreateRequestFieldRewriteEnabled          = big.NewInt(1 << 14)
+	sipTrunkCreateRequestFieldRewritePrefix           = big.NewInt(1 << 15)
+	sipTrunkCreateRequestFieldRewriteCond             = big.NewInt(1 << 16)
+	sipTrunkCreateRequestFieldCallRecordingEnabled    = big.NewInt(1 << 17)
+	sipTrunkCreateRequestFieldTranscriptionEnabled    = big.NewInt(1 << 18)
+	sipTrunkCreateRequestFieldTranscriptionThreshold  = big.NewInt(1 << 19)
+	sipTrunkCreateRequestFieldMachineDetectionEnabled = big.NewInt(1 << 20)
+	sipTrunkCreateRequestFieldEncryptedMedia          = big.NewInt(1 << 21)
+)
+
+type SipTrunkCreateRequest struct {
+	// User-defined name of the SIP trunk
+	Label string `json:"label" url:"-"`
+	// Password set for the SIP trunk. A strong password helps keep the trunk secure.
+	Password string `json:"password" url:"-"`
+	// For SIP trunks with IP authentication, includes the SIP endpoint public static IP address and the status of the authentication request. Wavix authenticates all SIP traffic originating from this IP address.
+	HostRequest *SipTrunkCreateRequestHostRequest `json:"host_request,omitempty" url:"-"`
+	// Caller ID associated with the SIP trunk. Must be an active or verified number on the account.
+	Callerid string `json:"callerid" url:"-"`
+	// Indicates whether any active or verified phone number on the account can be used as the Caller ID for the SIP trunk.
+	MultipleNumbers *bool `json:"multiple_numbers,omitempty" url:"-"`
+	// Indicates whether SIP trunk registration is allowed from only specific public static IP addresses. When set to `true`, the `allowed_ips` parameter must be provided.
+	IPRestrict bool `json:"ip_restrict" url:"-"`
+	// A list of public static IP addresses allowed to register with the SIP trunk
+	AllowedIps []*SipTrunkCreateRequestAllowedIpsItem `json:"allowed_ips,omitempty" url:"-"`
+	// Indicates whether inbound calls include dialed number information in the `To` header of SIP INVITE requests
+	DidinfoEnabled bool `json:"didinfo_enabled" url:"-"`
+	// Indicates whether a maximum call duration limit is enforced for the SIP trunk
+	CallRestrict bool `json:"call_restrict" url:"-"`
+	// Maximum call duration for the SIP trunk, in seconds. Must not exceed the maximum duration set for the account. Ignored when `call_restrict` is `false`.
+	CallLimit *int `json:"call_limit,omitempty" url:"-"`
+	// Indicates if the max cost limit for an outbound call limit is activated for the SIP trunk.
+	CostLimit *bool `json:"cost_limit,omitempty" url:"-"`
+	// Maximum cost for an outbound call, in USD
+	MaxCallCost *float64 `json:"max_call_cost,omitempty" url:"-"`
+	// Indicates whether a limit on the number of concurrent outbound calls is enforced for the SIP trunk
+	ChannelsRestrict bool `json:"channels_restrict" url:"-"`
+	// Maximum number of concurrent outbound calls for the SIP trunk. Must not exceed the outbound channel capacity set for the account. Ignored when `channels_restrict` is `false`.
+	MaxChannels *int `json:"max_channels,omitempty" url:"-"`
+	// Indicates whether a custom dial plan is activated for the SIP trunk
+	RewriteEnabled bool `json:"rewrite_enabled" url:"-"`
+	// Digits to automatically prepend to each dialed phone number
+	RewritePrefix *string `json:"rewrite_prefix,omitempty" url:"-"`
+	// Number of leading digits to automatically remove from each dialed phone number
+	RewriteCond *string `json:"rewrite_cond,omitempty" url:"-"`
+	// Indicates whether outbound call recording is enabled for the SIP trunk
+	CallRecordingEnabled *bool `json:"call_recording_enabled,omitempty" url:"-"`
+	// Indicates whether automatic call transcription is enabled for the SIP trunk.
+	// Available for `Flex Pro` customers only.
+	TranscriptionEnabled bool `json:"transcription_enabled" url:"-"`
+	// Transcriptions will be generated for calls that meet or exceed the specified minimal call duration threshold, in seconds.
+	// Available for `Flex Pro` customers only.
+	TranscriptionThreshold int `json:"transcription_threshold" url:"-"`
+	// Indicates whether automatic voicemail detection is enabled for the SIP trunk.
+	// Available for `Flex Pro` customers only.
+	MachineDetectionEnabled *bool `json:"machine_detection_enabled,omitempty" url:"-"`
+	// Indicates whether SRTP media encryption is enabled for the SIP trunk.
+	EncryptedMedia *bool `json:"encrypted_media,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *SipTrunkCreateRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetLabel(label string) {
+	s.Label = label
+	s.require(sipTrunkCreateRequestFieldLabel)
+}
+
+// SetPassword sets the Password field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetPassword(password string) {
+	s.Password = password
+	s.require(sipTrunkCreateRequestFieldPassword)
+}
+
+// SetHostRequest sets the HostRequest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetHostRequest(hostRequest *SipTrunkCreateRequestHostRequest) {
+	s.HostRequest = hostRequest
+	s.require(sipTrunkCreateRequestFieldHostRequest)
+}
+
+// SetCallerid sets the Callerid field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetCallerid(callerid string) {
+	s.Callerid = callerid
+	s.require(sipTrunkCreateRequestFieldCallerid)
+}
+
+// SetMultipleNumbers sets the MultipleNumbers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetMultipleNumbers(multipleNumbers *bool) {
+	s.MultipleNumbers = multipleNumbers
+	s.require(sipTrunkCreateRequestFieldMultipleNumbers)
+}
+
+// SetIPRestrict sets the IPRestrict field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetIPRestrict(ipRestrict bool) {
+	s.IPRestrict = ipRestrict
+	s.require(sipTrunkCreateRequestFieldIPRestrict)
+}
+
+// SetAllowedIps sets the AllowedIps field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetAllowedIps(allowedIps []*SipTrunkCreateRequestAllowedIpsItem) {
+	s.AllowedIps = allowedIps
+	s.require(sipTrunkCreateRequestFieldAllowedIps)
+}
+
+// SetDidinfoEnabled sets the DidinfoEnabled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetDidinfoEnabled(didinfoEnabled bool) {
+	s.DidinfoEnabled = didinfoEnabled
+	s.require(sipTrunkCreateRequestFieldDidinfoEnabled)
+}
+
+// SetCallRestrict sets the CallRestrict field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetCallRestrict(callRestrict bool) {
+	s.CallRestrict = callRestrict
+	s.require(sipTrunkCreateRequestFieldCallRestrict)
+}
+
+// SetCallLimit sets the CallLimit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetCallLimit(callLimit *int) {
+	s.CallLimit = callLimit
+	s.require(sipTrunkCreateRequestFieldCallLimit)
+}
+
+// SetCostLimit sets the CostLimit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetCostLimit(costLimit *bool) {
+	s.CostLimit = costLimit
+	s.require(sipTrunkCreateRequestFieldCostLimit)
+}
+
+// SetMaxCallCost sets the MaxCallCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetMaxCallCost(maxCallCost *float64) {
+	s.MaxCallCost = maxCallCost
+	s.require(sipTrunkCreateRequestFieldMaxCallCost)
+}
+
+// SetChannelsRestrict sets the ChannelsRestrict field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetChannelsRestrict(channelsRestrict bool) {
+	s.ChannelsRestrict = channelsRestrict
+	s.require(sipTrunkCreateRequestFieldChannelsRestrict)
+}
+
+// SetMaxChannels sets the MaxChannels field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetMaxChannels(maxChannels *int) {
+	s.MaxChannels = maxChannels
+	s.require(sipTrunkCreateRequestFieldMaxChannels)
+}
+
+// SetRewriteEnabled sets the RewriteEnabled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetRewriteEnabled(rewriteEnabled bool) {
+	s.RewriteEnabled = rewriteEnabled
+	s.require(sipTrunkCreateRequestFieldRewriteEnabled)
+}
+
+// SetRewritePrefix sets the RewritePrefix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetRewritePrefix(rewritePrefix *string) {
+	s.RewritePrefix = rewritePrefix
+	s.require(sipTrunkCreateRequestFieldRewritePrefix)
+}
+
+// SetRewriteCond sets the RewriteCond field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetRewriteCond(rewriteCond *string) {
+	s.RewriteCond = rewriteCond
+	s.require(sipTrunkCreateRequestFieldRewriteCond)
+}
+
+// SetCallRecordingEnabled sets the CallRecordingEnabled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetCallRecordingEnabled(callRecordingEnabled *bool) {
+	s.CallRecordingEnabled = callRecordingEnabled
+	s.require(sipTrunkCreateRequestFieldCallRecordingEnabled)
+}
+
+// SetTranscriptionEnabled sets the TranscriptionEnabled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetTranscriptionEnabled(transcriptionEnabled bool) {
+	s.TranscriptionEnabled = transcriptionEnabled
+	s.require(sipTrunkCreateRequestFieldTranscriptionEnabled)
+}
+
+// SetTranscriptionThreshold sets the TranscriptionThreshold field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetTranscriptionThreshold(transcriptionThreshold int) {
+	s.TranscriptionThreshold = transcriptionThreshold
+	s.require(sipTrunkCreateRequestFieldTranscriptionThreshold)
+}
+
+// SetMachineDetectionEnabled sets the MachineDetectionEnabled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetMachineDetectionEnabled(machineDetectionEnabled *bool) {
+	s.MachineDetectionEnabled = machineDetectionEnabled
+	s.require(sipTrunkCreateRequestFieldMachineDetectionEnabled)
+}
+
+// SetEncryptedMedia sets the EncryptedMedia field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequest) SetEncryptedMedia(encryptedMedia *bool) {
+	s.EncryptedMedia = encryptedMedia
+	s.require(sipTrunkCreateRequestFieldEncryptedMedia)
+}
+
+func (s *SipTrunkCreateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SipTrunkCreateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*s = SipTrunkCreateRequest(body)
+	return nil
+}
+
+func (s *SipTrunkCreateRequest) MarshalJSON() ([]byte, error) {
+	type embed SipTrunkCreateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	deleteSipTrunksRequestFieldID = big.NewInt(1 << 0)
 )
 
@@ -200,622 +460,6 @@ func (a *AllowedIPsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", a)
-}
-
-var (
-	sipTrunkCreateRequestFieldLabel                   = big.NewInt(1 << 0)
-	sipTrunkCreateRequestFieldPassword                = big.NewInt(1 << 1)
-	sipTrunkCreateRequestFieldHostRequest             = big.NewInt(1 << 2)
-	sipTrunkCreateRequestFieldCallerid                = big.NewInt(1 << 3)
-	sipTrunkCreateRequestFieldMultipleNumbers         = big.NewInt(1 << 4)
-	sipTrunkCreateRequestFieldIPRestrict              = big.NewInt(1 << 5)
-	sipTrunkCreateRequestFieldAllowedIps              = big.NewInt(1 << 6)
-	sipTrunkCreateRequestFieldDidinfoEnabled          = big.NewInt(1 << 7)
-	sipTrunkCreateRequestFieldCallRestrict            = big.NewInt(1 << 8)
-	sipTrunkCreateRequestFieldCallLimit               = big.NewInt(1 << 9)
-	sipTrunkCreateRequestFieldCostLimit               = big.NewInt(1 << 10)
-	sipTrunkCreateRequestFieldMaxCallCost             = big.NewInt(1 << 11)
-	sipTrunkCreateRequestFieldChannelsRestrict        = big.NewInt(1 << 12)
-	sipTrunkCreateRequestFieldMaxChannels             = big.NewInt(1 << 13)
-	sipTrunkCreateRequestFieldRewriteEnabled          = big.NewInt(1 << 14)
-	sipTrunkCreateRequestFieldRewritePrefix           = big.NewInt(1 << 15)
-	sipTrunkCreateRequestFieldRewriteCond             = big.NewInt(1 << 16)
-	sipTrunkCreateRequestFieldCallRecordingEnabled    = big.NewInt(1 << 17)
-	sipTrunkCreateRequestFieldTranscriptionEnabled    = big.NewInt(1 << 18)
-	sipTrunkCreateRequestFieldTranscriptionThreshold  = big.NewInt(1 << 19)
-	sipTrunkCreateRequestFieldMachineDetectionEnabled = big.NewInt(1 << 20)
-	sipTrunkCreateRequestFieldEncryptedMedia          = big.NewInt(1 << 21)
-)
-
-type SipTrunkCreateRequest struct {
-	// User-defined name of the SIP trunk
-	Label string `json:"label" url:"label"`
-	// Password set for the SIP trunk. A strong password helps keep the trunk secure.
-	Password string `json:"password" url:"password"`
-	// For SIP trunks with IP authentication, includes the SIP endpoint public static IP address and the status of the authentication request. Wavix authenticates all SIP traffic originating from this IP address.
-	HostRequest *SipTrunkCreateRequestHostRequest `json:"host_request,omitempty" url:"host_request,omitempty"`
-	// Caller ID associated with the SIP trunk. Must be an active or verified number on the account.
-	Callerid string `json:"callerid" url:"callerid"`
-	// Indicates whether any active or verified phone number on the account can be used as the Caller ID for the SIP trunk.
-	MultipleNumbers *bool `json:"multiple_numbers,omitempty" url:"multiple_numbers,omitempty"`
-	// Indicates whether SIP trunk registration is allowed from only specific public static IP addresses. When set to `true`, the `allowed_ips` parameter must be provided.
-	IPRestrict bool `json:"ip_restrict" url:"ip_restrict"`
-	// A list of public static IP addresses allowed to register with the SIP trunk
-	AllowedIps []*SipTrunkCreateRequestAllowedIpsItem `json:"allowed_ips,omitempty" url:"allowed_ips,omitempty"`
-	// Indicates whether inbound calls include dialed number information in the `To` header of SIP INVITE requests
-	DidinfoEnabled bool `json:"didinfo_enabled" url:"didinfo_enabled"`
-	// Indicates whether a maximum call duration limit is enforced for the SIP trunk
-	CallRestrict bool `json:"call_restrict" url:"call_restrict"`
-	// Maximum call duration for the SIP trunk, in seconds. Must not exceed the maximum duration set for the account. Ignored when `call_restrict` is `false`.
-	CallLimit *int `json:"call_limit,omitempty" url:"call_limit,omitempty"`
-	// Indicates if the max cost limit for an outbound call limit is activated for the SIP trunk.
-	CostLimit *bool `json:"cost_limit,omitempty" url:"cost_limit,omitempty"`
-	// Maximum cost for an outbound call, in USD
-	MaxCallCost *float64 `json:"max_call_cost,omitempty" url:"max_call_cost,omitempty"`
-	// Indicates whether a limit on the number of concurrent outbound calls is enforced for the SIP trunk
-	ChannelsRestrict bool `json:"channels_restrict" url:"channels_restrict"`
-	// Maximum number of concurrent outbound calls for the SIP trunk. Must not exceed the outbound channel capacity set for the account. Ignored when `channels_restrict` is `false`.
-	MaxChannels *int `json:"max_channels,omitempty" url:"max_channels,omitempty"`
-	// Indicates whether a custom dial plan is activated for the SIP trunk
-	RewriteEnabled bool `json:"rewrite_enabled" url:"rewrite_enabled"`
-	// Digits to automatically prepend to each dialed phone number
-	RewritePrefix *string `json:"rewrite_prefix,omitempty" url:"rewrite_prefix,omitempty"`
-	// Number of leading digits to automatically remove from each dialed phone number
-	RewriteCond *string `json:"rewrite_cond,omitempty" url:"rewrite_cond,omitempty"`
-	// Indicates whether outbound call recording is enabled for the SIP trunk
-	CallRecordingEnabled *bool `json:"call_recording_enabled,omitempty" url:"call_recording_enabled,omitempty"`
-	// Indicates whether automatic call transcription is enabled for the SIP trunk.
-	// Available for `Flex Pro` customers only.
-	TranscriptionEnabled bool `json:"transcription_enabled" url:"transcription_enabled"`
-	// Transcriptions will be generated for calls that meet or exceed the specified minimal call duration threshold, in seconds.
-	// Available for `Flex Pro` customers only.
-	TranscriptionThreshold int `json:"transcription_threshold" url:"transcription_threshold"`
-	// Indicates whether automatic voicemail detection is enabled for the SIP trunk.
-	// Available for `Flex Pro` customers only.
-	MachineDetectionEnabled *bool `json:"machine_detection_enabled,omitempty" url:"machine_detection_enabled,omitempty"`
-	// Indicates whether SRTP media encryption is enabled for the SIP trunk.
-	EncryptedMedia *bool `json:"encrypted_media,omitempty" url:"encrypted_media,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (s *SipTrunkCreateRequest) GetLabel() string {
-	if s == nil {
-		return ""
-	}
-	return s.Label
-}
-
-func (s *SipTrunkCreateRequest) GetPassword() string {
-	if s == nil {
-		return ""
-	}
-	return s.Password
-}
-
-func (s *SipTrunkCreateRequest) GetHostRequest() *SipTrunkCreateRequestHostRequest {
-	if s == nil {
-		return nil
-	}
-	return s.HostRequest
-}
-
-func (s *SipTrunkCreateRequest) GetCallerid() string {
-	if s == nil {
-		return ""
-	}
-	return s.Callerid
-}
-
-func (s *SipTrunkCreateRequest) GetMultipleNumbers() *bool {
-	if s == nil {
-		return nil
-	}
-	return s.MultipleNumbers
-}
-
-func (s *SipTrunkCreateRequest) GetIPRestrict() bool {
-	if s == nil {
-		return false
-	}
-	return s.IPRestrict
-}
-
-func (s *SipTrunkCreateRequest) GetAllowedIps() []*SipTrunkCreateRequestAllowedIpsItem {
-	if s == nil {
-		return nil
-	}
-	return s.AllowedIps
-}
-
-func (s *SipTrunkCreateRequest) GetDidinfoEnabled() bool {
-	if s == nil {
-		return false
-	}
-	return s.DidinfoEnabled
-}
-
-func (s *SipTrunkCreateRequest) GetCallRestrict() bool {
-	if s == nil {
-		return false
-	}
-	return s.CallRestrict
-}
-
-func (s *SipTrunkCreateRequest) GetCallLimit() *int {
-	if s == nil {
-		return nil
-	}
-	return s.CallLimit
-}
-
-func (s *SipTrunkCreateRequest) GetCostLimit() *bool {
-	if s == nil {
-		return nil
-	}
-	return s.CostLimit
-}
-
-func (s *SipTrunkCreateRequest) GetMaxCallCost() *float64 {
-	if s == nil {
-		return nil
-	}
-	return s.MaxCallCost
-}
-
-func (s *SipTrunkCreateRequest) GetChannelsRestrict() bool {
-	if s == nil {
-		return false
-	}
-	return s.ChannelsRestrict
-}
-
-func (s *SipTrunkCreateRequest) GetMaxChannels() *int {
-	if s == nil {
-		return nil
-	}
-	return s.MaxChannels
-}
-
-func (s *SipTrunkCreateRequest) GetRewriteEnabled() bool {
-	if s == nil {
-		return false
-	}
-	return s.RewriteEnabled
-}
-
-func (s *SipTrunkCreateRequest) GetRewritePrefix() *string {
-	if s == nil {
-		return nil
-	}
-	return s.RewritePrefix
-}
-
-func (s *SipTrunkCreateRequest) GetRewriteCond() *string {
-	if s == nil {
-		return nil
-	}
-	return s.RewriteCond
-}
-
-func (s *SipTrunkCreateRequest) GetCallRecordingEnabled() *bool {
-	if s == nil {
-		return nil
-	}
-	return s.CallRecordingEnabled
-}
-
-func (s *SipTrunkCreateRequest) GetTranscriptionEnabled() bool {
-	if s == nil {
-		return false
-	}
-	return s.TranscriptionEnabled
-}
-
-func (s *SipTrunkCreateRequest) GetTranscriptionThreshold() int {
-	if s == nil {
-		return 0
-	}
-	return s.TranscriptionThreshold
-}
-
-func (s *SipTrunkCreateRequest) GetMachineDetectionEnabled() *bool {
-	if s == nil {
-		return nil
-	}
-	return s.MachineDetectionEnabled
-}
-
-func (s *SipTrunkCreateRequest) GetEncryptedMedia() *bool {
-	if s == nil {
-		return nil
-	}
-	return s.EncryptedMedia
-}
-
-func (s *SipTrunkCreateRequest) GetExtraProperties() map[string]interface{} {
-	if s == nil {
-		return nil
-	}
-	return s.extraProperties
-}
-
-func (s *SipTrunkCreateRequest) require(field *big.Int) {
-	if s.explicitFields == nil {
-		s.explicitFields = big.NewInt(0)
-	}
-	s.explicitFields.Or(s.explicitFields, field)
-}
-
-// SetLabel sets the Label field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetLabel(label string) {
-	s.Label = label
-	s.require(sipTrunkCreateRequestFieldLabel)
-}
-
-// SetPassword sets the Password field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetPassword(password string) {
-	s.Password = password
-	s.require(sipTrunkCreateRequestFieldPassword)
-}
-
-// SetHostRequest sets the HostRequest field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetHostRequest(hostRequest *SipTrunkCreateRequestHostRequest) {
-	s.HostRequest = hostRequest
-	s.require(sipTrunkCreateRequestFieldHostRequest)
-}
-
-// SetCallerid sets the Callerid field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetCallerid(callerid string) {
-	s.Callerid = callerid
-	s.require(sipTrunkCreateRequestFieldCallerid)
-}
-
-// SetMultipleNumbers sets the MultipleNumbers field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetMultipleNumbers(multipleNumbers *bool) {
-	s.MultipleNumbers = multipleNumbers
-	s.require(sipTrunkCreateRequestFieldMultipleNumbers)
-}
-
-// SetIPRestrict sets the IPRestrict field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetIPRestrict(ipRestrict bool) {
-	s.IPRestrict = ipRestrict
-	s.require(sipTrunkCreateRequestFieldIPRestrict)
-}
-
-// SetAllowedIps sets the AllowedIps field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetAllowedIps(allowedIps []*SipTrunkCreateRequestAllowedIpsItem) {
-	s.AllowedIps = allowedIps
-	s.require(sipTrunkCreateRequestFieldAllowedIps)
-}
-
-// SetDidinfoEnabled sets the DidinfoEnabled field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetDidinfoEnabled(didinfoEnabled bool) {
-	s.DidinfoEnabled = didinfoEnabled
-	s.require(sipTrunkCreateRequestFieldDidinfoEnabled)
-}
-
-// SetCallRestrict sets the CallRestrict field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetCallRestrict(callRestrict bool) {
-	s.CallRestrict = callRestrict
-	s.require(sipTrunkCreateRequestFieldCallRestrict)
-}
-
-// SetCallLimit sets the CallLimit field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetCallLimit(callLimit *int) {
-	s.CallLimit = callLimit
-	s.require(sipTrunkCreateRequestFieldCallLimit)
-}
-
-// SetCostLimit sets the CostLimit field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetCostLimit(costLimit *bool) {
-	s.CostLimit = costLimit
-	s.require(sipTrunkCreateRequestFieldCostLimit)
-}
-
-// SetMaxCallCost sets the MaxCallCost field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetMaxCallCost(maxCallCost *float64) {
-	s.MaxCallCost = maxCallCost
-	s.require(sipTrunkCreateRequestFieldMaxCallCost)
-}
-
-// SetChannelsRestrict sets the ChannelsRestrict field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetChannelsRestrict(channelsRestrict bool) {
-	s.ChannelsRestrict = channelsRestrict
-	s.require(sipTrunkCreateRequestFieldChannelsRestrict)
-}
-
-// SetMaxChannels sets the MaxChannels field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetMaxChannels(maxChannels *int) {
-	s.MaxChannels = maxChannels
-	s.require(sipTrunkCreateRequestFieldMaxChannels)
-}
-
-// SetRewriteEnabled sets the RewriteEnabled field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetRewriteEnabled(rewriteEnabled bool) {
-	s.RewriteEnabled = rewriteEnabled
-	s.require(sipTrunkCreateRequestFieldRewriteEnabled)
-}
-
-// SetRewritePrefix sets the RewritePrefix field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetRewritePrefix(rewritePrefix *string) {
-	s.RewritePrefix = rewritePrefix
-	s.require(sipTrunkCreateRequestFieldRewritePrefix)
-}
-
-// SetRewriteCond sets the RewriteCond field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetRewriteCond(rewriteCond *string) {
-	s.RewriteCond = rewriteCond
-	s.require(sipTrunkCreateRequestFieldRewriteCond)
-}
-
-// SetCallRecordingEnabled sets the CallRecordingEnabled field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetCallRecordingEnabled(callRecordingEnabled *bool) {
-	s.CallRecordingEnabled = callRecordingEnabled
-	s.require(sipTrunkCreateRequestFieldCallRecordingEnabled)
-}
-
-// SetTranscriptionEnabled sets the TranscriptionEnabled field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetTranscriptionEnabled(transcriptionEnabled bool) {
-	s.TranscriptionEnabled = transcriptionEnabled
-	s.require(sipTrunkCreateRequestFieldTranscriptionEnabled)
-}
-
-// SetTranscriptionThreshold sets the TranscriptionThreshold field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetTranscriptionThreshold(transcriptionThreshold int) {
-	s.TranscriptionThreshold = transcriptionThreshold
-	s.require(sipTrunkCreateRequestFieldTranscriptionThreshold)
-}
-
-// SetMachineDetectionEnabled sets the MachineDetectionEnabled field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetMachineDetectionEnabled(machineDetectionEnabled *bool) {
-	s.MachineDetectionEnabled = machineDetectionEnabled
-	s.require(sipTrunkCreateRequestFieldMachineDetectionEnabled)
-}
-
-// SetEncryptedMedia sets the EncryptedMedia field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequest) SetEncryptedMedia(encryptedMedia *bool) {
-	s.EncryptedMedia = encryptedMedia
-	s.require(sipTrunkCreateRequestFieldEncryptedMedia)
-}
-
-func (s *SipTrunkCreateRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler SipTrunkCreateRequest
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*s = SipTrunkCreateRequest(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *s)
-	if err != nil {
-		return err
-	}
-	s.extraProperties = extraProperties
-	s.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (s *SipTrunkCreateRequest) MarshalJSON() ([]byte, error) {
-	type embed SipTrunkCreateRequest
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*s),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (s *SipTrunkCreateRequest) String() string {
-	if s == nil {
-		return "<nil>"
-	}
-	if len(s.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(s); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", s)
-}
-
-var (
-	sipTrunkCreateRequestAllowedIpsItemFieldIP = big.NewInt(1 << 0)
-)
-
-type SipTrunkCreateRequestAllowedIpsItem struct {
-	// Public static IP address allowed to register with the SIP trunk.
-	IP string `json:"ip" url:"ip"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (s *SipTrunkCreateRequestAllowedIpsItem) GetIP() string {
-	if s == nil {
-		return ""
-	}
-	return s.IP
-}
-
-func (s *SipTrunkCreateRequestAllowedIpsItem) GetExtraProperties() map[string]interface{} {
-	if s == nil {
-		return nil
-	}
-	return s.extraProperties
-}
-
-func (s *SipTrunkCreateRequestAllowedIpsItem) require(field *big.Int) {
-	if s.explicitFields == nil {
-		s.explicitFields = big.NewInt(0)
-	}
-	s.explicitFields.Or(s.explicitFields, field)
-}
-
-// SetIP sets the IP field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequestAllowedIpsItem) SetIP(ip string) {
-	s.IP = ip
-	s.require(sipTrunkCreateRequestAllowedIpsItemFieldIP)
-}
-
-func (s *SipTrunkCreateRequestAllowedIpsItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler SipTrunkCreateRequestAllowedIpsItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*s = SipTrunkCreateRequestAllowedIpsItem(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *s)
-	if err != nil {
-		return err
-	}
-	s.extraProperties = extraProperties
-	s.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (s *SipTrunkCreateRequestAllowedIpsItem) MarshalJSON() ([]byte, error) {
-	type embed SipTrunkCreateRequestAllowedIpsItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*s),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (s *SipTrunkCreateRequestAllowedIpsItem) String() string {
-	if s == nil {
-		return "<nil>"
-	}
-	if len(s.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(s); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", s)
-}
-
-// For SIP trunks with IP authentication, includes the SIP endpoint public static IP address and the status of the authentication request. Wavix authenticates all SIP traffic originating from this IP address.
-var (
-	sipTrunkCreateRequestHostRequestFieldHost = big.NewInt(1 << 0)
-)
-
-type SipTrunkCreateRequestHostRequest struct {
-	// SIP endpoint public static IP address
-	Host string `json:"host" url:"host"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (s *SipTrunkCreateRequestHostRequest) GetHost() string {
-	if s == nil {
-		return ""
-	}
-	return s.Host
-}
-
-func (s *SipTrunkCreateRequestHostRequest) GetExtraProperties() map[string]interface{} {
-	if s == nil {
-		return nil
-	}
-	return s.extraProperties
-}
-
-func (s *SipTrunkCreateRequestHostRequest) require(field *big.Int) {
-	if s.explicitFields == nil {
-		s.explicitFields = big.NewInt(0)
-	}
-	s.explicitFields.Or(s.explicitFields, field)
-}
-
-// SetHost sets the Host field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SipTrunkCreateRequestHostRequest) SetHost(host string) {
-	s.Host = host
-	s.require(sipTrunkCreateRequestHostRequestFieldHost)
-}
-
-func (s *SipTrunkCreateRequestHostRequest) UnmarshalJSON(data []byte) error {
-	type unmarshaler SipTrunkCreateRequestHostRequest
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*s = SipTrunkCreateRequestHostRequest(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *s)
-	if err != nil {
-		return err
-	}
-	s.extraProperties = extraProperties
-	s.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (s *SipTrunkCreateRequestHostRequest) MarshalJSON() ([]byte, error) {
-	type embed SipTrunkCreateRequestHostRequest
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*s),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (s *SipTrunkCreateRequestHostRequest) String() string {
-	if s == nil {
-		return "<nil>"
-	}
-	if len(s.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(s); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", s)
 }
 
 var (
@@ -1905,41 +1549,613 @@ func (s *SipTrunkSummaryHostRequest) String() string {
 }
 
 var (
-	updateSipTrunksRequestFieldID = big.NewInt(1 << 0)
+	sipTrunkCreateRequestAllowedIpsItemFieldIP = big.NewInt(1 << 0)
 )
 
-type UpdateSipTrunksRequest struct {
+type SipTrunkCreateRequestAllowedIpsItem struct {
+	// Public static IP address allowed to register with the SIP trunk.
+	IP string `json:"ip" url:"ip"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SipTrunkCreateRequestAllowedIpsItem) GetIP() string {
+	if s == nil {
+		return ""
+	}
+	return s.IP
+}
+
+func (s *SipTrunkCreateRequestAllowedIpsItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SipTrunkCreateRequestAllowedIpsItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetIP sets the IP field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequestAllowedIpsItem) SetIP(ip string) {
+	s.IP = ip
+	s.require(sipTrunkCreateRequestAllowedIpsItemFieldIP)
+}
+
+func (s *SipTrunkCreateRequestAllowedIpsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler SipTrunkCreateRequestAllowedIpsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SipTrunkCreateRequestAllowedIpsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SipTrunkCreateRequestAllowedIpsItem) MarshalJSON() ([]byte, error) {
+	type embed SipTrunkCreateRequestAllowedIpsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SipTrunkCreateRequestAllowedIpsItem) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+// For SIP trunks with IP authentication, includes the SIP endpoint public static IP address and the status of the authentication request. Wavix authenticates all SIP traffic originating from this IP address.
+var (
+	sipTrunkCreateRequestHostRequestFieldHost = big.NewInt(1 << 0)
+)
+
+type SipTrunkCreateRequestHostRequest struct {
+	// SIP endpoint public static IP address
+	Host string `json:"host" url:"host"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SipTrunkCreateRequestHostRequest) GetHost() string {
+	if s == nil {
+		return ""
+	}
+	return s.Host
+}
+
+func (s *SipTrunkCreateRequestHostRequest) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SipTrunkCreateRequestHostRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetHost sets the Host field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkCreateRequestHostRequest) SetHost(host string) {
+	s.Host = host
+	s.require(sipTrunkCreateRequestHostRequestFieldHost)
+}
+
+func (s *SipTrunkCreateRequestHostRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SipTrunkCreateRequestHostRequest
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SipTrunkCreateRequestHostRequest(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SipTrunkCreateRequestHostRequest) MarshalJSON() ([]byte, error) {
+	type embed SipTrunkCreateRequestHostRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SipTrunkCreateRequestHostRequest) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	sipTrunkUpdateRequestAllowedIpsItemFieldIP = big.NewInt(1 << 0)
+)
+
+type SipTrunkUpdateRequestAllowedIpsItem struct {
+	// Public static IP address allowed to register with the SIP trunk.
+	IP string `json:"ip" url:"ip"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SipTrunkUpdateRequestAllowedIpsItem) GetIP() string {
+	if s == nil {
+		return ""
+	}
+	return s.IP
+}
+
+func (s *SipTrunkUpdateRequestAllowedIpsItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SipTrunkUpdateRequestAllowedIpsItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetIP sets the IP field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequestAllowedIpsItem) SetIP(ip string) {
+	s.IP = ip
+	s.require(sipTrunkUpdateRequestAllowedIpsItemFieldIP)
+}
+
+func (s *SipTrunkUpdateRequestAllowedIpsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler SipTrunkUpdateRequestAllowedIpsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SipTrunkUpdateRequestAllowedIpsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SipTrunkUpdateRequestAllowedIpsItem) MarshalJSON() ([]byte, error) {
+	type embed SipTrunkUpdateRequestAllowedIpsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SipTrunkUpdateRequestAllowedIpsItem) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+// For SIP trunks with IP authentication, the SIP endpoint public static IP address. Wavix authenticates all SIP traffic originating from this IP address. Ignored when the trunk already has a host request that is pending or approved. Not supported on trial accounts.
+var (
+	sipTrunkUpdateRequestHostRequestFieldHost = big.NewInt(1 << 0)
+)
+
+type SipTrunkUpdateRequestHostRequest struct {
+	// SIP endpoint public static IP address
+	Host string `json:"host" url:"host"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SipTrunkUpdateRequestHostRequest) GetHost() string {
+	if s == nil {
+		return ""
+	}
+	return s.Host
+}
+
+func (s *SipTrunkUpdateRequestHostRequest) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SipTrunkUpdateRequestHostRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetHost sets the Host field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequestHostRequest) SetHost(host string) {
+	s.Host = host
+	s.require(sipTrunkUpdateRequestHostRequestFieldHost)
+}
+
+func (s *SipTrunkUpdateRequestHostRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SipTrunkUpdateRequestHostRequest
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SipTrunkUpdateRequestHostRequest(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SipTrunkUpdateRequestHostRequest) MarshalJSON() ([]byte, error) {
+	type embed SipTrunkUpdateRequestHostRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SipTrunkUpdateRequestHostRequest) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	sipTrunkUpdateRequestFieldID                      = big.NewInt(1 << 0)
+	sipTrunkUpdateRequestFieldLabel                   = big.NewInt(1 << 1)
+	sipTrunkUpdateRequestFieldPassword                = big.NewInt(1 << 2)
+	sipTrunkUpdateRequestFieldHostRequest             = big.NewInt(1 << 3)
+	sipTrunkUpdateRequestFieldCallerid                = big.NewInt(1 << 4)
+	sipTrunkUpdateRequestFieldMultipleNumbers         = big.NewInt(1 << 5)
+	sipTrunkUpdateRequestFieldIPRestrict              = big.NewInt(1 << 6)
+	sipTrunkUpdateRequestFieldAllowedIps              = big.NewInt(1 << 7)
+	sipTrunkUpdateRequestFieldDidinfoEnabled          = big.NewInt(1 << 8)
+	sipTrunkUpdateRequestFieldCallRestrict            = big.NewInt(1 << 9)
+	sipTrunkUpdateRequestFieldCallLimit               = big.NewInt(1 << 10)
+	sipTrunkUpdateRequestFieldCostLimit               = big.NewInt(1 << 11)
+	sipTrunkUpdateRequestFieldMaxCallCost             = big.NewInt(1 << 12)
+	sipTrunkUpdateRequestFieldChannelsRestrict        = big.NewInt(1 << 13)
+	sipTrunkUpdateRequestFieldMaxChannels             = big.NewInt(1 << 14)
+	sipTrunkUpdateRequestFieldRewriteEnabled          = big.NewInt(1 << 15)
+	sipTrunkUpdateRequestFieldRewritePrefix           = big.NewInt(1 << 16)
+	sipTrunkUpdateRequestFieldRewriteCond             = big.NewInt(1 << 17)
+	sipTrunkUpdateRequestFieldCallRecordingEnabled    = big.NewInt(1 << 18)
+	sipTrunkUpdateRequestFieldTranscriptionEnabled    = big.NewInt(1 << 19)
+	sipTrunkUpdateRequestFieldTranscriptionThreshold  = big.NewInt(1 << 20)
+	sipTrunkUpdateRequestFieldMachineDetectionEnabled = big.NewInt(1 << 21)
+	sipTrunkUpdateRequestFieldEncryptedMedia          = big.NewInt(1 << 22)
+)
+
+type SipTrunkUpdateRequest struct {
 	// The unique ID of the SIP trunk.
-	ID   int                    `json:"-" url:"-"`
-	Body *SipTrunkCreateRequest `json:"-" url:"-"`
+	ID int `json:"-" url:"-"`
+	// User-defined name of the SIP trunk
+	Label *string `json:"label,omitempty" url:"-"`
+	// Password set for the SIP trunk. A strong password helps keep the trunk secure.
+	Password *string `json:"password,omitempty" url:"-"`
+	// For SIP trunks with IP authentication, the SIP endpoint public static IP address. Wavix authenticates all SIP traffic originating from this IP address. Ignored when the trunk already has a host request that is pending or approved. Not supported on trial accounts.
+	HostRequest *SipTrunkUpdateRequestHostRequest `json:"host_request,omitempty" url:"-"`
+	// Caller ID associated with the SIP trunk. Must be an active or verified number on the account.
+	Callerid *string `json:"callerid,omitempty" url:"-"`
+	// Indicates whether any active or verified phone number on the account can be used as the Caller ID for the SIP trunk. Setting it to `true` clears the trunk's `callerid`; on a trunk with Caller ID passthrough (`passthrough`) enabled, `true` is ignored.
+	MultipleNumbers *bool `json:"multiple_numbers,omitempty" url:"-"`
+	// Indicates whether SIP trunk registration is allowed from only specific public static IP addresses. It can be `true` only when the trunk has at least one allowed IP address, either already stored or sent in `allowed_ips`.
+	IPRestrict *bool `json:"ip_restrict,omitempty" url:"-"`
+	// Public static IP addresses to add to the list allowed to register with the SIP trunk. Addresses already on the list are kept.
+	AllowedIps []*SipTrunkUpdateRequestAllowedIpsItem `json:"allowed_ips,omitempty" url:"-"`
+	// Indicates whether inbound calls include dialed number information in the `To` header of SIP INVITE requests
+	DidinfoEnabled *bool `json:"didinfo_enabled,omitempty" url:"-"`
+	// Indicates whether a maximum call duration limit is enforced for the SIP trunk
+	CallRestrict *bool `json:"call_restrict,omitempty" url:"-"`
+	// Maximum call duration for the SIP trunk, in seconds. Must not exceed the maximum duration set for the account. Ignored when `call_restrict` is `false`.
+	CallLimit *int `json:"call_limit,omitempty" url:"-"`
+	// Indicates if the max cost limit for an outbound call limit is activated for the SIP trunk.
+	CostLimit *bool `json:"cost_limit,omitempty" url:"-"`
+	// Maximum cost for an outbound call, in USD
+	MaxCallCost *float64 `json:"max_call_cost,omitempty" url:"-"`
+	// Indicates whether a limit on the number of concurrent outbound calls is enforced for the SIP trunk
+	ChannelsRestrict *bool `json:"channels_restrict,omitempty" url:"-"`
+	// Maximum number of concurrent outbound calls for the SIP trunk. Must not exceed the outbound channel capacity set for the account. Ignored when `channels_restrict` is `false`.
+	MaxChannels *int `json:"max_channels,omitempty" url:"-"`
+	// Indicates whether a custom dial plan is activated for the SIP trunk
+	RewriteEnabled *bool `json:"rewrite_enabled,omitempty" url:"-"`
+	// Digits to automatically prepend to each dialed phone number
+	RewritePrefix *string `json:"rewrite_prefix,omitempty" url:"-"`
+	// Number of leading digits to automatically remove from each dialed phone number
+	RewriteCond *string `json:"rewrite_cond,omitempty" url:"-"`
+	// Indicates whether outbound call recording is enabled for the SIP trunk
+	CallRecordingEnabled *bool `json:"call_recording_enabled,omitempty" url:"-"`
+	// Indicates whether automatic call transcription is enabled for the SIP trunk.
+	// Available for `Flex Pro` customers only.
+	TranscriptionEnabled *bool `json:"transcription_enabled,omitempty" url:"-"`
+	// Transcriptions will be generated for calls that meet or exceed the specified minimal call duration threshold, in seconds.
+	// Available for `Flex Pro` customers only.
+	TranscriptionThreshold *int `json:"transcription_threshold,omitempty" url:"-"`
+	// Indicates whether automatic voicemail detection is enabled for the SIP trunk.
+	// Available for `Flex Pro` customers only.
+	MachineDetectionEnabled *bool `json:"machine_detection_enabled,omitempty" url:"-"`
+	// Indicates whether SRTP media encryption is enabled for the SIP trunk.
+	EncryptedMedia *bool `json:"encrypted_media,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 }
 
-func (u *UpdateSipTrunksRequest) require(field *big.Int) {
-	if u.explicitFields == nil {
-		u.explicitFields = big.NewInt(0)
+func (s *SipTrunkUpdateRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
 	}
-	u.explicitFields.Or(u.explicitFields, field)
+	s.explicitFields.Or(s.explicitFields, field)
 }
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (u *UpdateSipTrunksRequest) SetID(id int) {
-	u.ID = id
-	u.require(updateSipTrunksRequestFieldID)
+func (s *SipTrunkUpdateRequest) SetID(id int) {
+	s.ID = id
+	s.require(sipTrunkUpdateRequestFieldID)
 }
 
-func (u *UpdateSipTrunksRequest) UnmarshalJSON(data []byte) error {
-	body := new(SipTrunkCreateRequest)
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetLabel(label *string) {
+	s.Label = label
+	s.require(sipTrunkUpdateRequestFieldLabel)
+}
+
+// SetPassword sets the Password field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetPassword(password *string) {
+	s.Password = password
+	s.require(sipTrunkUpdateRequestFieldPassword)
+}
+
+// SetHostRequest sets the HostRequest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetHostRequest(hostRequest *SipTrunkUpdateRequestHostRequest) {
+	s.HostRequest = hostRequest
+	s.require(sipTrunkUpdateRequestFieldHostRequest)
+}
+
+// SetCallerid sets the Callerid field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetCallerid(callerid *string) {
+	s.Callerid = callerid
+	s.require(sipTrunkUpdateRequestFieldCallerid)
+}
+
+// SetMultipleNumbers sets the MultipleNumbers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetMultipleNumbers(multipleNumbers *bool) {
+	s.MultipleNumbers = multipleNumbers
+	s.require(sipTrunkUpdateRequestFieldMultipleNumbers)
+}
+
+// SetIPRestrict sets the IPRestrict field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetIPRestrict(ipRestrict *bool) {
+	s.IPRestrict = ipRestrict
+	s.require(sipTrunkUpdateRequestFieldIPRestrict)
+}
+
+// SetAllowedIps sets the AllowedIps field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetAllowedIps(allowedIps []*SipTrunkUpdateRequestAllowedIpsItem) {
+	s.AllowedIps = allowedIps
+	s.require(sipTrunkUpdateRequestFieldAllowedIps)
+}
+
+// SetDidinfoEnabled sets the DidinfoEnabled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetDidinfoEnabled(didinfoEnabled *bool) {
+	s.DidinfoEnabled = didinfoEnabled
+	s.require(sipTrunkUpdateRequestFieldDidinfoEnabled)
+}
+
+// SetCallRestrict sets the CallRestrict field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetCallRestrict(callRestrict *bool) {
+	s.CallRestrict = callRestrict
+	s.require(sipTrunkUpdateRequestFieldCallRestrict)
+}
+
+// SetCallLimit sets the CallLimit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetCallLimit(callLimit *int) {
+	s.CallLimit = callLimit
+	s.require(sipTrunkUpdateRequestFieldCallLimit)
+}
+
+// SetCostLimit sets the CostLimit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetCostLimit(costLimit *bool) {
+	s.CostLimit = costLimit
+	s.require(sipTrunkUpdateRequestFieldCostLimit)
+}
+
+// SetMaxCallCost sets the MaxCallCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetMaxCallCost(maxCallCost *float64) {
+	s.MaxCallCost = maxCallCost
+	s.require(sipTrunkUpdateRequestFieldMaxCallCost)
+}
+
+// SetChannelsRestrict sets the ChannelsRestrict field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetChannelsRestrict(channelsRestrict *bool) {
+	s.ChannelsRestrict = channelsRestrict
+	s.require(sipTrunkUpdateRequestFieldChannelsRestrict)
+}
+
+// SetMaxChannels sets the MaxChannels field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetMaxChannels(maxChannels *int) {
+	s.MaxChannels = maxChannels
+	s.require(sipTrunkUpdateRequestFieldMaxChannels)
+}
+
+// SetRewriteEnabled sets the RewriteEnabled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetRewriteEnabled(rewriteEnabled *bool) {
+	s.RewriteEnabled = rewriteEnabled
+	s.require(sipTrunkUpdateRequestFieldRewriteEnabled)
+}
+
+// SetRewritePrefix sets the RewritePrefix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetRewritePrefix(rewritePrefix *string) {
+	s.RewritePrefix = rewritePrefix
+	s.require(sipTrunkUpdateRequestFieldRewritePrefix)
+}
+
+// SetRewriteCond sets the RewriteCond field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetRewriteCond(rewriteCond *string) {
+	s.RewriteCond = rewriteCond
+	s.require(sipTrunkUpdateRequestFieldRewriteCond)
+}
+
+// SetCallRecordingEnabled sets the CallRecordingEnabled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetCallRecordingEnabled(callRecordingEnabled *bool) {
+	s.CallRecordingEnabled = callRecordingEnabled
+	s.require(sipTrunkUpdateRequestFieldCallRecordingEnabled)
+}
+
+// SetTranscriptionEnabled sets the TranscriptionEnabled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetTranscriptionEnabled(transcriptionEnabled *bool) {
+	s.TranscriptionEnabled = transcriptionEnabled
+	s.require(sipTrunkUpdateRequestFieldTranscriptionEnabled)
+}
+
+// SetTranscriptionThreshold sets the TranscriptionThreshold field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetTranscriptionThreshold(transcriptionThreshold *int) {
+	s.TranscriptionThreshold = transcriptionThreshold
+	s.require(sipTrunkUpdateRequestFieldTranscriptionThreshold)
+}
+
+// SetMachineDetectionEnabled sets the MachineDetectionEnabled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetMachineDetectionEnabled(machineDetectionEnabled *bool) {
+	s.MachineDetectionEnabled = machineDetectionEnabled
+	s.require(sipTrunkUpdateRequestFieldMachineDetectionEnabled)
+}
+
+// SetEncryptedMedia sets the EncryptedMedia field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SipTrunkUpdateRequest) SetEncryptedMedia(encryptedMedia *bool) {
+	s.EncryptedMedia = encryptedMedia
+	s.require(sipTrunkUpdateRequestFieldEncryptedMedia)
+}
+
+func (s *SipTrunkUpdateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SipTrunkUpdateRequest
+	var body unmarshaler
 	if err := json.Unmarshal(data, &body); err != nil {
 		return err
 	}
-	u.Body = body
+	*s = SipTrunkUpdateRequest(body)
 	return nil
 }
 
-func (u *UpdateSipTrunksRequest) MarshalJSON() ([]byte, error) {
-	return json.Marshal(u.Body)
+func (s *SipTrunkUpdateRequest) MarshalJSON() ([]byte, error) {
+	type embed SipTrunkUpdateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
 }

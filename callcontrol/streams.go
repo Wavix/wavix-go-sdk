@@ -19,7 +19,7 @@ var (
 type CallStreamCreateRequest struct {
 	// The `uuid` of the call.
 	CallID string `json:"-" url:"-"`
-	// WebSocket URL for call streaming
+	// WebSocket URL (`ws://` or `wss://`) that receives the call's audio.
 	StreamURL string `json:"stream_url" url:"-"`
 	// Direction of audio streamed to `stream_url`.
 	StreamType wavixgosdk.CallStreamType `json:"stream_type" url:"-"`

@@ -476,7 +476,7 @@ type TenDlcBrandUpdateRequest struct {
 	StreetAddress *string `json:"street_address,omitempty" url:"-"`
 	// The city name
 	City *string `json:"city,omitempty" url:"-"`
-	// State or province. For the United States, use 2 character codes.
+	// State or province. For the United States, it is a 2-character code.
 	StateOrProvince *string `json:"state_or_province,omitempty" url:"-"`
 	// The business zip or postal code
 	Zip *string `json:"zip,omitempty" url:"-"`

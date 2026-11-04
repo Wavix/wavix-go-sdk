@@ -88,7 +88,7 @@ func (c *Client) Get(
 	return response.Body, nil
 }
 
-// Replaces the configuration of the sub-account identified by `id`. Omitted fields revert to their defaults.
+// Updates the sub-account identified by `id`. Only the provided fields are changed.
 func (c *Client) Update(
 	ctx context.Context,
 	request *wavixgosdk.SubAccountsUpdateRequest,

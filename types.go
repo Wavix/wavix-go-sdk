@@ -1304,7 +1304,7 @@ func (c CallStatusWebhookDirection) Ptr() *CallStatusWebhookDirection {
 	return &c
 }
 
-// Specifies which audio channel to stream. Use `inbound` to stream the incoming channel (to Wavix), `outbound` for the outbound channel (from Wavix), or `both` to stream both. For bidirectional call streaming, this setting is ignored and the inbound channel is only streamed.
+// Audio channel to stream: `inbound` streams the incoming channel (to Wavix), `outbound` the outbound channel (from Wavix), and `both` both channels. For bidirectional call streaming, this setting is ignored and only the inbound channel is streamed.
 type CallStreamChannel string
 
 const (
@@ -13372,8 +13372,7 @@ var (
 )
 
 type TenDlcCampaignNudgeRequest struct {
-	// Nudge intent. Allowed values: `REVIEW`, `APPEAL_REJECTION`.
-	// Use `nudge_intent` to specify the action: - `REVIEW`: Request review for a pending Campaign. - `APPEAL_REJECTION`: Appeal a rejected Campaign.
+	// Action the nudge requests: `REVIEW` requests review of a pending Campaign, and `APPEAL_REJECTION` appeals a rejected Campaign.
 	NudgeIntent string `json:"nudge_intent" url:"nudge_intent"`
 	// Description of the nudge request.
 	Description string `json:"description" url:"description"`
@@ -15909,6 +15908,308 @@ func (w *WebRtcTokensListResponse) String() string {
 	return fmt.Sprintf("%#v", w)
 }
 
+// Error returned when a webhook change is rejected because the webhook no longer has the expected URL.
+var (
+	webhookInUseErrorResponseFieldSuccess = big.NewInt(1 << 0)
+	webhookInUseErrorResponseFieldError   = big.NewInt(1 << 1)
+	webhookInUseErrorResponseFieldMessage = big.NewInt(1 << 2)
+)
+
+type WebhookInUseErrorResponse struct {
+	// Indicates whether the request was successful. Always `false` for this error.
+	Success bool `json:"success" url:"success"`
+	// Indicates that the request failed. Always `true` for this error.
+	Error bool `json:"error" url:"error"`
+	// Human-readable description of the conflict.
+	Message string `json:"message" url:"message"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WebhookInUseErrorResponse) GetSuccess() bool {
+	if w == nil {
+		return false
+	}
+	return w.Success
+}
+
+func (w *WebhookInUseErrorResponse) GetError() bool {
+	if w == nil {
+		return false
+	}
+	return w.Error
+}
+
+func (w *WebhookInUseErrorResponse) GetMessage() string {
+	if w == nil {
+		return ""
+	}
+	return w.Message
+}
+
+func (w *WebhookInUseErrorResponse) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WebhookInUseErrorResponse) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetSuccess sets the Success field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WebhookInUseErrorResponse) SetSuccess(success bool) {
+	w.Success = success
+	w.require(webhookInUseErrorResponseFieldSuccess)
+}
+
+// SetError sets the Error field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WebhookInUseErrorResponse) SetError(error_ bool) {
+	w.Error = error_
+	w.require(webhookInUseErrorResponseFieldError)
+}
+
+// SetMessage sets the Message field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WebhookInUseErrorResponse) SetMessage(message string) {
+	w.Message = message
+	w.require(webhookInUseErrorResponseFieldMessage)
+}
+
+func (w *WebhookInUseErrorResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler WebhookInUseErrorResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WebhookInUseErrorResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WebhookInUseErrorResponse) MarshalJSON() ([]byte, error) {
+	type embed WebhookInUseErrorResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WebhookInUseErrorResponse) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// A WhatsApp Business Account linked to your account. Returned by `whatsapp_wabas_list` and `whatsapp_wabas_get`.
+var (
+	whatsAppBusinessAccountFieldID             = big.NewInt(1 << 0)
+	whatsAppBusinessAccountFieldName           = big.NewInt(1 << 1)
+	whatsAppBusinessAccountFieldMessagingLimit = big.NewInt(1 << 2)
+	whatsAppBusinessAccountFieldSenderCount    = big.NewInt(1 << 3)
+)
+
+type WhatsAppBusinessAccount struct {
+	// ID of the WhatsApp Business Account, as returned in `waba.id` on senders and templates.
+	ID string `json:"id" url:"id"`
+	// Name of the WhatsApp Business Account.
+	Name *string `json:"name,omitempty" url:"name,omitempty"`
+	// Maximum number of unique customers the WhatsApp Business Account can start conversations with in a rolling 24-hour period. Omitted when the limit isn't known yet. Possible values:
+	//
+	// - `up_to_250` — Up to 250 unique customers.
+	// - `up_to_2k` — Up to 2,000 unique customers.
+	// - `up_to_10k` — Up to 10,000 unique customers.
+	// - `up_to_100k` — Up to 100,000 unique customers.
+	// - `unlimited` — No limit on unique customers.
+	MessagingLimit *WhatsAppBusinessAccountMessagingLimit `json:"messaging_limit,omitempty" url:"messaging_limit,omitempty"`
+	// Number of senders registered in the WhatsApp Business Account.
+	SenderCount int `json:"sender_count" url:"sender_count"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppBusinessAccount) GetID() string {
+	if w == nil {
+		return ""
+	}
+	return w.ID
+}
+
+func (w *WhatsAppBusinessAccount) GetName() *string {
+	if w == nil {
+		return nil
+	}
+	return w.Name
+}
+
+func (w *WhatsAppBusinessAccount) GetMessagingLimit() *WhatsAppBusinessAccountMessagingLimit {
+	if w == nil {
+		return nil
+	}
+	return w.MessagingLimit
+}
+
+func (w *WhatsAppBusinessAccount) GetSenderCount() int {
+	if w == nil {
+		return 0
+	}
+	return w.SenderCount
+}
+
+func (w *WhatsAppBusinessAccount) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppBusinessAccount) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppBusinessAccount) SetID(id string) {
+	w.ID = id
+	w.require(whatsAppBusinessAccountFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppBusinessAccount) SetName(name *string) {
+	w.Name = name
+	w.require(whatsAppBusinessAccountFieldName)
+}
+
+// SetMessagingLimit sets the MessagingLimit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppBusinessAccount) SetMessagingLimit(messagingLimit *WhatsAppBusinessAccountMessagingLimit) {
+	w.MessagingLimit = messagingLimit
+	w.require(whatsAppBusinessAccountFieldMessagingLimit)
+}
+
+// SetSenderCount sets the SenderCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppBusinessAccount) SetSenderCount(senderCount int) {
+	w.SenderCount = senderCount
+	w.require(whatsAppBusinessAccountFieldSenderCount)
+}
+
+func (w *WhatsAppBusinessAccount) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppBusinessAccount
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppBusinessAccount(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppBusinessAccount) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppBusinessAccount
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppBusinessAccount) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Maximum number of unique customers the WhatsApp Business Account can start conversations with in a rolling 24-hour period. Omitted when the limit isn't known yet. Possible values:
+//
+// - `up_to_250` — Up to 250 unique customers.
+// - `up_to_2k` — Up to 2,000 unique customers.
+// - `up_to_10k` — Up to 10,000 unique customers.
+// - `up_to_100k` — Up to 100,000 unique customers.
+// - `unlimited` — No limit on unique customers.
+type WhatsAppBusinessAccountMessagingLimit string
+
+const (
+	WhatsAppBusinessAccountMessagingLimitUpTo250   WhatsAppBusinessAccountMessagingLimit = "up_to_250"
+	WhatsAppBusinessAccountMessagingLimitUpTo2K    WhatsAppBusinessAccountMessagingLimit = "up_to_2k"
+	WhatsAppBusinessAccountMessagingLimitUpTo10K   WhatsAppBusinessAccountMessagingLimit = "up_to_10k"
+	WhatsAppBusinessAccountMessagingLimitUpTo100K  WhatsAppBusinessAccountMessagingLimit = "up_to_100k"
+	WhatsAppBusinessAccountMessagingLimitUnlimited WhatsAppBusinessAccountMessagingLimit = "unlimited"
+)
+
+func NewWhatsAppBusinessAccountMessagingLimitFromString(s string) (WhatsAppBusinessAccountMessagingLimit, error) {
+	switch s {
+	case "up_to_250":
+		return WhatsAppBusinessAccountMessagingLimitUpTo250, nil
+	case "up_to_2k":
+		return WhatsAppBusinessAccountMessagingLimitUpTo2K, nil
+	case "up_to_10k":
+		return WhatsAppBusinessAccountMessagingLimitUpTo10K, nil
+	case "up_to_100k":
+		return WhatsAppBusinessAccountMessagingLimitUpTo100K, nil
+	case "unlimited":
+		return WhatsAppBusinessAccountMessagingLimitUnlimited, nil
+	}
+	var t WhatsAppBusinessAccountMessagingLimit
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppBusinessAccountMessagingLimit) Ptr() *WhatsAppBusinessAccountMessagingLimit {
+	return &w
+}
+
+// A WhatsApp message you sent. Returned by `whatsapp_messages_send`.
 var (
 	whatsAppMessageFieldUUID      = big.NewInt(1 << 0)
 	whatsAppMessageFieldFrom      = big.NewInt(1 << 1)
@@ -15919,18 +16220,25 @@ var (
 )
 
 type WhatsAppMessage struct {
-	// Message ID.
+	// ID of the message. Pass it to `whatsapp_messages_get` to check the delivery outcome.
 	UUID string `json:"uuid" url:"uuid"`
-	// Sender's phone number in E.164 digits.
+	// Sender's phone number in E.164 format.
 	From string `json:"from" url:"from"`
-	// Recipient's phone number in E.164 digits.
+	// Recipient's phone number in E.164 format.
 	To string `json:"to" url:"to"`
-	// Message delivery status.
+	// Message delivery status. Possible values:
+	//
+	// - `sent` — The message isn't delivered yet.
+	// - `delivered` — The message was delivered to the recipient.
+	// - `undelivered` — The message was sent but not delivered.
+	// - `expired` — The message expired before it was delivered.
+	// - `rejected` — The message was permanently rejected before or by the provider.
+	// - `unknown` — The provider hasn't reported a status.
 	Status WhatsAppMessageStatus `json:"status" url:"status"`
 	// Template used to send the message.
 	Template *WhatsAppMessageTemplate `json:"template,omitempty" url:"template,omitempty"`
 	// Date and time the message was created, in ISO 8601 format.
-	CreatedAt string `json:"created_at" url:"created_at"`
+	CreatedAt time.Time `json:"created_at" url:"created_at"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -15974,9 +16282,9 @@ func (w *WhatsAppMessage) GetTemplate() *WhatsAppMessageTemplate {
 	return w.Template
 }
 
-func (w *WhatsAppMessage) GetCreatedAt() string {
+func (w *WhatsAppMessage) GetCreatedAt() time.Time {
 	if w == nil {
-		return ""
+		return time.Time{}
 	}
 	return w.CreatedAt
 }
@@ -16032,18 +16340,24 @@ func (w *WhatsAppMessage) SetTemplate(template *WhatsAppMessageTemplate) {
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppMessage) SetCreatedAt(createdAt string) {
+func (w *WhatsAppMessage) SetCreatedAt(createdAt time.Time) {
 	w.CreatedAt = createdAt
 	w.require(whatsAppMessageFieldCreatedAt)
 }
 
 func (w *WhatsAppMessage) UnmarshalJSON(data []byte) error {
-	type unmarshaler WhatsAppMessage
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+	type embed WhatsAppMessage
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"created_at"`
+	}{
+		embed: embed(*w),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*w = WhatsAppMessage(value)
+	*w = WhatsAppMessage(unmarshaler.embed)
+	w.CreatedAt = unmarshaler.CreatedAt.Time()
 	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
@@ -16057,8 +16371,10 @@ func (w *WhatsAppMessage) MarshalJSON() ([]byte, error) {
 	type embed WhatsAppMessage
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"created_at"`
 	}{
-		embed: embed(*w),
+		embed:     embed(*w),
+		CreatedAt: internal.NewDateTime(w.CreatedAt),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -16079,6 +16395,7 @@ func (w *WhatsAppMessage) String() string {
 	return fmt.Sprintf("%#v", w)
 }
 
+// Returned by `whatsapp_messages_get`.
 var (
 	whatsAppMessageGetResponseFieldMessage = big.NewInt(1 << 0)
 )
@@ -16163,6 +16480,7 @@ func (w *WhatsAppMessageGetResponse) String() string {
 	return fmt.Sprintf("%#v", w)
 }
 
+// A WhatsApp message your account sent or received. Returned by `whatsapp_messages_list` and `whatsapp_messages_get`.
 var (
 	whatsAppMessageListItemFieldUUID      = big.NewInt(1 << 0)
 	whatsAppMessageListItemFieldDirection = big.NewInt(1 << 1)
@@ -16174,20 +16492,30 @@ var (
 )
 
 type WhatsAppMessageListItem struct {
-	// Message ID.
+	// ID of the message.
 	UUID string `json:"uuid" url:"uuid"`
-	// Message direction.
+	// Message direction. Possible values:
+	//
+	// - `outbound` — The message was sent from your account to a recipient.
+	// - `inbound` — A customer sent the message to one of your senders.
 	Direction WhatsAppMessageListItemDirection `json:"direction" url:"direction"`
-	// Message delivery status.
+	// Message delivery status. Inbound messages always have `delivered` status. Possible values:
+	//
+	// - `sent` — The message isn't delivered yet.
+	// - `delivered` — The message was delivered to the recipient.
+	// - `undelivered` — The message was sent but not delivered.
+	// - `expired` — The message expired before it was delivered.
+	// - `rejected` — The message was permanently rejected before or by the provider.
+	// - `unknown` — The provider hasn't reported a status.
 	Status WhatsAppMessageListItemStatus `json:"status" url:"status"`
-	// For `outbound` messages, the sender's phone number. For `inbound`, the originating phone number.
+	// For `outbound` messages, the phone number of your sender. For `inbound`, the customer's phone number.
 	From string `json:"from" url:"from"`
-	// For `outbound` messages, the recipient's phone number. For `inbound`, the sender's phone number.
+	// For `outbound` messages, the recipient's phone number. For `inbound`, the phone number of your sender that received it.
 	To string `json:"to" url:"to"`
-	// Recipient's country, derived from the phone number.
+	// Country of the customer's phone number, as an ISO 3166-1 alpha-2 code, or `null` if the country can't be determined from the number.
 	Country *string `json:"country,omitempty" url:"country,omitempty"`
 	// Date and time the message was created, in ISO 8601 format.
-	CreatedAt string `json:"created_at" url:"created_at"`
+	CreatedAt time.Time `json:"created_at" url:"created_at"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -16238,9 +16566,9 @@ func (w *WhatsAppMessageListItem) GetCountry() *string {
 	return w.Country
 }
 
-func (w *WhatsAppMessageListItem) GetCreatedAt() string {
+func (w *WhatsAppMessageListItem) GetCreatedAt() time.Time {
 	if w == nil {
-		return ""
+		return time.Time{}
 	}
 	return w.CreatedAt
 }
@@ -16303,18 +16631,24 @@ func (w *WhatsAppMessageListItem) SetCountry(country *string) {
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppMessageListItem) SetCreatedAt(createdAt string) {
+func (w *WhatsAppMessageListItem) SetCreatedAt(createdAt time.Time) {
 	w.CreatedAt = createdAt
 	w.require(whatsAppMessageListItemFieldCreatedAt)
 }
 
 func (w *WhatsAppMessageListItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler WhatsAppMessageListItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+	type embed WhatsAppMessageListItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"created_at"`
+	}{
+		embed: embed(*w),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*w = WhatsAppMessageListItem(value)
+	*w = WhatsAppMessageListItem(unmarshaler.embed)
+	w.CreatedAt = unmarshaler.CreatedAt.Time()
 	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
@@ -16328,8 +16662,10 @@ func (w *WhatsAppMessageListItem) MarshalJSON() ([]byte, error) {
 	type embed WhatsAppMessageListItem
 	var marshaler = struct {
 		embed
+		CreatedAt *internal.DateTime `json:"created_at"`
 	}{
-		embed: embed(*w),
+		embed:     embed(*w),
+		CreatedAt: internal.NewDateTime(w.CreatedAt),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -16350,7 +16686,10 @@ func (w *WhatsAppMessageListItem) String() string {
 	return fmt.Sprintf("%#v", w)
 }
 
-// Message direction.
+// Message direction. Possible values:
+//
+// - `outbound` — The message was sent from your account to a recipient.
+// - `inbound` — A customer sent the message to one of your senders.
 type WhatsAppMessageListItemDirection string
 
 const (
@@ -16373,11 +16712,17 @@ func (w WhatsAppMessageListItemDirection) Ptr() *WhatsAppMessageListItemDirectio
 	return &w
 }
 
-// Message delivery status.
+// Message delivery status. Inbound messages always have `delivered` status. Possible values:
+//
+// - `sent` — The message isn't delivered yet.
+// - `delivered` — The message was delivered to the recipient.
+// - `undelivered` — The message was sent but not delivered.
+// - `expired` — The message expired before it was delivered.
+// - `rejected` — The message was permanently rejected before or by the provider.
+// - `unknown` — The provider hasn't reported a status.
 type WhatsAppMessageListItemStatus string
 
 const (
-	WhatsAppMessageListItemStatusFailed      WhatsAppMessageListItemStatus = "failed"
 	WhatsAppMessageListItemStatusSent        WhatsAppMessageListItemStatus = "sent"
 	WhatsAppMessageListItemStatusDelivered   WhatsAppMessageListItemStatus = "delivered"
 	WhatsAppMessageListItemStatusUndelivered WhatsAppMessageListItemStatus = "undelivered"
@@ -16388,8 +16733,6 @@ const (
 
 func NewWhatsAppMessageListItemStatusFromString(s string) (WhatsAppMessageListItemStatus, error) {
 	switch s {
-	case "failed":
-		return WhatsAppMessageListItemStatusFailed, nil
 	case "sent":
 		return WhatsAppMessageListItemStatusSent, nil
 	case "delivered":
@@ -16411,6 +16754,7 @@ func (w WhatsAppMessageListItemStatus) Ptr() *WhatsAppMessageListItemStatus {
 	return &w
 }
 
+// Returned by `whatsapp_messages_list`.
 var (
 	whatsAppMessageListResponseFieldMessages   = big.NewInt(1 << 0)
 	whatsAppMessageListResponseFieldPagination = big.NewInt(1 << 1)
@@ -16512,18 +16856,22 @@ func (w *WhatsAppMessageListResponse) String() string {
 	return fmt.Sprintf("%#v", w)
 }
 
+// Attributes of a WhatsApp template message to send. Consumed by `whatsapp_messages_send`.
 var (
-	whatsAppMessageSendRequestFieldFrom     = big.NewInt(1 << 0)
-	whatsAppMessageSendRequestFieldTo       = big.NewInt(1 << 1)
-	whatsAppMessageSendRequestFieldTemplate = big.NewInt(1 << 2)
+	whatsAppMessageSendRequestFieldFrom           = big.NewInt(1 << 0)
+	whatsAppMessageSendRequestFieldTo             = big.NewInt(1 << 1)
+	whatsAppMessageSendRequestFieldIdempotencyKey = big.NewInt(1 << 2)
+	whatsAppMessageSendRequestFieldTemplate       = big.NewInt(1 << 3)
 )
 
 type WhatsAppMessageSendRequest struct {
-	// Sender's phone number, 6-20 digits.
+	// Phone number of a sender registered on your account, in E.164 format, as returned by `whatsapp_senders_list`. The leading `+` is optional.
 	From string `json:"from" url:"from"`
-	// Recipient's phone number, 6-20 digits.
-	To       string                              `json:"to" url:"to"`
-	Template *WhatsAppMessageSendRequestTemplate `json:"template" url:"template"`
+	// Recipient's phone number in E.164 format. The leading `+` is optional.
+	To string `json:"to" url:"to"`
+	// Key that makes the send safe to retry, unique per account. Matching is exact, so case and accents are significant - `ORDER-1` and `order-1` are two different keys and both are sent. Printable ASCII only. Must not begin with `campaign:`, a prefix reserved for campaign messages. A request with a key in that namespace is rejected.
+	IdempotencyKey *string               `json:"idempotency_key,omitempty" url:"idempotency_key,omitempty"`
+	Template       *WhatsAppSendTemplate `json:"template" url:"template"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -16546,7 +16894,14 @@ func (w *WhatsAppMessageSendRequest) GetTo() string {
 	return w.To
 }
 
-func (w *WhatsAppMessageSendRequest) GetTemplate() *WhatsAppMessageSendRequestTemplate {
+func (w *WhatsAppMessageSendRequest) GetIdempotencyKey() *string {
+	if w == nil {
+		return nil
+	}
+	return w.IdempotencyKey
+}
+
+func (w *WhatsAppMessageSendRequest) GetTemplate() *WhatsAppSendTemplate {
 	if w == nil {
 		return nil
 	}
@@ -16581,9 +16936,16 @@ func (w *WhatsAppMessageSendRequest) SetTo(to string) {
 	w.require(whatsAppMessageSendRequestFieldTo)
 }
 
+// SetIdempotencyKey sets the IdempotencyKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageSendRequest) SetIdempotencyKey(idempotencyKey *string) {
+	w.IdempotencyKey = idempotencyKey
+	w.require(whatsAppMessageSendRequestFieldIdempotencyKey)
+}
+
 // SetTemplate sets the Template field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppMessageSendRequest) SetTemplate(template *WhatsAppMessageSendRequestTemplate) {
+func (w *WhatsAppMessageSendRequest) SetTemplate(template *WhatsAppSendTemplate) {
 	w.Template = template
 	w.require(whatsAppMessageSendRequestFieldTemplate)
 }
@@ -16630,526 +16992,7 @@ func (w *WhatsAppMessageSendRequest) String() string {
 	return fmt.Sprintf("%#v", w)
 }
 
-var (
-	whatsAppMessageSendRequestTemplateFieldName         = big.NewInt(1 << 0)
-	whatsAppMessageSendRequestTemplateFieldLanguage     = big.NewInt(1 << 1)
-	whatsAppMessageSendRequestTemplateFieldPlaceholders = big.NewInt(1 << 2)
-	whatsAppMessageSendRequestTemplateFieldHeader       = big.NewInt(1 << 3)
-	whatsAppMessageSendRequestTemplateFieldButtons      = big.NewInt(1 << 4)
-)
-
-type WhatsAppMessageSendRequestTemplate struct {
-	// Approved template name.
-	Name string `json:"name" url:"name"`
-	// Template language code.
-	Language string `json:"language" url:"language"`
-	// Values substituted into the template body's `{{n}}` placeholders, in order.
-	Placeholders []string `json:"placeholders,omitempty" url:"placeholders,omitempty"`
-	// Header content, required only when the template's `HEADER` component needs one.
-	Header *WhatsAppMessageSendRequestTemplateHeader `json:"header,omitempty" url:"header,omitempty"`
-	// Dynamic values for the template's `BUTTONS` component, one entry per button, matching the template's button order.
-	Buttons []*WhatsAppMessageSendRequestTemplateButtonsItem `json:"buttons,omitempty" url:"buttons,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (w *WhatsAppMessageSendRequestTemplate) GetName() string {
-	if w == nil {
-		return ""
-	}
-	return w.Name
-}
-
-func (w *WhatsAppMessageSendRequestTemplate) GetLanguage() string {
-	if w == nil {
-		return ""
-	}
-	return w.Language
-}
-
-func (w *WhatsAppMessageSendRequestTemplate) GetPlaceholders() []string {
-	if w == nil {
-		return nil
-	}
-	return w.Placeholders
-}
-
-func (w *WhatsAppMessageSendRequestTemplate) GetHeader() *WhatsAppMessageSendRequestTemplateHeader {
-	if w == nil {
-		return nil
-	}
-	return w.Header
-}
-
-func (w *WhatsAppMessageSendRequestTemplate) GetButtons() []*WhatsAppMessageSendRequestTemplateButtonsItem {
-	if w == nil {
-		return nil
-	}
-	return w.Buttons
-}
-
-func (w *WhatsAppMessageSendRequestTemplate) GetExtraProperties() map[string]interface{} {
-	if w == nil {
-		return nil
-	}
-	return w.extraProperties
-}
-
-func (w *WhatsAppMessageSendRequestTemplate) require(field *big.Int) {
-	if w.explicitFields == nil {
-		w.explicitFields = big.NewInt(0)
-	}
-	w.explicitFields.Or(w.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppMessageSendRequestTemplate) SetName(name string) {
-	w.Name = name
-	w.require(whatsAppMessageSendRequestTemplateFieldName)
-}
-
-// SetLanguage sets the Language field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppMessageSendRequestTemplate) SetLanguage(language string) {
-	w.Language = language
-	w.require(whatsAppMessageSendRequestTemplateFieldLanguage)
-}
-
-// SetPlaceholders sets the Placeholders field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppMessageSendRequestTemplate) SetPlaceholders(placeholders []string) {
-	w.Placeholders = placeholders
-	w.require(whatsAppMessageSendRequestTemplateFieldPlaceholders)
-}
-
-// SetHeader sets the Header field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppMessageSendRequestTemplate) SetHeader(header *WhatsAppMessageSendRequestTemplateHeader) {
-	w.Header = header
-	w.require(whatsAppMessageSendRequestTemplateFieldHeader)
-}
-
-// SetButtons sets the Buttons field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppMessageSendRequestTemplate) SetButtons(buttons []*WhatsAppMessageSendRequestTemplateButtonsItem) {
-	w.Buttons = buttons
-	w.require(whatsAppMessageSendRequestTemplateFieldButtons)
-}
-
-func (w *WhatsAppMessageSendRequestTemplate) UnmarshalJSON(data []byte) error {
-	type unmarshaler WhatsAppMessageSendRequestTemplate
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*w = WhatsAppMessageSendRequestTemplate(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *w)
-	if err != nil {
-		return err
-	}
-	w.extraProperties = extraProperties
-	w.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (w *WhatsAppMessageSendRequestTemplate) MarshalJSON() ([]byte, error) {
-	type embed WhatsAppMessageSendRequestTemplate
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*w),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (w *WhatsAppMessageSendRequestTemplate) String() string {
-	if w == nil {
-		return "<nil>"
-	}
-	if len(w.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(w); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", w)
-}
-
-var (
-	whatsAppMessageSendRequestTemplateButtonsItemFieldType = big.NewInt(1 << 0)
-)
-
-type WhatsAppMessageSendRequestTemplateButtonsItem struct {
-	Type WhatsAppMessageSendRequestTemplateButtonsItemType `json:"type" url:"type"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	ExtraProperties map[string]interface{} `json:"-" url:"-"`
-
-	rawJSON json.RawMessage
-}
-
-func (w *WhatsAppMessageSendRequestTemplateButtonsItem) GetType() WhatsAppMessageSendRequestTemplateButtonsItemType {
-	if w == nil {
-		return ""
-	}
-	return w.Type
-}
-
-func (w *WhatsAppMessageSendRequestTemplateButtonsItem) GetExtraProperties() map[string]interface{} {
-	if w == nil {
-		return nil
-	}
-	return w.ExtraProperties
-}
-
-func (w *WhatsAppMessageSendRequestTemplateButtonsItem) require(field *big.Int) {
-	if w.explicitFields == nil {
-		w.explicitFields = big.NewInt(0)
-	}
-	w.explicitFields.Or(w.explicitFields, field)
-}
-
-// SetType sets the Type field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppMessageSendRequestTemplateButtonsItem) SetType(type_ WhatsAppMessageSendRequestTemplateButtonsItemType) {
-	w.Type = type_
-	w.require(whatsAppMessageSendRequestTemplateButtonsItemFieldType)
-}
-
-func (w *WhatsAppMessageSendRequestTemplateButtonsItem) UnmarshalJSON(data []byte) error {
-	type embed WhatsAppMessageSendRequestTemplateButtonsItem
-	var unmarshaler = struct {
-		embed
-	}{
-		embed: embed(*w),
-	}
-	if err := json.Unmarshal(data, &unmarshaler); err != nil {
-		return err
-	}
-	*w = WhatsAppMessageSendRequestTemplateButtonsItem(unmarshaler.embed)
-	extraProperties, err := internal.ExtractExtraProperties(data, *w)
-	if err != nil {
-		return err
-	}
-	w.ExtraProperties = extraProperties
-	w.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (w *WhatsAppMessageSendRequestTemplateButtonsItem) MarshalJSON() ([]byte, error) {
-	type embed WhatsAppMessageSendRequestTemplateButtonsItem
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*w),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
-	return internal.MarshalJSONWithExtraProperties(explicitMarshaler, w.ExtraProperties)
-}
-
-func (w *WhatsAppMessageSendRequestTemplateButtonsItem) String() string {
-	if w == nil {
-		return "<nil>"
-	}
-	if len(w.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(w); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", w)
-}
-
-type WhatsAppMessageSendRequestTemplateButtonsItemType string
-
-const (
-	WhatsAppMessageSendRequestTemplateButtonsItemTypeQuickReply   WhatsAppMessageSendRequestTemplateButtonsItemType = "QUICK_REPLY"
-	WhatsAppMessageSendRequestTemplateButtonsItemTypeURL          WhatsAppMessageSendRequestTemplateButtonsItemType = "URL"
-	WhatsAppMessageSendRequestTemplateButtonsItemTypeCopyCode     WhatsAppMessageSendRequestTemplateButtonsItemType = "COPY_CODE"
-	WhatsAppMessageSendRequestTemplateButtonsItemTypeFlow         WhatsAppMessageSendRequestTemplateButtonsItemType = "FLOW"
-	WhatsAppMessageSendRequestTemplateButtonsItemTypeCatalog      WhatsAppMessageSendRequestTemplateButtonsItemType = "CATALOG"
-	WhatsAppMessageSendRequestTemplateButtonsItemTypeMultiProduct WhatsAppMessageSendRequestTemplateButtonsItemType = "MULTI_PRODUCT"
-	WhatsAppMessageSendRequestTemplateButtonsItemTypeOrderDetails WhatsAppMessageSendRequestTemplateButtonsItemType = "ORDER_DETAILS"
-	WhatsAppMessageSendRequestTemplateButtonsItemTypeVoiceCall    WhatsAppMessageSendRequestTemplateButtonsItemType = "VOICE_CALL"
-)
-
-func NewWhatsAppMessageSendRequestTemplateButtonsItemTypeFromString(s string) (WhatsAppMessageSendRequestTemplateButtonsItemType, error) {
-	switch s {
-	case "QUICK_REPLY":
-		return WhatsAppMessageSendRequestTemplateButtonsItemTypeQuickReply, nil
-	case "URL":
-		return WhatsAppMessageSendRequestTemplateButtonsItemTypeURL, nil
-	case "COPY_CODE":
-		return WhatsAppMessageSendRequestTemplateButtonsItemTypeCopyCode, nil
-	case "FLOW":
-		return WhatsAppMessageSendRequestTemplateButtonsItemTypeFlow, nil
-	case "CATALOG":
-		return WhatsAppMessageSendRequestTemplateButtonsItemTypeCatalog, nil
-	case "MULTI_PRODUCT":
-		return WhatsAppMessageSendRequestTemplateButtonsItemTypeMultiProduct, nil
-	case "ORDER_DETAILS":
-		return WhatsAppMessageSendRequestTemplateButtonsItemTypeOrderDetails, nil
-	case "VOICE_CALL":
-		return WhatsAppMessageSendRequestTemplateButtonsItemTypeVoiceCall, nil
-	}
-	var t WhatsAppMessageSendRequestTemplateButtonsItemType
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (w WhatsAppMessageSendRequestTemplateButtonsItemType) Ptr() *WhatsAppMessageSendRequestTemplateButtonsItemType {
-	return &w
-}
-
-// Header content, required only when the template's `HEADER` component needs one.
-var (
-	whatsAppMessageSendRequestTemplateHeaderFieldType          = big.NewInt(1 << 0)
-	whatsAppMessageSendRequestTemplateHeaderFieldPlaceholder   = big.NewInt(1 << 1)
-	whatsAppMessageSendRequestTemplateHeaderFieldMediaURL      = big.NewInt(1 << 2)
-	whatsAppMessageSendRequestTemplateHeaderFieldFilename      = big.NewInt(1 << 3)
-	whatsAppMessageSendRequestTemplateHeaderFieldLatitude      = big.NewInt(1 << 4)
-	whatsAppMessageSendRequestTemplateHeaderFieldLongitude     = big.NewInt(1 << 5)
-	whatsAppMessageSendRequestTemplateHeaderFieldParameterName = big.NewInt(1 << 6)
-	whatsAppMessageSendRequestTemplateHeaderFieldText          = big.NewInt(1 << 7)
-)
-
-type WhatsAppMessageSendRequestTemplateHeader struct {
-	Type *WhatsAppMessageSendRequestTemplateHeaderType `json:"type,omitempty" url:"type,omitempty"`
-	// Value for a `TEXT` header's `{{1}}` placeholder.
-	Placeholder *string `json:"placeholder,omitempty" url:"placeholder,omitempty"`
-	// Media URL for an `IMAGE`/`VIDEO`/`DOCUMENT` header.
-	MediaURL *string `json:"mediaUrl,omitempty" url:"mediaUrl,omitempty"`
-	// Filename for a `DOCUMENT` header.
-	Filename *string `json:"filename,omitempty" url:"filename,omitempty"`
-	// Latitude for a `LOCATION` header.
-	Latitude *float64 `json:"latitude,omitempty" url:"latitude,omitempty"`
-	// Longitude for a `LOCATION` header.
-	Longitude *float64 `json:"longitude,omitempty" url:"longitude,omitempty"`
-	// Placeholder name for a named-parameter `TEXT` header.
-	ParameterName *string `json:"parameterName,omitempty" url:"parameterName,omitempty"`
-	// Value for a named-parameter `TEXT` header.
-	Text *string `json:"text,omitempty" url:"text,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (w *WhatsAppMessageSendRequestTemplateHeader) GetType() *WhatsAppMessageSendRequestTemplateHeaderType {
-	if w == nil {
-		return nil
-	}
-	return w.Type
-}
-
-func (w *WhatsAppMessageSendRequestTemplateHeader) GetPlaceholder() *string {
-	if w == nil {
-		return nil
-	}
-	return w.Placeholder
-}
-
-func (w *WhatsAppMessageSendRequestTemplateHeader) GetMediaURL() *string {
-	if w == nil {
-		return nil
-	}
-	return w.MediaURL
-}
-
-func (w *WhatsAppMessageSendRequestTemplateHeader) GetFilename() *string {
-	if w == nil {
-		return nil
-	}
-	return w.Filename
-}
-
-func (w *WhatsAppMessageSendRequestTemplateHeader) GetLatitude() *float64 {
-	if w == nil {
-		return nil
-	}
-	return w.Latitude
-}
-
-func (w *WhatsAppMessageSendRequestTemplateHeader) GetLongitude() *float64 {
-	if w == nil {
-		return nil
-	}
-	return w.Longitude
-}
-
-func (w *WhatsAppMessageSendRequestTemplateHeader) GetParameterName() *string {
-	if w == nil {
-		return nil
-	}
-	return w.ParameterName
-}
-
-func (w *WhatsAppMessageSendRequestTemplateHeader) GetText() *string {
-	if w == nil {
-		return nil
-	}
-	return w.Text
-}
-
-func (w *WhatsAppMessageSendRequestTemplateHeader) GetExtraProperties() map[string]interface{} {
-	if w == nil {
-		return nil
-	}
-	return w.extraProperties
-}
-
-func (w *WhatsAppMessageSendRequestTemplateHeader) require(field *big.Int) {
-	if w.explicitFields == nil {
-		w.explicitFields = big.NewInt(0)
-	}
-	w.explicitFields.Or(w.explicitFields, field)
-}
-
-// SetType sets the Type field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppMessageSendRequestTemplateHeader) SetType(type_ *WhatsAppMessageSendRequestTemplateHeaderType) {
-	w.Type = type_
-	w.require(whatsAppMessageSendRequestTemplateHeaderFieldType)
-}
-
-// SetPlaceholder sets the Placeholder field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppMessageSendRequestTemplateHeader) SetPlaceholder(placeholder *string) {
-	w.Placeholder = placeholder
-	w.require(whatsAppMessageSendRequestTemplateHeaderFieldPlaceholder)
-}
-
-// SetMediaURL sets the MediaURL field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppMessageSendRequestTemplateHeader) SetMediaURL(mediaURL *string) {
-	w.MediaURL = mediaURL
-	w.require(whatsAppMessageSendRequestTemplateHeaderFieldMediaURL)
-}
-
-// SetFilename sets the Filename field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppMessageSendRequestTemplateHeader) SetFilename(filename *string) {
-	w.Filename = filename
-	w.require(whatsAppMessageSendRequestTemplateHeaderFieldFilename)
-}
-
-// SetLatitude sets the Latitude field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppMessageSendRequestTemplateHeader) SetLatitude(latitude *float64) {
-	w.Latitude = latitude
-	w.require(whatsAppMessageSendRequestTemplateHeaderFieldLatitude)
-}
-
-// SetLongitude sets the Longitude field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppMessageSendRequestTemplateHeader) SetLongitude(longitude *float64) {
-	w.Longitude = longitude
-	w.require(whatsAppMessageSendRequestTemplateHeaderFieldLongitude)
-}
-
-// SetParameterName sets the ParameterName field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppMessageSendRequestTemplateHeader) SetParameterName(parameterName *string) {
-	w.ParameterName = parameterName
-	w.require(whatsAppMessageSendRequestTemplateHeaderFieldParameterName)
-}
-
-// SetText sets the Text field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppMessageSendRequestTemplateHeader) SetText(text *string) {
-	w.Text = text
-	w.require(whatsAppMessageSendRequestTemplateHeaderFieldText)
-}
-
-func (w *WhatsAppMessageSendRequestTemplateHeader) UnmarshalJSON(data []byte) error {
-	type unmarshaler WhatsAppMessageSendRequestTemplateHeader
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*w = WhatsAppMessageSendRequestTemplateHeader(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *w)
-	if err != nil {
-		return err
-	}
-	w.extraProperties = extraProperties
-	w.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (w *WhatsAppMessageSendRequestTemplateHeader) MarshalJSON() ([]byte, error) {
-	type embed WhatsAppMessageSendRequestTemplateHeader
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*w),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (w *WhatsAppMessageSendRequestTemplateHeader) String() string {
-	if w == nil {
-		return "<nil>"
-	}
-	if len(w.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(w); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", w)
-}
-
-type WhatsAppMessageSendRequestTemplateHeaderType string
-
-const (
-	WhatsAppMessageSendRequestTemplateHeaderTypeText                WhatsAppMessageSendRequestTemplateHeaderType = "TEXT"
-	WhatsAppMessageSendRequestTemplateHeaderTypeTextNamedParameters WhatsAppMessageSendRequestTemplateHeaderType = "TEXT_NAMED_PARAMETERS"
-	WhatsAppMessageSendRequestTemplateHeaderTypeImage               WhatsAppMessageSendRequestTemplateHeaderType = "IMAGE"
-	WhatsAppMessageSendRequestTemplateHeaderTypeVideo               WhatsAppMessageSendRequestTemplateHeaderType = "VIDEO"
-	WhatsAppMessageSendRequestTemplateHeaderTypeDocument            WhatsAppMessageSendRequestTemplateHeaderType = "DOCUMENT"
-	WhatsAppMessageSendRequestTemplateHeaderTypeLocation            WhatsAppMessageSendRequestTemplateHeaderType = "LOCATION"
-)
-
-func NewWhatsAppMessageSendRequestTemplateHeaderTypeFromString(s string) (WhatsAppMessageSendRequestTemplateHeaderType, error) {
-	switch s {
-	case "TEXT":
-		return WhatsAppMessageSendRequestTemplateHeaderTypeText, nil
-	case "TEXT_NAMED_PARAMETERS":
-		return WhatsAppMessageSendRequestTemplateHeaderTypeTextNamedParameters, nil
-	case "IMAGE":
-		return WhatsAppMessageSendRequestTemplateHeaderTypeImage, nil
-	case "VIDEO":
-		return WhatsAppMessageSendRequestTemplateHeaderTypeVideo, nil
-	case "DOCUMENT":
-		return WhatsAppMessageSendRequestTemplateHeaderTypeDocument, nil
-	case "LOCATION":
-		return WhatsAppMessageSendRequestTemplateHeaderTypeLocation, nil
-	}
-	var t WhatsAppMessageSendRequestTemplateHeaderType
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (w WhatsAppMessageSendRequestTemplateHeaderType) Ptr() *WhatsAppMessageSendRequestTemplateHeaderType {
-	return &w
-}
-
+// Returned by `whatsapp_messages_send`.
 var (
 	whatsAppMessageSendResponseFieldMessage = big.NewInt(1 << 0)
 )
@@ -17234,11 +17077,17 @@ func (w *WhatsAppMessageSendResponse) String() string {
 	return fmt.Sprintf("%#v", w)
 }
 
-// Message delivery status.
+// Message delivery status. Possible values:
+//
+// - `sent` — The message isn't delivered yet.
+// - `delivered` — The message was delivered to the recipient.
+// - `undelivered` — The message was sent but not delivered.
+// - `expired` — The message expired before it was delivered.
+// - `rejected` — The message was permanently rejected before or by the provider.
+// - `unknown` — The provider hasn't reported a status.
 type WhatsAppMessageStatus string
 
 const (
-	WhatsAppMessageStatusFailed      WhatsAppMessageStatus = "failed"
 	WhatsAppMessageStatusSent        WhatsAppMessageStatus = "sent"
 	WhatsAppMessageStatusDelivered   WhatsAppMessageStatus = "delivered"
 	WhatsAppMessageStatusUndelivered WhatsAppMessageStatus = "undelivered"
@@ -17249,8 +17098,6 @@ const (
 
 func NewWhatsAppMessageStatusFromString(s string) (WhatsAppMessageStatus, error) {
 	switch s {
-	case "failed":
-		return WhatsAppMessageStatusFailed, nil
 	case "sent":
 		return WhatsAppMessageStatusSent, nil
 	case "delivered":
@@ -17272,7 +17119,7 @@ func (w WhatsAppMessageStatus) Ptr() *WhatsAppMessageStatus {
 	return &w
 }
 
-// Template used to send the message.
+// The template that a WhatsApp message was sent with. Returned in `template` by `whatsapp_messages_send`.
 var (
 	whatsAppMessageTemplateFieldName     = big.NewInt(1 << 0)
 	whatsAppMessageTemplateFieldLanguage = big.NewInt(1 << 1)
@@ -17280,9 +17127,9 @@ var (
 
 type WhatsAppMessageTemplate struct {
 	// Template name.
-	Name *string `json:"name,omitempty" url:"name,omitempty"`
+	Name string `json:"name" url:"name"`
 	// Template language code.
-	Language *string `json:"language,omitempty" url:"language,omitempty"`
+	Language string `json:"language" url:"language"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -17291,16 +17138,16 @@ type WhatsAppMessageTemplate struct {
 	rawJSON         json.RawMessage
 }
 
-func (w *WhatsAppMessageTemplate) GetName() *string {
+func (w *WhatsAppMessageTemplate) GetName() string {
 	if w == nil {
-		return nil
+		return ""
 	}
 	return w.Name
 }
 
-func (w *WhatsAppMessageTemplate) GetLanguage() *string {
+func (w *WhatsAppMessageTemplate) GetLanguage() string {
 	if w == nil {
-		return nil
+		return ""
 	}
 	return w.Language
 }
@@ -17321,14 +17168,14 @@ func (w *WhatsAppMessageTemplate) require(field *big.Int) {
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppMessageTemplate) SetName(name *string) {
+func (w *WhatsAppMessageTemplate) SetName(name string) {
 	w.Name = name
 	w.require(whatsAppMessageTemplateFieldName)
 }
 
 // SetLanguage sets the Language field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppMessageTemplate) SetLanguage(language *string) {
+func (w *WhatsAppMessageTemplate) SetLanguage(language string) {
 	w.Language = language
 	w.require(whatsAppMessageTemplateFieldLanguage)
 }
@@ -17375,7 +17222,7 @@ func (w *WhatsAppMessageTemplate) String() string {
 	return fmt.Sprintf("%#v", w)
 }
 
-// RFC 9457 problem document returned by WhatsApp endpoints as `application/problem+json`.
+// An RFC 9457 problem document that describes an error from the WhatsApp API. Returned with the `application/problem+json` content type.
 var (
 	whatsAppProblemFieldType       = big.NewInt(1 << 0)
 	whatsAppProblemFieldTitle      = big.NewInt(1 << 1)
@@ -17387,19 +17234,24 @@ var (
 )
 
 type WhatsAppProblem struct {
-	// URI identifying the problem type.
+	// URI that identifies the problem type.
 	Type string `json:"type" url:"type"`
 	// Short, human-readable summary of the problem type.
 	Title string `json:"title" url:"title"`
-	// HTTP status code.
+	// HTTP status code of the response.
 	Status int `json:"status" url:"status"`
-	// Human-readable explanation specific to this occurrence of the problem.
+	// Human-readable explanation of this occurrence of the problem.
 	Detail string `json:"detail" url:"detail"`
-	// URI identifying this specific occurrence of the problem, such as the request ID.
+	// Request ID of this occurrence of the problem.
 	Instance string `json:"instance" url:"instance"`
-	// Machine-readable classification of the error.
+	// Machine-readable classification of the error. Possible values:
+	//
+	// - `permanent` — The request can't succeed as sent. Retrying doesn't help.
+	// - `retriable` — The failure is temporary. Retrying can succeed.
+	// - `rate_limited` — The request was rate limited. Retry later.
+	// - `invalid_template` — The template content is invalid.
 	ErrorClass *WhatsAppProblemErrorClass `json:"error_class,omitempty" url:"error_class,omitempty"`
-	// Stable machine-readable error code, derived from the problem slug.
+	// Stable machine-readable error code. It's the problem type slug in upper case with the `WAVIX_` prefix.
 	ErrorCode *string `json:"error_code,omitempty" url:"error_code,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -17563,7 +17415,12 @@ func (w *WhatsAppProblem) String() string {
 	return fmt.Sprintf("%#v", w)
 }
 
-// Machine-readable classification of the error.
+// Machine-readable classification of the error. Possible values:
+//
+// - `permanent` — The request can't succeed as sent. Retrying doesn't help.
+// - `retriable` — The failure is temporary. Retrying can succeed.
+// - `rate_limited` — The request was rate limited. Retry later.
+// - `invalid_template` — The template content is invalid.
 type WhatsAppProblemErrorClass string
 
 const (
@@ -17592,12 +17449,701 @@ func (w WhatsAppProblemErrorClass) Ptr() *WhatsAppProblemErrorClass {
 	return &w
 }
 
+// The template to send and the values for its dynamic parts. Consumed in `template` by `whatsapp_messages_send`.
+var (
+	whatsAppSendTemplateFieldName         = big.NewInt(1 << 0)
+	whatsAppSendTemplateFieldLanguage     = big.NewInt(1 << 1)
+	whatsAppSendTemplateFieldPlaceholders = big.NewInt(1 << 2)
+	whatsAppSendTemplateFieldHeader       = big.NewInt(1 << 3)
+	whatsAppSendTemplateFieldButtons      = big.NewInt(1 << 4)
+)
+
+type WhatsAppSendTemplate struct {
+	// Name of the template to send, as returned by `whatsapp_templates_list`.
+	Name string `json:"name" url:"name"`
+	// Language code of the template to send, as returned by `whatsapp_templates_list`.
+	Language string `json:"language" url:"language"`
+	// Values substituted into the template body's `{{n}}` placeholders, in order.
+	Placeholders []string                    `json:"placeholders,omitempty" url:"placeholders,omitempty"`
+	Header       *WhatsAppSendTemplateHeader `json:"header,omitempty" url:"header,omitempty"`
+	// Dynamic values for the template's `buttons` component, one entry per button, matching the template's button order. Each entry accepts only the fields its `type` uses.
+	Buttons []*WhatsAppSendTemplateButton `json:"buttons,omitempty" url:"buttons,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppSendTemplate) GetName() string {
+	if w == nil {
+		return ""
+	}
+	return w.Name
+}
+
+func (w *WhatsAppSendTemplate) GetLanguage() string {
+	if w == nil {
+		return ""
+	}
+	return w.Language
+}
+
+func (w *WhatsAppSendTemplate) GetPlaceholders() []string {
+	if w == nil {
+		return nil
+	}
+	return w.Placeholders
+}
+
+func (w *WhatsAppSendTemplate) GetHeader() *WhatsAppSendTemplateHeader {
+	if w == nil {
+		return nil
+	}
+	return w.Header
+}
+
+func (w *WhatsAppSendTemplate) GetButtons() []*WhatsAppSendTemplateButton {
+	if w == nil {
+		return nil
+	}
+	return w.Buttons
+}
+
+func (w *WhatsAppSendTemplate) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppSendTemplate) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplate) SetName(name string) {
+	w.Name = name
+	w.require(whatsAppSendTemplateFieldName)
+}
+
+// SetLanguage sets the Language field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplate) SetLanguage(language string) {
+	w.Language = language
+	w.require(whatsAppSendTemplateFieldLanguage)
+}
+
+// SetPlaceholders sets the Placeholders field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplate) SetPlaceholders(placeholders []string) {
+	w.Placeholders = placeholders
+	w.require(whatsAppSendTemplateFieldPlaceholders)
+}
+
+// SetHeader sets the Header field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplate) SetHeader(header *WhatsAppSendTemplateHeader) {
+	w.Header = header
+	w.require(whatsAppSendTemplateFieldHeader)
+}
+
+// SetButtons sets the Buttons field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplate) SetButtons(buttons []*WhatsAppSendTemplateButton) {
+	w.Buttons = buttons
+	w.require(whatsAppSendTemplateFieldButtons)
+}
+
+func (w *WhatsAppSendTemplate) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppSendTemplate
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppSendTemplate(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppSendTemplate) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppSendTemplate
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppSendTemplate) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Dynamic values for one button of the template. Each `type` requires specific fields and rejects the others, as listed in the `type` description. Consumed in `template.buttons` by `whatsapp_messages_send`.
+var (
+	whatsAppSendTemplateButtonFieldType                       = big.NewInt(1 << 0)
+	whatsAppSendTemplateButtonFieldParameter                  = big.NewInt(1 << 1)
+	whatsAppSendTemplateButtonFieldFlowToken                  = big.NewInt(1 << 2)
+	whatsAppSendTemplateButtonFieldData                       = big.NewInt(1 << 3)
+	whatsAppSendTemplateButtonFieldThumbnailProductRetailerID = big.NewInt(1 << 4)
+	whatsAppSendTemplateButtonFieldSections                   = big.NewInt(1 << 5)
+	whatsAppSendTemplateButtonFieldAction                     = big.NewInt(1 << 6)
+	whatsAppSendTemplateButtonFieldCallValidityPeriod         = big.NewInt(1 << 7)
+	whatsAppSendTemplateButtonFieldCallContextPayload         = big.NewInt(1 << 8)
+)
+
+type WhatsAppSendTemplateButton struct {
+	// Button type. Possible values:
+	//
+	// - `quick_reply` — Sends a predefined reply. Requires `parameter`.
+	// - `url` — Opens a URL. Requires `parameter`.
+	// - `copy_code` — Copies a code to the clipboard. Requires `parameter`.
+	// - `flow` — Opens a WhatsApp Flow. Accepts `flow_token` and `data`.
+	// - `catalog` — Opens the business catalog. Accepts `thumbnail_product_retailer_id`.
+	// - `multi_product` — Shows a message with several products. Requires `sections` and accepts `thumbnail_product_retailer_id`.
+	// - `order_details` — Shows order details. Requires `action`.
+	// - `voice_call` — Starts a voice call. Accepts `call_validity_period` and `call_context_payload`.
+	Type WhatsAppSendTemplateButtonType `json:"type" url:"type"`
+	// Dynamic value of a `quick_reply`, `url`, or `copy_code` button. Required for those types.
+	Parameter *string `json:"parameter,omitempty" url:"parameter,omitempty"`
+	// Flow token of a `flow` button.
+	FlowToken *string `json:"flow_token,omitempty" url:"flow_token,omitempty"`
+	// Initial data passed to the Flow of a `flow` button.
+	Data map[string]any `json:"data,omitempty" url:"data,omitempty"`
+	// Retailer ID of the product shown as the thumbnail of a `catalog` or `multi_product` button.
+	ThumbnailProductRetailerID *string `json:"thumbnail_product_retailer_id,omitempty" url:"thumbnail_product_retailer_id,omitempty"`
+	// Product sections of a `multi_product` button. Required for that type.
+	Sections []map[string]any `json:"sections,omitempty" url:"sections,omitempty"`
+	// Order details of an `order_details` button. Required for that type.
+	Action map[string]any `json:"action,omitempty" url:"action,omitempty"`
+	// How long a `voice_call` button stays valid.
+	CallValidityPeriod *int `json:"call_validity_period,omitempty" url:"call_validity_period,omitempty"`
+	// Context payload returned with a call started from a `voice_call` button.
+	CallContextPayload *string `json:"call_context_payload,omitempty" url:"call_context_payload,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppSendTemplateButton) GetType() WhatsAppSendTemplateButtonType {
+	if w == nil {
+		return ""
+	}
+	return w.Type
+}
+
+func (w *WhatsAppSendTemplateButton) GetParameter() *string {
+	if w == nil {
+		return nil
+	}
+	return w.Parameter
+}
+
+func (w *WhatsAppSendTemplateButton) GetFlowToken() *string {
+	if w == nil {
+		return nil
+	}
+	return w.FlowToken
+}
+
+func (w *WhatsAppSendTemplateButton) GetData() map[string]any {
+	if w == nil {
+		return nil
+	}
+	return w.Data
+}
+
+func (w *WhatsAppSendTemplateButton) GetThumbnailProductRetailerID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.ThumbnailProductRetailerID
+}
+
+func (w *WhatsAppSendTemplateButton) GetSections() []map[string]any {
+	if w == nil {
+		return nil
+	}
+	return w.Sections
+}
+
+func (w *WhatsAppSendTemplateButton) GetAction() map[string]any {
+	if w == nil {
+		return nil
+	}
+	return w.Action
+}
+
+func (w *WhatsAppSendTemplateButton) GetCallValidityPeriod() *int {
+	if w == nil {
+		return nil
+	}
+	return w.CallValidityPeriod
+}
+
+func (w *WhatsAppSendTemplateButton) GetCallContextPayload() *string {
+	if w == nil {
+		return nil
+	}
+	return w.CallContextPayload
+}
+
+func (w *WhatsAppSendTemplateButton) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppSendTemplateButton) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplateButton) SetType(type_ WhatsAppSendTemplateButtonType) {
+	w.Type = type_
+	w.require(whatsAppSendTemplateButtonFieldType)
+}
+
+// SetParameter sets the Parameter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplateButton) SetParameter(parameter *string) {
+	w.Parameter = parameter
+	w.require(whatsAppSendTemplateButtonFieldParameter)
+}
+
+// SetFlowToken sets the FlowToken field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplateButton) SetFlowToken(flowToken *string) {
+	w.FlowToken = flowToken
+	w.require(whatsAppSendTemplateButtonFieldFlowToken)
+}
+
+// SetData sets the Data field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplateButton) SetData(data map[string]any) {
+	w.Data = data
+	w.require(whatsAppSendTemplateButtonFieldData)
+}
+
+// SetThumbnailProductRetailerID sets the ThumbnailProductRetailerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplateButton) SetThumbnailProductRetailerID(thumbnailProductRetailerID *string) {
+	w.ThumbnailProductRetailerID = thumbnailProductRetailerID
+	w.require(whatsAppSendTemplateButtonFieldThumbnailProductRetailerID)
+}
+
+// SetSections sets the Sections field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplateButton) SetSections(sections []map[string]any) {
+	w.Sections = sections
+	w.require(whatsAppSendTemplateButtonFieldSections)
+}
+
+// SetAction sets the Action field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplateButton) SetAction(action map[string]any) {
+	w.Action = action
+	w.require(whatsAppSendTemplateButtonFieldAction)
+}
+
+// SetCallValidityPeriod sets the CallValidityPeriod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplateButton) SetCallValidityPeriod(callValidityPeriod *int) {
+	w.CallValidityPeriod = callValidityPeriod
+	w.require(whatsAppSendTemplateButtonFieldCallValidityPeriod)
+}
+
+// SetCallContextPayload sets the CallContextPayload field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplateButton) SetCallContextPayload(callContextPayload *string) {
+	w.CallContextPayload = callContextPayload
+	w.require(whatsAppSendTemplateButtonFieldCallContextPayload)
+}
+
+func (w *WhatsAppSendTemplateButton) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppSendTemplateButton
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppSendTemplateButton(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppSendTemplateButton) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppSendTemplateButton
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppSendTemplateButton) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Button type. Possible values:
+//
+// - `quick_reply` — Sends a predefined reply. Requires `parameter`.
+// - `url` — Opens a URL. Requires `parameter`.
+// - `copy_code` — Copies a code to the clipboard. Requires `parameter`.
+// - `flow` — Opens a WhatsApp Flow. Accepts `flow_token` and `data`.
+// - `catalog` — Opens the business catalog. Accepts `thumbnail_product_retailer_id`.
+// - `multi_product` — Shows a message with several products. Requires `sections` and accepts `thumbnail_product_retailer_id`.
+// - `order_details` — Shows order details. Requires `action`.
+// - `voice_call` — Starts a voice call. Accepts `call_validity_period` and `call_context_payload`.
+type WhatsAppSendTemplateButtonType string
+
+const (
+	WhatsAppSendTemplateButtonTypeQuickReply   WhatsAppSendTemplateButtonType = "quick_reply"
+	WhatsAppSendTemplateButtonTypeURL          WhatsAppSendTemplateButtonType = "url"
+	WhatsAppSendTemplateButtonTypeCopyCode     WhatsAppSendTemplateButtonType = "copy_code"
+	WhatsAppSendTemplateButtonTypeFlow         WhatsAppSendTemplateButtonType = "flow"
+	WhatsAppSendTemplateButtonTypeCatalog      WhatsAppSendTemplateButtonType = "catalog"
+	WhatsAppSendTemplateButtonTypeMultiProduct WhatsAppSendTemplateButtonType = "multi_product"
+	WhatsAppSendTemplateButtonTypeOrderDetails WhatsAppSendTemplateButtonType = "order_details"
+	WhatsAppSendTemplateButtonTypeVoiceCall    WhatsAppSendTemplateButtonType = "voice_call"
+)
+
+func NewWhatsAppSendTemplateButtonTypeFromString(s string) (WhatsAppSendTemplateButtonType, error) {
+	switch s {
+	case "quick_reply":
+		return WhatsAppSendTemplateButtonTypeQuickReply, nil
+	case "url":
+		return WhatsAppSendTemplateButtonTypeURL, nil
+	case "copy_code":
+		return WhatsAppSendTemplateButtonTypeCopyCode, nil
+	case "flow":
+		return WhatsAppSendTemplateButtonTypeFlow, nil
+	case "catalog":
+		return WhatsAppSendTemplateButtonTypeCatalog, nil
+	case "multi_product":
+		return WhatsAppSendTemplateButtonTypeMultiProduct, nil
+	case "order_details":
+		return WhatsAppSendTemplateButtonTypeOrderDetails, nil
+	case "voice_call":
+		return WhatsAppSendTemplateButtonTypeVoiceCall, nil
+	}
+	var t WhatsAppSendTemplateButtonType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppSendTemplateButtonType) Ptr() *WhatsAppSendTemplateButtonType {
+	return &w
+}
+
+// Header content, required only when the template's `header` component needs one. Each `type` requires specific fields and rejects the others, as listed in the `type` description. Consumed in `template.header` by `whatsapp_messages_send`.
+var (
+	whatsAppSendTemplateHeaderFieldType          = big.NewInt(1 << 0)
+	whatsAppSendTemplateHeaderFieldPlaceholder   = big.NewInt(1 << 1)
+	whatsAppSendTemplateHeaderFieldMediaURL      = big.NewInt(1 << 2)
+	whatsAppSendTemplateHeaderFieldFilename      = big.NewInt(1 << 3)
+	whatsAppSendTemplateHeaderFieldLatitude      = big.NewInt(1 << 4)
+	whatsAppSendTemplateHeaderFieldLongitude     = big.NewInt(1 << 5)
+	whatsAppSendTemplateHeaderFieldParameterName = big.NewInt(1 << 6)
+	whatsAppSendTemplateHeaderFieldText          = big.NewInt(1 << 7)
+)
+
+type WhatsAppSendTemplateHeader struct {
+	// Header content type. Possible values:
+	//
+	// - `text` — Text header with a `{{1}}` placeholder. Requires `placeholder`.
+	// - `text_named_parameters` — Text header with a named placeholder. Requires `parameter_name` and `text`.
+	// - `image` — Image header. Requires `media_url`.
+	// - `video` — Video header. Requires `media_url`.
+	// - `document` — Document header. Requires `media_url` and `filename`.
+	// - `location` — Location header. Requires `latitude` and `longitude`.
+	Type WhatsAppSendTemplateHeaderType `json:"type" url:"type"`
+	// Value for a `text` header's `{{1}}` placeholder.
+	Placeholder *string `json:"placeholder,omitempty" url:"placeholder,omitempty"`
+	// Media URL for an `image`, `video`, or `document` header.
+	MediaURL *string `json:"media_url,omitempty" url:"media_url,omitempty"`
+	// Filename for a `document` header.
+	Filename *string `json:"filename,omitempty" url:"filename,omitempty"`
+	// Latitude for a `location` header.
+	Latitude *float64 `json:"latitude,omitempty" url:"latitude,omitempty"`
+	// Longitude for a `location` header.
+	Longitude *float64 `json:"longitude,omitempty" url:"longitude,omitempty"`
+	// Placeholder name for a `text_named_parameters` header.
+	ParameterName *string `json:"parameter_name,omitempty" url:"parameter_name,omitempty"`
+	// Value for a `text_named_parameters` header.
+	Text *string `json:"text,omitempty" url:"text,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppSendTemplateHeader) GetType() WhatsAppSendTemplateHeaderType {
+	if w == nil {
+		return ""
+	}
+	return w.Type
+}
+
+func (w *WhatsAppSendTemplateHeader) GetPlaceholder() *string {
+	if w == nil {
+		return nil
+	}
+	return w.Placeholder
+}
+
+func (w *WhatsAppSendTemplateHeader) GetMediaURL() *string {
+	if w == nil {
+		return nil
+	}
+	return w.MediaURL
+}
+
+func (w *WhatsAppSendTemplateHeader) GetFilename() *string {
+	if w == nil {
+		return nil
+	}
+	return w.Filename
+}
+
+func (w *WhatsAppSendTemplateHeader) GetLatitude() *float64 {
+	if w == nil {
+		return nil
+	}
+	return w.Latitude
+}
+
+func (w *WhatsAppSendTemplateHeader) GetLongitude() *float64 {
+	if w == nil {
+		return nil
+	}
+	return w.Longitude
+}
+
+func (w *WhatsAppSendTemplateHeader) GetParameterName() *string {
+	if w == nil {
+		return nil
+	}
+	return w.ParameterName
+}
+
+func (w *WhatsAppSendTemplateHeader) GetText() *string {
+	if w == nil {
+		return nil
+	}
+	return w.Text
+}
+
+func (w *WhatsAppSendTemplateHeader) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppSendTemplateHeader) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplateHeader) SetType(type_ WhatsAppSendTemplateHeaderType) {
+	w.Type = type_
+	w.require(whatsAppSendTemplateHeaderFieldType)
+}
+
+// SetPlaceholder sets the Placeholder field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplateHeader) SetPlaceholder(placeholder *string) {
+	w.Placeholder = placeholder
+	w.require(whatsAppSendTemplateHeaderFieldPlaceholder)
+}
+
+// SetMediaURL sets the MediaURL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplateHeader) SetMediaURL(mediaURL *string) {
+	w.MediaURL = mediaURL
+	w.require(whatsAppSendTemplateHeaderFieldMediaURL)
+}
+
+// SetFilename sets the Filename field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplateHeader) SetFilename(filename *string) {
+	w.Filename = filename
+	w.require(whatsAppSendTemplateHeaderFieldFilename)
+}
+
+// SetLatitude sets the Latitude field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplateHeader) SetLatitude(latitude *float64) {
+	w.Latitude = latitude
+	w.require(whatsAppSendTemplateHeaderFieldLatitude)
+}
+
+// SetLongitude sets the Longitude field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplateHeader) SetLongitude(longitude *float64) {
+	w.Longitude = longitude
+	w.require(whatsAppSendTemplateHeaderFieldLongitude)
+}
+
+// SetParameterName sets the ParameterName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplateHeader) SetParameterName(parameterName *string) {
+	w.ParameterName = parameterName
+	w.require(whatsAppSendTemplateHeaderFieldParameterName)
+}
+
+// SetText sets the Text field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSendTemplateHeader) SetText(text *string) {
+	w.Text = text
+	w.require(whatsAppSendTemplateHeaderFieldText)
+}
+
+func (w *WhatsAppSendTemplateHeader) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppSendTemplateHeader
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppSendTemplateHeader(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppSendTemplateHeader) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppSendTemplateHeader
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppSendTemplateHeader) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Header content type. Possible values:
+//
+// - `text` — Text header with a `{{1}}` placeholder. Requires `placeholder`.
+// - `text_named_parameters` — Text header with a named placeholder. Requires `parameter_name` and `text`.
+// - `image` — Image header. Requires `media_url`.
+// - `video` — Video header. Requires `media_url`.
+// - `document` — Document header. Requires `media_url` and `filename`.
+// - `location` — Location header. Requires `latitude` and `longitude`.
+type WhatsAppSendTemplateHeaderType string
+
+const (
+	WhatsAppSendTemplateHeaderTypeText                WhatsAppSendTemplateHeaderType = "text"
+	WhatsAppSendTemplateHeaderTypeTextNamedParameters WhatsAppSendTemplateHeaderType = "text_named_parameters"
+	WhatsAppSendTemplateHeaderTypeImage               WhatsAppSendTemplateHeaderType = "image"
+	WhatsAppSendTemplateHeaderTypeVideo               WhatsAppSendTemplateHeaderType = "video"
+	WhatsAppSendTemplateHeaderTypeDocument            WhatsAppSendTemplateHeaderType = "document"
+	WhatsAppSendTemplateHeaderTypeLocation            WhatsAppSendTemplateHeaderType = "location"
+)
+
+func NewWhatsAppSendTemplateHeaderTypeFromString(s string) (WhatsAppSendTemplateHeaderType, error) {
+	switch s {
+	case "text":
+		return WhatsAppSendTemplateHeaderTypeText, nil
+	case "text_named_parameters":
+		return WhatsAppSendTemplateHeaderTypeTextNamedParameters, nil
+	case "image":
+		return WhatsAppSendTemplateHeaderTypeImage, nil
+	case "video":
+		return WhatsAppSendTemplateHeaderTypeVideo, nil
+	case "document":
+		return WhatsAppSendTemplateHeaderTypeDocument, nil
+	case "location":
+		return WhatsAppSendTemplateHeaderTypeLocation, nil
+	}
+	var t WhatsAppSendTemplateHeaderType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppSendTemplateHeaderType) Ptr() *WhatsAppSendTemplateHeaderType {
+	return &w
+}
+
+// A WhatsApp sender, which is a phone number registered with WhatsApp in one of your account's WhatsApp Business Accounts. Returned by `whatsapp_senders_list` and `whatsapp_senders_get`.
 var (
 	whatsAppSenderFieldPhoneNumber   = big.NewInt(1 << 0)
 	whatsAppSenderFieldDisplayName   = big.NewInt(1 << 1)
 	whatsAppSenderFieldStatus        = big.NewInt(1 << 2)
 	whatsAppSenderFieldQualityRating = big.NewInt(1 << 3)
-	whatsAppSenderFieldMessageTier   = big.NewInt(1 << 4)
+	whatsAppSenderFieldWaba          = big.NewInt(1 << 4)
 )
 
 type WhatsAppSender struct {
@@ -17605,12 +18151,28 @@ type WhatsAppSender struct {
 	PhoneNumber string `json:"phone_number" url:"phone_number"`
 	// Sender's WhatsApp display name.
 	DisplayName *string `json:"display_name,omitempty" url:"display_name,omitempty"`
-	// Sender registration status with the provider.
+	// Sender registration status with the provider. Possible values:
+	//
+	// - `banned` — The provider banned the sender.
+	// - `connected` — The sender can send messages within its messaging limit.
+	// - `deleted` — The sender was deleted.
+	// - `disconnected` — The sender is disconnected from the provider.
+	// - `flagged` — The sender's quality rating dropped to low. The status returns to `connected` if the rating returns to medium or high within seven days.
+	// - `migrated` — The sender was migrated.
+	// - `pending` — Registration with the provider is in progress.
+	// - `rate_limited` — The provider is rate limiting the sender.
+	// - `restricted` — The sender reached its messaging limit. It can't start new conversations until the 24-hour window resets, but it can still reply to customers who messaged it.
+	// - `unknown` — The provider hasn't reported a status.
+	// - `unverified` — The sender isn't verified.
 	Status WhatsAppSenderStatus `json:"status" url:"status"`
-	// Sender's messaging quality rating.
+	// Sender's messaging quality rating. Meta rates quality from customer feedback over the past seven days, such as blocks and reports. Possible values:
+	//
+	// - `high` — High quality.
+	// - `medium` — Medium quality.
+	// - `low` — Low quality.
+	// - `unknown` — Not rated yet.
 	QualityRating *WhatsAppSenderQualityRating `json:"quality_rating,omitempty" url:"quality_rating,omitempty"`
-	// Sender's 24-hour outbound messaging limit tier.
-	MessageTier *WhatsAppSenderMessageTier `json:"message_tier,omitempty" url:"message_tier,omitempty"`
+	Waba          *WhatsAppWaba                `json:"waba" url:"waba"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -17647,11 +18209,11 @@ func (w *WhatsAppSender) GetQualityRating() *WhatsAppSenderQualityRating {
 	return w.QualityRating
 }
 
-func (w *WhatsAppSender) GetMessageTier() *WhatsAppSenderMessageTier {
+func (w *WhatsAppSender) GetWaba() *WhatsAppWaba {
 	if w == nil {
 		return nil
 	}
-	return w.MessageTier
+	return w.Waba
 }
 
 func (w *WhatsAppSender) GetExtraProperties() map[string]interface{} {
@@ -17696,11 +18258,11 @@ func (w *WhatsAppSender) SetQualityRating(qualityRating *WhatsAppSenderQualityRa
 	w.require(whatsAppSenderFieldQualityRating)
 }
 
-// SetMessageTier sets the MessageTier field and marks it as non-optional;
+// SetWaba sets the Waba field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppSender) SetMessageTier(messageTier *WhatsAppSenderMessageTier) {
-	w.MessageTier = messageTier
-	w.require(whatsAppSenderFieldMessageTier)
+func (w *WhatsAppSender) SetWaba(waba *WhatsAppWaba) {
+	w.Waba = waba
+	w.require(whatsAppSenderFieldWaba)
 }
 
 func (w *WhatsAppSender) UnmarshalJSON(data []byte) error {
@@ -17745,42 +18307,114 @@ func (w *WhatsAppSender) String() string {
 	return fmt.Sprintf("%#v", w)
 }
 
-// Sender's 24-hour outbound messaging limit tier.
-type WhatsAppSenderMessageTier string
-
-const (
-	WhatsAppSenderMessageTierLimitNa   WhatsAppSenderMessageTier = "limit_na"
-	WhatsAppSenderMessageTierLimit250  WhatsAppSenderMessageTier = "limit_250"
-	WhatsAppSenderMessageTierLimit2K   WhatsAppSenderMessageTier = "limit_2k"
-	WhatsAppSenderMessageTierLimit10K  WhatsAppSenderMessageTier = "limit_10k"
-	WhatsAppSenderMessageTierLimit100K WhatsAppSenderMessageTier = "limit_100k"
-	WhatsAppSenderMessageTierUnlimited WhatsAppSenderMessageTier = "unlimited"
+// Returned by `whatsapp_senders_list`.
+var (
+	whatsAppSenderListResponseFieldSenders    = big.NewInt(1 << 0)
+	whatsAppSenderListResponseFieldPagination = big.NewInt(1 << 1)
 )
 
-func NewWhatsAppSenderMessageTierFromString(s string) (WhatsAppSenderMessageTier, error) {
-	switch s {
-	case "limit_na":
-		return WhatsAppSenderMessageTierLimitNa, nil
-	case "limit_250":
-		return WhatsAppSenderMessageTierLimit250, nil
-	case "limit_2k":
-		return WhatsAppSenderMessageTierLimit2K, nil
-	case "limit_10k":
-		return WhatsAppSenderMessageTierLimit10K, nil
-	case "limit_100k":
-		return WhatsAppSenderMessageTierLimit100K, nil
-	case "unlimited":
-		return WhatsAppSenderMessageTierUnlimited, nil
+type WhatsAppSenderListResponse struct {
+	// Senders that match the request.
+	Senders    []*WhatsAppSender `json:"senders" url:"senders"`
+	Pagination *Pagination       `json:"pagination" url:"pagination"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppSenderListResponse) GetSenders() []*WhatsAppSender {
+	if w == nil {
+		return nil
 	}
-	var t WhatsAppSenderMessageTier
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
+	return w.Senders
 }
 
-func (w WhatsAppSenderMessageTier) Ptr() *WhatsAppSenderMessageTier {
-	return &w
+func (w *WhatsAppSenderListResponse) GetPagination() *Pagination {
+	if w == nil {
+		return nil
+	}
+	return w.Pagination
 }
 
-// Sender's messaging quality rating.
+func (w *WhatsAppSenderListResponse) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppSenderListResponse) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetSenders sets the Senders field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSenderListResponse) SetSenders(senders []*WhatsAppSender) {
+	w.Senders = senders
+	w.require(whatsAppSenderListResponseFieldSenders)
+}
+
+// SetPagination sets the Pagination field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppSenderListResponse) SetPagination(pagination *Pagination) {
+	w.Pagination = pagination
+	w.require(whatsAppSenderListResponseFieldPagination)
+}
+
+func (w *WhatsAppSenderListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppSenderListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppSenderListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppSenderListResponse) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppSenderListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppSenderListResponse) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Sender's messaging quality rating. Meta rates quality from customer feedback over the past seven days, such as blocks and reports. Possible values:
+//
+// - `high` — High quality.
+// - `medium` — Medium quality.
+// - `low` — Low quality.
+// - `unknown` — Not rated yet.
 type WhatsAppSenderQualityRating string
 
 const (
@@ -17809,7 +18443,19 @@ func (w WhatsAppSenderQualityRating) Ptr() *WhatsAppSenderQualityRating {
 	return &w
 }
 
-// Sender registration status with the provider.
+// Sender registration status with the provider. Possible values:
+//
+// - `banned` — The provider banned the sender.
+// - `connected` — The sender can send messages within its messaging limit.
+// - `deleted` — The sender was deleted.
+// - `disconnected` — The sender is disconnected from the provider.
+// - `flagged` — The sender's quality rating dropped to low. The status returns to `connected` if the rating returns to medium or high within seven days.
+// - `migrated` — The sender was migrated.
+// - `pending` — Registration with the provider is in progress.
+// - `rate_limited` — The provider is rate limiting the sender.
+// - `restricted` — The sender reached its messaging limit. It can't start new conversations until the 24-hour window resets, but it can still reply to customers who messaged it.
+// - `unknown` — The provider hasn't reported a status.
+// - `unverified` — The sender isn't verified.
 type WhatsAppSenderStatus string
 
 const (
@@ -17859,6 +18505,7 @@ func (w WhatsAppSenderStatus) Ptr() *WhatsAppSenderStatus {
 	return &w
 }
 
+// A WhatsApp message template with its review status and components. Returned by `whatsapp_templates_list`, `whatsapp_templates_get`, and `whatsapp_templates_create`.
 var (
 	whatsAppTemplateFieldUUID          = big.NewInt(1 << 0)
 	whatsAppTemplateFieldName          = big.NewInt(1 << 1)
@@ -17868,28 +18515,51 @@ var (
 	whatsAppTemplateFieldQualityRating = big.NewInt(1 << 5)
 	whatsAppTemplateFieldSubmittedAt   = big.NewInt(1 << 6)
 	whatsAppTemplateFieldComponents    = big.NewInt(1 << 7)
-	whatsAppTemplateFieldCreatedAt     = big.NewInt(1 << 8)
+	whatsAppTemplateFieldWaba          = big.NewInt(1 << 8)
+	whatsAppTemplateFieldCreatedAt     = big.NewInt(1 << 9)
 )
 
 type WhatsAppTemplate struct {
-	// Template ID.
+	// ID of the template. Pass it to `whatsapp_templates_get` to check the review outcome.
 	UUID string `json:"uuid" url:"uuid"`
 	// Template name.
 	Name string `json:"name" url:"name"`
 	// Template language code.
 	Language string `json:"language" url:"language"`
-	// Template category.
+	// Template category. Possible values:
+	//
+	// - `marketing` — Promotions, offers, and other marketing content.
+	// - `authentication` — One-time passcodes for verifying a user.
+	// - `utility` — Transactional updates about an order or an account.
 	Category WhatsAppTemplateCategory `json:"category" url:"category"`
-	// Template review/approval status.
+	// Template review status. Possible values:
+	//
+	// - `draft` — The template is created but not yet submitted to the provider.
+	// - `pending` — The provider is reviewing the template.
+	// - `approved` — The template is approved and can be sent.
+	// - `rejected` — The provider rejected the template.
+	// - `paused` — The provider paused the template.
+	// - `flagged` — The provider flagged the template. It can still be sent.
+	// - `disabled` — The template is disabled and can't be sent.
+	// - `in_appeal` — An appeal of the review decision is in progress.
+	// - `pending_deletion` — The template is being deleted.
+	// - `deleted` — The template was deleted.
+	// - `unknown` — The provider reported a status that Wavix doesn't recognize.
 	Status WhatsAppTemplateStatus `json:"status" url:"status"`
-	// Template's messaging quality rating.
+	// Template's messaging quality rating. Meta rates quality from customer feedback over the past seven days, such as blocks and reports. Possible values:
+	//
+	// - `high` — High quality.
+	// - `medium` — Medium quality.
+	// - `low` — Low quality.
+	// - `unknown` — Not rated yet.
 	QualityRating *WhatsAppTemplateQualityRating `json:"quality_rating,omitempty" url:"quality_rating,omitempty"`
-	// Date and time the template was submitted for review, in ISO 8601 format.
-	SubmittedAt *string `json:"submitted_at,omitempty" url:"submitted_at,omitempty"`
+	// Date and time the template's state was last updated from WhatsApp, in ISO 8601 format.
+	SubmittedAt *time.Time `json:"submitted_at,omitempty" url:"submitted_at,omitempty"`
 	// Structural components of the template.
-	Components []*WhatsAppTemplateComponent `json:"components" url:"components"`
+	Components []*WhatsAppTemplateResponseComponent `json:"components" url:"components"`
+	Waba       *WhatsAppWaba                        `json:"waba" url:"waba"`
 	// Date and time the template was created, in ISO 8601 format.
-	CreatedAt string `json:"created_at" url:"created_at"`
+	CreatedAt time.Time `json:"created_at" url:"created_at"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -17940,23 +18610,30 @@ func (w *WhatsAppTemplate) GetQualityRating() *WhatsAppTemplateQualityRating {
 	return w.QualityRating
 }
 
-func (w *WhatsAppTemplate) GetSubmittedAt() *string {
+func (w *WhatsAppTemplate) GetSubmittedAt() *time.Time {
 	if w == nil {
 		return nil
 	}
 	return w.SubmittedAt
 }
 
-func (w *WhatsAppTemplate) GetComponents() []*WhatsAppTemplateComponent {
+func (w *WhatsAppTemplate) GetComponents() []*WhatsAppTemplateResponseComponent {
 	if w == nil {
 		return nil
 	}
 	return w.Components
 }
 
-func (w *WhatsAppTemplate) GetCreatedAt() string {
+func (w *WhatsAppTemplate) GetWaba() *WhatsAppWaba {
 	if w == nil {
-		return ""
+		return nil
+	}
+	return w.Waba
+}
+
+func (w *WhatsAppTemplate) GetCreatedAt() time.Time {
+	if w == nil {
+		return time.Time{}
 	}
 	return w.CreatedAt
 }
@@ -18019,32 +18696,47 @@ func (w *WhatsAppTemplate) SetQualityRating(qualityRating *WhatsAppTemplateQuali
 
 // SetSubmittedAt sets the SubmittedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppTemplate) SetSubmittedAt(submittedAt *string) {
+func (w *WhatsAppTemplate) SetSubmittedAt(submittedAt *time.Time) {
 	w.SubmittedAt = submittedAt
 	w.require(whatsAppTemplateFieldSubmittedAt)
 }
 
 // SetComponents sets the Components field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppTemplate) SetComponents(components []*WhatsAppTemplateComponent) {
+func (w *WhatsAppTemplate) SetComponents(components []*WhatsAppTemplateResponseComponent) {
 	w.Components = components
 	w.require(whatsAppTemplateFieldComponents)
 }
 
+// SetWaba sets the Waba field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplate) SetWaba(waba *WhatsAppWaba) {
+	w.Waba = waba
+	w.require(whatsAppTemplateFieldWaba)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppTemplate) SetCreatedAt(createdAt string) {
+func (w *WhatsAppTemplate) SetCreatedAt(createdAt time.Time) {
 	w.CreatedAt = createdAt
 	w.require(whatsAppTemplateFieldCreatedAt)
 }
 
 func (w *WhatsAppTemplate) UnmarshalJSON(data []byte) error {
-	type unmarshaler WhatsAppTemplate
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+	type embed WhatsAppTemplate
+	var unmarshaler = struct {
+		embed
+		SubmittedAt *internal.DateTime `json:"submitted_at,omitempty"`
+		CreatedAt   *internal.DateTime `json:"created_at"`
+	}{
+		embed: embed(*w),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*w = WhatsAppTemplate(value)
+	*w = WhatsAppTemplate(unmarshaler.embed)
+	w.SubmittedAt = unmarshaler.SubmittedAt.TimePtr()
+	w.CreatedAt = unmarshaler.CreatedAt.Time()
 	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
@@ -18058,8 +18750,12 @@ func (w *WhatsAppTemplate) MarshalJSON() ([]byte, error) {
 	type embed WhatsAppTemplate
 	var marshaler = struct {
 		embed
+		SubmittedAt *internal.DateTime `json:"submitted_at,omitempty"`
+		CreatedAt   *internal.DateTime `json:"created_at"`
 	}{
-		embed: embed(*w),
+		embed:       embed(*w),
+		SubmittedAt: internal.NewOptionalDateTime(w.SubmittedAt),
+		CreatedAt:   internal.NewDateTime(w.CreatedAt),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -18080,7 +18776,461 @@ func (w *WhatsAppTemplate) String() string {
 	return fmt.Sprintf("%#v", w)
 }
 
-// Template category.
+// Body of a new WhatsApp template. Required, exactly once. Consumed by `whatsapp_templates_create`.
+var (
+	whatsAppTemplateBodyComponentRequestFieldText    = big.NewInt(1 << 0)
+	whatsAppTemplateBodyComponentRequestFieldExample = big.NewInt(1 << 1)
+)
+
+type WhatsAppTemplateBodyComponentRequest struct {
+	// Body text, with positional `{{n}}` placeholders.
+	Text string `json:"text" url:"text"`
+	// Sample values for the placeholders in the body text.
+	Example *WhatsAppTemplateBodyComponentRequestExample `json:"example,omitempty" url:"example,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppTemplateBodyComponentRequest) GetText() string {
+	if w == nil {
+		return ""
+	}
+	return w.Text
+}
+
+func (w *WhatsAppTemplateBodyComponentRequest) GetExample() *WhatsAppTemplateBodyComponentRequestExample {
+	if w == nil {
+		return nil
+	}
+	return w.Example
+}
+
+func (w *WhatsAppTemplateBodyComponentRequest) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppTemplateBodyComponentRequest) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetText sets the Text field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateBodyComponentRequest) SetText(text string) {
+	w.Text = text
+	w.require(whatsAppTemplateBodyComponentRequestFieldText)
+}
+
+// SetExample sets the Example field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateBodyComponentRequest) SetExample(example *WhatsAppTemplateBodyComponentRequestExample) {
+	w.Example = example
+	w.require(whatsAppTemplateBodyComponentRequestFieldExample)
+}
+
+func (w *WhatsAppTemplateBodyComponentRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppTemplateBodyComponentRequest
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppTemplateBodyComponentRequest(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppTemplateBodyComponentRequest) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppTemplateBodyComponentRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppTemplateBodyComponentRequest) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Sample values for the placeholders in the body text.
+var (
+	whatsAppTemplateBodyComponentRequestExampleFieldBodyText = big.NewInt(1 << 0)
+)
+
+type WhatsAppTemplateBodyComponentRequestExample struct {
+	// One set of sample values, one value per placeholder in order.
+	BodyText [][]string `json:"body_text" url:"body_text"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppTemplateBodyComponentRequestExample) GetBodyText() [][]string {
+	if w == nil {
+		return nil
+	}
+	return w.BodyText
+}
+
+func (w *WhatsAppTemplateBodyComponentRequestExample) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppTemplateBodyComponentRequestExample) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetBodyText sets the BodyText field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateBodyComponentRequestExample) SetBodyText(bodyText [][]string) {
+	w.BodyText = bodyText
+	w.require(whatsAppTemplateBodyComponentRequestExampleFieldBodyText)
+}
+
+func (w *WhatsAppTemplateBodyComponentRequestExample) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppTemplateBodyComponentRequestExample
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppTemplateBodyComponentRequestExample(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppTemplateBodyComponentRequestExample) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppTemplateBodyComponentRequestExample
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppTemplateBodyComponentRequestExample) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// A button in the `buttons` component of a new WhatsApp template. Consumed by `whatsapp_templates_create`. The `type` field selects the variant.
+type WhatsAppTemplateButtonRequest struct {
+	Type        string
+	QuickReply  *WhatsAppTemplateQuickReplyButtonRequest
+	URL         *WhatsAppTemplateURLButtonRequest
+	PhoneNumber *WhatsAppTemplatePhoneNumberButtonRequest
+	CopyCode    *WhatsAppTemplateCopyCodeButtonRequest
+
+	rawJSON json.RawMessage
+}
+
+func (w *WhatsAppTemplateButtonRequest) GetType() string {
+	if w == nil {
+		return ""
+	}
+	return w.Type
+}
+
+func (w *WhatsAppTemplateButtonRequest) GetQuickReply() *WhatsAppTemplateQuickReplyButtonRequest {
+	if w == nil {
+		return nil
+	}
+	return w.QuickReply
+}
+
+func (w *WhatsAppTemplateButtonRequest) GetURL() *WhatsAppTemplateURLButtonRequest {
+	if w == nil {
+		return nil
+	}
+	return w.URL
+}
+
+func (w *WhatsAppTemplateButtonRequest) GetPhoneNumber() *WhatsAppTemplatePhoneNumberButtonRequest {
+	if w == nil {
+		return nil
+	}
+	return w.PhoneNumber
+}
+
+func (w *WhatsAppTemplateButtonRequest) GetCopyCode() *WhatsAppTemplateCopyCodeButtonRequest {
+	if w == nil {
+		return nil
+	}
+	return w.CopyCode
+}
+
+func (w *WhatsAppTemplateButtonRequest) UnmarshalJSON(data []byte) error {
+	var unmarshaler struct {
+		Type string `json:"type"`
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	w.Type = unmarshaler.Type
+	if unmarshaler.Type == "" {
+		return fmt.Errorf("%T did not include discriminant type", w)
+	}
+	switch unmarshaler.Type {
+	case "quick_reply":
+		value := new(WhatsAppTemplateQuickReplyButtonRequest)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		w.QuickReply = value
+	case "url":
+		value := new(WhatsAppTemplateURLButtonRequest)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		w.URL = value
+	case "phone_number":
+		value := new(WhatsAppTemplatePhoneNumberButtonRequest)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		w.PhoneNumber = value
+	case "copy_code":
+		value := new(WhatsAppTemplateCopyCodeButtonRequest)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		w.CopyCode = value
+	}
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w WhatsAppTemplateButtonRequest) MarshalJSON() ([]byte, error) {
+	if err := w.validate(); err != nil {
+		return nil, err
+	}
+	if w.QuickReply != nil {
+		return internal.MarshalJSONWithExtraProperty(w.QuickReply, "type", "quick_reply")
+	}
+	if w.URL != nil {
+		return internal.MarshalJSONWithExtraProperty(w.URL, "type", "url")
+	}
+	if w.PhoneNumber != nil {
+		return internal.MarshalJSONWithExtraProperty(w.PhoneNumber, "type", "phone_number")
+	}
+	if w.CopyCode != nil {
+		return internal.MarshalJSONWithExtraProperty(w.CopyCode, "type", "copy_code")
+	}
+	if len(w.rawJSON) > 0 {
+		return w.rawJSON, nil
+	}
+	return nil, fmt.Errorf("type %T does not define a non-empty union type", w)
+}
+
+type WhatsAppTemplateButtonRequestVisitor interface {
+	VisitQuickReply(*WhatsAppTemplateQuickReplyButtonRequest) error
+	VisitURL(*WhatsAppTemplateURLButtonRequest) error
+	VisitPhoneNumber(*WhatsAppTemplatePhoneNumberButtonRequest) error
+	VisitCopyCode(*WhatsAppTemplateCopyCodeButtonRequest) error
+}
+
+func (w *WhatsAppTemplateButtonRequest) Accept(visitor WhatsAppTemplateButtonRequestVisitor) error {
+	if w.QuickReply != nil {
+		return visitor.VisitQuickReply(w.QuickReply)
+	}
+	if w.URL != nil {
+		return visitor.VisitURL(w.URL)
+	}
+	if w.PhoneNumber != nil {
+		return visitor.VisitPhoneNumber(w.PhoneNumber)
+	}
+	if w.CopyCode != nil {
+		return visitor.VisitCopyCode(w.CopyCode)
+	}
+	return fmt.Errorf("type %T does not define a non-empty union type", w)
+}
+
+func (w *WhatsAppTemplateButtonRequest) validate() error {
+	if w == nil {
+		return fmt.Errorf("type %T is nil", w)
+	}
+	var fields []string
+	if w.QuickReply != nil {
+		fields = append(fields, "quick_reply")
+	}
+	if w.URL != nil {
+		fields = append(fields, "url")
+	}
+	if w.PhoneNumber != nil {
+		fields = append(fields, "phone_number")
+	}
+	if w.CopyCode != nil {
+		fields = append(fields, "copy_code")
+	}
+	if len(fields) == 0 {
+		if w.Type != "" {
+			if len(w.rawJSON) > 0 {
+				return nil
+			}
+			return fmt.Errorf("type %T defines a discriminant set to %q but the field is not set", w, w.Type)
+		}
+		return fmt.Errorf("type %T is empty", w)
+	}
+	if len(fields) > 1 {
+		return fmt.Errorf("type %T defines values for %s, but only one value is allowed", w, fields)
+	}
+	if w.Type != "" {
+		field := fields[0]
+		if w.Type != field {
+			return fmt.Errorf(
+				"type %T defines a discriminant set to %q, but it does not match the %T field; either remove or update the discriminant to match",
+				w,
+				w.Type,
+				w,
+			)
+		}
+	}
+	return nil
+}
+
+// Buttons component of a new WhatsApp template. Consumed by `whatsapp_templates_create`.
+var (
+	whatsAppTemplateButtonsComponentRequestFieldButtons = big.NewInt(1 << 0)
+)
+
+type WhatsAppTemplateButtonsComponentRequest struct {
+	// Buttons, in display order.
+	Buttons []*WhatsAppTemplateButtonRequest `json:"buttons" url:"buttons"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppTemplateButtonsComponentRequest) GetButtons() []*WhatsAppTemplateButtonRequest {
+	if w == nil {
+		return nil
+	}
+	return w.Buttons
+}
+
+func (w *WhatsAppTemplateButtonsComponentRequest) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppTemplateButtonsComponentRequest) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetButtons sets the Buttons field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateButtonsComponentRequest) SetButtons(buttons []*WhatsAppTemplateButtonRequest) {
+	w.Buttons = buttons
+	w.require(whatsAppTemplateButtonsComponentRequestFieldButtons)
+}
+
+func (w *WhatsAppTemplateButtonsComponentRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppTemplateButtonsComponentRequest
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppTemplateButtonsComponentRequest(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppTemplateButtonsComponentRequest) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppTemplateButtonsComponentRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppTemplateButtonsComponentRequest) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Template category. Possible values:
+//
+// - `marketing` — Promotions, offers, and other marketing content.
+// - `authentication` — One-time passcodes for verifying a user.
+// - `utility` — Transactional updates about an order or an account.
 type WhatsAppTemplateCategory string
 
 const (
@@ -18106,26 +19256,198 @@ func (w WhatsAppTemplateCategory) Ptr() *WhatsAppTemplateCategory {
 	return &w
 }
 
-// One structural component (header, body, footer, or buttons) of a WhatsApp message template.
+// A header, body, footer, or buttons component of a new WhatsApp template. Consumed by `whatsapp_templates_create`. The `type` field selects the variant, and a `header` component is further selected by `format`.
+type WhatsAppTemplateComponentRequest struct {
+	Type    string
+	Header  *WhatsAppTemplateHeaderComponentRequest
+	Body    *WhatsAppTemplateBodyComponentRequest
+	Footer  *WhatsAppTemplateFooterComponentRequest
+	Buttons *WhatsAppTemplateButtonsComponentRequest
+
+	rawJSON json.RawMessage
+}
+
+func (w *WhatsAppTemplateComponentRequest) GetType() string {
+	if w == nil {
+		return ""
+	}
+	return w.Type
+}
+
+func (w *WhatsAppTemplateComponentRequest) GetHeader() *WhatsAppTemplateHeaderComponentRequest {
+	if w == nil {
+		return nil
+	}
+	return w.Header
+}
+
+func (w *WhatsAppTemplateComponentRequest) GetBody() *WhatsAppTemplateBodyComponentRequest {
+	if w == nil {
+		return nil
+	}
+	return w.Body
+}
+
+func (w *WhatsAppTemplateComponentRequest) GetFooter() *WhatsAppTemplateFooterComponentRequest {
+	if w == nil {
+		return nil
+	}
+	return w.Footer
+}
+
+func (w *WhatsAppTemplateComponentRequest) GetButtons() *WhatsAppTemplateButtonsComponentRequest {
+	if w == nil {
+		return nil
+	}
+	return w.Buttons
+}
+
+func (w *WhatsAppTemplateComponentRequest) UnmarshalJSON(data []byte) error {
+	var unmarshaler struct {
+		Type string `json:"type"`
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	w.Type = unmarshaler.Type
+	if unmarshaler.Type == "" {
+		return fmt.Errorf("%T did not include discriminant type", w)
+	}
+	switch unmarshaler.Type {
+	case "header":
+		var valueUnmarshaler struct {
+			Header *WhatsAppTemplateHeaderComponentRequest `json:"value"`
+		}
+		if err := json.Unmarshal(data, &valueUnmarshaler); err != nil {
+			return err
+		}
+		w.Header = valueUnmarshaler.Header
+	case "body":
+		value := new(WhatsAppTemplateBodyComponentRequest)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		w.Body = value
+	case "footer":
+		value := new(WhatsAppTemplateFooterComponentRequest)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		w.Footer = value
+	case "buttons":
+		value := new(WhatsAppTemplateButtonsComponentRequest)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		w.Buttons = value
+	}
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w WhatsAppTemplateComponentRequest) MarshalJSON() ([]byte, error) {
+	if err := w.validate(); err != nil {
+		return nil, err
+	}
+	if w.Header != nil {
+		var marshaler = struct {
+			Type   string                                  `json:"type"`
+			Header *WhatsAppTemplateHeaderComponentRequest `json:"value"`
+		}{
+			Type:   "header",
+			Header: w.Header,
+		}
+		return json.Marshal(marshaler)
+	}
+	if w.Body != nil {
+		return internal.MarshalJSONWithExtraProperty(w.Body, "type", "body")
+	}
+	if w.Footer != nil {
+		return internal.MarshalJSONWithExtraProperty(w.Footer, "type", "footer")
+	}
+	if w.Buttons != nil {
+		return internal.MarshalJSONWithExtraProperty(w.Buttons, "type", "buttons")
+	}
+	if len(w.rawJSON) > 0 {
+		return w.rawJSON, nil
+	}
+	return nil, fmt.Errorf("type %T does not define a non-empty union type", w)
+}
+
+type WhatsAppTemplateComponentRequestVisitor interface {
+	VisitHeader(*WhatsAppTemplateHeaderComponentRequest) error
+	VisitBody(*WhatsAppTemplateBodyComponentRequest) error
+	VisitFooter(*WhatsAppTemplateFooterComponentRequest) error
+	VisitButtons(*WhatsAppTemplateButtonsComponentRequest) error
+}
+
+func (w *WhatsAppTemplateComponentRequest) Accept(visitor WhatsAppTemplateComponentRequestVisitor) error {
+	if w.Header != nil {
+		return visitor.VisitHeader(w.Header)
+	}
+	if w.Body != nil {
+		return visitor.VisitBody(w.Body)
+	}
+	if w.Footer != nil {
+		return visitor.VisitFooter(w.Footer)
+	}
+	if w.Buttons != nil {
+		return visitor.VisitButtons(w.Buttons)
+	}
+	return fmt.Errorf("type %T does not define a non-empty union type", w)
+}
+
+func (w *WhatsAppTemplateComponentRequest) validate() error {
+	if w == nil {
+		return fmt.Errorf("type %T is nil", w)
+	}
+	var fields []string
+	if w.Header != nil {
+		fields = append(fields, "header")
+	}
+	if w.Body != nil {
+		fields = append(fields, "body")
+	}
+	if w.Footer != nil {
+		fields = append(fields, "footer")
+	}
+	if w.Buttons != nil {
+		fields = append(fields, "buttons")
+	}
+	if len(fields) == 0 {
+		if w.Type != "" {
+			if len(w.rawJSON) > 0 {
+				return nil
+			}
+			return fmt.Errorf("type %T defines a discriminant set to %q but the field is not set", w, w.Type)
+		}
+		return fmt.Errorf("type %T is empty", w)
+	}
+	if len(fields) > 1 {
+		return fmt.Errorf("type %T defines values for %s, but only one value is allowed", w, fields)
+	}
+	if w.Type != "" {
+		field := fields[0]
+		if w.Type != field {
+			return fmt.Errorf(
+				"type %T defines a discriminant set to %q, but it does not match the %T field; either remove or update the discriminant to match",
+				w,
+				w.Type,
+				w,
+			)
+		}
+	}
+	return nil
+}
+
+// Button that copies a code to the clipboard. Consumed by `whatsapp_templates_create`.
 var (
-	whatsAppTemplateComponentFieldType    = big.NewInt(1 << 0)
-	whatsAppTemplateComponentFieldFormat  = big.NewInt(1 << 1)
-	whatsAppTemplateComponentFieldText    = big.NewInt(1 << 2)
-	whatsAppTemplateComponentFieldExample = big.NewInt(1 << 3)
-	whatsAppTemplateComponentFieldButtons = big.NewInt(1 << 4)
+	whatsAppTemplateCopyCodeButtonRequestFieldExample = big.NewInt(1 << 0)
 )
 
-type WhatsAppTemplateComponent struct {
-	// Component type.
-	Type WhatsAppTemplateComponentType `json:"type" url:"type"`
-	// Header content format. Present on `HEADER` components only.
-	Format *WhatsAppTemplateComponentFormat `json:"format,omitempty" url:"format,omitempty"`
-	// Component text, with `{{n}}` placeholders where applicable.
-	Text *string `json:"text,omitempty" url:"text,omitempty"`
-	// Sample values for the component's placeholders, in the shape the provider expects.
-	Example map[string]any `json:"example,omitempty" url:"example,omitempty"`
-	// Button definitions. Present on `BUTTONS` components only.
-	Buttons []map[string]any `json:"buttons,omitempty" url:"buttons,omitempty"`
+type WhatsAppTemplateCopyCodeButtonRequest struct {
+	// Sample code.
+	Example string `json:"example" url:"example"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -18134,97 +19456,41 @@ type WhatsAppTemplateComponent struct {
 	rawJSON         json.RawMessage
 }
 
-func (w *WhatsAppTemplateComponent) GetType() WhatsAppTemplateComponentType {
+func (w *WhatsAppTemplateCopyCodeButtonRequest) GetExample() string {
 	if w == nil {
 		return ""
-	}
-	return w.Type
-}
-
-func (w *WhatsAppTemplateComponent) GetFormat() *WhatsAppTemplateComponentFormat {
-	if w == nil {
-		return nil
-	}
-	return w.Format
-}
-
-func (w *WhatsAppTemplateComponent) GetText() *string {
-	if w == nil {
-		return nil
-	}
-	return w.Text
-}
-
-func (w *WhatsAppTemplateComponent) GetExample() map[string]any {
-	if w == nil {
-		return nil
 	}
 	return w.Example
 }
 
-func (w *WhatsAppTemplateComponent) GetButtons() []map[string]any {
-	if w == nil {
-		return nil
-	}
-	return w.Buttons
-}
-
-func (w *WhatsAppTemplateComponent) GetExtraProperties() map[string]interface{} {
+func (w *WhatsAppTemplateCopyCodeButtonRequest) GetExtraProperties() map[string]interface{} {
 	if w == nil {
 		return nil
 	}
 	return w.extraProperties
 }
 
-func (w *WhatsAppTemplateComponent) require(field *big.Int) {
+func (w *WhatsAppTemplateCopyCodeButtonRequest) require(field *big.Int) {
 	if w.explicitFields == nil {
 		w.explicitFields = big.NewInt(0)
 	}
 	w.explicitFields.Or(w.explicitFields, field)
 }
 
-// SetType sets the Type field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppTemplateComponent) SetType(type_ WhatsAppTemplateComponentType) {
-	w.Type = type_
-	w.require(whatsAppTemplateComponentFieldType)
-}
-
-// SetFormat sets the Format field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppTemplateComponent) SetFormat(format *WhatsAppTemplateComponentFormat) {
-	w.Format = format
-	w.require(whatsAppTemplateComponentFieldFormat)
-}
-
-// SetText sets the Text field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppTemplateComponent) SetText(text *string) {
-	w.Text = text
-	w.require(whatsAppTemplateComponentFieldText)
-}
-
 // SetExample sets the Example field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppTemplateComponent) SetExample(example map[string]any) {
+func (w *WhatsAppTemplateCopyCodeButtonRequest) SetExample(example string) {
 	w.Example = example
-	w.require(whatsAppTemplateComponentFieldExample)
+	w.require(whatsAppTemplateCopyCodeButtonRequestFieldExample)
 }
 
-// SetButtons sets the Buttons field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppTemplateComponent) SetButtons(buttons []map[string]any) {
-	w.Buttons = buttons
-	w.require(whatsAppTemplateComponentFieldButtons)
-}
-
-func (w *WhatsAppTemplateComponent) UnmarshalJSON(data []byte) error {
-	type unmarshaler WhatsAppTemplateComponent
+func (w *WhatsAppTemplateCopyCodeButtonRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppTemplateCopyCodeButtonRequest
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*w = WhatsAppTemplateComponent(value)
+	*w = WhatsAppTemplateCopyCodeButtonRequest(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
@@ -18234,8 +19500,8 @@ func (w *WhatsAppTemplateComponent) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (w *WhatsAppTemplateComponent) MarshalJSON() ([]byte, error) {
-	type embed WhatsAppTemplateComponent
+func (w *WhatsAppTemplateCopyCodeButtonRequest) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppTemplateCopyCodeButtonRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -18245,7 +19511,7 @@ func (w *WhatsAppTemplateComponent) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
-func (w *WhatsAppTemplateComponent) String() string {
+func (w *WhatsAppTemplateCopyCodeButtonRequest) String() string {
 	if w == nil {
 		return "<nil>"
 	}
@@ -18260,83 +19526,33 @@ func (w *WhatsAppTemplateComponent) String() string {
 	return fmt.Sprintf("%#v", w)
 }
 
-// Header content format. Present on `HEADER` components only.
-type WhatsAppTemplateComponentFormat string
-
-const (
-	WhatsAppTemplateComponentFormatText     WhatsAppTemplateComponentFormat = "TEXT"
-	WhatsAppTemplateComponentFormatImage    WhatsAppTemplateComponentFormat = "IMAGE"
-	WhatsAppTemplateComponentFormatVideo    WhatsAppTemplateComponentFormat = "VIDEO"
-	WhatsAppTemplateComponentFormatDocument WhatsAppTemplateComponentFormat = "DOCUMENT"
-	WhatsAppTemplateComponentFormatLocation WhatsAppTemplateComponentFormat = "LOCATION"
-)
-
-func NewWhatsAppTemplateComponentFormatFromString(s string) (WhatsAppTemplateComponentFormat, error) {
-	switch s {
-	case "TEXT":
-		return WhatsAppTemplateComponentFormatText, nil
-	case "IMAGE":
-		return WhatsAppTemplateComponentFormatImage, nil
-	case "VIDEO":
-		return WhatsAppTemplateComponentFormatVideo, nil
-	case "DOCUMENT":
-		return WhatsAppTemplateComponentFormatDocument, nil
-	case "LOCATION":
-		return WhatsAppTemplateComponentFormatLocation, nil
-	}
-	var t WhatsAppTemplateComponentFormat
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (w WhatsAppTemplateComponentFormat) Ptr() *WhatsAppTemplateComponentFormat {
-	return &w
-}
-
-// Component type.
-type WhatsAppTemplateComponentType string
-
-const (
-	WhatsAppTemplateComponentTypeHeader  WhatsAppTemplateComponentType = "HEADER"
-	WhatsAppTemplateComponentTypeBody    WhatsAppTemplateComponentType = "BODY"
-	WhatsAppTemplateComponentTypeFooter  WhatsAppTemplateComponentType = "FOOTER"
-	WhatsAppTemplateComponentTypeButtons WhatsAppTemplateComponentType = "BUTTONS"
-)
-
-func NewWhatsAppTemplateComponentTypeFromString(s string) (WhatsAppTemplateComponentType, error) {
-	switch s {
-	case "HEADER":
-		return WhatsAppTemplateComponentTypeHeader, nil
-	case "BODY":
-		return WhatsAppTemplateComponentTypeBody, nil
-	case "FOOTER":
-		return WhatsAppTemplateComponentTypeFooter, nil
-	case "BUTTONS":
-		return WhatsAppTemplateComponentTypeButtons, nil
-	}
-	var t WhatsAppTemplateComponentType
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (w WhatsAppTemplateComponentType) Ptr() *WhatsAppTemplateComponentType {
-	return &w
-}
-
+// Attributes of a new WhatsApp template. Consumed by `whatsapp_templates_create`.
 var (
 	whatsAppTemplateCreateRequestFieldName       = big.NewInt(1 << 0)
 	whatsAppTemplateCreateRequestFieldLanguage   = big.NewInt(1 << 1)
 	whatsAppTemplateCreateRequestFieldCategory   = big.NewInt(1 << 2)
 	whatsAppTemplateCreateRequestFieldComponents = big.NewInt(1 << 3)
+	whatsAppTemplateCreateRequestFieldWabaID     = big.NewInt(1 << 4)
+	whatsAppTemplateCreateRequestFieldSender     = big.NewInt(1 << 5)
 )
 
 type WhatsAppTemplateCreateRequest struct {
-	// Template name.
+	// Template name, made of lowercase letters, digits, and underscores, up to 512 characters.
 	Name string `json:"name" url:"name"`
-	// Template language code.
+	// Template language code, such as `en` or `en_US`.
 	Language string `json:"language" url:"language"`
-	// Template category.
+	// Template category. Possible values:
+	//
+	// - `marketing` — Promotions, offers, and other marketing content.
+	// - `authentication` — One-time passcodes for verifying a user.
+	// - `utility` — Transactional updates about an order or an account.
 	Category WhatsAppTemplateCreateRequestCategory `json:"category" url:"category"`
-	// Structural components of the template. Must include a `BODY` component.
-	Components []*WhatsAppTemplateComponent `json:"components" url:"components"`
+	// Structural components of the template. Each component type can appear once, exactly one `body` component is required, and `type` and `format` values must be lowercase.
+	Components []*WhatsAppTemplateComponentRequest `json:"components" url:"components"`
+	// ID of the WhatsApp Business Account that owns the template, as returned in `waba.id` by `whatsapp_senders_list`. Required when your account has more than one, unless `sender` is set. When both are set, `sender` must belong to this WhatsApp Business Account.
+	WabaID *string `json:"waba_id,omitempty" url:"waba_id,omitempty"`
+	// Phone number of a connected sender whose WhatsApp Business Account owns the template, as an alternative to `waba_id`. When both are set, the sender must belong to `waba_id`. The leading `+` is optional.
+	Sender *string `json:"sender,omitempty" url:"sender,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -18366,11 +19582,25 @@ func (w *WhatsAppTemplateCreateRequest) GetCategory() WhatsAppTemplateCreateRequ
 	return w.Category
 }
 
-func (w *WhatsAppTemplateCreateRequest) GetComponents() []*WhatsAppTemplateComponent {
+func (w *WhatsAppTemplateCreateRequest) GetComponents() []*WhatsAppTemplateComponentRequest {
 	if w == nil {
 		return nil
 	}
 	return w.Components
+}
+
+func (w *WhatsAppTemplateCreateRequest) GetWabaID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.WabaID
+}
+
+func (w *WhatsAppTemplateCreateRequest) GetSender() *string {
+	if w == nil {
+		return nil
+	}
+	return w.Sender
 }
 
 func (w *WhatsAppTemplateCreateRequest) GetExtraProperties() map[string]interface{} {
@@ -18410,9 +19640,23 @@ func (w *WhatsAppTemplateCreateRequest) SetCategory(category WhatsAppTemplateCre
 
 // SetComponents sets the Components field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppTemplateCreateRequest) SetComponents(components []*WhatsAppTemplateComponent) {
+func (w *WhatsAppTemplateCreateRequest) SetComponents(components []*WhatsAppTemplateComponentRequest) {
 	w.Components = components
 	w.require(whatsAppTemplateCreateRequestFieldComponents)
+}
+
+// SetWabaID sets the WabaID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateCreateRequest) SetWabaID(wabaID *string) {
+	w.WabaID = wabaID
+	w.require(whatsAppTemplateCreateRequestFieldWabaID)
+}
+
+// SetSender sets the Sender field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateCreateRequest) SetSender(sender *string) {
+	w.Sender = sender
+	w.require(whatsAppTemplateCreateRequestFieldSender)
 }
 
 func (w *WhatsAppTemplateCreateRequest) UnmarshalJSON(data []byte) error {
@@ -18457,7 +19701,11 @@ func (w *WhatsAppTemplateCreateRequest) String() string {
 	return fmt.Sprintf("%#v", w)
 }
 
-// Template category.
+// Template category. Possible values:
+//
+// - `marketing` — Promotions, offers, and other marketing content.
+// - `authentication` — One-time passcodes for verifying a user.
+// - `utility` — Transactional updates about an order or an account.
 type WhatsAppTemplateCreateRequestCategory string
 
 const (
@@ -18483,13 +19731,14 @@ func (w WhatsAppTemplateCreateRequestCategory) Ptr() *WhatsAppTemplateCreateRequ
 	return &w
 }
 
+// Footer of a new WhatsApp template. Consumed by `whatsapp_templates_create`.
 var (
-	whatsAppTemplateListResponseFieldTemplates = big.NewInt(1 << 0)
+	whatsAppTemplateFooterComponentRequestFieldText = big.NewInt(1 << 0)
 )
 
-type WhatsAppTemplateListResponse struct {
-	// Templates registered for the sender.
-	Templates []*WhatsAppTemplate `json:"templates" url:"templates"`
+type WhatsAppTemplateFooterComponentRequest struct {
+	// Footer text.
+	Text string `json:"text" url:"text"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -18498,41 +19747,41 @@ type WhatsAppTemplateListResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (w *WhatsAppTemplateListResponse) GetTemplates() []*WhatsAppTemplate {
+func (w *WhatsAppTemplateFooterComponentRequest) GetText() string {
 	if w == nil {
-		return nil
+		return ""
 	}
-	return w.Templates
+	return w.Text
 }
 
-func (w *WhatsAppTemplateListResponse) GetExtraProperties() map[string]interface{} {
+func (w *WhatsAppTemplateFooterComponentRequest) GetExtraProperties() map[string]interface{} {
 	if w == nil {
 		return nil
 	}
 	return w.extraProperties
 }
 
-func (w *WhatsAppTemplateListResponse) require(field *big.Int) {
+func (w *WhatsAppTemplateFooterComponentRequest) require(field *big.Int) {
 	if w.explicitFields == nil {
 		w.explicitFields = big.NewInt(0)
 	}
 	w.explicitFields.Or(w.explicitFields, field)
 }
 
-// SetTemplates sets the Templates field and marks it as non-optional;
+// SetText sets the Text field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppTemplateListResponse) SetTemplates(templates []*WhatsAppTemplate) {
-	w.Templates = templates
-	w.require(whatsAppTemplateListResponseFieldTemplates)
+func (w *WhatsAppTemplateFooterComponentRequest) SetText(text string) {
+	w.Text = text
+	w.require(whatsAppTemplateFooterComponentRequestFieldText)
 }
 
-func (w *WhatsAppTemplateListResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler WhatsAppTemplateListResponse
+func (w *WhatsAppTemplateFooterComponentRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppTemplateFooterComponentRequest
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*w = WhatsAppTemplateListResponse(value)
+	*w = WhatsAppTemplateFooterComponentRequest(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *w)
 	if err != nil {
 		return err
@@ -18542,8 +19791,8 @@ func (w *WhatsAppTemplateListResponse) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (w *WhatsAppTemplateListResponse) MarshalJSON() ([]byte, error) {
-	type embed WhatsAppTemplateListResponse
+func (w *WhatsAppTemplateFooterComponentRequest) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppTemplateFooterComponentRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -18553,7 +19802,7 @@ func (w *WhatsAppTemplateListResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
-func (w *WhatsAppTemplateListResponse) String() string {
+func (w *WhatsAppTemplateFooterComponentRequest) String() string {
 	if w == nil {
 		return "<nil>"
 	}
@@ -18568,7 +19817,731 @@ func (w *WhatsAppTemplateListResponse) String() string {
 	return fmt.Sprintf("%#v", w)
 }
 
-// Template's messaging quality rating.
+// Header of a new WhatsApp template. Consumed by `whatsapp_templates_create`. The `format` field selects the variant.
+type WhatsAppTemplateHeaderComponentRequest struct {
+	Format   string
+	Text     *WhatsAppTemplateTextHeaderComponentRequest
+	Image    *WhatsAppTemplateMediaHeaderComponentRequest
+	Video    *WhatsAppTemplateMediaHeaderComponentRequest
+	Document *WhatsAppTemplateMediaHeaderComponentRequest
+	Location *WhatsAppTemplateLocationHeaderComponentRequest
+
+	rawJSON json.RawMessage
+}
+
+func (w *WhatsAppTemplateHeaderComponentRequest) GetFormat() string {
+	if w == nil {
+		return ""
+	}
+	return w.Format
+}
+
+func (w *WhatsAppTemplateHeaderComponentRequest) GetText() *WhatsAppTemplateTextHeaderComponentRequest {
+	if w == nil {
+		return nil
+	}
+	return w.Text
+}
+
+func (w *WhatsAppTemplateHeaderComponentRequest) GetImage() *WhatsAppTemplateMediaHeaderComponentRequest {
+	if w == nil {
+		return nil
+	}
+	return w.Image
+}
+
+func (w *WhatsAppTemplateHeaderComponentRequest) GetVideo() *WhatsAppTemplateMediaHeaderComponentRequest {
+	if w == nil {
+		return nil
+	}
+	return w.Video
+}
+
+func (w *WhatsAppTemplateHeaderComponentRequest) GetDocument() *WhatsAppTemplateMediaHeaderComponentRequest {
+	if w == nil {
+		return nil
+	}
+	return w.Document
+}
+
+func (w *WhatsAppTemplateHeaderComponentRequest) GetLocation() *WhatsAppTemplateLocationHeaderComponentRequest {
+	if w == nil {
+		return nil
+	}
+	return w.Location
+}
+
+func (w *WhatsAppTemplateHeaderComponentRequest) UnmarshalJSON(data []byte) error {
+	var unmarshaler struct {
+		Format string `json:"format"`
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	w.Format = unmarshaler.Format
+	if unmarshaler.Format == "" {
+		return fmt.Errorf("%T did not include discriminant format", w)
+	}
+	switch unmarshaler.Format {
+	case "text":
+		value := new(WhatsAppTemplateTextHeaderComponentRequest)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		w.Text = value
+	case "image":
+		value := new(WhatsAppTemplateMediaHeaderComponentRequest)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		w.Image = value
+	case "video":
+		value := new(WhatsAppTemplateMediaHeaderComponentRequest)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		w.Video = value
+	case "document":
+		value := new(WhatsAppTemplateMediaHeaderComponentRequest)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		w.Document = value
+	case "location":
+		value := new(WhatsAppTemplateLocationHeaderComponentRequest)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		w.Location = value
+	}
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w WhatsAppTemplateHeaderComponentRequest) MarshalJSON() ([]byte, error) {
+	if err := w.validate(); err != nil {
+		return nil, err
+	}
+	if w.Text != nil {
+		return internal.MarshalJSONWithExtraProperty(w.Text, "format", "text")
+	}
+	if w.Image != nil {
+		return internal.MarshalJSONWithExtraProperty(w.Image, "format", "image")
+	}
+	if w.Video != nil {
+		return internal.MarshalJSONWithExtraProperty(w.Video, "format", "video")
+	}
+	if w.Document != nil {
+		return internal.MarshalJSONWithExtraProperty(w.Document, "format", "document")
+	}
+	if w.Location != nil {
+		return internal.MarshalJSONWithExtraProperty(w.Location, "format", "location")
+	}
+	if len(w.rawJSON) > 0 {
+		return w.rawJSON, nil
+	}
+	return nil, fmt.Errorf("type %T does not define a non-empty union type", w)
+}
+
+type WhatsAppTemplateHeaderComponentRequestVisitor interface {
+	VisitText(*WhatsAppTemplateTextHeaderComponentRequest) error
+	VisitImage(*WhatsAppTemplateMediaHeaderComponentRequest) error
+	VisitVideo(*WhatsAppTemplateMediaHeaderComponentRequest) error
+	VisitDocument(*WhatsAppTemplateMediaHeaderComponentRequest) error
+	VisitLocation(*WhatsAppTemplateLocationHeaderComponentRequest) error
+}
+
+func (w *WhatsAppTemplateHeaderComponentRequest) Accept(visitor WhatsAppTemplateHeaderComponentRequestVisitor) error {
+	if w.Text != nil {
+		return visitor.VisitText(w.Text)
+	}
+	if w.Image != nil {
+		return visitor.VisitImage(w.Image)
+	}
+	if w.Video != nil {
+		return visitor.VisitVideo(w.Video)
+	}
+	if w.Document != nil {
+		return visitor.VisitDocument(w.Document)
+	}
+	if w.Location != nil {
+		return visitor.VisitLocation(w.Location)
+	}
+	return fmt.Errorf("type %T does not define a non-empty union type", w)
+}
+
+func (w *WhatsAppTemplateHeaderComponentRequest) validate() error {
+	if w == nil {
+		return fmt.Errorf("type %T is nil", w)
+	}
+	var fields []string
+	if w.Text != nil {
+		fields = append(fields, "text")
+	}
+	if w.Image != nil {
+		fields = append(fields, "image")
+	}
+	if w.Video != nil {
+		fields = append(fields, "video")
+	}
+	if w.Document != nil {
+		fields = append(fields, "document")
+	}
+	if w.Location != nil {
+		fields = append(fields, "location")
+	}
+	if len(fields) == 0 {
+		if w.Format != "" {
+			if len(w.rawJSON) > 0 {
+				return nil
+			}
+			return fmt.Errorf("type %T defines a discriminant set to %q but the field is not set", w, w.Format)
+		}
+		return fmt.Errorf("type %T is empty", w)
+	}
+	if len(fields) > 1 {
+		return fmt.Errorf("type %T defines values for %s, but only one value is allowed", w, fields)
+	}
+	if w.Format != "" {
+		field := fields[0]
+		if w.Format != field {
+			return fmt.Errorf(
+				"type %T defines a discriminant set to %q, but it does not match the %T field; either remove or update the discriminant to match",
+				w,
+				w.Format,
+				w,
+			)
+		}
+	}
+	return nil
+}
+
+// Location header of a new WhatsApp template. Takes neither `text` nor `example`. Consumed by `whatsapp_templates_create`.
+var (
+	whatsAppTemplateLocationHeaderComponentRequestFieldType = big.NewInt(1 << 0)
+)
+
+type WhatsAppTemplateLocationHeaderComponentRequest struct {
+	// Component type.
+	Type WhatsAppTemplateLocationHeaderComponentRequestType `json:"type" url:"type"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppTemplateLocationHeaderComponentRequest) GetType() WhatsAppTemplateLocationHeaderComponentRequestType {
+	if w == nil {
+		return ""
+	}
+	return w.Type
+}
+
+func (w *WhatsAppTemplateLocationHeaderComponentRequest) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppTemplateLocationHeaderComponentRequest) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateLocationHeaderComponentRequest) SetType(type_ WhatsAppTemplateLocationHeaderComponentRequestType) {
+	w.Type = type_
+	w.require(whatsAppTemplateLocationHeaderComponentRequestFieldType)
+}
+
+func (w *WhatsAppTemplateLocationHeaderComponentRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppTemplateLocationHeaderComponentRequest
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppTemplateLocationHeaderComponentRequest(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppTemplateLocationHeaderComponentRequest) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppTemplateLocationHeaderComponentRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppTemplateLocationHeaderComponentRequest) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Component type.
+type WhatsAppTemplateLocationHeaderComponentRequestType string
+
+const (
+	WhatsAppTemplateLocationHeaderComponentRequestTypeHeader WhatsAppTemplateLocationHeaderComponentRequestType = "header"
+)
+
+func NewWhatsAppTemplateLocationHeaderComponentRequestTypeFromString(s string) (WhatsAppTemplateLocationHeaderComponentRequestType, error) {
+	switch s {
+	case "header":
+		return WhatsAppTemplateLocationHeaderComponentRequestTypeHeader, nil
+	}
+	var t WhatsAppTemplateLocationHeaderComponentRequestType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppTemplateLocationHeaderComponentRequestType) Ptr() *WhatsAppTemplateLocationHeaderComponentRequestType {
+	return &w
+}
+
+// Media header of a new WhatsApp template. Takes no `text`. Consumed by `whatsapp_templates_create`.
+var (
+	whatsAppTemplateMediaHeaderComponentRequestFieldType    = big.NewInt(1 << 0)
+	whatsAppTemplateMediaHeaderComponentRequestFieldExample = big.NewInt(1 << 1)
+)
+
+type WhatsAppTemplateMediaHeaderComponentRequest struct {
+	// Component type.
+	Type WhatsAppTemplateMediaHeaderComponentRequestType `json:"type" url:"type"`
+	// Sample media file.
+	Example *WhatsAppTemplateMediaHeaderComponentRequestExample `json:"example,omitempty" url:"example,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppTemplateMediaHeaderComponentRequest) GetType() WhatsAppTemplateMediaHeaderComponentRequestType {
+	if w == nil {
+		return ""
+	}
+	return w.Type
+}
+
+func (w *WhatsAppTemplateMediaHeaderComponentRequest) GetExample() *WhatsAppTemplateMediaHeaderComponentRequestExample {
+	if w == nil {
+		return nil
+	}
+	return w.Example
+}
+
+func (w *WhatsAppTemplateMediaHeaderComponentRequest) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppTemplateMediaHeaderComponentRequest) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateMediaHeaderComponentRequest) SetType(type_ WhatsAppTemplateMediaHeaderComponentRequestType) {
+	w.Type = type_
+	w.require(whatsAppTemplateMediaHeaderComponentRequestFieldType)
+}
+
+// SetExample sets the Example field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateMediaHeaderComponentRequest) SetExample(example *WhatsAppTemplateMediaHeaderComponentRequestExample) {
+	w.Example = example
+	w.require(whatsAppTemplateMediaHeaderComponentRequestFieldExample)
+}
+
+func (w *WhatsAppTemplateMediaHeaderComponentRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppTemplateMediaHeaderComponentRequest
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppTemplateMediaHeaderComponentRequest(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppTemplateMediaHeaderComponentRequest) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppTemplateMediaHeaderComponentRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppTemplateMediaHeaderComponentRequest) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Sample media file.
+var (
+	whatsAppTemplateMediaHeaderComponentRequestExampleFieldHeaderHandle = big.NewInt(1 << 0)
+)
+
+type WhatsAppTemplateMediaHeaderComponentRequestExample struct {
+	// Public `http` or `https` URL of a sample media file. Meta's own API expects an upload handle here; Wavix sends the URL to the provider as the sample.
+	HeaderHandle []string `json:"header_handle" url:"header_handle"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppTemplateMediaHeaderComponentRequestExample) GetHeaderHandle() []string {
+	if w == nil {
+		return nil
+	}
+	return w.HeaderHandle
+}
+
+func (w *WhatsAppTemplateMediaHeaderComponentRequestExample) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppTemplateMediaHeaderComponentRequestExample) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetHeaderHandle sets the HeaderHandle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateMediaHeaderComponentRequestExample) SetHeaderHandle(headerHandle []string) {
+	w.HeaderHandle = headerHandle
+	w.require(whatsAppTemplateMediaHeaderComponentRequestExampleFieldHeaderHandle)
+}
+
+func (w *WhatsAppTemplateMediaHeaderComponentRequestExample) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppTemplateMediaHeaderComponentRequestExample
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppTemplateMediaHeaderComponentRequestExample(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppTemplateMediaHeaderComponentRequestExample) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppTemplateMediaHeaderComponentRequestExample
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppTemplateMediaHeaderComponentRequestExample) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Component type.
+type WhatsAppTemplateMediaHeaderComponentRequestType string
+
+const (
+	WhatsAppTemplateMediaHeaderComponentRequestTypeHeader WhatsAppTemplateMediaHeaderComponentRequestType = "header"
+)
+
+func NewWhatsAppTemplateMediaHeaderComponentRequestTypeFromString(s string) (WhatsAppTemplateMediaHeaderComponentRequestType, error) {
+	switch s {
+	case "header":
+		return WhatsAppTemplateMediaHeaderComponentRequestTypeHeader, nil
+	}
+	var t WhatsAppTemplateMediaHeaderComponentRequestType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppTemplateMediaHeaderComponentRequestType) Ptr() *WhatsAppTemplateMediaHeaderComponentRequestType {
+	return &w
+}
+
+// Returned by `whatsapp_templates_list`.
+var (
+	whatsAppTemplatePageResponseFieldTemplates  = big.NewInt(1 << 0)
+	whatsAppTemplatePageResponseFieldPagination = big.NewInt(1 << 1)
+)
+
+type WhatsAppTemplatePageResponse struct {
+	// Templates that match the request.
+	Templates  []*WhatsAppTemplate `json:"templates" url:"templates"`
+	Pagination *Pagination         `json:"pagination" url:"pagination"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppTemplatePageResponse) GetTemplates() []*WhatsAppTemplate {
+	if w == nil {
+		return nil
+	}
+	return w.Templates
+}
+
+func (w *WhatsAppTemplatePageResponse) GetPagination() *Pagination {
+	if w == nil {
+		return nil
+	}
+	return w.Pagination
+}
+
+func (w *WhatsAppTemplatePageResponse) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppTemplatePageResponse) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetTemplates sets the Templates field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplatePageResponse) SetTemplates(templates []*WhatsAppTemplate) {
+	w.Templates = templates
+	w.require(whatsAppTemplatePageResponseFieldTemplates)
+}
+
+// SetPagination sets the Pagination field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplatePageResponse) SetPagination(pagination *Pagination) {
+	w.Pagination = pagination
+	w.require(whatsAppTemplatePageResponseFieldPagination)
+}
+
+func (w *WhatsAppTemplatePageResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppTemplatePageResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppTemplatePageResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppTemplatePageResponse) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppTemplatePageResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppTemplatePageResponse) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Button that calls a phone number. Consumed by `whatsapp_templates_create`.
+var (
+	whatsAppTemplatePhoneNumberButtonRequestFieldText        = big.NewInt(1 << 0)
+	whatsAppTemplatePhoneNumberButtonRequestFieldPhoneNumber = big.NewInt(1 << 1)
+)
+
+type WhatsAppTemplatePhoneNumberButtonRequest struct {
+	// Button label.
+	Text string `json:"text" url:"text"`
+	// Phone number to call, in E.164 format.
+	PhoneNumber string `json:"phone_number" url:"phone_number"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppTemplatePhoneNumberButtonRequest) GetText() string {
+	if w == nil {
+		return ""
+	}
+	return w.Text
+}
+
+func (w *WhatsAppTemplatePhoneNumberButtonRequest) GetPhoneNumber() string {
+	if w == nil {
+		return ""
+	}
+	return w.PhoneNumber
+}
+
+func (w *WhatsAppTemplatePhoneNumberButtonRequest) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppTemplatePhoneNumberButtonRequest) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetText sets the Text field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplatePhoneNumberButtonRequest) SetText(text string) {
+	w.Text = text
+	w.require(whatsAppTemplatePhoneNumberButtonRequestFieldText)
+}
+
+// SetPhoneNumber sets the PhoneNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplatePhoneNumberButtonRequest) SetPhoneNumber(phoneNumber string) {
+	w.PhoneNumber = phoneNumber
+	w.require(whatsAppTemplatePhoneNumberButtonRequestFieldPhoneNumber)
+}
+
+func (w *WhatsAppTemplatePhoneNumberButtonRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppTemplatePhoneNumberButtonRequest
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppTemplatePhoneNumberButtonRequest(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppTemplatePhoneNumberButtonRequest) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppTemplatePhoneNumberButtonRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppTemplatePhoneNumberButtonRequest) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Template's messaging quality rating. Meta rates quality from customer feedback over the past seven days, such as blocks and reports. Possible values:
+//
+// - `high` — High quality.
+// - `medium` — Medium quality.
+// - `low` — Low quality.
+// - `unknown` — Not rated yet.
 type WhatsAppTemplateQualityRating string
 
 const (
@@ -18597,6 +20570,93 @@ func (w WhatsAppTemplateQualityRating) Ptr() *WhatsAppTemplateQualityRating {
 	return &w
 }
 
+// Button that sends its label back as a reply. Consumed by `whatsapp_templates_create`.
+var (
+	whatsAppTemplateQuickReplyButtonRequestFieldText = big.NewInt(1 << 0)
+)
+
+type WhatsAppTemplateQuickReplyButtonRequest struct {
+	// Button label.
+	Text string `json:"text" url:"text"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppTemplateQuickReplyButtonRequest) GetText() string {
+	if w == nil {
+		return ""
+	}
+	return w.Text
+}
+
+func (w *WhatsAppTemplateQuickReplyButtonRequest) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppTemplateQuickReplyButtonRequest) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetText sets the Text field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateQuickReplyButtonRequest) SetText(text string) {
+	w.Text = text
+	w.require(whatsAppTemplateQuickReplyButtonRequestFieldText)
+}
+
+func (w *WhatsAppTemplateQuickReplyButtonRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppTemplateQuickReplyButtonRequest
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppTemplateQuickReplyButtonRequest(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppTemplateQuickReplyButtonRequest) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppTemplateQuickReplyButtonRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppTemplateQuickReplyButtonRequest) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Returned by `whatsapp_templates_get` and `whatsapp_templates_create`.
 var (
 	whatsAppTemplateResponseFieldTemplate = big.NewInt(1 << 0)
 )
@@ -18681,7 +20741,222 @@ func (w *WhatsAppTemplateResponse) String() string {
 	return fmt.Sprintf("%#v", w)
 }
 
-// Template review/approval status.
+// A component of a stored WhatsApp template. Returned inside templates by `whatsapp_templates_list`, `whatsapp_templates_get`, and `whatsapp_templates_create`. Section types other than header, body, footer, and buttons can carry fields of their own.
+var (
+	whatsAppTemplateResponseComponentFieldType    = big.NewInt(1 << 0)
+	whatsAppTemplateResponseComponentFieldFormat  = big.NewInt(1 << 1)
+	whatsAppTemplateResponseComponentFieldText    = big.NewInt(1 << 2)
+	whatsAppTemplateResponseComponentFieldExample = big.NewInt(1 << 3)
+	whatsAppTemplateResponseComponentFieldButtons = big.NewInt(1 << 4)
+)
+
+type WhatsAppTemplateResponseComponent struct {
+	// Component type: `header`, `body`, `footer`, `buttons`, or the lower-cased name of another section type carried over from an imported template, such as `carousel` or `limited_time_offer`.
+	Type string `json:"type" url:"type"`
+	// Header content format. Present on `header` components only. Possible values:
+	//
+	// - `text` — Text header.
+	// - `image` — Image header.
+	// - `video` — Video header.
+	// - `document` — Document header.
+	// - `location` — Location header.
+	Format *WhatsAppTemplateResponseComponentFormat `json:"format,omitempty" url:"format,omitempty"`
+	// Component text, with `{{n}}` placeholders where applicable.
+	Text *string `json:"text,omitempty" url:"text,omitempty"`
+	// Sample values for the component's placeholders, in the shape the provider expects.
+	Example map[string]any `json:"example,omitempty" url:"example,omitempty"`
+	// Button definitions. Present on `buttons` components only.
+	Buttons []map[string]any `json:"buttons,omitempty" url:"buttons,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	ExtraProperties map[string]interface{} `json:"-" url:"-"`
+
+	rawJSON json.RawMessage
+}
+
+func (w *WhatsAppTemplateResponseComponent) GetType() string {
+	if w == nil {
+		return ""
+	}
+	return w.Type
+}
+
+func (w *WhatsAppTemplateResponseComponent) GetFormat() *WhatsAppTemplateResponseComponentFormat {
+	if w == nil {
+		return nil
+	}
+	return w.Format
+}
+
+func (w *WhatsAppTemplateResponseComponent) GetText() *string {
+	if w == nil {
+		return nil
+	}
+	return w.Text
+}
+
+func (w *WhatsAppTemplateResponseComponent) GetExample() map[string]any {
+	if w == nil {
+		return nil
+	}
+	return w.Example
+}
+
+func (w *WhatsAppTemplateResponseComponent) GetButtons() []map[string]any {
+	if w == nil {
+		return nil
+	}
+	return w.Buttons
+}
+
+func (w *WhatsAppTemplateResponseComponent) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.ExtraProperties
+}
+
+func (w *WhatsAppTemplateResponseComponent) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateResponseComponent) SetType(type_ string) {
+	w.Type = type_
+	w.require(whatsAppTemplateResponseComponentFieldType)
+}
+
+// SetFormat sets the Format field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateResponseComponent) SetFormat(format *WhatsAppTemplateResponseComponentFormat) {
+	w.Format = format
+	w.require(whatsAppTemplateResponseComponentFieldFormat)
+}
+
+// SetText sets the Text field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateResponseComponent) SetText(text *string) {
+	w.Text = text
+	w.require(whatsAppTemplateResponseComponentFieldText)
+}
+
+// SetExample sets the Example field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateResponseComponent) SetExample(example map[string]any) {
+	w.Example = example
+	w.require(whatsAppTemplateResponseComponentFieldExample)
+}
+
+// SetButtons sets the Buttons field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateResponseComponent) SetButtons(buttons []map[string]any) {
+	w.Buttons = buttons
+	w.require(whatsAppTemplateResponseComponentFieldButtons)
+}
+
+func (w *WhatsAppTemplateResponseComponent) UnmarshalJSON(data []byte) error {
+	type embed WhatsAppTemplateResponseComponent
+	var unmarshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*w = WhatsAppTemplateResponseComponent(unmarshaler.embed)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.ExtraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppTemplateResponseComponent) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppTemplateResponseComponent
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return internal.MarshalJSONWithExtraProperties(explicitMarshaler, w.ExtraProperties)
+}
+
+func (w *WhatsAppTemplateResponseComponent) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Header content format. Present on `header` components only. Possible values:
+//
+// - `text` — Text header.
+// - `image` — Image header.
+// - `video` — Video header.
+// - `document` — Document header.
+// - `location` — Location header.
+type WhatsAppTemplateResponseComponentFormat string
+
+const (
+	WhatsAppTemplateResponseComponentFormatText     WhatsAppTemplateResponseComponentFormat = "text"
+	WhatsAppTemplateResponseComponentFormatImage    WhatsAppTemplateResponseComponentFormat = "image"
+	WhatsAppTemplateResponseComponentFormatVideo    WhatsAppTemplateResponseComponentFormat = "video"
+	WhatsAppTemplateResponseComponentFormatDocument WhatsAppTemplateResponseComponentFormat = "document"
+	WhatsAppTemplateResponseComponentFormatLocation WhatsAppTemplateResponseComponentFormat = "location"
+)
+
+func NewWhatsAppTemplateResponseComponentFormatFromString(s string) (WhatsAppTemplateResponseComponentFormat, error) {
+	switch s {
+	case "text":
+		return WhatsAppTemplateResponseComponentFormatText, nil
+	case "image":
+		return WhatsAppTemplateResponseComponentFormatImage, nil
+	case "video":
+		return WhatsAppTemplateResponseComponentFormatVideo, nil
+	case "document":
+		return WhatsAppTemplateResponseComponentFormatDocument, nil
+	case "location":
+		return WhatsAppTemplateResponseComponentFormatLocation, nil
+	}
+	var t WhatsAppTemplateResponseComponentFormat
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppTemplateResponseComponentFormat) Ptr() *WhatsAppTemplateResponseComponentFormat {
+	return &w
+}
+
+// Template review status. Possible values:
+//
+// - `draft` — The template is created but not yet submitted to the provider.
+// - `pending` — The provider is reviewing the template.
+// - `approved` — The template is approved and can be sent.
+// - `rejected` — The provider rejected the template.
+// - `paused` — The provider paused the template.
+// - `flagged` — The provider flagged the template. It can still be sent.
+// - `disabled` — The template is disabled and can't be sent.
+// - `in_appeal` — An appeal of the review decision is in progress.
+// - `pending_deletion` — The template is being deleted.
+// - `deleted` — The template was deleted.
+// - `unknown` — The provider reported a status that Wavix doesn't recognize.
 type WhatsAppTemplateStatus string
 
 const (
@@ -18729,4 +21004,555 @@ func NewWhatsAppTemplateStatusFromString(s string) (WhatsAppTemplateStatus, erro
 
 func (w WhatsAppTemplateStatus) Ptr() *WhatsAppTemplateStatus {
 	return &w
+}
+
+// Text header of a new WhatsApp template. Requires `text`. Consumed by `whatsapp_templates_create`.
+var (
+	whatsAppTemplateTextHeaderComponentRequestFieldType    = big.NewInt(1 << 0)
+	whatsAppTemplateTextHeaderComponentRequestFieldText    = big.NewInt(1 << 1)
+	whatsAppTemplateTextHeaderComponentRequestFieldExample = big.NewInt(1 << 2)
+)
+
+type WhatsAppTemplateTextHeaderComponentRequest struct {
+	// Component type.
+	Type WhatsAppTemplateTextHeaderComponentRequestType `json:"type" url:"type"`
+	// Header text, with an optional `{{1}}` placeholder.
+	Text string `json:"text" url:"text"`
+	// Sample for the `{{1}}` placeholder.
+	Example *WhatsAppTemplateTextHeaderComponentRequestExample `json:"example,omitempty" url:"example,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppTemplateTextHeaderComponentRequest) GetType() WhatsAppTemplateTextHeaderComponentRequestType {
+	if w == nil {
+		return ""
+	}
+	return w.Type
+}
+
+func (w *WhatsAppTemplateTextHeaderComponentRequest) GetText() string {
+	if w == nil {
+		return ""
+	}
+	return w.Text
+}
+
+func (w *WhatsAppTemplateTextHeaderComponentRequest) GetExample() *WhatsAppTemplateTextHeaderComponentRequestExample {
+	if w == nil {
+		return nil
+	}
+	return w.Example
+}
+
+func (w *WhatsAppTemplateTextHeaderComponentRequest) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppTemplateTextHeaderComponentRequest) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateTextHeaderComponentRequest) SetType(type_ WhatsAppTemplateTextHeaderComponentRequestType) {
+	w.Type = type_
+	w.require(whatsAppTemplateTextHeaderComponentRequestFieldType)
+}
+
+// SetText sets the Text field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateTextHeaderComponentRequest) SetText(text string) {
+	w.Text = text
+	w.require(whatsAppTemplateTextHeaderComponentRequestFieldText)
+}
+
+// SetExample sets the Example field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateTextHeaderComponentRequest) SetExample(example *WhatsAppTemplateTextHeaderComponentRequestExample) {
+	w.Example = example
+	w.require(whatsAppTemplateTextHeaderComponentRequestFieldExample)
+}
+
+func (w *WhatsAppTemplateTextHeaderComponentRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppTemplateTextHeaderComponentRequest
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppTemplateTextHeaderComponentRequest(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppTemplateTextHeaderComponentRequest) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppTemplateTextHeaderComponentRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppTemplateTextHeaderComponentRequest) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Sample for the `{{1}}` placeholder.
+var (
+	whatsAppTemplateTextHeaderComponentRequestExampleFieldHeaderText = big.NewInt(1 << 0)
+)
+
+type WhatsAppTemplateTextHeaderComponentRequestExample struct {
+	// Sample value for the `{{1}}` placeholder in the header text.
+	HeaderText []string `json:"header_text" url:"header_text"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppTemplateTextHeaderComponentRequestExample) GetHeaderText() []string {
+	if w == nil {
+		return nil
+	}
+	return w.HeaderText
+}
+
+func (w *WhatsAppTemplateTextHeaderComponentRequestExample) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppTemplateTextHeaderComponentRequestExample) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetHeaderText sets the HeaderText field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateTextHeaderComponentRequestExample) SetHeaderText(headerText []string) {
+	w.HeaderText = headerText
+	w.require(whatsAppTemplateTextHeaderComponentRequestExampleFieldHeaderText)
+}
+
+func (w *WhatsAppTemplateTextHeaderComponentRequestExample) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppTemplateTextHeaderComponentRequestExample
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppTemplateTextHeaderComponentRequestExample(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppTemplateTextHeaderComponentRequestExample) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppTemplateTextHeaderComponentRequestExample
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppTemplateTextHeaderComponentRequestExample) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Component type.
+type WhatsAppTemplateTextHeaderComponentRequestType string
+
+const (
+	WhatsAppTemplateTextHeaderComponentRequestTypeHeader WhatsAppTemplateTextHeaderComponentRequestType = "header"
+)
+
+func NewWhatsAppTemplateTextHeaderComponentRequestTypeFromString(s string) (WhatsAppTemplateTextHeaderComponentRequestType, error) {
+	switch s {
+	case "header":
+		return WhatsAppTemplateTextHeaderComponentRequestTypeHeader, nil
+	}
+	var t WhatsAppTemplateTextHeaderComponentRequestType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppTemplateTextHeaderComponentRequestType) Ptr() *WhatsAppTemplateTextHeaderComponentRequestType {
+	return &w
+}
+
+// Button that opens a URL. Consumed by `whatsapp_templates_create`.
+var (
+	whatsAppTemplateURLButtonRequestFieldText    = big.NewInt(1 << 0)
+	whatsAppTemplateURLButtonRequestFieldURL     = big.NewInt(1 << 1)
+	whatsAppTemplateURLButtonRequestFieldExample = big.NewInt(1 << 2)
+)
+
+type WhatsAppTemplateURLButtonRequest struct {
+	// Button label.
+	Text string `json:"text" url:"text"`
+	// Target URL, optionally ending in a `{{1}}` placeholder.
+	URL string `json:"url" url:"url"`
+	// Sample full URL for a `url` that ends in `{{1}}`.
+	Example []string `json:"example,omitempty" url:"example,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppTemplateURLButtonRequest) GetText() string {
+	if w == nil {
+		return ""
+	}
+	return w.Text
+}
+
+func (w *WhatsAppTemplateURLButtonRequest) GetURL() string {
+	if w == nil {
+		return ""
+	}
+	return w.URL
+}
+
+func (w *WhatsAppTemplateURLButtonRequest) GetExample() []string {
+	if w == nil {
+		return nil
+	}
+	return w.Example
+}
+
+func (w *WhatsAppTemplateURLButtonRequest) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppTemplateURLButtonRequest) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetText sets the Text field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateURLButtonRequest) SetText(text string) {
+	w.Text = text
+	w.require(whatsAppTemplateURLButtonRequestFieldText)
+}
+
+// SetURL sets the URL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateURLButtonRequest) SetURL(url string) {
+	w.URL = url
+	w.require(whatsAppTemplateURLButtonRequestFieldURL)
+}
+
+// SetExample sets the Example field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppTemplateURLButtonRequest) SetExample(example []string) {
+	w.Example = example
+	w.require(whatsAppTemplateURLButtonRequestFieldExample)
+}
+
+func (w *WhatsAppTemplateURLButtonRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppTemplateURLButtonRequest
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppTemplateURLButtonRequest(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppTemplateURLButtonRequest) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppTemplateURLButtonRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppTemplateURLButtonRequest) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// A WhatsApp Business Account linked to your account, embedded in senders and templates.
+var (
+	whatsAppWabaFieldID   = big.NewInt(1 << 0)
+	whatsAppWabaFieldName = big.NewInt(1 << 1)
+)
+
+type WhatsAppWaba struct {
+	// ID of the WhatsApp Business Account. Pass it to `whatsapp_wabas_get` to retrieve the account.
+	ID string `json:"id" url:"id"`
+	// Name of the WhatsApp Business Account.
+	Name *string `json:"name,omitempty" url:"name,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppWaba) GetID() string {
+	if w == nil {
+		return ""
+	}
+	return w.ID
+}
+
+func (w *WhatsAppWaba) GetName() *string {
+	if w == nil {
+		return nil
+	}
+	return w.Name
+}
+
+func (w *WhatsAppWaba) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppWaba) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppWaba) SetID(id string) {
+	w.ID = id
+	w.require(whatsAppWabaFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppWaba) SetName(name *string) {
+	w.Name = name
+	w.require(whatsAppWabaFieldName)
+}
+
+func (w *WhatsAppWaba) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppWaba
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppWaba(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppWaba) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppWaba
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppWaba) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+// Returned by `whatsapp_wabas_list`.
+var (
+	whatsAppWabaListResponseFieldWabas      = big.NewInt(1 << 0)
+	whatsAppWabaListResponseFieldPagination = big.NewInt(1 << 1)
+)
+
+type WhatsAppWabaListResponse struct {
+	// WhatsApp Business Accounts linked to your account.
+	Wabas      []*WhatsAppBusinessAccount `json:"wabas" url:"wabas"`
+	Pagination *Pagination                `json:"pagination" url:"pagination"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WhatsAppWabaListResponse) GetWabas() []*WhatsAppBusinessAccount {
+	if w == nil {
+		return nil
+	}
+	return w.Wabas
+}
+
+func (w *WhatsAppWabaListResponse) GetPagination() *Pagination {
+	if w == nil {
+		return nil
+	}
+	return w.Pagination
+}
+
+func (w *WhatsAppWabaListResponse) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WhatsAppWabaListResponse) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetWabas sets the Wabas field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppWabaListResponse) SetWabas(wabas []*WhatsAppBusinessAccount) {
+	w.Wabas = wabas
+	w.require(whatsAppWabaListResponseFieldWabas)
+}
+
+// SetPagination sets the Pagination field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppWabaListResponse) SetPagination(pagination *Pagination) {
+	w.Pagination = pagination
+	w.require(whatsAppWabaListResponseFieldPagination)
+}
+
+func (w *WhatsAppWabaListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler WhatsAppWabaListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WhatsAppWabaListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WhatsAppWabaListResponse) MarshalJSON() ([]byte, error) {
+	type embed WhatsAppWabaListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WhatsAppWabaListResponse) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
 }

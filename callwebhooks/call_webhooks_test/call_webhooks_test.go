@@ -139,6 +139,9 @@ func TestCallWebhooksDeleteWithWireMock(
 	)
 	request := &wavixgosdk.DeleteCallWebhooksRequest{
 		EventType: wavixgosdk.DeleteCallWebhooksRequestEventTypePostCall,
+		ExpectedURL: wavixgosdk.String(
+			"https://your-site.com/webhook",
+		),
 	}
 	_, invocationErr := client.CallWebhooks.Delete(
 		context.TODO(),
@@ -149,5 +152,5 @@ func TestCallWebhooksDeleteWithWireMock(
 	)
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestCallWebhooksDeleteWithWireMock", "DELETE", "/v1/calls/webhooks", map[string]interface{}{"event_type": "post-call"}, 1)
+	VerifyRequestCount(t, "TestCallWebhooksDeleteWithWireMock", "DELETE", "/v1/calls/webhooks", map[string]interface{}{"event_type": "post-call", "expected_url": "https://your-site.com/webhook"}, 1)
 }

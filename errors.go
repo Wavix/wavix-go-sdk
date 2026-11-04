@@ -31,6 +31,30 @@ func (b *BadRequestError) Unwrap() error {
 	return b.APIError
 }
 
+// Request failed. The webhook has a different URL than `expected_url` or `expected_sms_relay_url`; nothing was changed.
+type ConflictError struct {
+	*core.APIError
+	Body *WebhookInUseErrorResponse
+}
+
+func (c *ConflictError) UnmarshalJSON(data []byte) error {
+	var body *WebhookInUseErrorResponse
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	c.StatusCode = 409
+	c.Body = body
+	return nil
+}
+
+func (c *ConflictError) MarshalJSON() ([]byte, error) {
+	return json.Marshal(c.Body)
+}
+
+func (c *ConflictError) Unwrap() error {
+	return c.APIError
+}
+
 // Request failed. The feature is disabled for your account.
 type ForbiddenError struct {
 	*core.APIError

@@ -1236,6 +1236,9 @@
         "queryParameters": {
           "event_type": {
             "equalTo": "post-call"
+          },
+          "expected_url": {
+            "equalTo": "https://your-site.com/webhook"
           }
         }
       },

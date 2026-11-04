@@ -26,7 +26,7 @@ type CallAnswerRequest struct {
 	CallRecording *bool `json:"call_recording,omitempty" url:"-"`
 	// Indicates whether the call should be transcribed after it ends.
 	CallTranscription *bool `json:"call_transcription,omitempty" url:"-"`
-	// WebSocket URL to stream the call.
+	// WebSocket URL (`ws://` or `wss://`) that receives the call's audio, which can include the caller's voice.
 	StreamURL *string `json:"stream_url,omitempty" url:"-"`
 	// Direction of audio streamed to `stream_url`.
 	StreamType *CallStreamType `json:"stream_type,omitempty" url:"-"`

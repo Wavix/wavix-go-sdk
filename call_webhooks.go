@@ -10,8 +10,9 @@ import (
 )
 
 var (
-	callWebhooksCreateRequestFieldURL       = big.NewInt(1 << 0)
-	callWebhooksCreateRequestFieldEventType = big.NewInt(1 << 1)
+	callWebhooksCreateRequestFieldURL         = big.NewInt(1 << 0)
+	callWebhooksCreateRequestFieldEventType   = big.NewInt(1 << 1)
+	callWebhooksCreateRequestFieldExpectedURL = big.NewInt(1 << 2)
 )
 
 type CallWebhooksCreateRequest struct {
@@ -25,6 +26,8 @@ type CallWebhooksCreateRequest struct {
 	//   - `post-call`: Sends a callback after the call ends
 	//     with disposition, duration, and cost.
 	EventType CallWebhooksCreateRequestEventType `json:"event_type" url:"-"`
+	// Applies the change only if the webhook currently has this URL. Pass an empty string to set the webhook only while it is unset, or your own URL to replace your webhook. Setting the URL the webhook already has always succeeds.
+	ExpectedURL *string `json:"expected_url,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -51,6 +54,13 @@ func (c *CallWebhooksCreateRequest) SetEventType(eventType CallWebhooksCreateReq
 	c.require(callWebhooksCreateRequestFieldEventType)
 }
 
+// SetExpectedURL sets the ExpectedURL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CallWebhooksCreateRequest) SetExpectedURL(expectedURL *string) {
+	c.ExpectedURL = expectedURL
+	c.require(callWebhooksCreateRequestFieldExpectedURL)
+}
+
 func (c *CallWebhooksCreateRequest) UnmarshalJSON(data []byte) error {
 	type unmarshaler CallWebhooksCreateRequest
 	var body unmarshaler
@@ -73,12 +83,15 @@ func (c *CallWebhooksCreateRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	deleteCallWebhooksRequestFieldEventType = big.NewInt(1 << 0)
+	deleteCallWebhooksRequestFieldEventType   = big.NewInt(1 << 0)
+	deleteCallWebhooksRequestFieldExpectedURL = big.NewInt(1 << 1)
 )
 
 type DeleteCallWebhooksRequest struct {
 	// Event type of the webhook to delete. One of `post-call` (callbacks sent after a call ends) or `on-call` (real-time call status callbacks during a call).
 	EventType DeleteCallWebhooksRequestEventType `json:"-" url:"event_type"`
+	// Clears the webhook only if it currently has this URL. Percent-encode the value. An empty value clears only an unset webhook.
+	ExpectedURL *string `json:"-" url:"expected_url,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -96,6 +109,13 @@ func (d *DeleteCallWebhooksRequest) require(field *big.Int) {
 func (d *DeleteCallWebhooksRequest) SetEventType(eventType DeleteCallWebhooksRequestEventType) {
 	d.EventType = eventType
 	d.require(deleteCallWebhooksRequestFieldEventType)
+}
+
+// SetExpectedURL sets the ExpectedURL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeleteCallWebhooksRequest) SetExpectedURL(expectedURL *string) {
+	d.ExpectedURL = expectedURL
+	d.require(deleteCallWebhooksRequestFieldExpectedURL)
 }
 
 // A call webhook response

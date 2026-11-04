@@ -623,8 +623,7 @@ type NudgeCampaignsRequest struct {
 	BrandID string `json:"-" url:"-"`
 	// The unique ID of the 10DLC Campaign.
 	CampaignID string `json:"-" url:"-"`
-	// Nudge intent. Allowed values: `REVIEW`, `APPEAL_REJECTION`.
-	// Use `nudge_intent` to specify the action: - `REVIEW`: Request review for a pending Campaign. - `APPEAL_REJECTION`: Appeal a rejected Campaign.
+	// Action the nudge requests: `REVIEW` requests review of a pending Campaign, and `APPEAL_REJECTION` appeals a rejected Campaign.
 	NudgeIntent string `json:"nudge_intent" url:"-"`
 	// Description of the nudge request.
 	Description string `json:"description" url:"-"`

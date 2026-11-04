@@ -106,6 +106,8 @@ func (c *Client) Get(
 }
 
 // Updates the phone number identified by `id`. Only the provided fields are changed.
+//
+// **Behavior:** With `expected_sms_relay_url`, the `sms_relay_url` change is applied only while the number currently has that URL; an empty string matches a number with no `sms_relay_url`. Otherwise the call returns `409` and no field in the request is changed. Setting the URL the number already has succeeds. To clear `sms_relay_url`, send `null`, not an empty string. If the call returns a `Something went wrong` error, you can retry the request; repeating the `sms_relay_url` change is a no-op, so it is safe even if the first attempt already applied it.
 func (c *Client) Update(
 	ctx context.Context,
 	request *wavixgosdk.NumberUpdateRequest,

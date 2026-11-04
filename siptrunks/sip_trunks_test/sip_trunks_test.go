@@ -173,20 +173,8 @@ func TestSipTrunksUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.UpdateSipTrunksRequest{
+	request := &wavixgosdk.SipTrunkUpdateRequest{
 		ID: 3107,
-		Body: &wavixgosdk.SipTrunkCreateRequest{
-			Label:                  "My trunk",
-			Password:               "4r=h;EaCB85QNtr2",
-			Callerid:               "13132847320",
-			IPRestrict:             false,
-			DidinfoEnabled:         true,
-			CallRestrict:           true,
-			ChannelsRestrict:       false,
-			RewriteEnabled:         true,
-			TranscriptionEnabled:   true,
-			TranscriptionThreshold: 10,
-		},
 	}
 	_, invocationErr := client.SipTrunks.Update(
 		context.TODO(),
