@@ -700,7 +700,184 @@ client.SipTrunks.Create(
 <dl>
 <dd>
 
-**request:** `*wavixgosdk.SipTrunkCreateRequest` 
+**label:** `string` — User-defined name of the SIP trunk
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**password:** `string` — Password set for the SIP trunk. A strong password helps keep the trunk secure.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**hostRequest:** `*wavixgosdk.SipTrunkCreateRequestHostRequest` — For SIP trunks with IP authentication, includes the SIP endpoint public static IP address and the status of the authentication request. Wavix authenticates all SIP traffic originating from this IP address.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**callerid:** `string` — Caller ID associated with the SIP trunk. Must be an active or verified number on the account.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**multipleNumbers:** `*bool` — Indicates whether any active or verified phone number on the account can be used as the Caller ID for the SIP trunk.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ipRestrict:** `bool` — Indicates whether SIP trunk registration is allowed from only specific public static IP addresses. When set to `true`, the `allowed_ips` parameter must be provided.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**allowedIps:** `[]*wavixgosdk.SipTrunkCreateRequestAllowedIpsItem` — A list of public static IP addresses allowed to register with the SIP trunk
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**didinfoEnabled:** `bool` — Indicates whether inbound calls include dialed number information in the `To` header of SIP INVITE requests
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**callRestrict:** `bool` — Indicates whether a maximum call duration limit is enforced for the SIP trunk
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**callLimit:** `*int` — Maximum call duration for the SIP trunk, in seconds. Must not exceed the maximum duration set for the account. Ignored when `call_restrict` is `false`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**costLimit:** `*bool` — Indicates if the max cost limit for an outbound call limit is activated for the SIP trunk.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**maxCallCost:** `*float64` — Maximum cost for an outbound call, in USD
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**channelsRestrict:** `bool` — Indicates whether a limit on the number of concurrent outbound calls is enforced for the SIP trunk
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**maxChannels:** `*int` — Maximum number of concurrent outbound calls for the SIP trunk. Must not exceed the outbound channel capacity set for the account. Ignored when `channels_restrict` is `false`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rewriteEnabled:** `bool` — Indicates whether a custom dial plan is activated for the SIP trunk
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rewritePrefix:** `*string` — Digits to automatically prepend to each dialed phone number
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rewriteCond:** `*string` — Number of leading digits to automatically remove from each dialed phone number
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**callRecordingEnabled:** `*bool` — Indicates whether outbound call recording is enabled for the SIP trunk
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**transcriptionEnabled:** `bool` 
+
+Indicates whether automatic call transcription is enabled for the SIP trunk.
+Available for `Flex Pro` customers only.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**transcriptionThreshold:** `int` 
+
+Transcriptions will be generated for calls that meet or exceed the specified minimal call duration threshold, in seconds.
+Available for `Flex Pro` customers only.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**machineDetectionEnabled:** `*bool` 
+
+Indicates whether automatic voicemail detection is enabled for the SIP trunk.
+Available for `Flex Pro` customers only.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**encryptedMedia:** `*bool` — Indicates whether SRTP media encryption is enabled for the SIP trunk.
     
 </dd>
 </dl>
@@ -785,7 +962,7 @@ client.SipTrunks.Get(
 <dl>
 <dd>
 
-Replaces the configuration of the SIP trunk identified by `id`. Omitted fields revert to their defaults.
+Updates the SIP trunk identified by `id`. Only the provided fields are changed. On trial accounts, every update also applies the trial limits: a `call_limit` of at most 300 seconds (300 when omitted) and one concurrent call.
 </dd>
 </dl>
 </dd>
@@ -800,20 +977,8 @@ Replaces the configuration of the SIP trunk identified by `id`. Omitted fields r
 <dd>
 
 ```go
-request := &wavixgosdk.UpdateSipTrunksRequest{
+request := &wavixgosdk.SipTrunkUpdateRequest{
         ID: 3107,
-        Body: &wavixgosdk.SipTrunkCreateRequest{
-            Label: "My trunk",
-            Password: "4r=h;EaCB85QNtr2",
-            Callerid: "13132847320",
-            IPRestrict: false,
-            DidinfoEnabled: true,
-            CallRestrict: true,
-            ChannelsRestrict: false,
-            RewriteEnabled: true,
-            TranscriptionEnabled: true,
-            TranscriptionThreshold: 10,
-        },
     }
 client.SipTrunks.Update(
         context.TODO(),
@@ -842,7 +1007,184 @@ client.SipTrunks.Update(
 <dl>
 <dd>
 
-**request:** `*wavixgosdk.SipTrunkCreateRequest` 
+**label:** `*string` — User-defined name of the SIP trunk
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**password:** `*string` — Password set for the SIP trunk. A strong password helps keep the trunk secure.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**hostRequest:** `*wavixgosdk.SipTrunkUpdateRequestHostRequest` — For SIP trunks with IP authentication, the SIP endpoint public static IP address. Wavix authenticates all SIP traffic originating from this IP address. Ignored when the trunk already has a host request that is pending or approved. Not supported on trial accounts.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**callerid:** `*string` — Caller ID associated with the SIP trunk. Must be an active or verified number on the account.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**multipleNumbers:** `*bool` — Indicates whether any active or verified phone number on the account can be used as the Caller ID for the SIP trunk. Setting it to `true` clears the trunk's `callerid`; on a trunk with Caller ID passthrough (`passthrough`) enabled, `true` is ignored.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ipRestrict:** `*bool` — Indicates whether SIP trunk registration is allowed from only specific public static IP addresses. It can be `true` only when the trunk has at least one allowed IP address, either already stored or sent in `allowed_ips`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**allowedIps:** `[]*wavixgosdk.SipTrunkUpdateRequestAllowedIpsItem` — Public static IP addresses to add to the list allowed to register with the SIP trunk. Addresses already on the list are kept.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**didinfoEnabled:** `*bool` — Indicates whether inbound calls include dialed number information in the `To` header of SIP INVITE requests
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**callRestrict:** `*bool` — Indicates whether a maximum call duration limit is enforced for the SIP trunk
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**callLimit:** `*int` — Maximum call duration for the SIP trunk, in seconds. Must not exceed the maximum duration set for the account. Ignored when `call_restrict` is `false`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**costLimit:** `*bool` — Indicates if the max cost limit for an outbound call limit is activated for the SIP trunk.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**maxCallCost:** `*float64` — Maximum cost for an outbound call, in USD
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**channelsRestrict:** `*bool` — Indicates whether a limit on the number of concurrent outbound calls is enforced for the SIP trunk
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**maxChannels:** `*int` — Maximum number of concurrent outbound calls for the SIP trunk. Must not exceed the outbound channel capacity set for the account. Ignored when `channels_restrict` is `false`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rewriteEnabled:** `*bool` — Indicates whether a custom dial plan is activated for the SIP trunk
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rewritePrefix:** `*string` — Digits to automatically prepend to each dialed phone number
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rewriteCond:** `*string` — Number of leading digits to automatically remove from each dialed phone number
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**callRecordingEnabled:** `*bool` — Indicates whether outbound call recording is enabled for the SIP trunk
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**transcriptionEnabled:** `*bool` 
+
+Indicates whether automatic call transcription is enabled for the SIP trunk.
+Available for `Flex Pro` customers only.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**transcriptionThreshold:** `*int` 
+
+Transcriptions will be generated for calls that meet or exceed the specified minimal call duration threshold, in seconds.
+Available for `Flex Pro` customers only.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**machineDetectionEnabled:** `*bool` 
+
+Indicates whether automatic voicemail detection is enabled for the SIP trunk.
+Available for `Flex Pro` customers only.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**encryptedMedia:** `*bool` — Indicates whether SRTP media encryption is enabled for the SIP trunk.
     
 </dd>
 </dl>
@@ -1537,6 +1879,8 @@ client.Numbers.Get(
 <dd>
 
 Updates the phone number identified by `id`. Only the provided fields are changed.
+
+**Behavior:** With `expected_sms_relay_url`, the `sms_relay_url` change is applied only while the number currently has that URL; an empty string matches a number with no `sms_relay_url`. Otherwise the call returns `409` and no field in the request is changed. Setting the URL the number already has succeeds. To clear `sms_relay_url`, send `null`, not an empty string. If the call returns a `Something went wrong` error, you can retry the request; repeating the `sms_relay_url` change is a no-op, so it is safe even if the first attempt already applied it.
 </dd>
 </dl>
 </dd>
@@ -1597,7 +1941,15 @@ client.Numbers.Update(
 <dl>
 <dd>
 
-**smsRelayURL:** `*string` — Callback URL for inbound messages.
+**smsRelayURL:** `*string` — Callback URL for inbound messages. Pass `null` to clear it.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expectedSmsRelayURL:** `*string` — Applies the `sms_relay_url` change only if the number currently has this URL. Pass an empty string to set it only while it is unset, or your own URL to clear or replace it. Requires `sms_relay_url`.
     
 </dd>
 </dl>
@@ -1971,7 +2323,7 @@ Call disposition to filter results.  If omitted, returns only answered
 <dl>
 <dd>
 
-Transcribes the recording of the call identified by `call_id`. Transcription is asynchronous; poll the transcription endpoint for the result. Billed per minute at the account's call-transcription rate; fails with an insufficient-funds error when the balance cannot cover it.
+Transcribes the recording of the call identified by `call_id`. Transcription is asynchronous; poll the transcription endpoint for the result. When it completes, the new transcription replaces any earlier one that the transcription endpoints return. Billed per minute at the account's call-transcription rate; fails with an insufficient-funds error when the balance cannot cover it.
 </dd>
 </dl>
 </dd>
@@ -2909,6 +3261,8 @@ client.CallWebhooks.List(
 <dd>
 
 Registers a callback URL for the `on-call` or `post-call` event. Wavix sends a POST callback to the URL when the event occurs. Creates persistent configuration that forwards call metadata to the URL on every matching call until the webhook is deleted.
+
+**Behavior:** Without `expected_url`, the webhook is set to `url` whatever it was before. With `expected_url`, the webhook is set only while it currently has that URL; an empty string matches an unset webhook. Otherwise the call returns `409` and the webhook is unchanged. Setting the URL the webhook already has succeeds. If the call returns a `Something went wrong` error, the webhook is unchanged and you can retry the request.
 </dd>
 </dl>
 </dd>
@@ -2965,6 +3319,14 @@ Allowed values: `on-call`, `post-call`.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**expectedURL:** `*string` — Applies the change only if the webhook currently has this URL. Pass an empty string to set the webhook only while it is unset, or your own URL to replace your webhook. Setting the URL the webhook already has always succeeds.
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2986,6 +3348,8 @@ Allowed values: `on-call`, `post-call`.
 <dd>
 
 Removes the call webhook for the given event type. Wavix stops sending callbacks for that event.
+
+**Behavior:** Without `expected_url`, the webhook is cleared whatever URL it has. With `expected_url`, the webhook is cleared only while it currently has that URL; an empty value matches an unset webhook. Otherwise the call returns `409` and the webhook is unchanged. Clearing an unset webhook succeeds. Percent-encode the `expected_url` value in the query string. If the call returns a `Something went wrong` error, the webhook is unchanged and you can retry the request.
 </dd>
 </dl>
 </dd>
@@ -3002,6 +3366,9 @@ Removes the call webhook for the given event type. Wavix stops sending callbacks
 ```go
 request := &wavixgosdk.DeleteCallWebhooksRequest{
         EventType: wavixgosdk.DeleteCallWebhooksRequestEventTypePostCall,
+        ExpectedURL: wavixgosdk.String(
+            "https://your-site.com/webhook",
+        ),
     }
 client.CallWebhooks.Delete(
         context.TODO(),
@@ -3023,6 +3390,14 @@ client.CallWebhooks.Delete(
 <dd>
 
 **eventType:** `*wavixgosdk.DeleteCallWebhooksRequestEventType` — Event type of the webhook to delete. One of `post-call` (callbacks sent after a call ends) or `on-call` (real-time call status callbacks during a call).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expectedURL:** `*string` — Clears the webhook only if it currently has this URL. Percent-encode the value. An empty value clears only an unset webhook.
     
 </dd>
 </dl>
@@ -3453,7 +3828,7 @@ client.CallControl.Answer(
 <dl>
 <dd>
 
-**streamURL:** `*string` — WebSocket URL to stream the call.
+**streamURL:** `*string` — WebSocket URL (`ws://` or `wss://`) that receives the call's audio, which can include the caller's voice.
     
 </dd>
 </dl>
@@ -4374,7 +4749,7 @@ client.SubAccounts.Get(
 <dl>
 <dd>
 
-Replaces the configuration of the sub-account identified by `id`. Omitted fields revert to their defaults.
+Updates the sub-account identified by `id`. Only the provided fields are changed.
 </dd>
 </dl>
 </dd>
@@ -5110,7 +5485,7 @@ client.Buy.Numbers.List(
 <dl>
 <dd>
 
-Starts streaming the audio of the call identified by `call_id` to a WebSocket destination you supply, in the direction (`stream_type`) and channel (`stream_channel`) you configure. The destination can be any URL you specify — Wavix does not restrict it. Returns the `stream_id`.
+Starts streaming the audio of the call identified by `call_id` to the WebSocket destination in `stream_url`, in the direction (`stream_type`) and channel (`stream_channel`) you configure. The streamed audio can include the remote party's voice.
 </dd>
 </dl>
 </dd>
@@ -5158,7 +5533,7 @@ client.CallControl.Streams.Create(
 <dl>
 <dd>
 
-**streamURL:** `string` — WebSocket URL for call streaming
+**streamURL:** `string` — WebSocket URL (`ws://` or `wss://`) that receives the call's audio.
     
 </dd>
 </dl>
@@ -7327,7 +7702,7 @@ Business segment the Brand operates in. One of:
 <dl>
 <dd>
 
-**stateOrProvince:** `*string` — State or province. For the United States, use 2 character codes.
+**stateOrProvince:** `*string` — State or province. For the United States, it is a 2-character code.
     
 </dd>
 </dl>
@@ -9429,10 +9804,7 @@ client.TenDlc.Campaigns.Nudge(
 <dl>
 <dd>
 
-**nudgeIntent:** `string` 
-
-Nudge intent. Allowed values: `REVIEW`, `APPEAL_REJECTION`. 
-Use `nudge_intent` to specify the action: - `REVIEW`: Request review for a pending Campaign. - `APPEAL_REJECTION`: Appeal a rejected Campaign.
+**nudgeIntent:** `string` — Action the nudge requests: `REVIEW` requests review of a pending Campaign, and `APPEAL_REJECTION` appeals a rejected Campaign.
     
 </dd>
 </dl>
@@ -10418,7 +10790,7 @@ client.Webrtc.Tokens.Create(
 <dl>
 <dd>
 
-**ttl:** `*int` — Time to live in seconds. Default `3600`. Pass `null` for no expiration.
+**ttl:** `*int` — Time to live in seconds. Default `3600`; `null` means no expiration.
     
 </dd>
 </dl>

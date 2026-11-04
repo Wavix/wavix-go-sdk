@@ -19,7 +19,7 @@ type WebRtcTokenCreateRequest struct {
 	SipTrunk string `json:"sip_trunk" url:"-"`
 	// Arbitrary client-defined data to associate with the token.
 	Payload map[string]any `json:"payload,omitempty" url:"-"`
-	// Time to live in seconds. Default `3600`. Pass `null` for no expiration.
+	// Time to live in seconds. Default `3600`; `null` means no expiration.
 	TTL *int `json:"ttl,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted

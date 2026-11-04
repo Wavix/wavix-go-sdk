@@ -1356,10 +1356,11 @@ var (
 	numberUpdateRequestFieldSmsEnabled             = big.NewInt(1 << 1)
 	numberUpdateRequestFieldDestinations           = big.NewInt(1 << 2)
 	numberUpdateRequestFieldSmsRelayURL            = big.NewInt(1 << 3)
-	numberUpdateRequestFieldCallRecordingEnabled   = big.NewInt(1 << 4)
-	numberUpdateRequestFieldTranscriptionEnabled   = big.NewInt(1 << 5)
-	numberUpdateRequestFieldTranscriptionThreshold = big.NewInt(1 << 6)
-	numberUpdateRequestFieldCallStatusURL          = big.NewInt(1 << 7)
+	numberUpdateRequestFieldExpectedSmsRelayURL    = big.NewInt(1 << 4)
+	numberUpdateRequestFieldCallRecordingEnabled   = big.NewInt(1 << 5)
+	numberUpdateRequestFieldTranscriptionEnabled   = big.NewInt(1 << 6)
+	numberUpdateRequestFieldTranscriptionThreshold = big.NewInt(1 << 7)
+	numberUpdateRequestFieldCallStatusURL          = big.NewInt(1 << 8)
 )
 
 type NumberUpdateRequest struct {
@@ -1369,8 +1370,10 @@ type NumberUpdateRequest struct {
 	SmsEnabled *bool `json:"sms_enabled,omitempty" url:"-"`
 	// Inbound call routing destinations for the phone number.
 	Destinations []*NumberDestination `json:"destinations,omitempty" url:"-"`
-	// Callback URL for inbound messages.
+	// Callback URL for inbound messages. Pass `null` to clear it.
 	SmsRelayURL *string `json:"sms_relay_url,omitempty" url:"-"`
+	// Applies the `sms_relay_url` change only if the number currently has this URL. Pass an empty string to set it only while it is unset, or your own URL to clear or replace it. Requires `sms_relay_url`.
+	ExpectedSmsRelayURL *string `json:"expected_sms_relay_url,omitempty" url:"-"`
 	// Indicates whether call recording is enabled.
 	CallRecordingEnabled *bool `json:"call_recording_enabled,omitempty" url:"-"`
 	// Indicates whether call transcription is enabled.
@@ -1417,6 +1420,13 @@ func (n *NumberUpdateRequest) SetDestinations(destinations []*NumberDestination)
 func (n *NumberUpdateRequest) SetSmsRelayURL(smsRelayURL *string) {
 	n.SmsRelayURL = smsRelayURL
 	n.require(numberUpdateRequestFieldSmsRelayURL)
+}
+
+// SetExpectedSmsRelayURL sets the ExpectedSmsRelayURL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (n *NumberUpdateRequest) SetExpectedSmsRelayURL(expectedSmsRelayURL *string) {
+	n.ExpectedSmsRelayURL = expectedSmsRelayURL
+	n.require(numberUpdateRequestFieldExpectedSmsRelayURL)
 }
 
 // SetCallRecordingEnabled sets the CallRecordingEnabled field and marks it as non-optional;

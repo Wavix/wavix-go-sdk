@@ -85,10 +85,10 @@ func (c *Client) Get(
 	return response.Body, nil
 }
 
-// Replaces the configuration of the SIP trunk identified by `id`. Omitted fields revert to their defaults.
+// Updates the SIP trunk identified by `id`. Only the provided fields are changed. On trial accounts, every update also applies the trial limits: a `call_limit` of at most 300 seconds (300 when omitted) and one concurrent call.
 func (c *Client) Update(
 	ctx context.Context,
-	request *wavixgosdk.UpdateSipTrunksRequest,
+	request *wavixgosdk.SipTrunkUpdateRequest,
 	opts ...option.RequestOption,
 ) (*wavixgosdk.SipTrunkResponse, error) {
 	response, err := c.WithRawResponse.Update(

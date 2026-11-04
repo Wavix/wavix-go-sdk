@@ -50,6 +50,8 @@ func (c *Client) List(
 }
 
 // Registers a callback URL for the `on-call` or `post-call` event. Wavix sends a POST callback to the URL when the event occurs. Creates persistent configuration that forwards call metadata to the URL on every matching call until the webhook is deleted.
+//
+// **Behavior:** Without `expected_url`, the webhook is set to `url` whatever it was before. With `expected_url`, the webhook is set only while it currently has that URL; an empty string matches an unset webhook. Otherwise the call returns `409` and the webhook is unchanged. Setting the URL the webhook already has succeeds. If the call returns a `Something went wrong` error, the webhook is unchanged and you can retry the request.
 func (c *Client) Create(
 	ctx context.Context,
 	request *wavixgosdk.CallWebhooksCreateRequest,
@@ -67,6 +69,8 @@ func (c *Client) Create(
 }
 
 // Removes the call webhook for the given event type. Wavix stops sending callbacks for that event.
+//
+// **Behavior:** Without `expected_url`, the webhook is cleared whatever URL it has. With `expected_url`, the webhook is cleared only while it currently has that URL; an empty value matches an unset webhook. Otherwise the call returns `409` and the webhook is unchanged. Clearing an unset webhook succeeds. Percent-encode the `expected_url` value in the query string. If the call returns a `Something went wrong` error, the webhook is unchanged and you can retry the request.
 func (c *Client) Delete(
 	ctx context.Context,
 	request *wavixgosdk.DeleteCallWebhooksRequest,

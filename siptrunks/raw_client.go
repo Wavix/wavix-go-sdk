@@ -97,6 +97,7 @@ func (r *RawClient) Create(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
+	headers.Add("Content-Type", "application/json")
 	var response *wavixgosdk.SipTrunkResponse
 	raw, err := r.caller.Call(
 		ctx,
@@ -171,7 +172,7 @@ func (r *RawClient) Get(
 
 func (r *RawClient) Update(
 	ctx context.Context,
-	request *wavixgosdk.UpdateSipTrunksRequest,
+	request *wavixgosdk.SipTrunkUpdateRequest,
 	opts ...option.RequestOption,
 ) (*core.Response[*wavixgosdk.SipTrunkResponse], error) {
 	options := core.NewRequestOptions(opts...)

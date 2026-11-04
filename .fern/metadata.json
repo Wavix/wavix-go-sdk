@@ -7,9 +7,10 @@
       "path": "github.com/wavix/wavix-go-sdk"
     }
   },
-  "originGitCommit": "d29c16cfdf89e832f7792c0c920d6935e231f140",
+  "originGitCommit": "e0d4d73c3ae45a88f9edafbfa9bf22d469aaf8c3",
   "originGitCommitIsDirty": false,
-  "invokedBy": "manual",
-  "requestedVersion": "1.1.1",
-  "sdkVersion": "v1.1.1"
+  "invokedBy": "ci",
+  "requestedVersion": "1.4.0",
+  "ciProvider": "github",
+  "sdkVersion": "v1.4.0"
 }
