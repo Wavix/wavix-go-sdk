@@ -14319,6 +14319,7 @@ var (
 	transcriptTurnFieldE         = big.NewInt(1 << 2)
 	transcriptTurnFieldText      = big.NewInt(1 << 3)
 	transcriptTurnFieldSentiment = big.NewInt(1 << 4)
+	transcriptTurnFieldTopics    = big.NewInt(1 << 5)
 )
 
 type TranscriptTurn struct {
@@ -14332,6 +14333,8 @@ type TranscriptTurn struct {
 	Text *string `json:"text,omitempty" url:"text,omitempty"`
 	// Sentiment detected in the speaker's text for this turn, such as `neutral`, `positive`, or `negative`.
 	Sentiment *string `json:"sentiment,omitempty" url:"sentiment,omitempty"`
+	// Topics detected in the speaker's text for this turn. Empty when no topic was detected.
+	Topics []string `json:"topics,omitempty" url:"topics,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -14373,6 +14376,13 @@ func (t *TranscriptTurn) GetSentiment() *string {
 		return nil
 	}
 	return t.Sentiment
+}
+
+func (t *TranscriptTurn) GetTopics() []string {
+	if t == nil {
+		return nil
+	}
+	return t.Topics
 }
 
 func (t *TranscriptTurn) GetExtraProperties() map[string]interface{} {
@@ -14422,6 +14432,13 @@ func (t *TranscriptTurn) SetText(text *string) {
 func (t *TranscriptTurn) SetSentiment(sentiment *string) {
 	t.Sentiment = sentiment
 	t.require(transcriptTurnFieldSentiment)
+}
+
+// SetTopics sets the Topics field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TranscriptTurn) SetTopics(topics []string) {
+	t.Topics = topics
+	t.require(transcriptTurnFieldTopics)
 }
 
 func (t *TranscriptTurn) UnmarshalJSON(data []byte) error {
