@@ -33734,6 +33734,4588 @@ func TestSettersMarkExplicitWhatsAppBusinessAccount(t *testing.T) {
 
 }
 
+func TestSettersWhatsAppContactMarketingPreferenceEventData(t *testing.T) {
+	t.Run("SetFrom", func(t *testing.T) {
+		obj := &WhatsAppContactMarketingPreferenceEventData{}
+		var fernTestValueFrom string
+		obj.SetFrom(fernTestValueFrom)
+		assert.Equal(t, fernTestValueFrom, obj.From)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTo", func(t *testing.T) {
+		obj := &WhatsAppContactMarketingPreferenceEventData{}
+		var fernTestValueTo string
+		obj.SetTo(fernTestValueTo)
+		assert.Equal(t, fernTestValueTo, obj.To)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppContactMarketingPreferenceEventData(t *testing.T) {
+	t.Run("GetFrom", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppContactMarketingPreferenceEventData{}
+		var expected string
+		obj.From = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFrom(), "getter should return the property value")
+	})
+
+	t.Run("GetFrom_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppContactMarketingPreferenceEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFrom() // Should return zero value
+	})
+
+	t.Run("GetTo", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppContactMarketingPreferenceEventData{}
+		var expected string
+		obj.To = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTo(), "getter should return the property value")
+	})
+
+	t.Run("GetTo_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppContactMarketingPreferenceEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTo() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppContactMarketingPreferenceEventData(t *testing.T) {
+	t.Run("SetFrom_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppContactMarketingPreferenceEventData{}
+		var fernTestValueFrom string
+
+		// Act
+		obj.SetFrom(fernTestValueFrom)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTo_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppContactMarketingPreferenceEventData{}
+		var fernTestValueTo string
+
+		// Act
+		obj.SetTo(fernTestValueTo)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppContactMarketingResumedEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppContactMarketingResumedEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppContactMarketingResumedEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppContactMarketingResumedEvent{}
+		var fernTestValueData *WhatsAppContactMarketingPreferenceEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppContactMarketingResumedEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppContactMarketingResumedEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppContactMarketingResumedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppContactMarketingResumedEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppContactMarketingResumedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppContactMarketingResumedEvent{}
+		var expected *WhatsAppContactMarketingPreferenceEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppContactMarketingResumedEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppContactMarketingResumedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppContactMarketingResumedEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppContactMarketingResumedEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppContactMarketingResumedEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppContactMarketingResumedEvent{}
+		var fernTestValueData *WhatsAppContactMarketingPreferenceEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppContactMarketingStoppedEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppContactMarketingStoppedEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppContactMarketingStoppedEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppContactMarketingStoppedEvent{}
+		var fernTestValueData *WhatsAppContactMarketingPreferenceEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppContactMarketingStoppedEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppContactMarketingStoppedEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppContactMarketingStoppedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppContactMarketingStoppedEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppContactMarketingStoppedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppContactMarketingStoppedEvent{}
+		var expected *WhatsAppContactMarketingPreferenceEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppContactMarketingStoppedEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppContactMarketingStoppedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppContactMarketingStoppedEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppContactMarketingStoppedEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppContactMarketingStoppedEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppContactMarketingStoppedEvent{}
+		var fernTestValueData *WhatsAppContactMarketingPreferenceEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetType", func(t *testing.T) {
+		obj := &WhatsAppEvent{}
+		var fernTestValueType string
+		obj.SetType(fernTestValueType)
+		assert.Equal(t, fernTestValueType, obj.Type)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppEvent{}
+		var fernTestValueData map[string]any
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetType", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppEvent{}
+		var expected string
+		obj.Type = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetType(), "getter should return the property value")
+	})
+
+	t.Run("GetType_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetType() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppEvent{}
+		var expected map[string]any
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetType_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppEvent{}
+		var fernTestValueType string
+
+		// Act
+		obj.SetType(fernTestValueType)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppEvent{}
+		var fernTestValueData map[string]any
+
+		// Act
+		obj.SetData(fernTestValueData)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppEventListResponse(t *testing.T) {
+	t.Run("SetEvents", func(t *testing.T) {
+		obj := &WhatsAppEventListResponse{}
+		var fernTestValueEvents []*WhatsAppEvent
+		obj.SetEvents(fernTestValueEvents)
+		assert.Equal(t, fernTestValueEvents, obj.Events)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetNextCursor", func(t *testing.T) {
+		obj := &WhatsAppEventListResponse{}
+		var fernTestValueNextCursor *string
+		obj.SetNextCursor(fernTestValueNextCursor)
+		assert.Equal(t, fernTestValueNextCursor, obj.NextCursor)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetHasMore", func(t *testing.T) {
+		obj := &WhatsAppEventListResponse{}
+		var fernTestValueHasMore bool
+		obj.SetHasMore(fernTestValueHasMore)
+		assert.Equal(t, fernTestValueHasMore, obj.HasMore)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppEventListResponse(t *testing.T) {
+	t.Run("GetEvents", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppEventListResponse{}
+		var expected []*WhatsAppEvent
+		obj.Events = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetEvents(), "getter should return the property value")
+	})
+
+	t.Run("GetEvents_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppEventListResponse{}
+		obj.Events = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEvents(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetEvents_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppEventListResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetEvents() // Should return zero value
+	})
+
+	t.Run("GetNextCursor", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppEventListResponse{}
+		var expected *string
+		obj.NextCursor = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetNextCursor(), "getter should return the property value")
+	})
+
+	t.Run("GetNextCursor_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppEventListResponse{}
+		obj.NextCursor = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetNextCursor(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetNextCursor_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppEventListResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetNextCursor() // Should return zero value
+	})
+
+	t.Run("GetHasMore", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppEventListResponse{}
+		var expected bool
+		obj.HasMore = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetHasMore(), "getter should return the property value")
+	})
+
+	t.Run("GetHasMore_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppEventListResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetHasMore() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppEventListResponse(t *testing.T) {
+	t.Run("SetEvents_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppEventListResponse{}
+		var fernTestValueEvents []*WhatsAppEvent
+
+		// Act
+		obj.SetEvents(fernTestValueEvents)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetNextCursor_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppEventListResponse{}
+		var fernTestValueNextCursor *string
+
+		// Act
+		obj.SetNextCursor(fernTestValueNextCursor)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetHasMore_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppEventListResponse{}
+		var fernTestValueHasMore bool
+
+		// Act
+		obj.SetHasMore(fernTestValueHasMore)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppInboundAudioContent(t *testing.T) {
+	t.Run("SetAudio", func(t *testing.T) {
+		obj := &WhatsAppInboundAudioContent{}
+		var fernTestValueAudio *WhatsAppInboundMedia
+		obj.SetAudio(fernTestValueAudio)
+		assert.Equal(t, fernTestValueAudio, obj.Audio)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppInboundAudioContent(t *testing.T) {
+	t.Run("GetAudio", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundAudioContent{}
+		var expected *WhatsAppInboundMedia
+		obj.Audio = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAudio(), "getter should return the property value")
+	})
+
+	t.Run("GetAudio_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundAudioContent{}
+		obj.Audio = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAudio(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAudio_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundAudioContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAudio() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppInboundAudioContent(t *testing.T) {
+	t.Run("SetAudio_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundAudioContent{}
+		var fernTestValueAudio *WhatsAppInboundMedia
+
+		// Act
+		obj.SetAudio(fernTestValueAudio)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppInboundButtonReply(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppInboundButtonReply{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTitle", func(t *testing.T) {
+		obj := &WhatsAppInboundButtonReply{}
+		var fernTestValueTitle string
+		obj.SetTitle(fernTestValueTitle)
+		assert.Equal(t, fernTestValueTitle, obj.Title)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppInboundButtonReply(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundButtonReply{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundButtonReply
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTitle", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundButtonReply{}
+		var expected string
+		obj.Title = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTitle(), "getter should return the property value")
+	})
+
+	t.Run("GetTitle_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundButtonReply
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTitle() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppInboundButtonReply(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundButtonReply{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTitle_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundButtonReply{}
+		var fernTestValueTitle string
+
+		// Act
+		obj.SetTitle(fernTestValueTitle)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppInboundButtonReplyContent(t *testing.T) {
+	t.Run("SetButtonReply", func(t *testing.T) {
+		obj := &WhatsAppInboundButtonReplyContent{}
+		var fernTestValueButtonReply *WhatsAppInboundButtonReply
+		obj.SetButtonReply(fernTestValueButtonReply)
+		assert.Equal(t, fernTestValueButtonReply, obj.ButtonReply)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppInboundButtonReplyContent(t *testing.T) {
+	t.Run("GetButtonReply", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundButtonReplyContent{}
+		var expected *WhatsAppInboundButtonReply
+		obj.ButtonReply = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetButtonReply(), "getter should return the property value")
+	})
+
+	t.Run("GetButtonReply_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundButtonReplyContent{}
+		obj.ButtonReply = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetButtonReply(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetButtonReply_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundButtonReplyContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetButtonReply() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppInboundButtonReplyContent(t *testing.T) {
+	t.Run("SetButtonReply_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundButtonReplyContent{}
+		var fernTestValueButtonReply *WhatsAppInboundButtonReply
+
+		// Act
+		obj.SetButtonReply(fernTestValueButtonReply)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppInboundContactCard(t *testing.T) {
+	t.Run("SetName", func(t *testing.T) {
+		obj := &WhatsAppInboundContactCard{}
+		var fernTestValueName string
+		obj.SetName(fernTestValueName)
+		assert.Equal(t, fernTestValueName, obj.Name)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPhones", func(t *testing.T) {
+		obj := &WhatsAppInboundContactCard{}
+		var fernTestValuePhones []string
+		obj.SetPhones(fernTestValuePhones)
+		assert.Equal(t, fernTestValuePhones, obj.Phones)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEmails", func(t *testing.T) {
+		obj := &WhatsAppInboundContactCard{}
+		var fernTestValueEmails []string
+		obj.SetEmails(fernTestValueEmails)
+		assert.Equal(t, fernTestValueEmails, obj.Emails)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppInboundContactCard(t *testing.T) {
+	t.Run("GetName", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContactCard{}
+		var expected string
+		obj.Name = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetName(), "getter should return the property value")
+	})
+
+	t.Run("GetName_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContactCard
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetName() // Should return zero value
+	})
+
+	t.Run("GetPhones", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContactCard{}
+		var expected []string
+		obj.Phones = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPhones(), "getter should return the property value")
+	})
+
+	t.Run("GetPhones_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContactCard{}
+		obj.Phones = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPhones(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPhones_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContactCard
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPhones() // Should return zero value
+	})
+
+	t.Run("GetEmails", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContactCard{}
+		var expected []string
+		obj.Emails = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetEmails(), "getter should return the property value")
+	})
+
+	t.Run("GetEmails_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContactCard{}
+		obj.Emails = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEmails(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetEmails_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContactCard
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetEmails() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppInboundContactCard(t *testing.T) {
+	t.Run("SetName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContactCard{}
+		var fernTestValueName string
+
+		// Act
+		obj.SetName(fernTestValueName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPhones_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContactCard{}
+		var fernTestValuePhones []string
+
+		// Act
+		obj.SetPhones(fernTestValuePhones)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEmails_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContactCard{}
+		var fernTestValueEmails []string
+
+		// Act
+		obj.SetEmails(fernTestValueEmails)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppInboundContactsContent(t *testing.T) {
+	t.Run("SetContacts", func(t *testing.T) {
+		obj := &WhatsAppInboundContactsContent{}
+		var fernTestValueContacts []*WhatsAppInboundContactCard
+		obj.SetContacts(fernTestValueContacts)
+		assert.Equal(t, fernTestValueContacts, obj.Contacts)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppInboundContactsContent(t *testing.T) {
+	t.Run("GetContacts", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContactsContent{}
+		var expected []*WhatsAppInboundContactCard
+		obj.Contacts = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetContacts(), "getter should return the property value")
+	})
+
+	t.Run("GetContacts_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContactsContent{}
+		obj.Contacts = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetContacts(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetContacts_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContactsContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetContacts() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppInboundContactsContent(t *testing.T) {
+	t.Run("SetContacts_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContactsContent{}
+		var fernTestValueContacts []*WhatsAppInboundContactCard
+
+		// Act
+		obj.SetContacts(fernTestValueContacts)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestGettersWhatsAppInboundContent(t *testing.T) {
+	t.Run("GetType", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		var expected string
+		obj.Type = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetType(), "getter should return the property value")
+	})
+
+	t.Run("GetType_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetType() // Should return zero value
+	})
+
+	t.Run("GetText", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		var expected *WhatsAppInboundTextContent
+		obj.Text = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetText(), "getter should return the property value")
+	})
+
+	t.Run("GetText_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		obj.Text = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetText(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetText_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetText() // Should return zero value
+	})
+
+	t.Run("GetImage", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		var expected *WhatsAppInboundImageContent
+		obj.Image = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetImage(), "getter should return the property value")
+	})
+
+	t.Run("GetImage_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		obj.Image = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetImage(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetImage_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetImage() // Should return zero value
+	})
+
+	t.Run("GetVideo", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		var expected *WhatsAppInboundVideoContent
+		obj.Video = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVideo(), "getter should return the property value")
+	})
+
+	t.Run("GetVideo_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		obj.Video = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVideo(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVideo_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVideo() // Should return zero value
+	})
+
+	t.Run("GetAudio", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		var expected *WhatsAppInboundAudioContent
+		obj.Audio = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAudio(), "getter should return the property value")
+	})
+
+	t.Run("GetAudio_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		obj.Audio = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAudio(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAudio_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAudio() // Should return zero value
+	})
+
+	t.Run("GetDocument", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		var expected *WhatsAppInboundDocumentContent
+		obj.Document = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDocument(), "getter should return the property value")
+	})
+
+	t.Run("GetDocument_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		obj.Document = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDocument(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDocument_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDocument() // Should return zero value
+	})
+
+	t.Run("GetSticker", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		var expected *WhatsAppInboundStickerContent
+		obj.Sticker = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSticker(), "getter should return the property value")
+	})
+
+	t.Run("GetSticker_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		obj.Sticker = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSticker(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSticker_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSticker() // Should return zero value
+	})
+
+	t.Run("GetLocation", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		var expected *WhatsAppInboundLocationContent
+		obj.Location = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLocation(), "getter should return the property value")
+	})
+
+	t.Run("GetLocation_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		obj.Location = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetLocation(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetLocation_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLocation() // Should return zero value
+	})
+
+	t.Run("GetContacts", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		var expected *WhatsAppInboundContactsContent
+		obj.Contacts = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetContacts(), "getter should return the property value")
+	})
+
+	t.Run("GetContacts_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		obj.Contacts = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetContacts(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetContacts_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetContacts() // Should return zero value
+	})
+
+	t.Run("GetReaction", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		var expected *WhatsAppInboundReactionContent
+		obj.Reaction = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReaction(), "getter should return the property value")
+	})
+
+	t.Run("GetReaction_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		obj.Reaction = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReaction(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReaction_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReaction() // Should return zero value
+	})
+
+	t.Run("GetButtonReply", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		var expected *WhatsAppInboundButtonReplyContent
+		obj.ButtonReply = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetButtonReply(), "getter should return the property value")
+	})
+
+	t.Run("GetButtonReply_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		obj.ButtonReply = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetButtonReply(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetButtonReply_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetButtonReply() // Should return zero value
+	})
+
+	t.Run("GetListReply", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		var expected *WhatsAppInboundListReplyContent
+		obj.ListReply = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetListReply(), "getter should return the property value")
+	})
+
+	t.Run("GetListReply_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		obj.ListReply = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetListReply(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetListReply_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetListReply() // Should return zero value
+	})
+
+	t.Run("GetFlowResponse", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		var expected *WhatsAppInboundFlowResponseContent
+		obj.FlowResponse = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFlowResponse(), "getter should return the property value")
+	})
+
+	t.Run("GetFlowResponse_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContent{}
+		obj.FlowResponse = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetFlowResponse(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetFlowResponse_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFlowResponse() // Should return zero value
+	})
+
+}
+
+func TestSettersWhatsAppInboundContext(t *testing.T) {
+	t.Run("SetMessageUUID", func(t *testing.T) {
+		obj := &WhatsAppInboundContext{}
+		var fernTestValueMessageUUID *string
+		obj.SetMessageUUID(fernTestValueMessageUUID)
+		assert.Equal(t, fernTestValueMessageUUID, obj.MessageUUID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppInboundContext(t *testing.T) {
+	t.Run("GetMessageUUID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContext{}
+		var expected *string
+		obj.MessageUUID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMessageUUID(), "getter should return the property value")
+	})
+
+	t.Run("GetMessageUUID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContext{}
+		obj.MessageUUID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMessageUUID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMessageUUID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContext
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMessageUUID() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppInboundContext(t *testing.T) {
+	t.Run("SetMessageUUID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContext{}
+		var fernTestValueMessageUUID *string
+
+		// Act
+		obj.SetMessageUUID(fernTestValueMessageUUID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppInboundDocumentContent(t *testing.T) {
+	t.Run("SetDocument", func(t *testing.T) {
+		obj := &WhatsAppInboundDocumentContent{}
+		var fernTestValueDocument *WhatsAppInboundMedia
+		obj.SetDocument(fernTestValueDocument)
+		assert.Equal(t, fernTestValueDocument, obj.Document)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppInboundDocumentContent(t *testing.T) {
+	t.Run("GetDocument", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundDocumentContent{}
+		var expected *WhatsAppInboundMedia
+		obj.Document = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDocument(), "getter should return the property value")
+	})
+
+	t.Run("GetDocument_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundDocumentContent{}
+		obj.Document = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDocument(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDocument_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundDocumentContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDocument() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppInboundDocumentContent(t *testing.T) {
+	t.Run("SetDocument_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundDocumentContent{}
+		var fernTestValueDocument *WhatsAppInboundMedia
+
+		// Act
+		obj.SetDocument(fernTestValueDocument)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppInboundFlowResponseContent(t *testing.T) {
+	t.Run("SetFlowResponse", func(t *testing.T) {
+		obj := &WhatsAppInboundFlowResponseContent{}
+		var fernTestValueFlowResponse map[string]any
+		obj.SetFlowResponse(fernTestValueFlowResponse)
+		assert.Equal(t, fernTestValueFlowResponse, obj.FlowResponse)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppInboundFlowResponseContent(t *testing.T) {
+	t.Run("GetFlowResponse", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundFlowResponseContent{}
+		var expected map[string]any
+		obj.FlowResponse = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFlowResponse(), "getter should return the property value")
+	})
+
+	t.Run("GetFlowResponse_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundFlowResponseContent{}
+		obj.FlowResponse = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetFlowResponse(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetFlowResponse_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundFlowResponseContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFlowResponse() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppInboundFlowResponseContent(t *testing.T) {
+	t.Run("SetFlowResponse_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundFlowResponseContent{}
+		var fernTestValueFlowResponse map[string]any
+
+		// Act
+		obj.SetFlowResponse(fernTestValueFlowResponse)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppInboundImageContent(t *testing.T) {
+	t.Run("SetImage", func(t *testing.T) {
+		obj := &WhatsAppInboundImageContent{}
+		var fernTestValueImage *WhatsAppInboundMedia
+		obj.SetImage(fernTestValueImage)
+		assert.Equal(t, fernTestValueImage, obj.Image)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppInboundImageContent(t *testing.T) {
+	t.Run("GetImage", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundImageContent{}
+		var expected *WhatsAppInboundMedia
+		obj.Image = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetImage(), "getter should return the property value")
+	})
+
+	t.Run("GetImage_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundImageContent{}
+		obj.Image = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetImage(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetImage_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundImageContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetImage() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppInboundImageContent(t *testing.T) {
+	t.Run("SetImage_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundImageContent{}
+		var fernTestValueImage *WhatsAppInboundMedia
+
+		// Act
+		obj.SetImage(fernTestValueImage)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppInboundListReply(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppInboundListReply{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTitle", func(t *testing.T) {
+		obj := &WhatsAppInboundListReply{}
+		var fernTestValueTitle string
+		obj.SetTitle(fernTestValueTitle)
+		assert.Equal(t, fernTestValueTitle, obj.Title)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDescription", func(t *testing.T) {
+		obj := &WhatsAppInboundListReply{}
+		var fernTestValueDescription *string
+		obj.SetDescription(fernTestValueDescription)
+		assert.Equal(t, fernTestValueDescription, obj.Description)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppInboundListReply(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundListReply{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundListReply
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTitle", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundListReply{}
+		var expected string
+		obj.Title = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTitle(), "getter should return the property value")
+	})
+
+	t.Run("GetTitle_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundListReply
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTitle() // Should return zero value
+	})
+
+	t.Run("GetDescription", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundListReply{}
+		var expected *string
+		obj.Description = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDescription(), "getter should return the property value")
+	})
+
+	t.Run("GetDescription_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundListReply{}
+		obj.Description = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDescription(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundListReply
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDescription() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppInboundListReply(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundListReply{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTitle_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundListReply{}
+		var fernTestValueTitle string
+
+		// Act
+		obj.SetTitle(fernTestValueTitle)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundListReply{}
+		var fernTestValueDescription *string
+
+		// Act
+		obj.SetDescription(fernTestValueDescription)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppInboundListReplyContent(t *testing.T) {
+	t.Run("SetListReply", func(t *testing.T) {
+		obj := &WhatsAppInboundListReplyContent{}
+		var fernTestValueListReply *WhatsAppInboundListReply
+		obj.SetListReply(fernTestValueListReply)
+		assert.Equal(t, fernTestValueListReply, obj.ListReply)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppInboundListReplyContent(t *testing.T) {
+	t.Run("GetListReply", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundListReplyContent{}
+		var expected *WhatsAppInboundListReply
+		obj.ListReply = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetListReply(), "getter should return the property value")
+	})
+
+	t.Run("GetListReply_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundListReplyContent{}
+		obj.ListReply = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetListReply(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetListReply_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundListReplyContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetListReply() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppInboundListReplyContent(t *testing.T) {
+	t.Run("SetListReply_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundListReplyContent{}
+		var fernTestValueListReply *WhatsAppInboundListReply
+
+		// Act
+		obj.SetListReply(fernTestValueListReply)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppInboundLocation(t *testing.T) {
+	t.Run("SetLatitude", func(t *testing.T) {
+		obj := &WhatsAppInboundLocation{}
+		var fernTestValueLatitude float64
+		obj.SetLatitude(fernTestValueLatitude)
+		assert.Equal(t, fernTestValueLatitude, obj.Latitude)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLongitude", func(t *testing.T) {
+		obj := &WhatsAppInboundLocation{}
+		var fernTestValueLongitude float64
+		obj.SetLongitude(fernTestValueLongitude)
+		assert.Equal(t, fernTestValueLongitude, obj.Longitude)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetName", func(t *testing.T) {
+		obj := &WhatsAppInboundLocation{}
+		var fernTestValueName *string
+		obj.SetName(fernTestValueName)
+		assert.Equal(t, fernTestValueName, obj.Name)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAddress", func(t *testing.T) {
+		obj := &WhatsAppInboundLocation{}
+		var fernTestValueAddress *string
+		obj.SetAddress(fernTestValueAddress)
+		assert.Equal(t, fernTestValueAddress, obj.Address)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppInboundLocation(t *testing.T) {
+	t.Run("GetLatitude", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundLocation{}
+		var expected float64
+		obj.Latitude = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLatitude(), "getter should return the property value")
+	})
+
+	t.Run("GetLatitude_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundLocation
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLatitude() // Should return zero value
+	})
+
+	t.Run("GetLongitude", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundLocation{}
+		var expected float64
+		obj.Longitude = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLongitude(), "getter should return the property value")
+	})
+
+	t.Run("GetLongitude_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundLocation
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLongitude() // Should return zero value
+	})
+
+	t.Run("GetName", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundLocation{}
+		var expected *string
+		obj.Name = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetName(), "getter should return the property value")
+	})
+
+	t.Run("GetName_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundLocation{}
+		obj.Name = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetName(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetName_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundLocation
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetName() // Should return zero value
+	})
+
+	t.Run("GetAddress", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundLocation{}
+		var expected *string
+		obj.Address = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAddress(), "getter should return the property value")
+	})
+
+	t.Run("GetAddress_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundLocation{}
+		obj.Address = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAddress(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAddress_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundLocation
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAddress() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppInboundLocation(t *testing.T) {
+	t.Run("SetLatitude_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundLocation{}
+		var fernTestValueLatitude float64
+
+		// Act
+		obj.SetLatitude(fernTestValueLatitude)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLongitude_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundLocation{}
+		var fernTestValueLongitude float64
+
+		// Act
+		obj.SetLongitude(fernTestValueLongitude)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundLocation{}
+		var fernTestValueName *string
+
+		// Act
+		obj.SetName(fernTestValueName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAddress_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundLocation{}
+		var fernTestValueAddress *string
+
+		// Act
+		obj.SetAddress(fernTestValueAddress)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppInboundLocationContent(t *testing.T) {
+	t.Run("SetLocation", func(t *testing.T) {
+		obj := &WhatsAppInboundLocationContent{}
+		var fernTestValueLocation *WhatsAppInboundLocation
+		obj.SetLocation(fernTestValueLocation)
+		assert.Equal(t, fernTestValueLocation, obj.Location)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppInboundLocationContent(t *testing.T) {
+	t.Run("GetLocation", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundLocationContent{}
+		var expected *WhatsAppInboundLocation
+		obj.Location = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLocation(), "getter should return the property value")
+	})
+
+	t.Run("GetLocation_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundLocationContent{}
+		obj.Location = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetLocation(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetLocation_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundLocationContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLocation() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppInboundLocationContent(t *testing.T) {
+	t.Run("SetLocation_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundLocationContent{}
+		var fernTestValueLocation *WhatsAppInboundLocation
+
+		// Act
+		obj.SetLocation(fernTestValueLocation)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppInboundMedia(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppInboundMedia{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetURL", func(t *testing.T) {
+		obj := &WhatsAppInboundMedia{}
+		var fernTestValueURL string
+		obj.SetURL(fernTestValueURL)
+		assert.Equal(t, fernTestValueURL, obj.URL)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMimeType", func(t *testing.T) {
+		obj := &WhatsAppInboundMedia{}
+		var fernTestValueMimeType string
+		obj.SetMimeType(fernTestValueMimeType)
+		assert.Equal(t, fernTestValueMimeType, obj.MimeType)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCaption", func(t *testing.T) {
+		obj := &WhatsAppInboundMedia{}
+		var fernTestValueCaption *string
+		obj.SetCaption(fernTestValueCaption)
+		assert.Equal(t, fernTestValueCaption, obj.Caption)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFilename", func(t *testing.T) {
+		obj := &WhatsAppInboundMedia{}
+		var fernTestValueFilename *string
+		obj.SetFilename(fernTestValueFilename)
+		assert.Equal(t, fernTestValueFilename, obj.Filename)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppInboundMedia(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMedia{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundMedia
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetURL", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMedia{}
+		var expected string
+		obj.URL = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetURL(), "getter should return the property value")
+	})
+
+	t.Run("GetURL_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundMedia
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetURL() // Should return zero value
+	})
+
+	t.Run("GetMimeType", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMedia{}
+		var expected string
+		obj.MimeType = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMimeType(), "getter should return the property value")
+	})
+
+	t.Run("GetMimeType_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundMedia
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMimeType() // Should return zero value
+	})
+
+	t.Run("GetCaption", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMedia{}
+		var expected *string
+		obj.Caption = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCaption(), "getter should return the property value")
+	})
+
+	t.Run("GetCaption_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMedia{}
+		obj.Caption = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCaption(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCaption_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundMedia
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCaption() // Should return zero value
+	})
+
+	t.Run("GetFilename", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMedia{}
+		var expected *string
+		obj.Filename = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFilename(), "getter should return the property value")
+	})
+
+	t.Run("GetFilename_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMedia{}
+		obj.Filename = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetFilename(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetFilename_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundMedia
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFilename() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppInboundMedia(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMedia{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetURL_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMedia{}
+		var fernTestValueURL string
+
+		// Act
+		obj.SetURL(fernTestValueURL)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMimeType_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMedia{}
+		var fernTestValueMimeType string
+
+		// Act
+		obj.SetMimeType(fernTestValueMimeType)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCaption_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMedia{}
+		var fernTestValueCaption *string
+
+		// Act
+		obj.SetCaption(fernTestValueCaption)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFilename_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMedia{}
+		var fernTestValueFilename *string
+
+		// Act
+		obj.SetFilename(fernTestValueFilename)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppInboundMessageContent(t *testing.T) {
+	t.Run("SetType", func(t *testing.T) {
+		obj := &WhatsAppInboundMessageContent{}
+		var fernTestValueType WhatsAppInboundMessageContentType
+		obj.SetType(fernTestValueType)
+		assert.Equal(t, fernTestValueType, obj.Type)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetText", func(t *testing.T) {
+		obj := &WhatsAppInboundMessageContent{}
+		var fernTestValueText *string
+		obj.SetText(fernTestValueText)
+		assert.Equal(t, fernTestValueText, obj.Text)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMediaID", func(t *testing.T) {
+		obj := &WhatsAppInboundMessageContent{}
+		var fernTestValueMediaID *string
+		obj.SetMediaID(fernTestValueMediaID)
+		assert.Equal(t, fernTestValueMediaID, obj.MediaID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMediaURL", func(t *testing.T) {
+		obj := &WhatsAppInboundMessageContent{}
+		var fernTestValueMediaURL *string
+		obj.SetMediaURL(fernTestValueMediaURL)
+		assert.Equal(t, fernTestValueMediaURL, obj.MediaURL)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMimeType", func(t *testing.T) {
+		obj := &WhatsAppInboundMessageContent{}
+		var fernTestValueMimeType *string
+		obj.SetMimeType(fernTestValueMimeType)
+		assert.Equal(t, fernTestValueMimeType, obj.MimeType)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppInboundMessageContent(t *testing.T) {
+	t.Run("GetType", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMessageContent{}
+		var expected WhatsAppInboundMessageContentType
+		obj.Type = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetType(), "getter should return the property value")
+	})
+
+	t.Run("GetType_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundMessageContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetType() // Should return zero value
+	})
+
+	t.Run("GetText", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMessageContent{}
+		var expected *string
+		obj.Text = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetText(), "getter should return the property value")
+	})
+
+	t.Run("GetText_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMessageContent{}
+		obj.Text = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetText(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetText_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundMessageContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetText() // Should return zero value
+	})
+
+	t.Run("GetMediaID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMessageContent{}
+		var expected *string
+		obj.MediaID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMediaID(), "getter should return the property value")
+	})
+
+	t.Run("GetMediaID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMessageContent{}
+		obj.MediaID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMediaID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMediaID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundMessageContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMediaID() // Should return zero value
+	})
+
+	t.Run("GetMediaURL", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMessageContent{}
+		var expected *string
+		obj.MediaURL = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMediaURL(), "getter should return the property value")
+	})
+
+	t.Run("GetMediaURL_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMessageContent{}
+		obj.MediaURL = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMediaURL(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMediaURL_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundMessageContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMediaURL() // Should return zero value
+	})
+
+	t.Run("GetMimeType", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMessageContent{}
+		var expected *string
+		obj.MimeType = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMimeType(), "getter should return the property value")
+	})
+
+	t.Run("GetMimeType_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMessageContent{}
+		obj.MimeType = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMimeType(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMimeType_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundMessageContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMimeType() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppInboundMessageContent(t *testing.T) {
+	t.Run("SetType_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMessageContent{}
+		var fernTestValueType WhatsAppInboundMessageContentType
+
+		// Act
+		obj.SetType(fernTestValueType)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetText_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMessageContent{}
+		var fernTestValueText *string
+
+		// Act
+		obj.SetText(fernTestValueText)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMediaID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMessageContent{}
+		var fernTestValueMediaID *string
+
+		// Act
+		obj.SetMediaID(fernTestValueMediaID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMediaURL_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMessageContent{}
+		var fernTestValueMediaURL *string
+
+		// Act
+		obj.SetMediaURL(fernTestValueMediaURL)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMimeType_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMessageContent{}
+		var fernTestValueMimeType *string
+
+		// Act
+		obj.SetMimeType(fernTestValueMimeType)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppInboundReaction(t *testing.T) {
+	t.Run("SetMessageUUID", func(t *testing.T) {
+		obj := &WhatsAppInboundReaction{}
+		var fernTestValueMessageUUID *string
+		obj.SetMessageUUID(fernTestValueMessageUUID)
+		assert.Equal(t, fernTestValueMessageUUID, obj.MessageUUID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEmoji", func(t *testing.T) {
+		obj := &WhatsAppInboundReaction{}
+		var fernTestValueEmoji *string
+		obj.SetEmoji(fernTestValueEmoji)
+		assert.Equal(t, fernTestValueEmoji, obj.Emoji)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppInboundReaction(t *testing.T) {
+	t.Run("GetMessageUUID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReaction{}
+		var expected *string
+		obj.MessageUUID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMessageUUID(), "getter should return the property value")
+	})
+
+	t.Run("GetMessageUUID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReaction{}
+		obj.MessageUUID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMessageUUID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMessageUUID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundReaction
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMessageUUID() // Should return zero value
+	})
+
+	t.Run("GetEmoji", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReaction{}
+		var expected *string
+		obj.Emoji = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetEmoji(), "getter should return the property value")
+	})
+
+	t.Run("GetEmoji_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReaction{}
+		obj.Emoji = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEmoji(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetEmoji_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundReaction
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetEmoji() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppInboundReaction(t *testing.T) {
+	t.Run("SetMessageUUID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReaction{}
+		var fernTestValueMessageUUID *string
+
+		// Act
+		obj.SetMessageUUID(fernTestValueMessageUUID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEmoji_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReaction{}
+		var fernTestValueEmoji *string
+
+		// Act
+		obj.SetEmoji(fernTestValueEmoji)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppInboundReactionContent(t *testing.T) {
+	t.Run("SetReaction", func(t *testing.T) {
+		obj := &WhatsAppInboundReactionContent{}
+		var fernTestValueReaction *WhatsAppInboundReaction
+		obj.SetReaction(fernTestValueReaction)
+		assert.Equal(t, fernTestValueReaction, obj.Reaction)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppInboundReactionContent(t *testing.T) {
+	t.Run("GetReaction", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReactionContent{}
+		var expected *WhatsAppInboundReaction
+		obj.Reaction = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReaction(), "getter should return the property value")
+	})
+
+	t.Run("GetReaction_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReactionContent{}
+		obj.Reaction = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReaction(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReaction_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundReactionContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReaction() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppInboundReactionContent(t *testing.T) {
+	t.Run("SetReaction_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReactionContent{}
+		var fernTestValueReaction *WhatsAppInboundReaction
+
+		// Act
+		obj.SetReaction(fernTestValueReaction)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppInboundReferral(t *testing.T) {
+	t.Run("SetSourceType", func(t *testing.T) {
+		obj := &WhatsAppInboundReferral{}
+		var fernTestValueSourceType WhatsAppInboundReferralSourceType
+		obj.SetSourceType(fernTestValueSourceType)
+		assert.Equal(t, fernTestValueSourceType, obj.SourceType)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSourceID", func(t *testing.T) {
+		obj := &WhatsAppInboundReferral{}
+		var fernTestValueSourceID string
+		obj.SetSourceID(fernTestValueSourceID)
+		assert.Equal(t, fernTestValueSourceID, obj.SourceID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSourceURL", func(t *testing.T) {
+		obj := &WhatsAppInboundReferral{}
+		var fernTestValueSourceURL string
+		obj.SetSourceURL(fernTestValueSourceURL)
+		assert.Equal(t, fernTestValueSourceURL, obj.SourceURL)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetHeadline", func(t *testing.T) {
+		obj := &WhatsAppInboundReferral{}
+		var fernTestValueHeadline *string
+		obj.SetHeadline(fernTestValueHeadline)
+		assert.Equal(t, fernTestValueHeadline, obj.Headline)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetBody", func(t *testing.T) {
+		obj := &WhatsAppInboundReferral{}
+		var fernTestValueBody *string
+		obj.SetBody(fernTestValueBody)
+		assert.Equal(t, fernTestValueBody, obj.Body)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetClickID", func(t *testing.T) {
+		obj := &WhatsAppInboundReferral{}
+		var fernTestValueClickID *string
+		obj.SetClickID(fernTestValueClickID)
+		assert.Equal(t, fernTestValueClickID, obj.ClickID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppInboundReferral(t *testing.T) {
+	t.Run("GetSourceType", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReferral{}
+		var expected WhatsAppInboundReferralSourceType
+		obj.SourceType = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSourceType(), "getter should return the property value")
+	})
+
+	t.Run("GetSourceType_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundReferral
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSourceType() // Should return zero value
+	})
+
+	t.Run("GetSourceID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReferral{}
+		var expected string
+		obj.SourceID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSourceID(), "getter should return the property value")
+	})
+
+	t.Run("GetSourceID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundReferral
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSourceID() // Should return zero value
+	})
+
+	t.Run("GetSourceURL", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReferral{}
+		var expected string
+		obj.SourceURL = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSourceURL(), "getter should return the property value")
+	})
+
+	t.Run("GetSourceURL_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundReferral
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSourceURL() // Should return zero value
+	})
+
+	t.Run("GetHeadline", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReferral{}
+		var expected *string
+		obj.Headline = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetHeadline(), "getter should return the property value")
+	})
+
+	t.Run("GetHeadline_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReferral{}
+		obj.Headline = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetHeadline(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetHeadline_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundReferral
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetHeadline() // Should return zero value
+	})
+
+	t.Run("GetBody", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReferral{}
+		var expected *string
+		obj.Body = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetBody(), "getter should return the property value")
+	})
+
+	t.Run("GetBody_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReferral{}
+		obj.Body = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetBody(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetBody_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundReferral
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetBody() // Should return zero value
+	})
+
+	t.Run("GetClickID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReferral{}
+		var expected *string
+		obj.ClickID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetClickID(), "getter should return the property value")
+	})
+
+	t.Run("GetClickID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReferral{}
+		obj.ClickID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetClickID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetClickID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundReferral
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetClickID() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppInboundReferral(t *testing.T) {
+	t.Run("SetSourceType_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReferral{}
+		var fernTestValueSourceType WhatsAppInboundReferralSourceType
+
+		// Act
+		obj.SetSourceType(fernTestValueSourceType)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSourceID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReferral{}
+		var fernTestValueSourceID string
+
+		// Act
+		obj.SetSourceID(fernTestValueSourceID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSourceURL_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReferral{}
+		var fernTestValueSourceURL string
+
+		// Act
+		obj.SetSourceURL(fernTestValueSourceURL)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetHeadline_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReferral{}
+		var fernTestValueHeadline *string
+
+		// Act
+		obj.SetHeadline(fernTestValueHeadline)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetBody_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReferral{}
+		var fernTestValueBody *string
+
+		// Act
+		obj.SetBody(fernTestValueBody)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetClickID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReferral{}
+		var fernTestValueClickID *string
+
+		// Act
+		obj.SetClickID(fernTestValueClickID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppInboundStickerContent(t *testing.T) {
+	t.Run("SetSticker", func(t *testing.T) {
+		obj := &WhatsAppInboundStickerContent{}
+		var fernTestValueSticker *WhatsAppInboundMedia
+		obj.SetSticker(fernTestValueSticker)
+		assert.Equal(t, fernTestValueSticker, obj.Sticker)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppInboundStickerContent(t *testing.T) {
+	t.Run("GetSticker", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundStickerContent{}
+		var expected *WhatsAppInboundMedia
+		obj.Sticker = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSticker(), "getter should return the property value")
+	})
+
+	t.Run("GetSticker_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundStickerContent{}
+		obj.Sticker = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSticker(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSticker_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundStickerContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSticker() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppInboundStickerContent(t *testing.T) {
+	t.Run("SetSticker_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundStickerContent{}
+		var fernTestValueSticker *WhatsAppInboundMedia
+
+		// Act
+		obj.SetSticker(fernTestValueSticker)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppInboundTextContent(t *testing.T) {
+	t.Run("SetText", func(t *testing.T) {
+		obj := &WhatsAppInboundTextContent{}
+		var fernTestValueText string
+		obj.SetText(fernTestValueText)
+		assert.Equal(t, fernTestValueText, obj.Text)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppInboundTextContent(t *testing.T) {
+	t.Run("GetText", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundTextContent{}
+		var expected string
+		obj.Text = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetText(), "getter should return the property value")
+	})
+
+	t.Run("GetText_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundTextContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetText() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppInboundTextContent(t *testing.T) {
+	t.Run("SetText_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundTextContent{}
+		var fernTestValueText string
+
+		// Act
+		obj.SetText(fernTestValueText)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppInboundVideoContent(t *testing.T) {
+	t.Run("SetVideo", func(t *testing.T) {
+		obj := &WhatsAppInboundVideoContent{}
+		var fernTestValueVideo *WhatsAppInboundMedia
+		obj.SetVideo(fernTestValueVideo)
+		assert.Equal(t, fernTestValueVideo, obj.Video)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppInboundVideoContent(t *testing.T) {
+	t.Run("GetVideo", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundVideoContent{}
+		var expected *WhatsAppInboundMedia
+		obj.Video = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVideo(), "getter should return the property value")
+	})
+
+	t.Run("GetVideo_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundVideoContent{}
+		obj.Video = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVideo(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVideo_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundVideoContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVideo() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppInboundVideoContent(t *testing.T) {
+	t.Run("SetVideo_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundVideoContent{}
+		var fernTestValueVideo *WhatsAppInboundMedia
+
+		// Act
+		obj.SetVideo(fernTestValueVideo)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestSettersWhatsAppMessage(t *testing.T) {
 	t.Run("SetUUID", func(t *testing.T) {
 		obj := &WhatsAppMessage{}
@@ -33772,6 +38354,14 @@ func TestSettersWhatsAppMessage(t *testing.T) {
 		var fernTestValueTemplate *WhatsAppMessageTemplate
 		obj.SetTemplate(fernTestValueTemplate)
 		assert.Equal(t, fernTestValueTemplate, obj.Template)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetServiceWindowOpenUntil", func(t *testing.T) {
+		obj := &WhatsAppMessage{}
+		var fernTestValueServiceWindowOpenUntil *time.Time
+		obj.SetServiceWindowOpenUntil(fernTestValueServiceWindowOpenUntil)
+		assert.Equal(t, fernTestValueServiceWindowOpenUntil, obj.ServiceWindowOpenUntil)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -33909,6 +38499,39 @@ func TestGettersWhatsAppMessage(t *testing.T) {
 			}
 		}()
 		_ = obj.GetTemplate() // Should return zero value
+	})
+
+	t.Run("GetServiceWindowOpenUntil", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessage{}
+		var expected *time.Time
+		obj.ServiceWindowOpenUntil = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetServiceWindowOpenUntil(), "getter should return the property value")
+	})
+
+	t.Run("GetServiceWindowOpenUntil_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessage{}
+		obj.ServiceWindowOpenUntil = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetServiceWindowOpenUntil(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetServiceWindowOpenUntil_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetServiceWindowOpenUntil() // Should return zero value
 	})
 
 	t.Run("GetCreatedAt", func(t *testing.T) {
@@ -34092,6 +38715,37 @@ func TestSettersMarkExplicitWhatsAppMessage(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetServiceWindowOpenUntil_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessage{}
+		var fernTestValueServiceWindowOpenUntil *time.Time
+
+		// Act
+		obj.SetServiceWindowOpenUntil(fernTestValueServiceWindowOpenUntil)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -34100,6 +38754,1012 @@ func TestSettersMarkExplicitWhatsAppMessage(t *testing.T) {
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppMessageDeliveredEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppMessageDeliveredEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppMessageDeliveredEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppMessageDeliveredEvent{}
+		var fernTestValueData *WhatsAppMessageStatusEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppMessageDeliveredEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageDeliveredEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageDeliveredEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageDeliveredEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageDeliveredEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageDeliveredEvent{}
+		var expected *WhatsAppMessageStatusEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageDeliveredEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageDeliveredEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppMessageDeliveredEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageDeliveredEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageDeliveredEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageDeliveredEvent{}
+		var fernTestValueData *WhatsAppMessageStatusEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppMessageError(t *testing.T) {
+	t.Run("SetCode", func(t *testing.T) {
+		obj := &WhatsAppMessageError{}
+		var fernTestValueCode WhatsAppMessageErrorCode
+		obj.SetCode(fernTestValueCode)
+		assert.Equal(t, fernTestValueCode, obj.Code)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTitle", func(t *testing.T) {
+		obj := &WhatsAppMessageError{}
+		var fernTestValueTitle string
+		obj.SetTitle(fernTestValueTitle)
+		assert.Equal(t, fernTestValueTitle, obj.Title)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDocsURL", func(t *testing.T) {
+		obj := &WhatsAppMessageError{}
+		var fernTestValueDocsURL string
+		obj.SetDocsURL(fernTestValueDocsURL)
+		assert.Equal(t, fernTestValueDocsURL, obj.DocsURL)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppMessageError(t *testing.T) {
+	t.Run("GetCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageError{}
+		var expected WhatsAppMessageErrorCode
+		obj.Code = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCode(), "getter should return the property value")
+	})
+
+	t.Run("GetCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageError
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCode() // Should return zero value
+	})
+
+	t.Run("GetTitle", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageError{}
+		var expected string
+		obj.Title = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTitle(), "getter should return the property value")
+	})
+
+	t.Run("GetTitle_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageError
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTitle() // Should return zero value
+	})
+
+	t.Run("GetDocsURL", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageError{}
+		var expected string
+		obj.DocsURL = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDocsURL(), "getter should return the property value")
+	})
+
+	t.Run("GetDocsURL_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageError
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDocsURL() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppMessageError(t *testing.T) {
+	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageError{}
+		var fernTestValueCode WhatsAppMessageErrorCode
+
+		// Act
+		obj.SetCode(fernTestValueCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTitle_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageError{}
+		var fernTestValueTitle string
+
+		// Act
+		obj.SetTitle(fernTestValueTitle)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDocsURL_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageError{}
+		var fernTestValueDocsURL string
+
+		// Act
+		obj.SetDocsURL(fernTestValueDocsURL)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppMessageFailedEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppMessageFailedEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppMessageFailedEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppMessageFailedEvent{}
+		var fernTestValueData *WhatsAppMessageFailedEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppMessageFailedEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageFailedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageFailedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEvent{}
+		var expected *WhatsAppMessageFailedEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageFailedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppMessageFailedEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEvent{}
+		var fernTestValueData *WhatsAppMessageFailedEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppMessageFailedEventData(t *testing.T) {
+	t.Run("SetMessageUUID", func(t *testing.T) {
+		obj := &WhatsAppMessageFailedEventData{}
+		var fernTestValueMessageUUID string
+		obj.SetMessageUUID(fernTestValueMessageUUID)
+		assert.Equal(t, fernTestValueMessageUUID, obj.MessageUUID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFrom", func(t *testing.T) {
+		obj := &WhatsAppMessageFailedEventData{}
+		var fernTestValueFrom string
+		obj.SetFrom(fernTestValueFrom)
+		assert.Equal(t, fernTestValueFrom, obj.From)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTo", func(t *testing.T) {
+		obj := &WhatsAppMessageFailedEventData{}
+		var fernTestValueTo string
+		obj.SetTo(fernTestValueTo)
+		assert.Equal(t, fernTestValueTo, obj.To)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTemplate", func(t *testing.T) {
+		obj := &WhatsAppMessageFailedEventData{}
+		var fernTestValueTemplate *WhatsAppMessageTemplate
+		obj.SetTemplate(fernTestValueTemplate)
+		assert.Equal(t, fernTestValueTemplate, obj.Template)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetStatus", func(t *testing.T) {
+		obj := &WhatsAppMessageFailedEventData{}
+		var fernTestValueStatus WhatsAppMessageFailedEventDataStatus
+		obj.SetStatus(fernTestValueStatus)
+		assert.Equal(t, fernTestValueStatus, obj.Status)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetError", func(t *testing.T) {
+		obj := &WhatsAppMessageFailedEventData{}
+		var fernTestValueError *WhatsAppMessageError
+		obj.SetError(fernTestValueError)
+		assert.Equal(t, fernTestValueError, obj.Error)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppMessageFailedEventData(t *testing.T) {
+	t.Run("GetMessageUUID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEventData{}
+		var expected string
+		obj.MessageUUID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMessageUUID(), "getter should return the property value")
+	})
+
+	t.Run("GetMessageUUID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageFailedEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMessageUUID() // Should return zero value
+	})
+
+	t.Run("GetFrom", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEventData{}
+		var expected string
+		obj.From = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFrom(), "getter should return the property value")
+	})
+
+	t.Run("GetFrom_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageFailedEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFrom() // Should return zero value
+	})
+
+	t.Run("GetTo", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEventData{}
+		var expected string
+		obj.To = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTo(), "getter should return the property value")
+	})
+
+	t.Run("GetTo_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageFailedEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTo() // Should return zero value
+	})
+
+	t.Run("GetTemplate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEventData{}
+		var expected *WhatsAppMessageTemplate
+		obj.Template = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTemplate(), "getter should return the property value")
+	})
+
+	t.Run("GetTemplate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEventData{}
+		obj.Template = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTemplate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTemplate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageFailedEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTemplate() // Should return zero value
+	})
+
+	t.Run("GetStatus", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEventData{}
+		var expected WhatsAppMessageFailedEventDataStatus
+		obj.Status = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetStatus(), "getter should return the property value")
+	})
+
+	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageFailedEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetStatus() // Should return zero value
+	})
+
+	t.Run("GetError", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEventData{}
+		var expected *WhatsAppMessageError
+		obj.Error = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetError(), "getter should return the property value")
+	})
+
+	t.Run("GetError_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEventData{}
+		obj.Error = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetError(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetError_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageFailedEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetError() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppMessageFailedEventData(t *testing.T) {
+	t.Run("SetMessageUUID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEventData{}
+		var fernTestValueMessageUUID string
+
+		// Act
+		obj.SetMessageUUID(fernTestValueMessageUUID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFrom_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEventData{}
+		var fernTestValueFrom string
+
+		// Act
+		obj.SetFrom(fernTestValueFrom)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTo_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEventData{}
+		var fernTestValueTo string
+
+		// Act
+		obj.SetTo(fernTestValueTo)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTemplate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEventData{}
+		var fernTestValueTemplate *WhatsAppMessageTemplate
+
+		// Act
+		obj.SetTemplate(fernTestValueTemplate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEventData{}
+		var fernTestValueStatus WhatsAppMessageFailedEventDataStatus
+
+		// Act
+		obj.SetStatus(fernTestValueStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetError_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEventData{}
+		var fernTestValueError *WhatsAppMessageError
+
+		// Act
+		obj.SetError(fernTestValueError)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -34260,6 +39920,22 @@ func TestSettersWhatsAppMessageListItem(t *testing.T) {
 		var fernTestValueCreatedAt time.Time
 		obj.SetCreatedAt(fernTestValueCreatedAt)
 		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetContent", func(t *testing.T) {
+		obj := &WhatsAppMessageListItem{}
+		var fernTestValueContent *WhatsAppInboundMessageContent
+		obj.SetContent(fernTestValueContent)
+		assert.Equal(t, fernTestValueContent, obj.Content)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetServiceWindowOpenUntil", func(t *testing.T) {
+		obj := &WhatsAppMessageListItem{}
+		var fernTestValueServiceWindowOpenUntil *time.Time
+		obj.SetServiceWindowOpenUntil(fernTestValueServiceWindowOpenUntil)
+		assert.Equal(t, fernTestValueServiceWindowOpenUntil, obj.ServiceWindowOpenUntil)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -34435,6 +40111,72 @@ func TestGettersWhatsAppMessageListItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetCreatedAt() // Should return zero value
+	})
+
+	t.Run("GetContent", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageListItem{}
+		var expected *WhatsAppInboundMessageContent
+		obj.Content = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetContent(), "getter should return the property value")
+	})
+
+	t.Run("GetContent_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageListItem{}
+		obj.Content = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetContent(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetContent_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageListItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetContent() // Should return zero value
+	})
+
+	t.Run("GetServiceWindowOpenUntil", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageListItem{}
+		var expected *time.Time
+		obj.ServiceWindowOpenUntil = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetServiceWindowOpenUntil(), "getter should return the property value")
+	})
+
+	t.Run("GetServiceWindowOpenUntil_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageListItem{}
+		obj.ServiceWindowOpenUntil = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetServiceWindowOpenUntil(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetServiceWindowOpenUntil_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageListItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetServiceWindowOpenUntil() // Should return zero value
 	})
 
 }
@@ -34657,6 +40399,68 @@ func TestSettersMarkExplicitWhatsAppMessageListItem(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetContent_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageListItem{}
+		var fernTestValueContent *WhatsAppInboundMessageContent
+
+		// Act
+		obj.SetContent(fernTestValueContent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetServiceWindowOpenUntil_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageListItem{}
+		var fernTestValueServiceWindowOpenUntil *time.Time
+
+		// Act
+		obj.SetServiceWindowOpenUntil(fernTestValueServiceWindowOpenUntil)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 }
 
 func TestSettersWhatsAppMessageListResponse(t *testing.T) {
@@ -34812,6 +40616,961 @@ func TestSettersMarkExplicitWhatsAppMessageListResponse(t *testing.T) {
 
 }
 
+func TestSettersWhatsAppMessageReadEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppMessageReadEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppMessageReadEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppMessageReadEvent{}
+		var fernTestValueData *WhatsAppMessageStatusEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppMessageReadEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReadEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageReadEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReadEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageReadEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReadEvent{}
+		var expected *WhatsAppMessageStatusEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReadEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageReadEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppMessageReadEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReadEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReadEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReadEvent{}
+		var fernTestValueData *WhatsAppMessageStatusEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppMessageReceivedEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppMessageReceivedEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppMessageReceivedEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppMessageReceivedEvent{}
+		var fernTestValueData *WhatsAppMessageReceivedEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppMessageReceivedEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageReceivedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageReceivedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEvent{}
+		var expected *WhatsAppMessageReceivedEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageReceivedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppMessageReceivedEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEvent{}
+		var fernTestValueData *WhatsAppMessageReceivedEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppMessageReceivedEventData(t *testing.T) {
+	t.Run("SetMessageUUID", func(t *testing.T) {
+		obj := &WhatsAppMessageReceivedEventData{}
+		var fernTestValueMessageUUID string
+		obj.SetMessageUUID(fernTestValueMessageUUID)
+		assert.Equal(t, fernTestValueMessageUUID, obj.MessageUUID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFrom", func(t *testing.T) {
+		obj := &WhatsAppMessageReceivedEventData{}
+		var fernTestValueFrom string
+		obj.SetFrom(fernTestValueFrom)
+		assert.Equal(t, fernTestValueFrom, obj.From)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTo", func(t *testing.T) {
+		obj := &WhatsAppMessageReceivedEventData{}
+		var fernTestValueTo string
+		obj.SetTo(fernTestValueTo)
+		assert.Equal(t, fernTestValueTo, obj.To)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetProfileName", func(t *testing.T) {
+		obj := &WhatsAppMessageReceivedEventData{}
+		var fernTestValueProfileName *string
+		obj.SetProfileName(fernTestValueProfileName)
+		assert.Equal(t, fernTestValueProfileName, obj.ProfileName)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetContent", func(t *testing.T) {
+		obj := &WhatsAppMessageReceivedEventData{}
+		var fernTestValueContent *WhatsAppInboundContent
+		obj.SetContent(fernTestValueContent)
+		assert.Equal(t, fernTestValueContent, obj.Content)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetContext", func(t *testing.T) {
+		obj := &WhatsAppMessageReceivedEventData{}
+		var fernTestValueContext *WhatsAppInboundContext
+		obj.SetContext(fernTestValueContext)
+		assert.Equal(t, fernTestValueContext, obj.Context)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetReferral", func(t *testing.T) {
+		obj := &WhatsAppMessageReceivedEventData{}
+		var fernTestValueReferral *WhatsAppInboundReferral
+		obj.SetReferral(fernTestValueReferral)
+		assert.Equal(t, fernTestValueReferral, obj.Referral)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetServiceWindowOpenUntil", func(t *testing.T) {
+		obj := &WhatsAppMessageReceivedEventData{}
+		var fernTestValueServiceWindowOpenUntil time.Time
+		obj.SetServiceWindowOpenUntil(fernTestValueServiceWindowOpenUntil)
+		assert.Equal(t, fernTestValueServiceWindowOpenUntil, obj.ServiceWindowOpenUntil)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppMessageReceivedEventData(t *testing.T) {
+	t.Run("GetMessageUUID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEventData{}
+		var expected string
+		obj.MessageUUID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMessageUUID(), "getter should return the property value")
+	})
+
+	t.Run("GetMessageUUID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageReceivedEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMessageUUID() // Should return zero value
+	})
+
+	t.Run("GetFrom", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEventData{}
+		var expected string
+		obj.From = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFrom(), "getter should return the property value")
+	})
+
+	t.Run("GetFrom_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageReceivedEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFrom() // Should return zero value
+	})
+
+	t.Run("GetTo", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEventData{}
+		var expected string
+		obj.To = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTo(), "getter should return the property value")
+	})
+
+	t.Run("GetTo_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageReceivedEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTo() // Should return zero value
+	})
+
+	t.Run("GetProfileName", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEventData{}
+		var expected *string
+		obj.ProfileName = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetProfileName(), "getter should return the property value")
+	})
+
+	t.Run("GetProfileName_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEventData{}
+		obj.ProfileName = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetProfileName(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetProfileName_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageReceivedEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetProfileName() // Should return zero value
+	})
+
+	t.Run("GetContent", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEventData{}
+		var expected *WhatsAppInboundContent
+		obj.Content = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetContent(), "getter should return the property value")
+	})
+
+	t.Run("GetContent_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEventData{}
+		obj.Content = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetContent(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetContent_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageReceivedEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetContent() // Should return zero value
+	})
+
+	t.Run("GetContext", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEventData{}
+		var expected *WhatsAppInboundContext
+		obj.Context = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetContext(), "getter should return the property value")
+	})
+
+	t.Run("GetContext_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEventData{}
+		obj.Context = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetContext(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetContext_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageReceivedEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetContext() // Should return zero value
+	})
+
+	t.Run("GetReferral", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEventData{}
+		var expected *WhatsAppInboundReferral
+		obj.Referral = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReferral(), "getter should return the property value")
+	})
+
+	t.Run("GetReferral_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEventData{}
+		obj.Referral = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReferral(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReferral_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageReceivedEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReferral() // Should return zero value
+	})
+
+	t.Run("GetServiceWindowOpenUntil", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEventData{}
+		var expected time.Time
+		obj.ServiceWindowOpenUntil = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetServiceWindowOpenUntil(), "getter should return the property value")
+	})
+
+	t.Run("GetServiceWindowOpenUntil_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageReceivedEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetServiceWindowOpenUntil() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppMessageReceivedEventData(t *testing.T) {
+	t.Run("SetMessageUUID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEventData{}
+		var fernTestValueMessageUUID string
+
+		// Act
+		obj.SetMessageUUID(fernTestValueMessageUUID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFrom_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEventData{}
+		var fernTestValueFrom string
+
+		// Act
+		obj.SetFrom(fernTestValueFrom)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTo_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEventData{}
+		var fernTestValueTo string
+
+		// Act
+		obj.SetTo(fernTestValueTo)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetProfileName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEventData{}
+		var fernTestValueProfileName *string
+
+		// Act
+		obj.SetProfileName(fernTestValueProfileName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetContent_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEventData{}
+		var fernTestValueContent *WhatsAppInboundContent
+
+		// Act
+		obj.SetContent(fernTestValueContent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetContext_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEventData{}
+		var fernTestValueContext *WhatsAppInboundContext
+
+		// Act
+		obj.SetContext(fernTestValueContext)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetReferral_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEventData{}
+		var fernTestValueReferral *WhatsAppInboundReferral
+
+		// Act
+		obj.SetReferral(fernTestValueReferral)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetServiceWindowOpenUntil_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEventData{}
+		var fernTestValueServiceWindowOpenUntil time.Time
+
+		// Act
+		obj.SetServiceWindowOpenUntil(fernTestValueServiceWindowOpenUntil)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestSettersWhatsAppMessageSendRequest(t *testing.T) {
 	t.Run("SetFrom", func(t *testing.T) {
 		obj := &WhatsAppMessageSendRequest{}
@@ -34842,6 +41601,14 @@ func TestSettersWhatsAppMessageSendRequest(t *testing.T) {
 		var fernTestValueTemplate *WhatsAppSendTemplate
 		obj.SetTemplate(fernTestValueTemplate)
 		assert.Equal(t, fernTestValueTemplate, obj.Template)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetContent", func(t *testing.T) {
+		obj := &WhatsAppMessageSendRequest{}
+		var fernTestValueContent *WhatsAppSendContent
+		obj.SetContent(fernTestValueContent)
+		assert.Equal(t, fernTestValueContent, obj.Content)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -34958,6 +41725,39 @@ func TestGettersWhatsAppMessageSendRequest(t *testing.T) {
 			}
 		}()
 		_ = obj.GetTemplate() // Should return zero value
+	})
+
+	t.Run("GetContent", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageSendRequest{}
+		var expected *WhatsAppSendContent
+		obj.Content = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetContent(), "getter should return the property value")
+	})
+
+	t.Run("GetContent_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageSendRequest{}
+		obj.Content = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetContent(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetContent_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageSendRequest
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetContent() // Should return zero value
 	})
 
 }
@@ -35087,6 +41887,37 @@ func TestSettersMarkExplicitWhatsAppMessageSendRequest(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetContent_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageSendRequest{}
+		var fernTestValueContent *WhatsAppSendContent
+
+		// Act
+		obj.SetContent(fernTestValueContent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 }
 
 func TestSettersWhatsAppMessageSendResponse(t *testing.T) {
@@ -35145,6 +41976,478 @@ func TestSettersMarkExplicitWhatsAppMessageSendResponse(t *testing.T) {
 
 		// Act
 		obj.SetMessage(fernTestValueMessage)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppMessageSentEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppMessageSentEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppMessageSentEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppMessageSentEvent{}
+		var fernTestValueData *WhatsAppMessageStatusEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppMessageSentEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageSentEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageSentEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageSentEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageSentEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageSentEvent{}
+		var expected *WhatsAppMessageStatusEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageSentEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageSentEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppMessageSentEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageSentEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageSentEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageSentEvent{}
+		var fernTestValueData *WhatsAppMessageStatusEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppMessageStatusEventData(t *testing.T) {
+	t.Run("SetMessageUUID", func(t *testing.T) {
+		obj := &WhatsAppMessageStatusEventData{}
+		var fernTestValueMessageUUID string
+		obj.SetMessageUUID(fernTestValueMessageUUID)
+		assert.Equal(t, fernTestValueMessageUUID, obj.MessageUUID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFrom", func(t *testing.T) {
+		obj := &WhatsAppMessageStatusEventData{}
+		var fernTestValueFrom string
+		obj.SetFrom(fernTestValueFrom)
+		assert.Equal(t, fernTestValueFrom, obj.From)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTo", func(t *testing.T) {
+		obj := &WhatsAppMessageStatusEventData{}
+		var fernTestValueTo string
+		obj.SetTo(fernTestValueTo)
+		assert.Equal(t, fernTestValueTo, obj.To)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTemplate", func(t *testing.T) {
+		obj := &WhatsAppMessageStatusEventData{}
+		var fernTestValueTemplate *WhatsAppMessageTemplate
+		obj.SetTemplate(fernTestValueTemplate)
+		assert.Equal(t, fernTestValueTemplate, obj.Template)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppMessageStatusEventData(t *testing.T) {
+	t.Run("GetMessageUUID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageStatusEventData{}
+		var expected string
+		obj.MessageUUID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMessageUUID(), "getter should return the property value")
+	})
+
+	t.Run("GetMessageUUID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageStatusEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMessageUUID() // Should return zero value
+	})
+
+	t.Run("GetFrom", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageStatusEventData{}
+		var expected string
+		obj.From = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFrom(), "getter should return the property value")
+	})
+
+	t.Run("GetFrom_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageStatusEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFrom() // Should return zero value
+	})
+
+	t.Run("GetTo", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageStatusEventData{}
+		var expected string
+		obj.To = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTo(), "getter should return the property value")
+	})
+
+	t.Run("GetTo_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageStatusEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTo() // Should return zero value
+	})
+
+	t.Run("GetTemplate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageStatusEventData{}
+		var expected *WhatsAppMessageTemplate
+		obj.Template = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTemplate(), "getter should return the property value")
+	})
+
+	t.Run("GetTemplate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageStatusEventData{}
+		obj.Template = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTemplate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTemplate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageStatusEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTemplate() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppMessageStatusEventData(t *testing.T) {
+	t.Run("SetMessageUUID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageStatusEventData{}
+		var fernTestValueMessageUUID string
+
+		// Act
+		obj.SetMessageUUID(fernTestValueMessageUUID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFrom_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageStatusEventData{}
+		var fernTestValueFrom string
+
+		// Act
+		obj.SetFrom(fernTestValueFrom)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTo_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageStatusEventData{}
+		var fernTestValueTo string
+
+		// Act
+		obj.SetTo(fernTestValueTo)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTemplate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageStatusEventData{}
+		var fernTestValueTemplate *WhatsAppMessageTemplate
+
+		// Act
+		obj.SetTemplate(fernTestValueTemplate)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -35303,6 +42606,296 @@ func TestSettersMarkExplicitWhatsAppMessageTemplate(t *testing.T) {
 
 }
 
+func TestGettersWhatsAppMessagesGroupEvent(t *testing.T) {
+	t.Run("GetType", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessagesGroupEvent{}
+		var expected string
+		obj.Type = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetType(), "getter should return the property value")
+	})
+
+	t.Run("GetType_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessagesGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetType() // Should return zero value
+	})
+
+	t.Run("GetWhatsappMessageReceived", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessagesGroupEvent{}
+		var expected *WhatsAppMessageReceivedEvent
+		obj.WhatsappMessageReceived = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappMessageReceived(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappMessageReceived_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessagesGroupEvent{}
+		obj.WhatsappMessageReceived = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappMessageReceived(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappMessageReceived_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessagesGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappMessageReceived() // Should return zero value
+	})
+
+	t.Run("GetWhatsappMessageSent", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessagesGroupEvent{}
+		var expected *WhatsAppMessageSentEvent
+		obj.WhatsappMessageSent = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappMessageSent(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappMessageSent_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessagesGroupEvent{}
+		obj.WhatsappMessageSent = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappMessageSent(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappMessageSent_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessagesGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappMessageSent() // Should return zero value
+	})
+
+	t.Run("GetWhatsappMessageDelivered", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessagesGroupEvent{}
+		var expected *WhatsAppMessageDeliveredEvent
+		obj.WhatsappMessageDelivered = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappMessageDelivered(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappMessageDelivered_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessagesGroupEvent{}
+		obj.WhatsappMessageDelivered = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappMessageDelivered(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappMessageDelivered_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessagesGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappMessageDelivered() // Should return zero value
+	})
+
+	t.Run("GetWhatsappMessageRead", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessagesGroupEvent{}
+		var expected *WhatsAppMessageReadEvent
+		obj.WhatsappMessageRead = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappMessageRead(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappMessageRead_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessagesGroupEvent{}
+		obj.WhatsappMessageRead = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappMessageRead(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappMessageRead_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessagesGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappMessageRead() // Should return zero value
+	})
+
+	t.Run("GetWhatsappMessageFailed", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessagesGroupEvent{}
+		var expected *WhatsAppMessageFailedEvent
+		obj.WhatsappMessageFailed = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappMessageFailed(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappMessageFailed_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessagesGroupEvent{}
+		obj.WhatsappMessageFailed = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappMessageFailed(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappMessageFailed_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessagesGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappMessageFailed() // Should return zero value
+	})
+
+	t.Run("GetWhatsappContactMarketingStopped", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessagesGroupEvent{}
+		var expected *WhatsAppContactMarketingStoppedEvent
+		obj.WhatsappContactMarketingStopped = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappContactMarketingStopped(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappContactMarketingStopped_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessagesGroupEvent{}
+		obj.WhatsappContactMarketingStopped = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappContactMarketingStopped(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappContactMarketingStopped_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessagesGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappContactMarketingStopped() // Should return zero value
+	})
+
+	t.Run("GetWhatsappContactMarketingResumed", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessagesGroupEvent{}
+		var expected *WhatsAppContactMarketingResumedEvent
+		obj.WhatsappContactMarketingResumed = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappContactMarketingResumed(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappContactMarketingResumed_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessagesGroupEvent{}
+		obj.WhatsappContactMarketingResumed = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappContactMarketingResumed(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappContactMarketingResumed_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessagesGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappContactMarketingResumed() // Should return zero value
+	})
+
+	t.Run("GetTest", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessagesGroupEvent{}
+		var expected *WhatsAppWebhookTestEvent
+		obj.Test = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTest(), "getter should return the property value")
+	})
+
+	t.Run("GetTest_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessagesGroupEvent{}
+		obj.Test = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTest(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTest_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessagesGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTest() // Should return zero value
+	})
+
+}
+
 func TestSettersWhatsAppProblem(t *testing.T) {
 	t.Run("SetType", func(t *testing.T) {
 		obj := &WhatsAppProblem{}
@@ -35357,6 +42950,14 @@ func TestSettersWhatsAppProblem(t *testing.T) {
 		var fernTestValueErrorCode *string
 		obj.SetErrorCode(fernTestValueErrorCode)
 		assert.Equal(t, fernTestValueErrorCode, obj.ErrorCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetServiceWindowClosedAt", func(t *testing.T) {
+		obj := &WhatsAppProblem{}
+		var fernTestValueServiceWindowClosedAt *time.Time
+		obj.SetServiceWindowClosedAt(fernTestValueServiceWindowClosedAt)
+		assert.Equal(t, fernTestValueServiceWindowClosedAt, obj.ServiceWindowClosedAt)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -35542,6 +43143,39 @@ func TestGettersWhatsAppProblem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetErrorCode() // Should return zero value
+	})
+
+	t.Run("GetServiceWindowClosedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppProblem{}
+		var expected *time.Time
+		obj.ServiceWindowClosedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetServiceWindowClosedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetServiceWindowClosedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppProblem{}
+		obj.ServiceWindowClosedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetServiceWindowClosedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetServiceWindowClosedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppProblem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetServiceWindowClosedAt() // Should return zero value
 	})
 
 }
@@ -35741,6 +43375,2041 @@ func TestSettersMarkExplicitWhatsAppProblem(t *testing.T) {
 
 		// Act
 		obj.SetErrorCode(fernTestValueErrorCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetServiceWindowClosedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppProblem{}
+		var fernTestValueServiceWindowClosedAt *time.Time
+
+		// Act
+		obj.SetServiceWindowClosedAt(fernTestValueServiceWindowClosedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppSendAudioContent(t *testing.T) {
+	t.Run("SetAudio", func(t *testing.T) {
+		obj := &WhatsAppSendAudioContent{}
+		var fernTestValueAudio *WhatsAppSendMedia
+		obj.SetAudio(fernTestValueAudio)
+		assert.Equal(t, fernTestValueAudio, obj.Audio)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSendAudioContent(t *testing.T) {
+	t.Run("GetAudio", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendAudioContent{}
+		var expected *WhatsAppSendMedia
+		obj.Audio = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAudio(), "getter should return the property value")
+	})
+
+	t.Run("GetAudio_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendAudioContent{}
+		obj.Audio = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAudio(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAudio_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendAudioContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAudio() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSendAudioContent(t *testing.T) {
+	t.Run("SetAudio_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendAudioContent{}
+		var fernTestValueAudio *WhatsAppSendMedia
+
+		// Act
+		obj.SetAudio(fernTestValueAudio)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppSendButtons(t *testing.T) {
+	t.Run("SetHeader", func(t *testing.T) {
+		obj := &WhatsAppSendButtons{}
+		var fernTestValueHeader *string
+		obj.SetHeader(fernTestValueHeader)
+		assert.Equal(t, fernTestValueHeader, obj.Header)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetBody", func(t *testing.T) {
+		obj := &WhatsAppSendButtons{}
+		var fernTestValueBody string
+		obj.SetBody(fernTestValueBody)
+		assert.Equal(t, fernTestValueBody, obj.Body)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFooter", func(t *testing.T) {
+		obj := &WhatsAppSendButtons{}
+		var fernTestValueFooter *string
+		obj.SetFooter(fernTestValueFooter)
+		assert.Equal(t, fernTestValueFooter, obj.Footer)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetItems", func(t *testing.T) {
+		obj := &WhatsAppSendButtons{}
+		var fernTestValueItems []*WhatsAppSendReplyButton
+		obj.SetItems(fernTestValueItems)
+		assert.Equal(t, fernTestValueItems, obj.Items)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSendButtons(t *testing.T) {
+	t.Run("GetHeader", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendButtons{}
+		var expected *string
+		obj.Header = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetHeader(), "getter should return the property value")
+	})
+
+	t.Run("GetHeader_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendButtons{}
+		obj.Header = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetHeader(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetHeader_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendButtons
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetHeader() // Should return zero value
+	})
+
+	t.Run("GetBody", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendButtons{}
+		var expected string
+		obj.Body = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetBody(), "getter should return the property value")
+	})
+
+	t.Run("GetBody_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendButtons
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetBody() // Should return zero value
+	})
+
+	t.Run("GetFooter", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendButtons{}
+		var expected *string
+		obj.Footer = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFooter(), "getter should return the property value")
+	})
+
+	t.Run("GetFooter_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendButtons{}
+		obj.Footer = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetFooter(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetFooter_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendButtons
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFooter() // Should return zero value
+	})
+
+	t.Run("GetItems", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendButtons{}
+		var expected []*WhatsAppSendReplyButton
+		obj.Items = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetItems(), "getter should return the property value")
+	})
+
+	t.Run("GetItems_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendButtons{}
+		obj.Items = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetItems(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetItems_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendButtons
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetItems() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSendButtons(t *testing.T) {
+	t.Run("SetHeader_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendButtons{}
+		var fernTestValueHeader *string
+
+		// Act
+		obj.SetHeader(fernTestValueHeader)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetBody_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendButtons{}
+		var fernTestValueBody string
+
+		// Act
+		obj.SetBody(fernTestValueBody)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFooter_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendButtons{}
+		var fernTestValueFooter *string
+
+		// Act
+		obj.SetFooter(fernTestValueFooter)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetItems_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendButtons{}
+		var fernTestValueItems []*WhatsAppSendReplyButton
+
+		// Act
+		obj.SetItems(fernTestValueItems)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppSendButtonsContent(t *testing.T) {
+	t.Run("SetButtons", func(t *testing.T) {
+		obj := &WhatsAppSendButtonsContent{}
+		var fernTestValueButtons *WhatsAppSendButtons
+		obj.SetButtons(fernTestValueButtons)
+		assert.Equal(t, fernTestValueButtons, obj.Buttons)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSendButtonsContent(t *testing.T) {
+	t.Run("GetButtons", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendButtonsContent{}
+		var expected *WhatsAppSendButtons
+		obj.Buttons = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetButtons(), "getter should return the property value")
+	})
+
+	t.Run("GetButtons_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendButtonsContent{}
+		obj.Buttons = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetButtons(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetButtons_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendButtonsContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetButtons() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSendButtonsContent(t *testing.T) {
+	t.Run("SetButtons_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendButtonsContent{}
+		var fernTestValueButtons *WhatsAppSendButtons
+
+		// Act
+		obj.SetButtons(fernTestValueButtons)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestGettersWhatsAppSendContent(t *testing.T) {
+	t.Run("GetType", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendContent{}
+		var expected string
+		obj.Type = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetType(), "getter should return the property value")
+	})
+
+	t.Run("GetType_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetType() // Should return zero value
+	})
+
+	t.Run("GetText", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendContent{}
+		var expected *WhatsAppSendTextContent
+		obj.Text = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetText(), "getter should return the property value")
+	})
+
+	t.Run("GetText_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendContent{}
+		obj.Text = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetText(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetText_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetText() // Should return zero value
+	})
+
+	t.Run("GetImage", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendContent{}
+		var expected *WhatsAppSendImageContent
+		obj.Image = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetImage(), "getter should return the property value")
+	})
+
+	t.Run("GetImage_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendContent{}
+		obj.Image = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetImage(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetImage_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetImage() // Should return zero value
+	})
+
+	t.Run("GetVideo", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendContent{}
+		var expected *WhatsAppSendVideoContent
+		obj.Video = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVideo(), "getter should return the property value")
+	})
+
+	t.Run("GetVideo_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendContent{}
+		obj.Video = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVideo(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVideo_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVideo() // Should return zero value
+	})
+
+	t.Run("GetAudio", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendContent{}
+		var expected *WhatsAppSendAudioContent
+		obj.Audio = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAudio(), "getter should return the property value")
+	})
+
+	t.Run("GetAudio_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendContent{}
+		obj.Audio = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAudio(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAudio_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAudio() // Should return zero value
+	})
+
+	t.Run("GetDocument", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendContent{}
+		var expected *WhatsAppSendDocumentContent
+		obj.Document = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDocument(), "getter should return the property value")
+	})
+
+	t.Run("GetDocument_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendContent{}
+		obj.Document = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDocument(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDocument_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDocument() // Should return zero value
+	})
+
+	t.Run("GetButtons", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendContent{}
+		var expected *WhatsAppSendButtonsContent
+		obj.Buttons = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetButtons(), "getter should return the property value")
+	})
+
+	t.Run("GetButtons_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendContent{}
+		obj.Buttons = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetButtons(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetButtons_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetButtons() // Should return zero value
+	})
+
+	t.Run("GetList", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendContent{}
+		var expected *WhatsAppSendListContent
+		obj.List = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetList(), "getter should return the property value")
+	})
+
+	t.Run("GetList_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendContent{}
+		obj.List = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetList(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetList_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetList() // Should return zero value
+	})
+
+}
+
+func TestSettersWhatsAppSendDocumentContent(t *testing.T) {
+	t.Run("SetDocument", func(t *testing.T) {
+		obj := &WhatsAppSendDocumentContent{}
+		var fernTestValueDocument *WhatsAppSendMedia
+		obj.SetDocument(fernTestValueDocument)
+		assert.Equal(t, fernTestValueDocument, obj.Document)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSendDocumentContent(t *testing.T) {
+	t.Run("GetDocument", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendDocumentContent{}
+		var expected *WhatsAppSendMedia
+		obj.Document = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDocument(), "getter should return the property value")
+	})
+
+	t.Run("GetDocument_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendDocumentContent{}
+		obj.Document = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDocument(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDocument_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendDocumentContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDocument() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSendDocumentContent(t *testing.T) {
+	t.Run("SetDocument_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendDocumentContent{}
+		var fernTestValueDocument *WhatsAppSendMedia
+
+		// Act
+		obj.SetDocument(fernTestValueDocument)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppSendImageContent(t *testing.T) {
+	t.Run("SetImage", func(t *testing.T) {
+		obj := &WhatsAppSendImageContent{}
+		var fernTestValueImage *WhatsAppSendMedia
+		obj.SetImage(fernTestValueImage)
+		assert.Equal(t, fernTestValueImage, obj.Image)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSendImageContent(t *testing.T) {
+	t.Run("GetImage", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendImageContent{}
+		var expected *WhatsAppSendMedia
+		obj.Image = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetImage(), "getter should return the property value")
+	})
+
+	t.Run("GetImage_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendImageContent{}
+		obj.Image = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetImage(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetImage_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendImageContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetImage() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSendImageContent(t *testing.T) {
+	t.Run("SetImage_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendImageContent{}
+		var fernTestValueImage *WhatsAppSendMedia
+
+		// Act
+		obj.SetImage(fernTestValueImage)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppSendList(t *testing.T) {
+	t.Run("SetHeader", func(t *testing.T) {
+		obj := &WhatsAppSendList{}
+		var fernTestValueHeader *string
+		obj.SetHeader(fernTestValueHeader)
+		assert.Equal(t, fernTestValueHeader, obj.Header)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetBody", func(t *testing.T) {
+		obj := &WhatsAppSendList{}
+		var fernTestValueBody string
+		obj.SetBody(fernTestValueBody)
+		assert.Equal(t, fernTestValueBody, obj.Body)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFooter", func(t *testing.T) {
+		obj := &WhatsAppSendList{}
+		var fernTestValueFooter *string
+		obj.SetFooter(fernTestValueFooter)
+		assert.Equal(t, fernTestValueFooter, obj.Footer)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetButtonText", func(t *testing.T) {
+		obj := &WhatsAppSendList{}
+		var fernTestValueButtonText string
+		obj.SetButtonText(fernTestValueButtonText)
+		assert.Equal(t, fernTestValueButtonText, obj.ButtonText)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSections", func(t *testing.T) {
+		obj := &WhatsAppSendList{}
+		var fernTestValueSections []*WhatsAppSendListSection
+		obj.SetSections(fernTestValueSections)
+		assert.Equal(t, fernTestValueSections, obj.Sections)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSendList(t *testing.T) {
+	t.Run("GetHeader", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendList{}
+		var expected *string
+		obj.Header = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetHeader(), "getter should return the property value")
+	})
+
+	t.Run("GetHeader_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendList{}
+		obj.Header = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetHeader(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetHeader_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendList
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetHeader() // Should return zero value
+	})
+
+	t.Run("GetBody", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendList{}
+		var expected string
+		obj.Body = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetBody(), "getter should return the property value")
+	})
+
+	t.Run("GetBody_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendList
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetBody() // Should return zero value
+	})
+
+	t.Run("GetFooter", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendList{}
+		var expected *string
+		obj.Footer = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFooter(), "getter should return the property value")
+	})
+
+	t.Run("GetFooter_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendList{}
+		obj.Footer = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetFooter(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetFooter_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendList
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFooter() // Should return zero value
+	})
+
+	t.Run("GetButtonText", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendList{}
+		var expected string
+		obj.ButtonText = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetButtonText(), "getter should return the property value")
+	})
+
+	t.Run("GetButtonText_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendList
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetButtonText() // Should return zero value
+	})
+
+	t.Run("GetSections", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendList{}
+		var expected []*WhatsAppSendListSection
+		obj.Sections = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSections(), "getter should return the property value")
+	})
+
+	t.Run("GetSections_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendList{}
+		obj.Sections = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSections(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSections_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendList
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSections() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSendList(t *testing.T) {
+	t.Run("SetHeader_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendList{}
+		var fernTestValueHeader *string
+
+		// Act
+		obj.SetHeader(fernTestValueHeader)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetBody_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendList{}
+		var fernTestValueBody string
+
+		// Act
+		obj.SetBody(fernTestValueBody)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFooter_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendList{}
+		var fernTestValueFooter *string
+
+		// Act
+		obj.SetFooter(fernTestValueFooter)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetButtonText_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendList{}
+		var fernTestValueButtonText string
+
+		// Act
+		obj.SetButtonText(fernTestValueButtonText)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSections_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendList{}
+		var fernTestValueSections []*WhatsAppSendListSection
+
+		// Act
+		obj.SetSections(fernTestValueSections)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppSendListContent(t *testing.T) {
+	t.Run("SetList", func(t *testing.T) {
+		obj := &WhatsAppSendListContent{}
+		var fernTestValueList *WhatsAppSendList
+		obj.SetList(fernTestValueList)
+		assert.Equal(t, fernTestValueList, obj.List)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSendListContent(t *testing.T) {
+	t.Run("GetList", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendListContent{}
+		var expected *WhatsAppSendList
+		obj.List = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetList(), "getter should return the property value")
+	})
+
+	t.Run("GetList_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendListContent{}
+		obj.List = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetList(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetList_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendListContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetList() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSendListContent(t *testing.T) {
+	t.Run("SetList_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendListContent{}
+		var fernTestValueList *WhatsAppSendList
+
+		// Act
+		obj.SetList(fernTestValueList)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppSendListRow(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppSendListRow{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTitle", func(t *testing.T) {
+		obj := &WhatsAppSendListRow{}
+		var fernTestValueTitle string
+		obj.SetTitle(fernTestValueTitle)
+		assert.Equal(t, fernTestValueTitle, obj.Title)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDescription", func(t *testing.T) {
+		obj := &WhatsAppSendListRow{}
+		var fernTestValueDescription *string
+		obj.SetDescription(fernTestValueDescription)
+		assert.Equal(t, fernTestValueDescription, obj.Description)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSendListRow(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendListRow{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendListRow
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTitle", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendListRow{}
+		var expected string
+		obj.Title = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTitle(), "getter should return the property value")
+	})
+
+	t.Run("GetTitle_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendListRow
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTitle() // Should return zero value
+	})
+
+	t.Run("GetDescription", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendListRow{}
+		var expected *string
+		obj.Description = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDescription(), "getter should return the property value")
+	})
+
+	t.Run("GetDescription_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendListRow{}
+		obj.Description = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDescription(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDescription_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendListRow
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDescription() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSendListRow(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendListRow{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTitle_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendListRow{}
+		var fernTestValueTitle string
+
+		// Act
+		obj.SetTitle(fernTestValueTitle)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDescription_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendListRow{}
+		var fernTestValueDescription *string
+
+		// Act
+		obj.SetDescription(fernTestValueDescription)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppSendListSection(t *testing.T) {
+	t.Run("SetTitle", func(t *testing.T) {
+		obj := &WhatsAppSendListSection{}
+		var fernTestValueTitle *string
+		obj.SetTitle(fernTestValueTitle)
+		assert.Equal(t, fernTestValueTitle, obj.Title)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetItems", func(t *testing.T) {
+		obj := &WhatsAppSendListSection{}
+		var fernTestValueItems []*WhatsAppSendListRow
+		obj.SetItems(fernTestValueItems)
+		assert.Equal(t, fernTestValueItems, obj.Items)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSendListSection(t *testing.T) {
+	t.Run("GetTitle", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendListSection{}
+		var expected *string
+		obj.Title = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTitle(), "getter should return the property value")
+	})
+
+	t.Run("GetTitle_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendListSection{}
+		obj.Title = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTitle(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTitle_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendListSection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTitle() // Should return zero value
+	})
+
+	t.Run("GetItems", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendListSection{}
+		var expected []*WhatsAppSendListRow
+		obj.Items = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetItems(), "getter should return the property value")
+	})
+
+	t.Run("GetItems_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendListSection{}
+		obj.Items = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetItems(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetItems_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendListSection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetItems() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSendListSection(t *testing.T) {
+	t.Run("SetTitle_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendListSection{}
+		var fernTestValueTitle *string
+
+		// Act
+		obj.SetTitle(fernTestValueTitle)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetItems_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendListSection{}
+		var fernTestValueItems []*WhatsAppSendListRow
+
+		// Act
+		obj.SetItems(fernTestValueItems)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppSendMedia(t *testing.T) {
+	t.Run("SetURL", func(t *testing.T) {
+		obj := &WhatsAppSendMedia{}
+		var fernTestValueURL string
+		obj.SetURL(fernTestValueURL)
+		assert.Equal(t, fernTestValueURL, obj.URL)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCaption", func(t *testing.T) {
+		obj := &WhatsAppSendMedia{}
+		var fernTestValueCaption *string
+		obj.SetCaption(fernTestValueCaption)
+		assert.Equal(t, fernTestValueCaption, obj.Caption)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFilename", func(t *testing.T) {
+		obj := &WhatsAppSendMedia{}
+		var fernTestValueFilename *string
+		obj.SetFilename(fernTestValueFilename)
+		assert.Equal(t, fernTestValueFilename, obj.Filename)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSendMedia(t *testing.T) {
+	t.Run("GetURL", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendMedia{}
+		var expected string
+		obj.URL = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetURL(), "getter should return the property value")
+	})
+
+	t.Run("GetURL_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendMedia
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetURL() // Should return zero value
+	})
+
+	t.Run("GetCaption", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendMedia{}
+		var expected *string
+		obj.Caption = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCaption(), "getter should return the property value")
+	})
+
+	t.Run("GetCaption_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendMedia{}
+		obj.Caption = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCaption(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCaption_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendMedia
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCaption() // Should return zero value
+	})
+
+	t.Run("GetFilename", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendMedia{}
+		var expected *string
+		obj.Filename = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFilename(), "getter should return the property value")
+	})
+
+	t.Run("GetFilename_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendMedia{}
+		obj.Filename = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetFilename(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetFilename_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendMedia
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFilename() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSendMedia(t *testing.T) {
+	t.Run("SetURL_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendMedia{}
+		var fernTestValueURL string
+
+		// Act
+		obj.SetURL(fernTestValueURL)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCaption_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendMedia{}
+		var fernTestValueCaption *string
+
+		// Act
+		obj.SetCaption(fernTestValueCaption)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFilename_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendMedia{}
+		var fernTestValueFilename *string
+
+		// Act
+		obj.SetFilename(fernTestValueFilename)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppSendReplyButton(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppSendReplyButton{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTitle", func(t *testing.T) {
+		obj := &WhatsAppSendReplyButton{}
+		var fernTestValueTitle string
+		obj.SetTitle(fernTestValueTitle)
+		assert.Equal(t, fernTestValueTitle, obj.Title)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSendReplyButton(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendReplyButton{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendReplyButton
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTitle", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendReplyButton{}
+		var expected string
+		obj.Title = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTitle(), "getter should return the property value")
+	})
+
+	t.Run("GetTitle_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendReplyButton
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTitle() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSendReplyButton(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendReplyButton{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTitle_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendReplyButton{}
+		var fernTestValueTitle string
+
+		// Act
+		obj.SetTitle(fernTestValueTitle)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -37337,6 +47006,158 @@ func TestSettersMarkExplicitWhatsAppSendTemplateHeader(t *testing.T) {
 
 }
 
+func TestSettersWhatsAppSendTextContent(t *testing.T) {
+	t.Run("SetText", func(t *testing.T) {
+		obj := &WhatsAppSendTextContent{}
+		var fernTestValueText string
+		obj.SetText(fernTestValueText)
+		assert.Equal(t, fernTestValueText, obj.Text)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSendTextContent(t *testing.T) {
+	t.Run("GetText", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendTextContent{}
+		var expected string
+		obj.Text = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetText(), "getter should return the property value")
+	})
+
+	t.Run("GetText_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendTextContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetText() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSendTextContent(t *testing.T) {
+	t.Run("SetText_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendTextContent{}
+		var fernTestValueText string
+
+		// Act
+		obj.SetText(fernTestValueText)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppSendVideoContent(t *testing.T) {
+	t.Run("SetVideo", func(t *testing.T) {
+		obj := &WhatsAppSendVideoContent{}
+		var fernTestValueVideo *WhatsAppSendMedia
+		obj.SetVideo(fernTestValueVideo)
+		assert.Equal(t, fernTestValueVideo, obj.Video)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSendVideoContent(t *testing.T) {
+	t.Run("GetVideo", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendVideoContent{}
+		var expected *WhatsAppSendMedia
+		obj.Video = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVideo(), "getter should return the property value")
+	})
+
+	t.Run("GetVideo_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendVideoContent{}
+		obj.Video = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVideo(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVideo_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendVideoContent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVideo() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSendVideoContent(t *testing.T) {
+	t.Run("SetVideo_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendVideoContent{}
+		var fernTestValueVideo *WhatsAppSendMedia
+
+		// Act
+		obj.SetVideo(fernTestValueVideo)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestSettersWhatsAppSender(t *testing.T) {
 	t.Run("SetPhoneNumber", func(t *testing.T) {
 		obj := &WhatsAppSender{}
@@ -37686,6 +47507,1103 @@ func TestSettersMarkExplicitWhatsAppSender(t *testing.T) {
 
 }
 
+func TestSettersWhatsAppSenderBannedEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppSenderBannedEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppSenderBannedEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppSenderBannedEvent{}
+		var fernTestValueData *WhatsAppSenderEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSenderBannedEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderBannedEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderBannedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderBannedEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderBannedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderBannedEvent{}
+		var expected *WhatsAppSenderEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderBannedEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderBannedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSenderBannedEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderBannedEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderBannedEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderBannedEvent{}
+		var fernTestValueData *WhatsAppSenderEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppSenderConnectedEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppSenderConnectedEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppSenderConnectedEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppSenderConnectedEvent{}
+		var fernTestValueData *WhatsAppSenderEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSenderConnectedEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderConnectedEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderConnectedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderConnectedEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderConnectedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderConnectedEvent{}
+		var expected *WhatsAppSenderEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderConnectedEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderConnectedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSenderConnectedEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderConnectedEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderConnectedEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderConnectedEvent{}
+		var fernTestValueData *WhatsAppSenderEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppSenderDisconnectedEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppSenderDisconnectedEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppSenderDisconnectedEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppSenderDisconnectedEvent{}
+		var fernTestValueData *WhatsAppSenderEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSenderDisconnectedEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderDisconnectedEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderDisconnectedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderDisconnectedEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderDisconnectedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderDisconnectedEvent{}
+		var expected *WhatsAppSenderEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderDisconnectedEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderDisconnectedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSenderDisconnectedEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderDisconnectedEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderDisconnectedEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderDisconnectedEvent{}
+		var fernTestValueData *WhatsAppSenderEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppSenderEventData(t *testing.T) {
+	t.Run("SetPhoneNumber", func(t *testing.T) {
+		obj := &WhatsAppSenderEventData{}
+		var fernTestValuePhoneNumber string
+		obj.SetPhoneNumber(fernTestValuePhoneNumber)
+		assert.Equal(t, fernTestValuePhoneNumber, obj.PhoneNumber)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetStatus", func(t *testing.T) {
+		obj := &WhatsAppSenderEventData{}
+		var fernTestValueStatus WhatsAppSenderEventDataStatus
+		obj.SetStatus(fernTestValueStatus)
+		assert.Equal(t, fernTestValueStatus, obj.Status)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetQualityRating", func(t *testing.T) {
+		obj := &WhatsAppSenderEventData{}
+		var fernTestValueQualityRating *WhatsAppSenderEventDataQualityRating
+		obj.SetQualityRating(fernTestValueQualityRating)
+		assert.Equal(t, fernTestValueQualityRating, obj.QualityRating)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPreviousAttributes", func(t *testing.T) {
+		obj := &WhatsAppSenderEventData{}
+		var fernTestValuePreviousAttributes *WhatsAppSenderPreviousAttributes
+		obj.SetPreviousAttributes(fernTestValuePreviousAttributes)
+		assert.Equal(t, fernTestValuePreviousAttributes, obj.PreviousAttributes)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSenderEventData(t *testing.T) {
+	t.Run("GetPhoneNumber", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderEventData{}
+		var expected string
+		obj.PhoneNumber = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPhoneNumber(), "getter should return the property value")
+	})
+
+	t.Run("GetPhoneNumber_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPhoneNumber() // Should return zero value
+	})
+
+	t.Run("GetStatus", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderEventData{}
+		var expected WhatsAppSenderEventDataStatus
+		obj.Status = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetStatus(), "getter should return the property value")
+	})
+
+	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetStatus() // Should return zero value
+	})
+
+	t.Run("GetQualityRating", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderEventData{}
+		var expected *WhatsAppSenderEventDataQualityRating
+		obj.QualityRating = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetQualityRating(), "getter should return the property value")
+	})
+
+	t.Run("GetQualityRating_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderEventData{}
+		obj.QualityRating = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetQualityRating(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetQualityRating_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetQualityRating() // Should return zero value
+	})
+
+	t.Run("GetPreviousAttributes", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderEventData{}
+		var expected *WhatsAppSenderPreviousAttributes
+		obj.PreviousAttributes = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPreviousAttributes(), "getter should return the property value")
+	})
+
+	t.Run("GetPreviousAttributes_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderEventData{}
+		obj.PreviousAttributes = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPreviousAttributes(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPreviousAttributes_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPreviousAttributes() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSenderEventData(t *testing.T) {
+	t.Run("SetPhoneNumber_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderEventData{}
+		var fernTestValuePhoneNumber string
+
+		// Act
+		obj.SetPhoneNumber(fernTestValuePhoneNumber)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderEventData{}
+		var fernTestValueStatus WhatsAppSenderEventDataStatus
+
+		// Act
+		obj.SetStatus(fernTestValueStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetQualityRating_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderEventData{}
+		var fernTestValueQualityRating *WhatsAppSenderEventDataQualityRating
+
+		// Act
+		obj.SetQualityRating(fernTestValueQualityRating)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPreviousAttributes_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderEventData{}
+		var fernTestValuePreviousAttributes *WhatsAppSenderPreviousAttributes
+
+		// Act
+		obj.SetPreviousAttributes(fernTestValuePreviousAttributes)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppSenderFlaggedEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppSenderFlaggedEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppSenderFlaggedEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppSenderFlaggedEvent{}
+		var fernTestValueData *WhatsAppSenderEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSenderFlaggedEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderFlaggedEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderFlaggedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderFlaggedEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderFlaggedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderFlaggedEvent{}
+		var expected *WhatsAppSenderEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderFlaggedEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderFlaggedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSenderFlaggedEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderFlaggedEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderFlaggedEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderFlaggedEvent{}
+		var fernTestValueData *WhatsAppSenderEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestSettersWhatsAppSenderListResponse(t *testing.T) {
 	t.Run("SetSenders", func(t *testing.T) {
 		obj := &WhatsAppSenderListResponse{}
@@ -37835,6 +48753,1064 @@ func TestSettersMarkExplicitWhatsAppSenderListResponse(t *testing.T) {
 
 		// Note: This does not explicitly assert the presence of a specific JSON field
 		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppSenderPreviousAttributes(t *testing.T) {
+	t.Run("SetStatus", func(t *testing.T) {
+		obj := &WhatsAppSenderPreviousAttributes{}
+		var fernTestValueStatus *WhatsAppSenderPreviousAttributesStatus
+		obj.SetStatus(fernTestValueStatus)
+		assert.Equal(t, fernTestValueStatus, obj.Status)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetQualityRating", func(t *testing.T) {
+		obj := &WhatsAppSenderPreviousAttributes{}
+		var fernTestValueQualityRating *WhatsAppSenderPreviousAttributesQualityRating
+		obj.SetQualityRating(fernTestValueQualityRating)
+		assert.Equal(t, fernTestValueQualityRating, obj.QualityRating)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSenderPreviousAttributes(t *testing.T) {
+	t.Run("GetStatus", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderPreviousAttributes{}
+		var expected *WhatsAppSenderPreviousAttributesStatus
+		obj.Status = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetStatus(), "getter should return the property value")
+	})
+
+	t.Run("GetStatus_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderPreviousAttributes{}
+		obj.Status = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetStatus(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderPreviousAttributes
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetStatus() // Should return zero value
+	})
+
+	t.Run("GetQualityRating", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderPreviousAttributes{}
+		var expected *WhatsAppSenderPreviousAttributesQualityRating
+		obj.QualityRating = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetQualityRating(), "getter should return the property value")
+	})
+
+	t.Run("GetQualityRating_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderPreviousAttributes{}
+		obj.QualityRating = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetQualityRating(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetQualityRating_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderPreviousAttributes
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetQualityRating() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSenderPreviousAttributes(t *testing.T) {
+	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderPreviousAttributes{}
+		var fernTestValueStatus *WhatsAppSenderPreviousAttributesStatus
+
+		// Act
+		obj.SetStatus(fernTestValueStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetQualityRating_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderPreviousAttributes{}
+		var fernTestValueQualityRating *WhatsAppSenderPreviousAttributesQualityRating
+
+		// Act
+		obj.SetQualityRating(fernTestValueQualityRating)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppSenderQualityChangedEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppSenderQualityChangedEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppSenderQualityChangedEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppSenderQualityChangedEvent{}
+		var fernTestValueData *WhatsAppSenderEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSenderQualityChangedEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderQualityChangedEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderQualityChangedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderQualityChangedEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderQualityChangedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderQualityChangedEvent{}
+		var expected *WhatsAppSenderEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderQualityChangedEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderQualityChangedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSenderQualityChangedEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderQualityChangedEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderQualityChangedEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderQualityChangedEvent{}
+		var fernTestValueData *WhatsAppSenderEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppSenderRestrictedEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppSenderRestrictedEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppSenderRestrictedEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppSenderRestrictedEvent{}
+		var fernTestValueData *WhatsAppSenderEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSenderRestrictedEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderRestrictedEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderRestrictedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderRestrictedEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderRestrictedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderRestrictedEvent{}
+		var expected *WhatsAppSenderEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderRestrictedEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderRestrictedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSenderRestrictedEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderRestrictedEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderRestrictedEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderRestrictedEvent{}
+		var fernTestValueData *WhatsAppSenderEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppSenderUpdatedEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppSenderUpdatedEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppSenderUpdatedEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppSenderUpdatedEvent{}
+		var fernTestValueData *WhatsAppSenderEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppSenderUpdatedEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderUpdatedEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderUpdatedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderUpdatedEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderUpdatedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderUpdatedEvent{}
+		var expected *WhatsAppSenderEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderUpdatedEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderUpdatedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppSenderUpdatedEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderUpdatedEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderUpdatedEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderUpdatedEvent{}
+		var fernTestValueData *WhatsAppSenderEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestGettersWhatsAppSendersGroupEvent(t *testing.T) {
+	t.Run("GetType", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendersGroupEvent{}
+		var expected string
+		obj.Type = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetType(), "getter should return the property value")
+	})
+
+	t.Run("GetType_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendersGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetType() // Should return zero value
+	})
+
+	t.Run("GetWhatsappSenderConnected", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendersGroupEvent{}
+		var expected *WhatsAppSenderConnectedEvent
+		obj.WhatsappSenderConnected = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappSenderConnected(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappSenderConnected_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendersGroupEvent{}
+		obj.WhatsappSenderConnected = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappSenderConnected(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappSenderConnected_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendersGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappSenderConnected() // Should return zero value
+	})
+
+	t.Run("GetWhatsappSenderRestricted", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendersGroupEvent{}
+		var expected *WhatsAppSenderRestrictedEvent
+		obj.WhatsappSenderRestricted = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappSenderRestricted(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappSenderRestricted_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendersGroupEvent{}
+		obj.WhatsappSenderRestricted = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappSenderRestricted(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappSenderRestricted_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendersGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappSenderRestricted() // Should return zero value
+	})
+
+	t.Run("GetWhatsappSenderFlagged", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendersGroupEvent{}
+		var expected *WhatsAppSenderFlaggedEvent
+		obj.WhatsappSenderFlagged = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappSenderFlagged(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappSenderFlagged_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendersGroupEvent{}
+		obj.WhatsappSenderFlagged = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappSenderFlagged(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappSenderFlagged_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendersGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappSenderFlagged() // Should return zero value
+	})
+
+	t.Run("GetWhatsappSenderBanned", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendersGroupEvent{}
+		var expected *WhatsAppSenderBannedEvent
+		obj.WhatsappSenderBanned = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappSenderBanned(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappSenderBanned_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendersGroupEvent{}
+		obj.WhatsappSenderBanned = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappSenderBanned(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappSenderBanned_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendersGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappSenderBanned() // Should return zero value
+	})
+
+	t.Run("GetWhatsappSenderDisconnected", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendersGroupEvent{}
+		var expected *WhatsAppSenderDisconnectedEvent
+		obj.WhatsappSenderDisconnected = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappSenderDisconnected(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappSenderDisconnected_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendersGroupEvent{}
+		obj.WhatsappSenderDisconnected = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappSenderDisconnected(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappSenderDisconnected_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendersGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappSenderDisconnected() // Should return zero value
+	})
+
+	t.Run("GetWhatsappSenderQualityChanged", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendersGroupEvent{}
+		var expected *WhatsAppSenderQualityChangedEvent
+		obj.WhatsappSenderQualityChanged = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappSenderQualityChanged(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappSenderQualityChanged_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendersGroupEvent{}
+		obj.WhatsappSenderQualityChanged = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappSenderQualityChanged(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappSenderQualityChanged_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendersGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappSenderQualityChanged() // Should return zero value
+	})
+
+	t.Run("GetWhatsappSenderUpdated", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendersGroupEvent{}
+		var expected *WhatsAppSenderUpdatedEvent
+		obj.WhatsappSenderUpdated = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappSenderUpdated(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappSenderUpdated_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendersGroupEvent{}
+		obj.WhatsappSenderUpdated = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappSenderUpdated(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappSenderUpdated_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendersGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappSenderUpdated() // Should return zero value
+	})
+
+	t.Run("GetTest", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendersGroupEvent{}
+		var expected *WhatsAppWebhookTestEvent
+		obj.Test = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTest(), "getter should return the property value")
+	})
+
+	t.Run("GetTest_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendersGroupEvent{}
+		obj.Test = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTest(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTest_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendersGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTest() // Should return zero value
 	})
 
 }
@@ -38508,6 +50484,211 @@ func TestSettersMarkExplicitWhatsAppTemplate(t *testing.T) {
 
 }
 
+func TestSettersWhatsAppTemplateApprovedEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppTemplateApprovedEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppTemplateApprovedEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppTemplateApprovedEvent{}
+		var fernTestValueData *WhatsAppTemplateEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppTemplateApprovedEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateApprovedEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateApprovedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateApprovedEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateApprovedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateApprovedEvent{}
+		var expected *WhatsAppTemplateEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateApprovedEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateApprovedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppTemplateApprovedEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateApprovedEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateApprovedEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateApprovedEvent{}
+		var fernTestValueData *WhatsAppTemplateEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestSettersWhatsAppTemplateBodyComponentRequest(t *testing.T) {
 	t.Run("SetText", func(t *testing.T) {
 		obj := &WhatsAppTemplateBodyComponentRequest{}
@@ -38946,6 +51127,211 @@ func TestSettersMarkExplicitWhatsAppTemplateButtonsComponentRequest(t *testing.T
 
 		// Act
 		obj.SetButtons(fernTestValueButtons)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppTemplateCategoryChangedEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppTemplateCategoryChangedEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppTemplateCategoryChangedEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppTemplateCategoryChangedEvent{}
+		var fernTestValueData *WhatsAppTemplateEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppTemplateCategoryChangedEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateCategoryChangedEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateCategoryChangedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateCategoryChangedEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateCategoryChangedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateCategoryChangedEvent{}
+		var expected *WhatsAppTemplateEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateCategoryChangedEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateCategoryChangedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppTemplateCategoryChangedEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateCategoryChangedEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateCategoryChangedEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateCategoryChangedEvent{}
+		var fernTestValueData *WhatsAppTemplateEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -39586,6 +51972,879 @@ func TestSettersMarkExplicitWhatsAppTemplateCreateRequest(t *testing.T) {
 
 		// Act
 		obj.SetSender(fernTestValueSender)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppTemplateDisabledEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppTemplateDisabledEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppTemplateDisabledEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppTemplateDisabledEvent{}
+		var fernTestValueData *WhatsAppTemplateEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppTemplateDisabledEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateDisabledEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateDisabledEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateDisabledEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateDisabledEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateDisabledEvent{}
+		var expected *WhatsAppTemplateEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateDisabledEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateDisabledEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppTemplateDisabledEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateDisabledEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateDisabledEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateDisabledEvent{}
+		var fernTestValueData *WhatsAppTemplateEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppTemplateEventData(t *testing.T) {
+	t.Run("SetTemplateUUID", func(t *testing.T) {
+		obj := &WhatsAppTemplateEventData{}
+		var fernTestValueTemplateUUID string
+		obj.SetTemplateUUID(fernTestValueTemplateUUID)
+		assert.Equal(t, fernTestValueTemplateUUID, obj.TemplateUUID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetName", func(t *testing.T) {
+		obj := &WhatsAppTemplateEventData{}
+		var fernTestValueName string
+		obj.SetName(fernTestValueName)
+		assert.Equal(t, fernTestValueName, obj.Name)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLanguage", func(t *testing.T) {
+		obj := &WhatsAppTemplateEventData{}
+		var fernTestValueLanguage string
+		obj.SetLanguage(fernTestValueLanguage)
+		assert.Equal(t, fernTestValueLanguage, obj.Language)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetStatus", func(t *testing.T) {
+		obj := &WhatsAppTemplateEventData{}
+		var fernTestValueStatus WhatsAppTemplateEventDataStatus
+		obj.SetStatus(fernTestValueStatus)
+		assert.Equal(t, fernTestValueStatus, obj.Status)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCategory", func(t *testing.T) {
+		obj := &WhatsAppTemplateEventData{}
+		var fernTestValueCategory WhatsAppTemplateEventDataCategory
+		obj.SetCategory(fernTestValueCategory)
+		assert.Equal(t, fernTestValueCategory, obj.Category)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetQualityRating", func(t *testing.T) {
+		obj := &WhatsAppTemplateEventData{}
+		var fernTestValueQualityRating *WhatsAppTemplateEventDataQualityRating
+		obj.SetQualityRating(fernTestValueQualityRating)
+		assert.Equal(t, fernTestValueQualityRating, obj.QualityRating)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPreviousAttributes", func(t *testing.T) {
+		obj := &WhatsAppTemplateEventData{}
+		var fernTestValuePreviousAttributes *WhatsAppTemplatePreviousAttributes
+		obj.SetPreviousAttributes(fernTestValuePreviousAttributes)
+		assert.Equal(t, fernTestValuePreviousAttributes, obj.PreviousAttributes)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppTemplateEventData(t *testing.T) {
+	t.Run("GetTemplateUUID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateEventData{}
+		var expected string
+		obj.TemplateUUID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTemplateUUID(), "getter should return the property value")
+	})
+
+	t.Run("GetTemplateUUID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTemplateUUID() // Should return zero value
+	})
+
+	t.Run("GetName", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateEventData{}
+		var expected string
+		obj.Name = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetName(), "getter should return the property value")
+	})
+
+	t.Run("GetName_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetName() // Should return zero value
+	})
+
+	t.Run("GetLanguage", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateEventData{}
+		var expected string
+		obj.Language = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLanguage(), "getter should return the property value")
+	})
+
+	t.Run("GetLanguage_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLanguage() // Should return zero value
+	})
+
+	t.Run("GetStatus", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateEventData{}
+		var expected WhatsAppTemplateEventDataStatus
+		obj.Status = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetStatus(), "getter should return the property value")
+	})
+
+	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetStatus() // Should return zero value
+	})
+
+	t.Run("GetCategory", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateEventData{}
+		var expected WhatsAppTemplateEventDataCategory
+		obj.Category = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCategory(), "getter should return the property value")
+	})
+
+	t.Run("GetCategory_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCategory() // Should return zero value
+	})
+
+	t.Run("GetQualityRating", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateEventData{}
+		var expected *WhatsAppTemplateEventDataQualityRating
+		obj.QualityRating = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetQualityRating(), "getter should return the property value")
+	})
+
+	t.Run("GetQualityRating_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateEventData{}
+		obj.QualityRating = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetQualityRating(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetQualityRating_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetQualityRating() // Should return zero value
+	})
+
+	t.Run("GetPreviousAttributes", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateEventData{}
+		var expected *WhatsAppTemplatePreviousAttributes
+		obj.PreviousAttributes = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPreviousAttributes(), "getter should return the property value")
+	})
+
+	t.Run("GetPreviousAttributes_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateEventData{}
+		obj.PreviousAttributes = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPreviousAttributes(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPreviousAttributes_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPreviousAttributes() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppTemplateEventData(t *testing.T) {
+	t.Run("SetTemplateUUID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateEventData{}
+		var fernTestValueTemplateUUID string
+
+		// Act
+		obj.SetTemplateUUID(fernTestValueTemplateUUID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateEventData{}
+		var fernTestValueName string
+
+		// Act
+		obj.SetName(fernTestValueName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLanguage_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateEventData{}
+		var fernTestValueLanguage string
+
+		// Act
+		obj.SetLanguage(fernTestValueLanguage)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateEventData{}
+		var fernTestValueStatus WhatsAppTemplateEventDataStatus
+
+		// Act
+		obj.SetStatus(fernTestValueStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCategory_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateEventData{}
+		var fernTestValueCategory WhatsAppTemplateEventDataCategory
+
+		// Act
+		obj.SetCategory(fernTestValueCategory)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetQualityRating_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateEventData{}
+		var fernTestValueQualityRating *WhatsAppTemplateEventDataQualityRating
+
+		// Act
+		obj.SetQualityRating(fernTestValueQualityRating)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPreviousAttributes_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateEventData{}
+		var fernTestValuePreviousAttributes *WhatsAppTemplatePreviousAttributes
+
+		// Act
+		obj.SetPreviousAttributes(fernTestValuePreviousAttributes)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppTemplateFlaggedEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppTemplateFlaggedEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppTemplateFlaggedEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppTemplateFlaggedEvent{}
+		var fernTestValueData *WhatsAppTemplateEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppTemplateFlaggedEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateFlaggedEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateFlaggedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateFlaggedEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateFlaggedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateFlaggedEvent{}
+		var expected *WhatsAppTemplateEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateFlaggedEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateFlaggedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppTemplateFlaggedEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateFlaggedEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateFlaggedEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateFlaggedEvent{}
+		var fernTestValueData *WhatsAppTemplateEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -40321,6 +53580,211 @@ func TestSettersMarkExplicitWhatsAppTemplatePageResponse(t *testing.T) {
 
 }
 
+func TestSettersWhatsAppTemplatePausedEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppTemplatePausedEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppTemplatePausedEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppTemplatePausedEvent{}
+		var fernTestValueData *WhatsAppTemplateEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppTemplatePausedEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatePausedEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplatePausedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatePausedEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplatePausedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatePausedEvent{}
+		var expected *WhatsAppTemplateEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatePausedEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplatePausedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppTemplatePausedEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatePausedEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatePausedEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatePausedEvent{}
+		var fernTestValueData *WhatsAppTemplateEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestSettersWhatsAppTemplatePhoneNumberButtonRequest(t *testing.T) {
 	t.Run("SetText", func(t *testing.T) {
 		obj := &WhatsAppTemplatePhoneNumberButtonRequest{}
@@ -40454,6 +53918,436 @@ func TestSettersMarkExplicitWhatsAppTemplatePhoneNumberButtonRequest(t *testing.
 
 }
 
+func TestSettersWhatsAppTemplatePreviousAttributes(t *testing.T) {
+	t.Run("SetStatus", func(t *testing.T) {
+		obj := &WhatsAppTemplatePreviousAttributes{}
+		var fernTestValueStatus *WhatsAppTemplatePreviousAttributesStatus
+		obj.SetStatus(fernTestValueStatus)
+		assert.Equal(t, fernTestValueStatus, obj.Status)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCategory", func(t *testing.T) {
+		obj := &WhatsAppTemplatePreviousAttributes{}
+		var fernTestValueCategory *WhatsAppTemplatePreviousAttributesCategory
+		obj.SetCategory(fernTestValueCategory)
+		assert.Equal(t, fernTestValueCategory, obj.Category)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetQualityRating", func(t *testing.T) {
+		obj := &WhatsAppTemplatePreviousAttributes{}
+		var fernTestValueQualityRating *WhatsAppTemplatePreviousAttributesQualityRating
+		obj.SetQualityRating(fernTestValueQualityRating)
+		assert.Equal(t, fernTestValueQualityRating, obj.QualityRating)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppTemplatePreviousAttributes(t *testing.T) {
+	t.Run("GetStatus", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatePreviousAttributes{}
+		var expected *WhatsAppTemplatePreviousAttributesStatus
+		obj.Status = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetStatus(), "getter should return the property value")
+	})
+
+	t.Run("GetStatus_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatePreviousAttributes{}
+		obj.Status = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetStatus(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplatePreviousAttributes
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetStatus() // Should return zero value
+	})
+
+	t.Run("GetCategory", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatePreviousAttributes{}
+		var expected *WhatsAppTemplatePreviousAttributesCategory
+		obj.Category = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCategory(), "getter should return the property value")
+	})
+
+	t.Run("GetCategory_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatePreviousAttributes{}
+		obj.Category = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCategory(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCategory_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplatePreviousAttributes
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCategory() // Should return zero value
+	})
+
+	t.Run("GetQualityRating", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatePreviousAttributes{}
+		var expected *WhatsAppTemplatePreviousAttributesQualityRating
+		obj.QualityRating = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetQualityRating(), "getter should return the property value")
+	})
+
+	t.Run("GetQualityRating_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatePreviousAttributes{}
+		obj.QualityRating = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetQualityRating(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetQualityRating_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplatePreviousAttributes
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetQualityRating() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppTemplatePreviousAttributes(t *testing.T) {
+	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatePreviousAttributes{}
+		var fernTestValueStatus *WhatsAppTemplatePreviousAttributesStatus
+
+		// Act
+		obj.SetStatus(fernTestValueStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCategory_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatePreviousAttributes{}
+		var fernTestValueCategory *WhatsAppTemplatePreviousAttributesCategory
+
+		// Act
+		obj.SetCategory(fernTestValueCategory)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetQualityRating_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatePreviousAttributes{}
+		var fernTestValueQualityRating *WhatsAppTemplatePreviousAttributesQualityRating
+
+		// Act
+		obj.SetQualityRating(fernTestValueQualityRating)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppTemplateQualityChangedEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppTemplateQualityChangedEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppTemplateQualityChangedEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppTemplateQualityChangedEvent{}
+		var fernTestValueData *WhatsAppTemplateEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppTemplateQualityChangedEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateQualityChangedEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateQualityChangedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateQualityChangedEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateQualityChangedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateQualityChangedEvent{}
+		var expected *WhatsAppTemplateEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateQualityChangedEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateQualityChangedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppTemplateQualityChangedEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateQualityChangedEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateQualityChangedEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateQualityChangedEvent{}
+		var fernTestValueData *WhatsAppTemplateEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestSettersWhatsAppTemplateQuickReplyButtonRequest(t *testing.T) {
 	t.Run("SetText", func(t *testing.T) {
 		obj := &WhatsAppTemplateQuickReplyButtonRequest{}
@@ -40500,6 +54394,211 @@ func TestSettersMarkExplicitWhatsAppTemplateQuickReplyButtonRequest(t *testing.T
 
 		// Act
 		obj.SetText(fernTestValueText)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppTemplateRejectedEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppTemplateRejectedEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppTemplateRejectedEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppTemplateRejectedEvent{}
+		var fernTestValueData *WhatsAppTemplateEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppTemplateRejectedEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateRejectedEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateRejectedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateRejectedEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateRejectedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateRejectedEvent{}
+		var expected *WhatsAppTemplateEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateRejectedEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateRejectedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppTemplateRejectedEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateRejectedEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateRejectedEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateRejectedEvent{}
+		var fernTestValueData *WhatsAppTemplateEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -41251,6 +55350,211 @@ func TestSettersMarkExplicitWhatsAppTemplateTextHeaderComponentRequestExample(t 
 
 }
 
+func TestSettersWhatsAppTemplateUpdatedEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppTemplateUpdatedEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppTemplateUpdatedEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppTemplateUpdatedEvent{}
+		var fernTestValueData *WhatsAppTemplateEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppTemplateUpdatedEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateUpdatedEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateUpdatedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateUpdatedEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateUpdatedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateUpdatedEvent{}
+		var expected *WhatsAppTemplateEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateUpdatedEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateUpdatedEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppTemplateUpdatedEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateUpdatedEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateUpdatedEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateUpdatedEvent{}
+		var fernTestValueData *WhatsAppTemplateEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestSettersWhatsAppTemplateURLButtonRequest(t *testing.T) {
 	t.Run("SetText", func(t *testing.T) {
 		obj := &WhatsAppTemplateURLButtonRequest{}
@@ -41452,6 +55756,329 @@ func TestSettersMarkExplicitWhatsAppTemplateURLButtonRequest(t *testing.T) {
 
 		// Note: This does not explicitly assert the presence of a specific JSON field
 		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestGettersWhatsAppTemplatesGroupEvent(t *testing.T) {
+	t.Run("GetType", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatesGroupEvent{}
+		var expected string
+		obj.Type = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetType(), "getter should return the property value")
+	})
+
+	t.Run("GetType_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplatesGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetType() // Should return zero value
+	})
+
+	t.Run("GetWhatsappTemplateApproved", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatesGroupEvent{}
+		var expected *WhatsAppTemplateApprovedEvent
+		obj.WhatsappTemplateApproved = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappTemplateApproved(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappTemplateApproved_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatesGroupEvent{}
+		obj.WhatsappTemplateApproved = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappTemplateApproved(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappTemplateApproved_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplatesGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappTemplateApproved() // Should return zero value
+	})
+
+	t.Run("GetWhatsappTemplateRejected", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatesGroupEvent{}
+		var expected *WhatsAppTemplateRejectedEvent
+		obj.WhatsappTemplateRejected = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappTemplateRejected(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappTemplateRejected_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatesGroupEvent{}
+		obj.WhatsappTemplateRejected = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappTemplateRejected(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappTemplateRejected_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplatesGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappTemplateRejected() // Should return zero value
+	})
+
+	t.Run("GetWhatsappTemplatePaused", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatesGroupEvent{}
+		var expected *WhatsAppTemplatePausedEvent
+		obj.WhatsappTemplatePaused = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappTemplatePaused(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappTemplatePaused_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatesGroupEvent{}
+		obj.WhatsappTemplatePaused = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappTemplatePaused(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappTemplatePaused_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplatesGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappTemplatePaused() // Should return zero value
+	})
+
+	t.Run("GetWhatsappTemplateDisabled", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatesGroupEvent{}
+		var expected *WhatsAppTemplateDisabledEvent
+		obj.WhatsappTemplateDisabled = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappTemplateDisabled(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappTemplateDisabled_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatesGroupEvent{}
+		obj.WhatsappTemplateDisabled = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappTemplateDisabled(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappTemplateDisabled_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplatesGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappTemplateDisabled() // Should return zero value
+	})
+
+	t.Run("GetWhatsappTemplateFlagged", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatesGroupEvent{}
+		var expected *WhatsAppTemplateFlaggedEvent
+		obj.WhatsappTemplateFlagged = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappTemplateFlagged(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappTemplateFlagged_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatesGroupEvent{}
+		obj.WhatsappTemplateFlagged = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappTemplateFlagged(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappTemplateFlagged_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplatesGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappTemplateFlagged() // Should return zero value
+	})
+
+	t.Run("GetWhatsappTemplateCategoryChanged", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatesGroupEvent{}
+		var expected *WhatsAppTemplateCategoryChangedEvent
+		obj.WhatsappTemplateCategoryChanged = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappTemplateCategoryChanged(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappTemplateCategoryChanged_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatesGroupEvent{}
+		obj.WhatsappTemplateCategoryChanged = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappTemplateCategoryChanged(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappTemplateCategoryChanged_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplatesGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappTemplateCategoryChanged() // Should return zero value
+	})
+
+	t.Run("GetWhatsappTemplateQualityChanged", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatesGroupEvent{}
+		var expected *WhatsAppTemplateQualityChangedEvent
+		obj.WhatsappTemplateQualityChanged = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappTemplateQualityChanged(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappTemplateQualityChanged_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatesGroupEvent{}
+		obj.WhatsappTemplateQualityChanged = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappTemplateQualityChanged(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappTemplateQualityChanged_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplatesGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappTemplateQualityChanged() // Should return zero value
+	})
+
+	t.Run("GetWhatsappTemplateUpdated", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatesGroupEvent{}
+		var expected *WhatsAppTemplateUpdatedEvent
+		obj.WhatsappTemplateUpdated = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWhatsappTemplateUpdated(), "getter should return the property value")
+	})
+
+	t.Run("GetWhatsappTemplateUpdated_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatesGroupEvent{}
+		obj.WhatsappTemplateUpdated = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWhatsappTemplateUpdated(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWhatsappTemplateUpdated_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplatesGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWhatsappTemplateUpdated() // Should return zero value
+	})
+
+	t.Run("GetTest", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatesGroupEvent{}
+		var expected *WhatsAppWebhookTestEvent
+		obj.Test = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTest(), "getter should return the property value")
+	})
+
+	t.Run("GetTest_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatesGroupEvent{}
+		obj.Test = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTest(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTest_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplatesGroupEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTest() // Should return zero value
 	})
 
 }
@@ -41727,6 +56354,1479 @@ func TestSettersMarkExplicitWhatsAppWabaListResponse(t *testing.T) {
 
 		// Act
 		obj.SetPagination(fernTestValuePagination)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppWebhook(t *testing.T) {
+	t.Run("SetUUID", func(t *testing.T) {
+		obj := &WhatsAppWebhook{}
+		var fernTestValueUUID string
+		obj.SetUUID(fernTestValueUUID)
+		assert.Equal(t, fernTestValueUUID, obj.UUID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetURL", func(t *testing.T) {
+		obj := &WhatsAppWebhook{}
+		var fernTestValueURL string
+		obj.SetURL(fernTestValueURL)
+		assert.Equal(t, fernTestValueURL, obj.URL)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetGroup", func(t *testing.T) {
+		obj := &WhatsAppWebhook{}
+		var fernTestValueGroup WhatsAppWebhookGroup
+		obj.SetGroup(fernTestValueGroup)
+		assert.Equal(t, fernTestValueGroup, obj.Group)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEnabled", func(t *testing.T) {
+		obj := &WhatsAppWebhook{}
+		var fernTestValueEnabled bool
+		obj.SetEnabled(fernTestValueEnabled)
+		assert.Equal(t, fernTestValueEnabled, obj.Enabled)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEnabledEvents", func(t *testing.T) {
+		obj := &WhatsAppWebhook{}
+		var fernTestValueEnabledEvents []WhatsAppEventType
+		obj.SetEnabledEvents(fernTestValueEnabledEvents)
+		assert.Equal(t, fernTestValueEnabledEvents, obj.EnabledEvents)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCreatedAt", func(t *testing.T) {
+		obj := &WhatsAppWebhook{}
+		var fernTestValueCreatedAt time.Time
+		obj.SetCreatedAt(fernTestValueCreatedAt)
+		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSecret", func(t *testing.T) {
+		obj := &WhatsAppWebhook{}
+		var fernTestValueSecret *string
+		obj.SetSecret(fernTestValueSecret)
+		assert.Equal(t, fernTestValueSecret, obj.Secret)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppWebhook(t *testing.T) {
+	t.Run("GetUUID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhook{}
+		var expected string
+		obj.UUID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetUUID(), "getter should return the property value")
+	})
+
+	t.Run("GetUUID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhook
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetUUID() // Should return zero value
+	})
+
+	t.Run("GetURL", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhook{}
+		var expected string
+		obj.URL = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetURL(), "getter should return the property value")
+	})
+
+	t.Run("GetURL_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhook
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetURL() // Should return zero value
+	})
+
+	t.Run("GetGroup", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhook{}
+		var expected WhatsAppWebhookGroup
+		obj.Group = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetGroup(), "getter should return the property value")
+	})
+
+	t.Run("GetGroup_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhook
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetGroup() // Should return zero value
+	})
+
+	t.Run("GetEnabled", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhook{}
+		var expected bool
+		obj.Enabled = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetEnabled(), "getter should return the property value")
+	})
+
+	t.Run("GetEnabled_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhook
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetEnabled() // Should return zero value
+	})
+
+	t.Run("GetEnabledEvents", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhook{}
+		var expected []WhatsAppEventType
+		obj.EnabledEvents = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetEnabledEvents(), "getter should return the property value")
+	})
+
+	t.Run("GetEnabledEvents_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhook{}
+		obj.EnabledEvents = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEnabledEvents(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetEnabledEvents_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhook
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetEnabledEvents() // Should return zero value
+	})
+
+	t.Run("GetCreatedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhook{}
+		var expected time.Time
+		obj.CreatedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCreatedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhook
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCreatedAt() // Should return zero value
+	})
+
+	t.Run("GetSecret", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhook{}
+		var expected *string
+		obj.Secret = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSecret(), "getter should return the property value")
+	})
+
+	t.Run("GetSecret_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhook{}
+		obj.Secret = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSecret(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSecret_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhook
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSecret() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppWebhook(t *testing.T) {
+	t.Run("SetUUID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhook{}
+		var fernTestValueUUID string
+
+		// Act
+		obj.SetUUID(fernTestValueUUID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetURL_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhook{}
+		var fernTestValueURL string
+
+		// Act
+		obj.SetURL(fernTestValueURL)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetGroup_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhook{}
+		var fernTestValueGroup WhatsAppWebhookGroup
+
+		// Act
+		obj.SetGroup(fernTestValueGroup)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEnabled_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhook{}
+		var fernTestValueEnabled bool
+
+		// Act
+		obj.SetEnabled(fernTestValueEnabled)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEnabledEvents_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhook{}
+		var fernTestValueEnabledEvents []WhatsAppEventType
+
+		// Act
+		obj.SetEnabledEvents(fernTestValueEnabledEvents)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhook{}
+		var fernTestValueCreatedAt time.Time
+
+		// Act
+		obj.SetCreatedAt(fernTestValueCreatedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSecret_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhook{}
+		var fernTestValueSecret *string
+
+		// Act
+		obj.SetSecret(fernTestValueSecret)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppWebhookCreateRequest(t *testing.T) {
+	t.Run("SetURL", func(t *testing.T) {
+		obj := &WhatsAppWebhookCreateRequest{}
+		var fernTestValueURL string
+		obj.SetURL(fernTestValueURL)
+		assert.Equal(t, fernTestValueURL, obj.URL)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetGroup", func(t *testing.T) {
+		obj := &WhatsAppWebhookCreateRequest{}
+		var fernTestValueGroup WhatsAppWebhookGroup
+		obj.SetGroup(fernTestValueGroup)
+		assert.Equal(t, fernTestValueGroup, obj.Group)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppWebhookCreateRequest(t *testing.T) {
+	t.Run("GetURL", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookCreateRequest{}
+		var expected string
+		obj.URL = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetURL(), "getter should return the property value")
+	})
+
+	t.Run("GetURL_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookCreateRequest
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetURL() // Should return zero value
+	})
+
+	t.Run("GetGroup", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookCreateRequest{}
+		var expected WhatsAppWebhookGroup
+		obj.Group = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetGroup(), "getter should return the property value")
+	})
+
+	t.Run("GetGroup_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookCreateRequest
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetGroup() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppWebhookCreateRequest(t *testing.T) {
+	t.Run("SetURL_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookCreateRequest{}
+		var fernTestValueURL string
+
+		// Act
+		obj.SetURL(fernTestValueURL)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetGroup_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookCreateRequest{}
+		var fernTestValueGroup WhatsAppWebhookGroup
+
+		// Act
+		obj.SetGroup(fernTestValueGroup)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppWebhookListResponse(t *testing.T) {
+	t.Run("SetWebhooks", func(t *testing.T) {
+		obj := &WhatsAppWebhookListResponse{}
+		var fernTestValueWebhooks []*WhatsAppWebhook
+		obj.SetWebhooks(fernTestValueWebhooks)
+		assert.Equal(t, fernTestValueWebhooks, obj.Webhooks)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppWebhookListResponse(t *testing.T) {
+	t.Run("GetWebhooks", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookListResponse{}
+		var expected []*WhatsAppWebhook
+		obj.Webhooks = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWebhooks(), "getter should return the property value")
+	})
+
+	t.Run("GetWebhooks_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookListResponse{}
+		obj.Webhooks = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWebhooks(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWebhooks_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookListResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWebhooks() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppWebhookListResponse(t *testing.T) {
+	t.Run("SetWebhooks_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookListResponse{}
+		var fernTestValueWebhooks []*WhatsAppWebhook
+
+		// Act
+		obj.SetWebhooks(fernTestValueWebhooks)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppWebhookResponse(t *testing.T) {
+	t.Run("SetWebhook", func(t *testing.T) {
+		obj := &WhatsAppWebhookResponse{}
+		var fernTestValueWebhook *WhatsAppWebhook
+		obj.SetWebhook(fernTestValueWebhook)
+		assert.Equal(t, fernTestValueWebhook, obj.Webhook)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppWebhookResponse(t *testing.T) {
+	t.Run("GetWebhook", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookResponse{}
+		var expected *WhatsAppWebhook
+		obj.Webhook = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWebhook(), "getter should return the property value")
+	})
+
+	t.Run("GetWebhook_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookResponse{}
+		obj.Webhook = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWebhook(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWebhook_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWebhook() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppWebhookResponse(t *testing.T) {
+	t.Run("SetWebhook_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookResponse{}
+		var fernTestValueWebhook *WhatsAppWebhook
+
+		// Act
+		obj.SetWebhook(fernTestValueWebhook)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppWebhookTestEvent(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &WhatsAppWebhookTestEvent{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTimestamp", func(t *testing.T) {
+		obj := &WhatsAppWebhookTestEvent{}
+		var fernTestValueTimestamp time.Time
+		obj.SetTimestamp(fernTestValueTimestamp)
+		assert.Equal(t, fernTestValueTimestamp, obj.Timestamp)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetData", func(t *testing.T) {
+		obj := &WhatsAppWebhookTestEvent{}
+		var fernTestValueData *WhatsAppWebhookTestEventData
+		obj.SetData(fernTestValueData)
+		assert.Equal(t, fernTestValueData, obj.Data)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppWebhookTestEvent(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestEvent{}
+		var expected string
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookTestEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetTimestamp", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestEvent{}
+		var expected time.Time
+		obj.Timestamp = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTimestamp(), "getter should return the property value")
+	})
+
+	t.Run("GetTimestamp_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookTestEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTimestamp() // Should return zero value
+	})
+
+	t.Run("GetData", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestEvent{}
+		var expected *WhatsAppWebhookTestEventData
+		obj.Data = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetData(), "getter should return the property value")
+	})
+
+	t.Run("GetData_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestEvent{}
+		obj.Data = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetData(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetData_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookTestEvent
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetData() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppWebhookTestEvent(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestEvent{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTimestamp_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestEvent{}
+		var fernTestValueTimestamp time.Time
+
+		// Act
+		obj.SetTimestamp(fernTestValueTimestamp)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetData_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestEvent{}
+		var fernTestValueData *WhatsAppWebhookTestEventData
+
+		// Act
+		obj.SetData(fernTestValueData)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppWebhookTestEventData(t *testing.T) {
+	t.Run("SetWebhookID", func(t *testing.T) {
+		obj := &WhatsAppWebhookTestEventData{}
+		var fernTestValueWebhookID string
+		obj.SetWebhookID(fernTestValueWebhookID)
+		assert.Equal(t, fernTestValueWebhookID, obj.WebhookID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppWebhookTestEventData(t *testing.T) {
+	t.Run("GetWebhookID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestEventData{}
+		var expected string
+		obj.WebhookID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWebhookID(), "getter should return the property value")
+	})
+
+	t.Run("GetWebhookID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookTestEventData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWebhookID() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppWebhookTestEventData(t *testing.T) {
+	t.Run("SetWebhookID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestEventData{}
+		var fernTestValueWebhookID string
+
+		// Act
+		obj.SetWebhookID(fernTestValueWebhookID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppWebhookTestResponse(t *testing.T) {
+	t.Run("SetTest", func(t *testing.T) {
+		obj := &WhatsAppWebhookTestResponse{}
+		var fernTestValueTest *WhatsAppWebhookTestResult
+		obj.SetTest(fernTestValueTest)
+		assert.Equal(t, fernTestValueTest, obj.Test)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppWebhookTestResponse(t *testing.T) {
+	t.Run("GetTest", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestResponse{}
+		var expected *WhatsAppWebhookTestResult
+		obj.Test = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTest(), "getter should return the property value")
+	})
+
+	t.Run("GetTest_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestResponse{}
+		obj.Test = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTest(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTest_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookTestResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTest() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppWebhookTestResponse(t *testing.T) {
+	t.Run("SetTest_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestResponse{}
+		var fernTestValueTest *WhatsAppWebhookTestResult
+
+		// Act
+		obj.SetTest(fernTestValueTest)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppWebhookTestResult(t *testing.T) {
+	t.Run("SetOutcome", func(t *testing.T) {
+		obj := &WhatsAppWebhookTestResult{}
+		var fernTestValueOutcome WhatsAppWebhookTestResultOutcome
+		obj.SetOutcome(fernTestValueOutcome)
+		assert.Equal(t, fernTestValueOutcome, obj.Outcome)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetStatusCode", func(t *testing.T) {
+		obj := &WhatsAppWebhookTestResult{}
+		var fernTestValueStatusCode *int
+		obj.SetStatusCode(fernTestValueStatusCode)
+		assert.Equal(t, fernTestValueStatusCode, obj.StatusCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDurationMs", func(t *testing.T) {
+		obj := &WhatsAppWebhookTestResult{}
+		var fernTestValueDurationMs int
+		obj.SetDurationMs(fernTestValueDurationMs)
+		assert.Equal(t, fernTestValueDurationMs, obj.DurationMs)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppWebhookTestResult(t *testing.T) {
+	t.Run("GetOutcome", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestResult{}
+		var expected WhatsAppWebhookTestResultOutcome
+		obj.Outcome = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetOutcome(), "getter should return the property value")
+	})
+
+	t.Run("GetOutcome_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookTestResult
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetOutcome() // Should return zero value
+	})
+
+	t.Run("GetStatusCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestResult{}
+		var expected *int
+		obj.StatusCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetStatusCode(), "getter should return the property value")
+	})
+
+	t.Run("GetStatusCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestResult{}
+		obj.StatusCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetStatusCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetStatusCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookTestResult
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetStatusCode() // Should return zero value
+	})
+
+	t.Run("GetDurationMs", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestResult{}
+		var expected int
+		obj.DurationMs = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDurationMs(), "getter should return the property value")
+	})
+
+	t.Run("GetDurationMs_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookTestResult
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDurationMs() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppWebhookTestResult(t *testing.T) {
+	t.Run("SetOutcome_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestResult{}
+		var fernTestValueOutcome WhatsAppWebhookTestResultOutcome
+
+		// Act
+		obj.SetOutcome(fernTestValueOutcome)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetStatusCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestResult{}
+		var fernTestValueStatusCode *int
+
+		// Act
+		obj.SetStatusCode(fernTestValueStatusCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDurationMs_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestResult{}
+		var fernTestValueDurationMs int
+
+		// Act
+		obj.SetDurationMs(fernTestValueDurationMs)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersWhatsAppWebhookUpdateRequest(t *testing.T) {
+	t.Run("SetURL", func(t *testing.T) {
+		obj := &WhatsAppWebhookUpdateRequest{}
+		var fernTestValueURL *string
+		obj.SetURL(fernTestValueURL)
+		assert.Equal(t, fernTestValueURL, obj.URL)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEnabled", func(t *testing.T) {
+		obj := &WhatsAppWebhookUpdateRequest{}
+		var fernTestValueEnabled *bool
+		obj.SetEnabled(fernTestValueEnabled)
+		assert.Equal(t, fernTestValueEnabled, obj.Enabled)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWhatsAppWebhookUpdateRequest(t *testing.T) {
+	t.Run("GetURL", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookUpdateRequest{}
+		var expected *string
+		obj.URL = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetURL(), "getter should return the property value")
+	})
+
+	t.Run("GetURL_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookUpdateRequest{}
+		obj.URL = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetURL(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetURL_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookUpdateRequest
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetURL() // Should return zero value
+	})
+
+	t.Run("GetEnabled", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookUpdateRequest{}
+		var expected *bool
+		obj.Enabled = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetEnabled(), "getter should return the property value")
+	})
+
+	t.Run("GetEnabled_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookUpdateRequest{}
+		obj.Enabled = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEnabled(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetEnabled_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookUpdateRequest
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetEnabled() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWhatsAppWebhookUpdateRequest(t *testing.T) {
+	t.Run("SetURL_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookUpdateRequest{}
+		var fernTestValueURL *string
+
+		// Act
+		obj.SetURL(fernTestValueURL)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEnabled_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookUpdateRequest{}
+		var fernTestValueEnabled *bool
+
+		// Act
+		obj.SetEnabled(fernTestValueEnabled)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -45085,6 +61185,864 @@ func TestJSONMarshalingWhatsAppBusinessAccount(t *testing.T) {
 	})
 }
 
+func TestJSONMarshalingWhatsAppContactMarketingPreferenceEventData(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppContactMarketingPreferenceEventData{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppContactMarketingPreferenceEventData
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppContactMarketingPreferenceEventData
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppContactMarketingPreferenceEventData
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppContactMarketingResumedEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppContactMarketingResumedEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppContactMarketingResumedEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppContactMarketingResumedEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppContactMarketingResumedEvent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppContactMarketingStoppedEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppContactMarketingStoppedEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppContactMarketingStoppedEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppContactMarketingStoppedEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppContactMarketingStoppedEvent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppEvent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppEventListResponse(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppEventListResponse{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppEventListResponse
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppEventListResponse
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppEventListResponse
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppInboundAudioContent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundAudioContent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppInboundAudioContent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundAudioContent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundAudioContent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppInboundButtonReply(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundButtonReply{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppInboundButtonReply
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundButtonReply
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundButtonReply
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppInboundButtonReplyContent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundButtonReplyContent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppInboundButtonReplyContent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundButtonReplyContent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundButtonReplyContent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppInboundContactCard(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContactCard{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppInboundContactCard
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundContactCard
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundContactCard
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppInboundContactsContent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContactsContent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppInboundContactsContent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundContactsContent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundContactsContent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppInboundContext(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundContext{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppInboundContext
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundContext
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundContext
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppInboundDocumentContent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundDocumentContent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppInboundDocumentContent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundDocumentContent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundDocumentContent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppInboundFlowResponseContent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundFlowResponseContent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppInboundFlowResponseContent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundFlowResponseContent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundFlowResponseContent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppInboundImageContent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundImageContent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppInboundImageContent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundImageContent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundImageContent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppInboundListReply(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundListReply{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppInboundListReply
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundListReply
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundListReply
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppInboundListReplyContent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundListReplyContent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppInboundListReplyContent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundListReplyContent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundListReplyContent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppInboundLocation(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundLocation{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppInboundLocation
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundLocation
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundLocation
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppInboundLocationContent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundLocationContent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppInboundLocationContent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundLocationContent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundLocationContent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppInboundMedia(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMedia{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppInboundMedia
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundMedia
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundMedia
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppInboundMessageContent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundMessageContent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppInboundMessageContent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundMessageContent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundMessageContent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppInboundReaction(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReaction{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppInboundReaction
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundReaction
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundReaction
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppInboundReactionContent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReactionContent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppInboundReactionContent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundReactionContent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundReactionContent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppInboundReferral(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundReferral{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppInboundReferral
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundReferral
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundReferral
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppInboundStickerContent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundStickerContent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppInboundStickerContent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundStickerContent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundStickerContent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppInboundTextContent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundTextContent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppInboundTextContent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundTextContent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundTextContent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppInboundVideoContent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppInboundVideoContent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppInboundVideoContent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundVideoContent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppInboundVideoContent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestJSONMarshalingWhatsAppMessage(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -45113,6 +62071,138 @@ func TestJSONMarshalingWhatsAppMessage(t *testing.T) {
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
 		var obj WhatsAppMessage
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppMessageDeliveredEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageDeliveredEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppMessageDeliveredEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppMessageDeliveredEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppMessageDeliveredEvent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppMessageError(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageError{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppMessageError
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppMessageError
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppMessageError
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppMessageFailedEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppMessageFailedEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppMessageFailedEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppMessageFailedEvent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppMessageFailedEventData(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageFailedEventData{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppMessageFailedEventData
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppMessageFailedEventData
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppMessageFailedEventData
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
@@ -45217,6 +62307,105 @@ func TestJSONMarshalingWhatsAppMessageListResponse(t *testing.T) {
 	})
 }
 
+func TestJSONMarshalingWhatsAppMessageReadEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReadEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppMessageReadEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppMessageReadEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppMessageReadEvent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppMessageReceivedEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppMessageReceivedEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppMessageReceivedEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppMessageReceivedEvent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppMessageReceivedEventData(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageReceivedEventData{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppMessageReceivedEventData
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppMessageReceivedEventData
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppMessageReceivedEventData
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestJSONMarshalingWhatsAppMessageSendRequest(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -45283,6 +62472,72 @@ func TestJSONMarshalingWhatsAppMessageSendResponse(t *testing.T) {
 	})
 }
 
+func TestJSONMarshalingWhatsAppMessageSentEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageSentEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppMessageSentEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppMessageSentEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppMessageSentEvent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppMessageStatusEventData(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageStatusEventData{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppMessageStatusEventData
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppMessageStatusEventData
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppMessageStatusEventData
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestJSONMarshalingWhatsAppMessageTemplate(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -45344,6 +62599,369 @@ func TestJSONMarshalingWhatsAppProblem(t *testing.T) {
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
 		var obj WhatsAppProblem
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppSendAudioContent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendAudioContent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSendAudioContent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendAudioContent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendAudioContent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppSendButtons(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendButtons{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSendButtons
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendButtons
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendButtons
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppSendButtonsContent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendButtonsContent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSendButtonsContent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendButtonsContent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendButtonsContent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppSendDocumentContent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendDocumentContent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSendDocumentContent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendDocumentContent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendDocumentContent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppSendImageContent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendImageContent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSendImageContent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendImageContent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendImageContent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppSendList(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendList{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSendList
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendList
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendList
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppSendListContent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendListContent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSendListContent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendListContent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendListContent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppSendListRow(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendListRow{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSendListRow
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendListRow
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendListRow
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppSendListSection(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendListSection{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSendListSection
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendListSection
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendListSection
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppSendMedia(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendMedia{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSendMedia
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendMedia
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendMedia
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppSendReplyButton(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendReplyButton{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSendReplyButton
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendReplyButton
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendReplyButton
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
@@ -45448,6 +63066,72 @@ func TestJSONMarshalingWhatsAppSendTemplateHeader(t *testing.T) {
 	})
 }
 
+func TestJSONMarshalingWhatsAppSendTextContent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendTextContent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSendTextContent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendTextContent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendTextContent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppSendVideoContent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSendVideoContent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSendVideoContent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendVideoContent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSendVideoContent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestJSONMarshalingWhatsAppSender(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -45476,6 +63160,171 @@ func TestJSONMarshalingWhatsAppSender(t *testing.T) {
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
 		var obj WhatsAppSender
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppSenderBannedEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderBannedEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSenderBannedEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSenderBannedEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSenderBannedEvent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppSenderConnectedEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderConnectedEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSenderConnectedEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSenderConnectedEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSenderConnectedEvent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppSenderDisconnectedEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderDisconnectedEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSenderDisconnectedEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSenderDisconnectedEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSenderDisconnectedEvent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppSenderEventData(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderEventData{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSenderEventData
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSenderEventData
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSenderEventData
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppSenderFlaggedEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderFlaggedEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSenderFlaggedEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSenderFlaggedEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSenderFlaggedEvent
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
@@ -45514,6 +63363,138 @@ func TestJSONMarshalingWhatsAppSenderListResponse(t *testing.T) {
 	})
 }
 
+func TestJSONMarshalingWhatsAppSenderPreviousAttributes(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderPreviousAttributes{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSenderPreviousAttributes
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSenderPreviousAttributes
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSenderPreviousAttributes
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppSenderQualityChangedEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderQualityChangedEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSenderQualityChangedEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSenderQualityChangedEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSenderQualityChangedEvent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppSenderRestrictedEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderRestrictedEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSenderRestrictedEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSenderRestrictedEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSenderRestrictedEvent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppSenderUpdatedEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppSenderUpdatedEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppSenderUpdatedEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSenderUpdatedEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppSenderUpdatedEvent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestJSONMarshalingWhatsAppTemplate(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -45542,6 +63523,39 @@ func TestJSONMarshalingWhatsAppTemplate(t *testing.T) {
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
 		var obj WhatsAppTemplate
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppTemplateApprovedEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateApprovedEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppTemplateApprovedEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppTemplateApprovedEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppTemplateApprovedEvent
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
@@ -45646,6 +63660,39 @@ func TestJSONMarshalingWhatsAppTemplateButtonsComponentRequest(t *testing.T) {
 	})
 }
 
+func TestJSONMarshalingWhatsAppTemplateCategoryChangedEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateCategoryChangedEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppTemplateCategoryChangedEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppTemplateCategoryChangedEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppTemplateCategoryChangedEvent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestJSONMarshalingWhatsAppTemplateCopyCodeButtonRequest(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -45707,6 +63754,105 @@ func TestJSONMarshalingWhatsAppTemplateCreateRequest(t *testing.T) {
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
 		var obj WhatsAppTemplateCreateRequest
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppTemplateDisabledEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateDisabledEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppTemplateDisabledEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppTemplateDisabledEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppTemplateDisabledEvent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppTemplateEventData(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateEventData{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppTemplateEventData
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppTemplateEventData
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppTemplateEventData
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppTemplateFlaggedEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateFlaggedEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppTemplateFlaggedEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppTemplateFlaggedEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppTemplateFlaggedEvent
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
@@ -45877,6 +64023,39 @@ func TestJSONMarshalingWhatsAppTemplatePageResponse(t *testing.T) {
 	})
 }
 
+func TestJSONMarshalingWhatsAppTemplatePausedEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatePausedEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppTemplatePausedEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppTemplatePausedEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppTemplatePausedEvent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestJSONMarshalingWhatsAppTemplatePhoneNumberButtonRequest(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -45910,6 +64089,72 @@ func TestJSONMarshalingWhatsAppTemplatePhoneNumberButtonRequest(t *testing.T) {
 	})
 }
 
+func TestJSONMarshalingWhatsAppTemplatePreviousAttributes(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplatePreviousAttributes{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppTemplatePreviousAttributes
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppTemplatePreviousAttributes
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppTemplatePreviousAttributes
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppTemplateQualityChangedEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateQualityChangedEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppTemplateQualityChangedEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppTemplateQualityChangedEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppTemplateQualityChangedEvent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestJSONMarshalingWhatsAppTemplateQuickReplyButtonRequest(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -45938,6 +64183,39 @@ func TestJSONMarshalingWhatsAppTemplateQuickReplyButtonRequest(t *testing.T) {
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
 		var obj WhatsAppTemplateQuickReplyButtonRequest
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppTemplateRejectedEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateRejectedEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppTemplateRejectedEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppTemplateRejectedEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppTemplateRejectedEvent
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
@@ -46108,6 +64386,39 @@ func TestJSONMarshalingWhatsAppTemplateURLButtonRequest(t *testing.T) {
 	})
 }
 
+func TestJSONMarshalingWhatsAppTemplateUpdatedEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppTemplateUpdatedEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppTemplateUpdatedEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppTemplateUpdatedEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppTemplateUpdatedEvent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestJSONMarshalingWhatsAppWaba(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -46169,6 +64480,303 @@ func TestJSONMarshalingWhatsAppWabaListResponse(t *testing.T) {
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
 		var obj WhatsAppWabaListResponse
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppWebhook(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhook{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppWebhook
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppWebhook
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppWebhook
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppWebhookCreateRequest(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookCreateRequest{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppWebhookCreateRequest
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppWebhookCreateRequest
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppWebhookCreateRequest
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppWebhookListResponse(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookListResponse{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppWebhookListResponse
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppWebhookListResponse
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppWebhookListResponse
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppWebhookResponse(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookResponse{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppWebhookResponse
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppWebhookResponse
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppWebhookResponse
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppWebhookTestEvent(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestEvent{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppWebhookTestEvent
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppWebhookTestEvent
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppWebhookTestEvent
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppWebhookTestEventData(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestEventData{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppWebhookTestEventData
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppWebhookTestEventData
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppWebhookTestEventData
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppWebhookTestResponse(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestResponse{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppWebhookTestResponse
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppWebhookTestResponse
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppWebhookTestResponse
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppWebhookTestResult(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookTestResult{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppWebhookTestResult
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppWebhookTestResult
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppWebhookTestResult
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingWhatsAppWebhookUpdateRequest(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppWebhookUpdateRequest{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WhatsAppWebhookUpdateRequest
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppWebhookUpdateRequest
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WhatsAppWebhookUpdateRequest
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
@@ -47790,6 +66398,422 @@ func TestStringWhatsAppBusinessAccount(t *testing.T) {
 	})
 }
 
+func TestStringWhatsAppContactMarketingPreferenceEventData(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppContactMarketingPreferenceEventData{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppContactMarketingPreferenceEventData
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppContactMarketingResumedEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppContactMarketingResumedEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppContactMarketingResumedEvent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppContactMarketingStoppedEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppContactMarketingStoppedEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppContactMarketingStoppedEvent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppEvent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppEventListResponse(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppEventListResponse{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppEventListResponse
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppInboundAudioContent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundAudioContent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundAudioContent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppInboundButtonReply(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundButtonReply{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundButtonReply
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppInboundButtonReplyContent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundButtonReplyContent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundButtonReplyContent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppInboundContactCard(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundContactCard{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContactCard
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppInboundContactsContent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundContactsContent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContactsContent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppInboundContext(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundContext{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContext
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppInboundDocumentContent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundDocumentContent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundDocumentContent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppInboundFlowResponseContent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundFlowResponseContent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundFlowResponseContent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppInboundImageContent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundImageContent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundImageContent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppInboundListReply(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundListReply{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundListReply
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppInboundListReplyContent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundListReplyContent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundListReplyContent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppInboundLocation(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundLocation{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundLocation
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppInboundLocationContent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundLocationContent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundLocationContent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppInboundMedia(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundMedia{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundMedia
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppInboundMessageContent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundMessageContent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundMessageContent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppInboundReaction(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundReaction{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundReaction
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppInboundReactionContent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundReactionContent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundReactionContent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppInboundReferral(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundReferral{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundReferral
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppInboundStickerContent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundStickerContent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundStickerContent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppInboundTextContent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundTextContent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundTextContent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppInboundVideoContent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundVideoContent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundVideoContent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
 func TestStringWhatsAppMessage(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -47801,6 +66825,70 @@ func TestStringWhatsAppMessage(t *testing.T) {
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *WhatsAppMessage
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppMessageDeliveredEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppMessageDeliveredEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageDeliveredEvent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppMessageError(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppMessageError{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageError
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppMessageFailedEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppMessageFailedEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageFailedEvent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppMessageFailedEventData(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppMessageFailedEventData{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageFailedEventData
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -47854,6 +66942,54 @@ func TestStringWhatsAppMessageListResponse(t *testing.T) {
 	})
 }
 
+func TestStringWhatsAppMessageReadEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppMessageReadEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageReadEvent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppMessageReceivedEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppMessageReceivedEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageReceivedEvent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppMessageReceivedEventData(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppMessageReceivedEventData{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageReceivedEventData
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
 func TestStringWhatsAppMessageSendRequest(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -47886,6 +67022,38 @@ func TestStringWhatsAppMessageSendResponse(t *testing.T) {
 	})
 }
 
+func TestStringWhatsAppMessageSentEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppMessageSentEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageSentEvent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppMessageStatusEventData(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppMessageStatusEventData{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageStatusEventData
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
 func TestStringWhatsAppMessageTemplate(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -47913,6 +67081,182 @@ func TestStringWhatsAppProblem(t *testing.T) {
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *WhatsAppProblem
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppSendAudioContent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendAudioContent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendAudioContent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppSendButtons(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendButtons{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendButtons
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppSendButtonsContent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendButtonsContent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendButtonsContent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppSendDocumentContent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendDocumentContent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendDocumentContent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppSendImageContent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendImageContent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendImageContent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppSendList(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendList{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendList
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppSendListContent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendListContent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendListContent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppSendListRow(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendListRow{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendListRow
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppSendListSection(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendListSection{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendListSection
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppSendMedia(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendMedia{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendMedia
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppSendReplyButton(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendReplyButton{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendReplyButton
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -47966,6 +67310,38 @@ func TestStringWhatsAppSendTemplateHeader(t *testing.T) {
 	})
 }
 
+func TestStringWhatsAppSendTextContent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendTextContent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendTextContent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppSendVideoContent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendVideoContent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendVideoContent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
 func TestStringWhatsAppSender(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -47977,6 +67353,86 @@ func TestStringWhatsAppSender(t *testing.T) {
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *WhatsAppSender
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppSenderBannedEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSenderBannedEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderBannedEvent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppSenderConnectedEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSenderConnectedEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderConnectedEvent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppSenderDisconnectedEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSenderDisconnectedEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderDisconnectedEvent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppSenderEventData(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSenderEventData{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderEventData
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppSenderFlaggedEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSenderFlaggedEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderFlaggedEvent
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -47998,6 +67454,70 @@ func TestStringWhatsAppSenderListResponse(t *testing.T) {
 	})
 }
 
+func TestStringWhatsAppSenderPreviousAttributes(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSenderPreviousAttributes{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderPreviousAttributes
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppSenderQualityChangedEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSenderQualityChangedEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderQualityChangedEvent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppSenderRestrictedEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSenderRestrictedEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderRestrictedEvent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppSenderUpdatedEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSenderUpdatedEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderUpdatedEvent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
 func TestStringWhatsAppTemplate(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -48009,6 +67529,22 @@ func TestStringWhatsAppTemplate(t *testing.T) {
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *WhatsAppTemplate
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppTemplateApprovedEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppTemplateApprovedEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateApprovedEvent
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -48062,6 +67598,22 @@ func TestStringWhatsAppTemplateButtonsComponentRequest(t *testing.T) {
 	})
 }
 
+func TestStringWhatsAppTemplateCategoryChangedEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppTemplateCategoryChangedEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateCategoryChangedEvent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
 func TestStringWhatsAppTemplateCopyCodeButtonRequest(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -48089,6 +67641,54 @@ func TestStringWhatsAppTemplateCreateRequest(t *testing.T) {
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *WhatsAppTemplateCreateRequest
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppTemplateDisabledEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppTemplateDisabledEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateDisabledEvent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppTemplateEventData(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppTemplateEventData{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateEventData
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppTemplateFlaggedEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppTemplateFlaggedEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateFlaggedEvent
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -48174,6 +67774,22 @@ func TestStringWhatsAppTemplatePageResponse(t *testing.T) {
 	})
 }
 
+func TestStringWhatsAppTemplatePausedEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppTemplatePausedEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplatePausedEvent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
 func TestStringWhatsAppTemplatePhoneNumberButtonRequest(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -48190,6 +67806,38 @@ func TestStringWhatsAppTemplatePhoneNumberButtonRequest(t *testing.T) {
 	})
 }
 
+func TestStringWhatsAppTemplatePreviousAttributes(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppTemplatePreviousAttributes{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplatePreviousAttributes
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppTemplateQualityChangedEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppTemplateQualityChangedEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateQualityChangedEvent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
 func TestStringWhatsAppTemplateQuickReplyButtonRequest(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -48201,6 +67849,22 @@ func TestStringWhatsAppTemplateQuickReplyButtonRequest(t *testing.T) {
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *WhatsAppTemplateQuickReplyButtonRequest
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppTemplateRejectedEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppTemplateRejectedEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateRejectedEvent
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -48286,6 +67950,22 @@ func TestStringWhatsAppTemplateURLButtonRequest(t *testing.T) {
 	})
 }
 
+func TestStringWhatsAppTemplateUpdatedEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppTemplateUpdatedEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateUpdatedEvent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
 func TestStringWhatsAppWaba(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -48313,6 +67993,150 @@ func TestStringWhatsAppWabaListResponse(t *testing.T) {
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *WhatsAppWabaListResponse
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppWebhook(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppWebhook{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhook
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppWebhookCreateRequest(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppWebhookCreateRequest{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookCreateRequest
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppWebhookListResponse(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppWebhookListResponse{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookListResponse
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppWebhookResponse(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppWebhookResponse{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookResponse
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppWebhookTestEvent(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppWebhookTestEvent{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookTestEvent
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppWebhookTestEventData(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppWebhookTestEventData{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookTestEventData
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppWebhookTestResponse(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppWebhookTestResponse{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookTestResponse
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppWebhookTestResult(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppWebhookTestResult{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookTestResult
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWhatsAppWebhookUpdateRequest(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppWebhookUpdateRequest{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookUpdateRequest
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -49250,6 +69074,452 @@ func TestEnumWhatsAppBusinessAccountMessagingLimit(t *testing.T) {
 	})
 }
 
+func TestEnumWhatsAppEventType(t *testing.T) {
+	t.Run("NewFromString_whatsapp_message_received", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.message.received")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.message.received"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_whatsapp_message_sent", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.message.sent")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.message.sent"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_whatsapp_message_delivered", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.message.delivered")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.message.delivered"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_whatsapp_message_read", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.message.read")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.message.read"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_whatsapp_message_failed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.message.failed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.message.failed"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_whatsapp_contact_marketing_stopped", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.contact.marketing_stopped")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.contact.marketing_stopped"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_whatsapp_contact_marketing_resumed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.contact.marketing_resumed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.contact.marketing_resumed"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_whatsapp_template_approved", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.template.approved")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.template.approved"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_whatsapp_template_rejected", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.template.rejected")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.template.rejected"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_whatsapp_template_paused", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.template.paused")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.template.paused"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_whatsapp_template_disabled", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.template.disabled")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.template.disabled"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_whatsapp_template_flagged", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.template.flagged")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.template.flagged"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_whatsapp_template_category_changed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.template.category_changed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.template.category_changed"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_whatsapp_template_quality_changed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.template.quality_changed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.template.quality_changed"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_whatsapp_template_updated", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.template.updated")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.template.updated"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_whatsapp_sender_connected", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.sender.connected")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.sender.connected"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_whatsapp_sender_restricted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.sender.restricted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.sender.restricted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_whatsapp_sender_flagged", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.sender.flagged")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.sender.flagged"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_whatsapp_sender_banned", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.sender.banned")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.sender.banned"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_whatsapp_sender_disconnected", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.sender.disconnected")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.sender.disconnected"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_whatsapp_sender_quality_changed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.sender.quality_changed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.sender.quality_changed"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_whatsapp_sender_updated", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.sender.updated")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppEventType("whatsapp.sender.updated"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewWhatsAppEventTypeFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewWhatsAppEventTypeFromString("whatsapp.message.received")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumWhatsAppInboundMessageContentType(t *testing.T) {
+	t.Run("NewFromString_text", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppInboundMessageContentTypeFromString("text")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppInboundMessageContentType("text"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_image", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppInboundMessageContentTypeFromString("image")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppInboundMessageContentType("image"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_video", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppInboundMessageContentTypeFromString("video")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppInboundMessageContentType("video"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_document", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppInboundMessageContentTypeFromString("document")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppInboundMessageContentType("document"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_audio", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppInboundMessageContentTypeFromString("audio")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppInboundMessageContentType("audio"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sticker", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppInboundMessageContentTypeFromString("sticker")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppInboundMessageContentType("sticker"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_location", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppInboundMessageContentTypeFromString("location")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppInboundMessageContentType("location"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_contacts", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppInboundMessageContentTypeFromString("contacts")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppInboundMessageContentType("contacts"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_reaction", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppInboundMessageContentTypeFromString("reaction")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppInboundMessageContentType("reaction"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_button_reply", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppInboundMessageContentTypeFromString("button_reply")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppInboundMessageContentType("button_reply"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_list_reply", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppInboundMessageContentTypeFromString("list_reply")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppInboundMessageContentType("list_reply"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_flow_response", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppInboundMessageContentTypeFromString("flow_response")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppInboundMessageContentType("flow_response"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_unsupported", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppInboundMessageContentTypeFromString("unsupported")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppInboundMessageContentType("unsupported"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewWhatsAppInboundMessageContentTypeFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewWhatsAppInboundMessageContentTypeFromString("text")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumWhatsAppInboundReferralSourceType(t *testing.T) {
+	t.Run("NewFromString_ad", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppInboundReferralSourceTypeFromString("ad")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppInboundReferralSourceType("ad"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_post", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppInboundReferralSourceTypeFromString("post")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppInboundReferralSourceType("post"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewWhatsAppInboundReferralSourceTypeFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewWhatsAppInboundReferralSourceTypeFromString("ad")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumWhatsAppMessageErrorCode(t *testing.T) {
+	t.Run("NewFromString_WAVIX_RECIPIENT_NOT_ON_WHATSAPP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_RECIPIENT_NOT_ON_WHATSAPP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_RECIPIENT_NOT_ON_WHATSAPP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_WAVIX_RECIPIENT_OPTED_OUT", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_RECIPIENT_OPTED_OUT")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_RECIPIENT_OPTED_OUT"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_WAVIX_SERVICE_WINDOW_CLOSED", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_SERVICE_WINDOW_CLOSED")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_SERVICE_WINDOW_CLOSED"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_WAVIX_TEMPLATE_NOT_APPROVED", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_TEMPLATE_NOT_APPROVED")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_TEMPLATE_NOT_APPROVED"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_WAVIX_TEMPLATE_PAUSED_OR_DISABLED", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_TEMPLATE_PAUSED_OR_DISABLED")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_TEMPLATE_PAUSED_OR_DISABLED"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_WAVIX_INVALID_TEMPLATE_PARAMETERS", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_INVALID_TEMPLATE_PARAMETERS")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_INVALID_TEMPLATE_PARAMETERS"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_WAVIX_MARKETING_LIMIT_REACHED", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_MARKETING_LIMIT_REACHED")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_MARKETING_LIMIT_REACHED"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_WAVIX_SENDER_LIMIT_REACHED", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_SENDER_LIMIT_REACHED")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_SENDER_LIMIT_REACHED"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_WAVIX_SENDER_RATE_LIMITED", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_SENDER_RATE_LIMITED")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_SENDER_RATE_LIMITED"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_WAVIX_SENDER_UNAVAILABLE", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_SENDER_UNAVAILABLE")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_SENDER_UNAVAILABLE"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_WAVIX_SERVICE_UNAVAILABLE", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_SERVICE_UNAVAILABLE")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_SERVICE_UNAVAILABLE"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_WAVIX_MESSAGE_EXPIRED", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_MESSAGE_EXPIRED")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_MESSAGE_EXPIRED"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_WAVIX_DELIVERY_FAILED", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_DELIVERY_FAILED")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_DELIVERY_FAILED"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewWhatsAppMessageErrorCodeFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_RECIPIENT_NOT_ON_WHATSAPP")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumWhatsAppMessageFailedEventDataStatus(t *testing.T) {
+	t.Run("NewFromString_undelivered", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageFailedEventDataStatusFromString("undelivered")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageFailedEventDataStatus("undelivered"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_expired", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageFailedEventDataStatusFromString("expired")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageFailedEventDataStatus("expired"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_rejected", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageFailedEventDataStatusFromString("rejected")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageFailedEventDataStatus("rejected"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewWhatsAppMessageFailedEventDataStatusFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewWhatsAppMessageFailedEventDataStatusFromString("undelivered")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumWhatsAppMessageListItemDirection(t *testing.T) {
 	t.Run("NewFromString_outbound", func(t *testing.T) {
 		t.Parallel()
@@ -49292,6 +69562,13 @@ func TestEnumWhatsAppMessageListItemStatus(t *testing.T) {
 		val, err := NewWhatsAppMessageListItemStatusFromString("delivered")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, WhatsAppMessageListItemStatus("delivered"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_read", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageListItemStatusFromString("read")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageListItemStatus("read"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_undelivered", func(t *testing.T) {
@@ -49349,6 +69626,13 @@ func TestEnumWhatsAppMessageStatus(t *testing.T) {
 		val, err := NewWhatsAppMessageStatusFromString("delivered")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, WhatsAppMessageStatus("delivered"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_read", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageStatusFromString("read")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageStatus("read"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_undelivered", func(t *testing.T) {
@@ -49564,6 +69848,276 @@ func TestEnumWhatsAppSendTemplateHeaderType(t *testing.T) {
 	})
 }
 
+func TestEnumWhatsAppSenderEventDataQualityRating(t *testing.T) {
+	t.Run("NewFromString_high", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderEventDataQualityRatingFromString("high")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderEventDataQualityRating("high"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_medium", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderEventDataQualityRatingFromString("medium")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderEventDataQualityRating("medium"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_low", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderEventDataQualityRatingFromString("low")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderEventDataQualityRating("low"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_unknown", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderEventDataQualityRatingFromString("unknown")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderEventDataQualityRating("unknown"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewWhatsAppSenderEventDataQualityRatingFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewWhatsAppSenderEventDataQualityRatingFromString("high")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumWhatsAppSenderEventDataStatus(t *testing.T) {
+	t.Run("NewFromString_banned", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderEventDataStatusFromString("banned")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderEventDataStatus("banned"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_connected", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderEventDataStatusFromString("connected")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderEventDataStatus("connected"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_deleted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderEventDataStatusFromString("deleted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderEventDataStatus("deleted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_disconnected", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderEventDataStatusFromString("disconnected")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderEventDataStatus("disconnected"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_flagged", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderEventDataStatusFromString("flagged")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderEventDataStatus("flagged"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_migrated", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderEventDataStatusFromString("migrated")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderEventDataStatus("migrated"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pending", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderEventDataStatusFromString("pending")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderEventDataStatus("pending"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_rate_limited", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderEventDataStatusFromString("rate_limited")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderEventDataStatus("rate_limited"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_restricted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderEventDataStatusFromString("restricted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderEventDataStatus("restricted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_unknown", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderEventDataStatusFromString("unknown")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderEventDataStatus("unknown"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_unverified", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderEventDataStatusFromString("unverified")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderEventDataStatus("unverified"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewWhatsAppSenderEventDataStatusFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewWhatsAppSenderEventDataStatusFromString("banned")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumWhatsAppSenderPreviousAttributesQualityRating(t *testing.T) {
+	t.Run("NewFromString_high", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderPreviousAttributesQualityRatingFromString("high")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderPreviousAttributesQualityRating("high"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_medium", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderPreviousAttributesQualityRatingFromString("medium")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderPreviousAttributesQualityRating("medium"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_low", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderPreviousAttributesQualityRatingFromString("low")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderPreviousAttributesQualityRating("low"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_unknown", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderPreviousAttributesQualityRatingFromString("unknown")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderPreviousAttributesQualityRating("unknown"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewWhatsAppSenderPreviousAttributesQualityRatingFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewWhatsAppSenderPreviousAttributesQualityRatingFromString("high")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumWhatsAppSenderPreviousAttributesStatus(t *testing.T) {
+	t.Run("NewFromString_banned", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderPreviousAttributesStatusFromString("banned")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderPreviousAttributesStatus("banned"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_connected", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderPreviousAttributesStatusFromString("connected")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderPreviousAttributesStatus("connected"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_deleted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderPreviousAttributesStatusFromString("deleted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderPreviousAttributesStatus("deleted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_disconnected", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderPreviousAttributesStatusFromString("disconnected")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderPreviousAttributesStatus("disconnected"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_flagged", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderPreviousAttributesStatusFromString("flagged")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderPreviousAttributesStatus("flagged"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_migrated", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderPreviousAttributesStatusFromString("migrated")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderPreviousAttributesStatus("migrated"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pending", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderPreviousAttributesStatusFromString("pending")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderPreviousAttributesStatus("pending"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_rate_limited", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderPreviousAttributesStatusFromString("rate_limited")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderPreviousAttributesStatus("rate_limited"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_restricted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderPreviousAttributesStatusFromString("restricted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderPreviousAttributesStatus("restricted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_unknown", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderPreviousAttributesStatusFromString("unknown")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderPreviousAttributesStatus("unknown"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_unverified", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppSenderPreviousAttributesStatusFromString("unverified")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppSenderPreviousAttributesStatus("unverified"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewWhatsAppSenderPreviousAttributesStatusFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewWhatsAppSenderPreviousAttributesStatusFromString("banned")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumWhatsAppSenderQualityRating(t *testing.T) {
 	t.Run("NewFromString_high", func(t *testing.T) {
 		t.Parallel()
@@ -49771,6 +70325,177 @@ func TestEnumWhatsAppTemplateCreateRequestCategory(t *testing.T) {
 	})
 }
 
+func TestEnumWhatsAppTemplateEventDataCategory(t *testing.T) {
+	t.Run("NewFromString_marketing", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplateEventDataCategoryFromString("marketing")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplateEventDataCategory("marketing"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_authentication", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplateEventDataCategoryFromString("authentication")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplateEventDataCategory("authentication"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_utility", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplateEventDataCategoryFromString("utility")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplateEventDataCategory("utility"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewWhatsAppTemplateEventDataCategoryFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewWhatsAppTemplateEventDataCategoryFromString("marketing")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumWhatsAppTemplateEventDataQualityRating(t *testing.T) {
+	t.Run("NewFromString_high", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplateEventDataQualityRatingFromString("high")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplateEventDataQualityRating("high"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_medium", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplateEventDataQualityRatingFromString("medium")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplateEventDataQualityRating("medium"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_low", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplateEventDataQualityRatingFromString("low")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplateEventDataQualityRating("low"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_unknown", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplateEventDataQualityRatingFromString("unknown")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplateEventDataQualityRating("unknown"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewWhatsAppTemplateEventDataQualityRatingFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewWhatsAppTemplateEventDataQualityRatingFromString("high")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumWhatsAppTemplateEventDataStatus(t *testing.T) {
+	t.Run("NewFromString_draft", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplateEventDataStatusFromString("draft")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplateEventDataStatus("draft"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pending", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplateEventDataStatusFromString("pending")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplateEventDataStatus("pending"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_approved", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplateEventDataStatusFromString("approved")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplateEventDataStatus("approved"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_rejected", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplateEventDataStatusFromString("rejected")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplateEventDataStatus("rejected"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_paused", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplateEventDataStatusFromString("paused")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplateEventDataStatus("paused"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_flagged", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplateEventDataStatusFromString("flagged")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplateEventDataStatus("flagged"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_disabled", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplateEventDataStatusFromString("disabled")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplateEventDataStatus("disabled"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_in_appeal", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplateEventDataStatusFromString("in_appeal")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplateEventDataStatus("in_appeal"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pending_deletion", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplateEventDataStatusFromString("pending_deletion")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplateEventDataStatus("pending_deletion"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_deleted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplateEventDataStatusFromString("deleted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplateEventDataStatus("deleted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_unknown", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplateEventDataStatusFromString("unknown")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplateEventDataStatus("unknown"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewWhatsAppTemplateEventDataStatusFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewWhatsAppTemplateEventDataStatusFromString("draft")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumWhatsAppTemplateLocationHeaderComponentRequestType(t *testing.T) {
 	t.Run("NewFromString_header", func(t *testing.T) {
 		t.Parallel()
@@ -49808,6 +70533,177 @@ func TestEnumWhatsAppTemplateMediaHeaderComponentRequestType(t *testing.T) {
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewWhatsAppTemplateMediaHeaderComponentRequestTypeFromString("header")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumWhatsAppTemplatePreviousAttributesCategory(t *testing.T) {
+	t.Run("NewFromString_marketing", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplatePreviousAttributesCategoryFromString("marketing")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplatePreviousAttributesCategory("marketing"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_authentication", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplatePreviousAttributesCategoryFromString("authentication")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplatePreviousAttributesCategory("authentication"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_utility", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplatePreviousAttributesCategoryFromString("utility")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplatePreviousAttributesCategory("utility"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewWhatsAppTemplatePreviousAttributesCategoryFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewWhatsAppTemplatePreviousAttributesCategoryFromString("marketing")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumWhatsAppTemplatePreviousAttributesQualityRating(t *testing.T) {
+	t.Run("NewFromString_high", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplatePreviousAttributesQualityRatingFromString("high")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplatePreviousAttributesQualityRating("high"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_medium", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplatePreviousAttributesQualityRatingFromString("medium")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplatePreviousAttributesQualityRating("medium"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_low", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplatePreviousAttributesQualityRatingFromString("low")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplatePreviousAttributesQualityRating("low"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_unknown", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplatePreviousAttributesQualityRatingFromString("unknown")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplatePreviousAttributesQualityRating("unknown"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewWhatsAppTemplatePreviousAttributesQualityRatingFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewWhatsAppTemplatePreviousAttributesQualityRatingFromString("high")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumWhatsAppTemplatePreviousAttributesStatus(t *testing.T) {
+	t.Run("NewFromString_draft", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplatePreviousAttributesStatusFromString("draft")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplatePreviousAttributesStatus("draft"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pending", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplatePreviousAttributesStatusFromString("pending")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplatePreviousAttributesStatus("pending"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_approved", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplatePreviousAttributesStatusFromString("approved")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplatePreviousAttributesStatus("approved"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_rejected", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplatePreviousAttributesStatusFromString("rejected")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplatePreviousAttributesStatus("rejected"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_paused", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplatePreviousAttributesStatusFromString("paused")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplatePreviousAttributesStatus("paused"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_flagged", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplatePreviousAttributesStatusFromString("flagged")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplatePreviousAttributesStatus("flagged"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_disabled", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplatePreviousAttributesStatusFromString("disabled")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplatePreviousAttributesStatus("disabled"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_in_appeal", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplatePreviousAttributesStatusFromString("in_appeal")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplatePreviousAttributesStatus("in_appeal"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pending_deletion", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplatePreviousAttributesStatusFromString("pending_deletion")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplatePreviousAttributesStatus("pending_deletion"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_deleted", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplatePreviousAttributesStatusFromString("deleted")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplatePreviousAttributesStatus("deleted"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_unknown", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppTemplatePreviousAttributesStatusFromString("unknown")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppTemplatePreviousAttributesStatus("unknown"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewWhatsAppTemplatePreviousAttributesStatusFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewWhatsAppTemplatePreviousAttributesStatusFromString("draft")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -50015,6 +70911,99 @@ func TestEnumWhatsAppTemplateTextHeaderComponentRequestType(t *testing.T) {
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewWhatsAppTemplateTextHeaderComponentRequestTypeFromString("header")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumWhatsAppWebhookGroup(t *testing.T) {
+	t.Run("NewFromString_messages", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppWebhookGroupFromString("messages")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppWebhookGroup("messages"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_templates", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppWebhookGroupFromString("templates")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppWebhookGroup("templates"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_senders", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppWebhookGroupFromString("senders")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppWebhookGroup("senders"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewWhatsAppWebhookGroupFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewWhatsAppWebhookGroupFromString("messages")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumWhatsAppWebhookTestResultOutcome(t *testing.T) {
+	t.Run("NewFromString_delivered", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppWebhookTestResultOutcomeFromString("delivered")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppWebhookTestResultOutcome("delivered"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_http_error", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppWebhookTestResultOutcomeFromString("http_error")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppWebhookTestResultOutcome("http_error"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_timeout", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppWebhookTestResultOutcomeFromString("timeout")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppWebhookTestResultOutcome("timeout"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_connection_error", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppWebhookTestResultOutcomeFromString("connection_error")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppWebhookTestResultOutcome("connection_error"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_tls_error", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppWebhookTestResultOutcomeFromString("tls_error")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppWebhookTestResultOutcome("tls_error"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_blocked", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppWebhookTestResultOutcomeFromString("blocked")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppWebhookTestResultOutcome("blocked"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewWhatsAppWebhookTestResultOutcomeFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewWhatsAppWebhookTestResultOutcomeFromString("delivered")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -52345,6 +73334,604 @@ func TestExtraPropertiesWhatsAppBusinessAccount(t *testing.T) {
 	})
 }
 
+func TestExtraPropertiesWhatsAppContactMarketingPreferenceEventData(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppContactMarketingPreferenceEventData{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppContactMarketingPreferenceEventData
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppContactMarketingResumedEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppContactMarketingResumedEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppContactMarketingResumedEvent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppContactMarketingStoppedEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppContactMarketingStoppedEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppContactMarketingStoppedEvent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppEvent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppEventListResponse(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppEventListResponse{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppEventListResponse
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppInboundAudioContent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundAudioContent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundAudioContent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppInboundButtonReply(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundButtonReply{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundButtonReply
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppInboundButtonReplyContent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundButtonReplyContent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundButtonReplyContent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppInboundContactCard(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundContactCard{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContactCard
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppInboundContactsContent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundContactsContent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContactsContent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppInboundContext(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundContext{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundContext
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppInboundDocumentContent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundDocumentContent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundDocumentContent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppInboundFlowResponseContent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundFlowResponseContent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundFlowResponseContent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppInboundImageContent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundImageContent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundImageContent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppInboundListReply(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundListReply{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundListReply
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppInboundListReplyContent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundListReplyContent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundListReplyContent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppInboundLocation(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundLocation{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundLocation
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppInboundLocationContent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundLocationContent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundLocationContent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppInboundMedia(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundMedia{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundMedia
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppInboundMessageContent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundMessageContent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundMessageContent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppInboundReaction(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundReaction{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundReaction
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppInboundReactionContent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundReactionContent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundReactionContent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppInboundReferral(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundReferral{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundReferral
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppInboundStickerContent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundStickerContent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundStickerContent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppInboundTextContent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundTextContent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundTextContent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppInboundVideoContent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppInboundVideoContent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppInboundVideoContent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
 func TestExtraPropertiesWhatsAppMessage(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
@@ -52363,6 +73950,98 @@ func TestExtraPropertiesWhatsAppMessage(t *testing.T) {
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *WhatsAppMessage
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppMessageDeliveredEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppMessageDeliveredEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageDeliveredEvent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppMessageError(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppMessageError{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageError
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppMessageFailedEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppMessageFailedEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageFailedEvent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppMessageFailedEventData(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppMessageFailedEventData{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageFailedEventData
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
@@ -52437,6 +74116,75 @@ func TestExtraPropertiesWhatsAppMessageListResponse(t *testing.T) {
 	})
 }
 
+func TestExtraPropertiesWhatsAppMessageReadEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppMessageReadEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageReadEvent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppMessageReceivedEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppMessageReceivedEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageReceivedEvent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppMessageReceivedEventData(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppMessageReceivedEventData{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageReceivedEventData
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
 func TestExtraPropertiesWhatsAppMessageSendRequest(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
@@ -52483,6 +74231,52 @@ func TestExtraPropertiesWhatsAppMessageSendResponse(t *testing.T) {
 	})
 }
 
+func TestExtraPropertiesWhatsAppMessageSentEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppMessageSentEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageSentEvent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppMessageStatusEventData(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppMessageStatusEventData{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageStatusEventData
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
 func TestExtraPropertiesWhatsAppMessageTemplate(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
@@ -52524,6 +74318,259 @@ func TestExtraPropertiesWhatsAppProblem(t *testing.T) {
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *WhatsAppProblem
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppSendAudioContent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendAudioContent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendAudioContent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppSendButtons(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendButtons{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendButtons
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppSendButtonsContent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendButtonsContent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendButtonsContent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppSendDocumentContent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendDocumentContent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendDocumentContent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppSendImageContent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendImageContent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendImageContent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppSendList(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendList{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendList
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppSendListContent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendListContent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendListContent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppSendListRow(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendListRow{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendListRow
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppSendListSection(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendListSection{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendListSection
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppSendMedia(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendMedia{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendMedia
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppSendReplyButton(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendReplyButton{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendReplyButton
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
@@ -52598,6 +74645,52 @@ func TestExtraPropertiesWhatsAppSendTemplateHeader(t *testing.T) {
 	})
 }
 
+func TestExtraPropertiesWhatsAppSendTextContent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendTextContent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendTextContent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppSendVideoContent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSendVideoContent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSendVideoContent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
 func TestExtraPropertiesWhatsAppSender(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
@@ -52616,6 +74709,121 @@ func TestExtraPropertiesWhatsAppSender(t *testing.T) {
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *WhatsAppSender
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppSenderBannedEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSenderBannedEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderBannedEvent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppSenderConnectedEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSenderConnectedEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderConnectedEvent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppSenderDisconnectedEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSenderDisconnectedEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderDisconnectedEvent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppSenderEventData(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSenderEventData{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderEventData
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppSenderFlaggedEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSenderFlaggedEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderFlaggedEvent
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
@@ -52644,6 +74852,98 @@ func TestExtraPropertiesWhatsAppSenderListResponse(t *testing.T) {
 	})
 }
 
+func TestExtraPropertiesWhatsAppSenderPreviousAttributes(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSenderPreviousAttributes{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderPreviousAttributes
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppSenderQualityChangedEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSenderQualityChangedEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderQualityChangedEvent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppSenderRestrictedEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSenderRestrictedEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderRestrictedEvent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppSenderUpdatedEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppSenderUpdatedEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppSenderUpdatedEvent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
 func TestExtraPropertiesWhatsAppTemplate(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
@@ -52662,6 +74962,29 @@ func TestExtraPropertiesWhatsAppTemplate(t *testing.T) {
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *WhatsAppTemplate
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppTemplateApprovedEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppTemplateApprovedEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateApprovedEvent
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
@@ -52736,6 +75059,29 @@ func TestExtraPropertiesWhatsAppTemplateButtonsComponentRequest(t *testing.T) {
 	})
 }
 
+func TestExtraPropertiesWhatsAppTemplateCategoryChangedEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppTemplateCategoryChangedEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateCategoryChangedEvent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
 func TestExtraPropertiesWhatsAppTemplateCopyCodeButtonRequest(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
@@ -52777,6 +75123,75 @@ func TestExtraPropertiesWhatsAppTemplateCreateRequest(t *testing.T) {
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *WhatsAppTemplateCreateRequest
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppTemplateDisabledEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppTemplateDisabledEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateDisabledEvent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppTemplateEventData(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppTemplateEventData{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateEventData
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppTemplateFlaggedEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppTemplateFlaggedEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateFlaggedEvent
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
@@ -52897,6 +75312,29 @@ func TestExtraPropertiesWhatsAppTemplatePageResponse(t *testing.T) {
 	})
 }
 
+func TestExtraPropertiesWhatsAppTemplatePausedEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppTemplatePausedEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplatePausedEvent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
 func TestExtraPropertiesWhatsAppTemplatePhoneNumberButtonRequest(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
@@ -52920,6 +75358,52 @@ func TestExtraPropertiesWhatsAppTemplatePhoneNumberButtonRequest(t *testing.T) {
 	})
 }
 
+func TestExtraPropertiesWhatsAppTemplatePreviousAttributes(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppTemplatePreviousAttributes{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplatePreviousAttributes
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppTemplateQualityChangedEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppTemplateQualityChangedEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateQualityChangedEvent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
 func TestExtraPropertiesWhatsAppTemplateQuickReplyButtonRequest(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
@@ -52938,6 +75422,29 @@ func TestExtraPropertiesWhatsAppTemplateQuickReplyButtonRequest(t *testing.T) {
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *WhatsAppTemplateQuickReplyButtonRequest
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppTemplateRejectedEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppTemplateRejectedEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateRejectedEvent
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
@@ -53058,6 +75565,29 @@ func TestExtraPropertiesWhatsAppTemplateURLButtonRequest(t *testing.T) {
 	})
 }
 
+func TestExtraPropertiesWhatsAppTemplateUpdatedEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppTemplateUpdatedEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppTemplateUpdatedEvent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
 func TestExtraPropertiesWhatsAppWaba(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
@@ -53099,6 +75629,213 @@ func TestExtraPropertiesWhatsAppWabaListResponse(t *testing.T) {
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *WhatsAppWabaListResponse
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppWebhook(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppWebhook{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhook
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppWebhookCreateRequest(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppWebhookCreateRequest{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookCreateRequest
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppWebhookListResponse(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppWebhookListResponse{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookListResponse
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppWebhookResponse(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppWebhookResponse{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookResponse
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppWebhookTestEvent(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppWebhookTestEvent{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookTestEvent
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppWebhookTestEventData(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppWebhookTestEventData{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookTestEventData
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppWebhookTestResponse(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppWebhookTestResponse{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookTestResponse
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppWebhookTestResult(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppWebhookTestResult{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookTestResult
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWhatsAppWebhookUpdateRequest(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WhatsAppWebhookUpdateRequest{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppWebhookUpdateRequest
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

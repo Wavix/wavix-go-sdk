@@ -1761,7 +1761,7 @@ applied to every listed number.
 <dl>
 <dd>
 
-**smsRelayURL:** `*string` — Callback URL for inbound messages.
+**smsRelayURL:** `*string` — Callback URL for inbound messages. Pass `null` to clear it.
     
 </dd>
 </dl>

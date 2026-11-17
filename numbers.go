@@ -29,7 +29,7 @@ type NumberBulkUpdateRequest struct {
 	SmsEnabled *bool `json:"sms_enabled,omitempty" url:"-"`
 	// Inbound call routing destinations for the phone numbers.
 	Destinations []*NumberDestination `json:"destinations,omitempty" url:"-"`
-	// Callback URL for inbound messages.
+	// Callback URL for inbound messages. Pass `null` to clear it.
 	SmsRelayURL *string `json:"sms_relay_url,omitempty" url:"-"`
 	// Indicates whether call recording is enabled.
 	CallRecordingEnabled *bool `json:"call_recording_enabled,omitempty" url:"-"`
