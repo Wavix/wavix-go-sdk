@@ -3,16 +3,16 @@
 package client
 
 import (
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	brandappeals "github.com/wavix/wavix-go-sdk/tendlc/brandappeals"
-	brandevidence "github.com/wavix/wavix-go-sdk/tendlc/brandevidence"
-	brands "github.com/wavix/wavix-go-sdk/tendlc/brands"
-	brandvettingappeals "github.com/wavix/wavix-go-sdk/tendlc/brandvettingappeals"
-	brandvettings "github.com/wavix/wavix-go-sdk/tendlc/brandvettings"
-	campaignnumbers "github.com/wavix/wavix-go-sdk/tendlc/campaignnumbers"
-	campaigns "github.com/wavix/wavix-go-sdk/tendlc/campaigns"
-	subscriptions "github.com/wavix/wavix-go-sdk/tendlc/subscriptions"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	brandappeals "github.com/wavix/wavix-go-sdk/v2/tendlc/brandappeals"
+	brandevidence "github.com/wavix/wavix-go-sdk/v2/tendlc/brandevidence"
+	brands "github.com/wavix/wavix-go-sdk/v2/tendlc/brands"
+	brandvettingappeals "github.com/wavix/wavix-go-sdk/v2/tendlc/brandvettingappeals"
+	brandvettings "github.com/wavix/wavix-go-sdk/v2/tendlc/brandvettings"
+	campaignnumbers "github.com/wavix/wavix-go-sdk/v2/tendlc/campaignnumbers"
+	campaigns "github.com/wavix/wavix-go-sdk/v2/tendlc/campaigns"
+	subscriptions "github.com/wavix/wavix-go-sdk/v2/tendlc/subscriptions"
 )
 
 type Client struct {

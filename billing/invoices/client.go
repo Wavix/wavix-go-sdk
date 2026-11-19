@@ -6,11 +6,11 @@ import (
 	context "context"
 	io "io"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	billing "github.com/wavix/wavix-go-sdk/billing"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	billing "github.com/wavix/wavix-go-sdk/v2/billing"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 type Client struct {
@@ -41,7 +41,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *billing.ListInvoicesRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.InvoiceListResponse, error) {
+) (*v2.InvoiceListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,

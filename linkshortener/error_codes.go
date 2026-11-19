@@ -3,29 +3,29 @@
 package linkshortener
 
 import (
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
 )
 
 var ErrorCodes internal.ErrorCodes = internal.ErrorCodes{
 	400: func(apiError *core.APIError) error {
-		return &wavixgosdk.BadRequestError{
+		return &v2.BadRequestError{
 			APIError: apiError,
 		}
 	},
 	401: func(apiError *core.APIError) error {
-		return &wavixgosdk.UnauthorizedError{
+		return &v2.UnauthorizedError{
 			APIError: apiError,
 		}
 	},
 	403: func(apiError *core.APIError) error {
-		return &wavixgosdk.ForbiddenError{
+		return &v2.ForbiddenError{
 			APIError: apiError,
 		}
 	},
 	404: func(apiError *core.APIError) error {
-		return &wavixgosdk.NotFoundError{
+		return &v2.NotFoundError{
 			APIError: apiError,
 		}
 	},

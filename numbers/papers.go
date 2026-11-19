@@ -3,7 +3,7 @@
 package numbers
 
 import (
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
 	io "io"
 	big "math/big"
 )
@@ -11,8 +11,8 @@ import (
 type UploadPapersRequest struct {
 	DocAttachment io.Reader `json:"-" url:"-"`
 	// Comma-separated record IDs of the phone numbers the document applies to.
-	DidIDs string                  `json:"did_ids" url:"-"`
-	DocID  wavixgosdk.DocumentType `json:"doc_id" url:"-"`
+	DidIDs string          `json:"did_ids" url:"-"`
+	DocID  v2.DocumentType `json:"doc_id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`

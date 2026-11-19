@@ -5,11 +5,11 @@ package papers
 import (
 	context "context"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	numbers "github.com/wavix/wavix-go-sdk/numbers"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	numbers "github.com/wavix/wavix-go-sdk/v2/numbers"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 type Client struct {
@@ -45,7 +45,7 @@ func (c *Client) Upload(
 	ctx context.Context,
 	request *numbers.UploadPapersRequest,
 	opts ...option.RequestOption,
-) ([]*wavixgosdk.NumberDocument, error) {
+) ([]*v2.NumberDocument, error) {
 	response, err := c.WithRawResponse.Upload(
 		ctx,
 		request,

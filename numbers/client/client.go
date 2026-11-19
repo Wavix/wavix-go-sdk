@@ -5,11 +5,11 @@ package client
 import (
 	context "context"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	papers "github.com/wavix/wavix-go-sdk/numbers/papers"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	papers "github.com/wavix/wavix-go-sdk/v2/numbers/papers"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 type Client struct {
@@ -40,9 +40,9 @@ func NewClient(options *core.RequestOptions) *Client {
 // Returns a paginated list of the phone numbers owned by the authenticated account.
 func (c *Client) List(
 	ctx context.Context,
-	request *wavixgosdk.ListNumbersRequest,
+	request *v2.ListNumbersRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.NumberListResponse, error) {
+) (*v2.NumberListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
@@ -57,9 +57,9 @@ func (c *Client) List(
 // Releases the listed phone numbers back to stock. Selection accepts either `ids` (record IDs) or `dids` (phone numbers), but not both.
 func (c *Client) Delete(
 	ctx context.Context,
-	request *wavixgosdk.DeleteNumbersRequest,
+	request *v2.DeleteNumbersRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SuccessResponse, error) {
+) (*v2.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,
@@ -74,9 +74,9 @@ func (c *Client) Delete(
 // Applies the same changes to every listed phone number. Only the provided fields are changed. Destination and SMS callback changes are applied asynchronously and may not be reflected in the response immediately.
 func (c *Client) BulkUpdate(
 	ctx context.Context,
-	request *wavixgosdk.NumberBulkUpdateRequest,
+	request *v2.NumberBulkUpdateRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.BulkUpdateNumbersResponse, error) {
+) (*v2.BulkUpdateNumbersResponse, error) {
 	response, err := c.WithRawResponse.BulkUpdate(
 		ctx,
 		request,
@@ -91,9 +91,9 @@ func (c *Client) BulkUpdate(
 // Returns the phone number identified by `id`, including its destinations, documents, and feature settings.
 func (c *Client) Get(
 	ctx context.Context,
-	request *wavixgosdk.GetNumbersRequest,
+	request *v2.GetNumbersRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.Number, error) {
+) (*v2.Number, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,
@@ -110,9 +110,9 @@ func (c *Client) Get(
 // **Behavior:** With `expected_sms_relay_url`, the `sms_relay_url` change is applied only while the number currently has that URL; an empty string matches a number with no `sms_relay_url`. Otherwise the call returns `409` and no field in the request is changed. Setting the URL the number already has succeeds. To clear `sms_relay_url`, send `null`, not an empty string. If the call returns a `Something went wrong` error, you can retry the request; repeating the `sms_relay_url` change is a no-op, so it is safe even if the first attempt already applied it.
 func (c *Client) Update(
 	ctx context.Context,
-	request *wavixgosdk.NumberUpdateRequest,
+	request *v2.NumberUpdateRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.Number, error) {
+) (*v2.Number, error) {
 	response, err := c.WithRawResponse.Update(
 		ctx,
 		request,

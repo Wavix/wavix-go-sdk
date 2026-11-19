@@ -4,8 +4,8 @@ package callcontrol
 
 import (
 	json "encoding/json"
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	internal "github.com/wavix/wavix-go-sdk/internal"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
 	big "math/big"
 )
 
@@ -22,9 +22,9 @@ type CallStreamCreateRequest struct {
 	// WebSocket URL (`ws://` or `wss://`) that receives the call's audio.
 	StreamURL string `json:"stream_url" url:"-"`
 	// Direction of audio streamed to `stream_url`.
-	StreamType wavixgosdk.CallStreamType `json:"stream_type" url:"-"`
+	StreamType v2.CallStreamType `json:"stream_type" url:"-"`
 	// Audio channel streamed to `stream_url`.
-	StreamChannel wavixgosdk.CallStreamChannel `json:"stream_channel" url:"-"`
+	StreamChannel v2.CallStreamChannel `json:"stream_channel" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -53,14 +53,14 @@ func (c *CallStreamCreateRequest) SetStreamURL(streamURL string) {
 
 // SetStreamType sets the StreamType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CallStreamCreateRequest) SetStreamType(streamType wavixgosdk.CallStreamType) {
+func (c *CallStreamCreateRequest) SetStreamType(streamType v2.CallStreamType) {
 	c.StreamType = streamType
 	c.require(callStreamCreateRequestFieldStreamType)
 }
 
 // SetStreamChannel sets the StreamChannel field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CallStreamCreateRequest) SetStreamChannel(streamChannel wavixgosdk.CallStreamChannel) {
+func (c *CallStreamCreateRequest) SetStreamChannel(streamChannel v2.CallStreamChannel) {
 	c.StreamChannel = streamChannel
 	c.require(callStreamCreateRequestFieldStreamChannel)
 }

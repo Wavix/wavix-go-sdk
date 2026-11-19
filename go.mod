@@ -1,4 +1,4 @@
-module github.com/wavix/wavix-go-sdk
+module github.com/wavix/wavix-go-sdk/v2
 
 go 1.21
 

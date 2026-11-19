@@ -5,7 +5,7 @@ package api
 import (
 	json "encoding/json"
 	fmt "fmt"
-	internal "github.com/wavix/wavix-go-sdk/internal"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
 	big "math/big"
 	time "time"
 )
@@ -19954,32 +19954,64 @@ func (w *WhatsAppMessageDeliveredEvent) String() string {
 	return fmt.Sprintf("%#v", w)
 }
 
-// Why a message you sent wasn't delivered. Returned in `whatsapp.message.failed` events and by [Retrieve a WhatsApp message](https://docs.wavix.com/api-reference/whatsapp/retrieve-a-whatsapp-message). The code and explanation come from a fixed Wavix list and don't depend on the provider.
+// Why a message you sent wasn't delivered. Returned in `whatsapp.message.failed` events and when you retrieve or list WhatsApp messages. Wavix retries temporary failures itself, so you get an error only after Wavix stops retrying.
 var (
 	whatsAppMessageErrorFieldCode    = big.NewInt(1 << 0)
-	whatsAppMessageErrorFieldTitle   = big.NewInt(1 << 1)
-	whatsAppMessageErrorFieldDocsURL = big.NewInt(1 << 2)
+	whatsAppMessageErrorFieldSubcode = big.NewInt(1 << 1)
+	whatsAppMessageErrorFieldMessage = big.NewInt(1 << 2)
+	whatsAppMessageErrorFieldAction  = big.NewInt(1 << 3)
+	whatsAppMessageErrorFieldDocsURL = big.NewInt(1 << 4)
 )
 
 type WhatsAppMessageError struct {
-	// Wavix error code, in the same format as the `error_code` of WhatsApp API errors. Wavix can add codes, so handle a code you don't recognize as `WAVIX_DELIVERY_FAILED`. Possible values:
+	// Wavix error code, in the same format as the `error_code` of WhatsApp API errors. Wavix can add codes, so handle a code you don't recognize as `DELIVERY_FAILED`. Possible values:
 	//
-	// - `WAVIX_RECIPIENT_NOT_ON_WHATSAPP` — The recipient's number isn't on WhatsApp or can't receive messages.
-	// - `WAVIX_RECIPIENT_OPTED_OUT` — The recipient stopped marketing messages from your sender.
-	// - `WAVIX_SERVICE_WINDOW_CLOSED` — The message isn't a template, and the recipient hasn't messaged your sender in the last 24 hours. Send a template instead.
-	// - `WAVIX_TEMPLATE_NOT_APPROVED` — The template is still pending review or was rejected, so it can't be sent yet.
-	// - `WAVIX_TEMPLATE_PAUSED_OR_DISABLED` — The template is paused or disabled, so it can't be sent.
-	// - `WAVIX_INVALID_TEMPLATE_PARAMETERS` — The parameters don't match the template. Correct them and send the message again.
-	// - `WAVIX_MARKETING_LIMIT_REACHED` — WhatsApp limits how many marketing messages a recipient gets, and the limit for this recipient is reached.
-	// - `WAVIX_SENDER_LIMIT_REACHED` — Your sender reached its messaging limit and can't start new conversations until the 24-hour window resets.
-	// - `WAVIX_SENDER_RATE_LIMITED` — WhatsApp slowed down your sender, for example because recipients reported or blocked its messages.
-	// - `WAVIX_SENDER_UNAVAILABLE` — Your sender isn't registered, or it's banned or disconnected.
-	// - `WAVIX_SERVICE_UNAVAILABLE` — The provider was unavailable and couldn't take the message. Sending it again later can help.
-	// - `WAVIX_MESSAGE_EXPIRED` — WhatsApp didn't confirm delivery before the message expired.
-	// - `WAVIX_DELIVERY_FAILED` — The message wasn't delivered, and the cause isn't one of the other codes.
+	// - `RECIPIENT_NOT_ON_WHATSAPP` — The recipient's number isn't on WhatsApp or can't receive messages.
+	// - `RECIPIENT_OPTED_OUT` — The recipient turned off marketing messages or blocked your sender or template.
+	// - `SERVICE_WINDOW_CLOSED` — The message isn't a template, and the recipient hasn't messaged your sender in the last 24 hours. Send a template instead.
+	// - `TEMPLATE_NOT_APPROVED` — The template is pending review, was rejected, or WhatsApp hasn't finished preparing it, so it can't be sent yet.
+	// - `TEMPLATE_PAUSED_OR_DISABLED` — The template is paused or disabled, so it can't be sent.
+	// - `INVALID_TEMPLATE_PARAMETERS` — The parameters don't match the template. Correct them and send the message again.
+	// - `MARKETING_LIMIT_REACHED` — WhatsApp limits how many marketing messages a recipient gets, and the limit for this recipient is reached.
+	// - `SENDER_LIMIT_REACHED` — Your sender reached its messaging limit and can't start new conversations until the 24-hour window resets.
+	// - `SENDER_RATE_LIMITED` — WhatsApp slowed down your sender, for example because recipients reported or blocked its messages.
+	// - `SENDER_UNAVAILABLE` — Your sender isn't registered, or it's banned or disconnected.
+	// - `SERVICE_UNAVAILABLE` — The provider was unavailable and couldn't take the message. Sending it again later can help.
+	// - `MESSAGE_EXPIRED` — The message expired before it was delivered.
+	// - `DELIVERY_FAILED` — The message wasn't delivered, and the cause isn't one of the other codes.
 	Code WhatsAppMessageErrorCode `json:"code" url:"code"`
-	// Explanation of `code` in plain language. It's the same for every message with this code and never contains the provider's own error text.
-	Title string `json:"title" url:"title"`
+	// Finer cause within `code`, or `null` when Wavix has no finer cause. Wavix can add values, so handle a value you don't recognize by `code` alone. Possible values:
+	//
+	// - `NOT_REGISTERED` — With `RECIPIENT_NOT_ON_WHATSAPP`. The number isn't registered on WhatsApp.
+	// - `APP_UPDATE_REQUIRED` — With `RECIPIENT_NOT_ON_WHATSAPP`. The recipient's WhatsApp app can't show the message. The recipient may need to update the app or accept the WhatsApp Terms of Service.
+	// - `DEVICE_UNSUPPORTED` — With `RECIPIENT_NOT_ON_WHATSAPP`. The recipient's device doesn't support the message.
+	// - `BLOCKED_BY_OPERATOR` — With `RECIPIENT_NOT_ON_WHATSAPP`. This number can't receive WhatsApp messages from businesses.
+	// - `MARKETING_OPT_OUT` — With `RECIPIENT_OPTED_OUT`. The recipient turned off marketing messages in WhatsApp.
+	// - `TEMPLATE_BLOCKED_BY_RECIPIENT` — With `RECIPIENT_OPTED_OUT`. The recipient blocked this template.
+	// - `SENDER_BLOCKED_BY_RECIPIENT` — With `RECIPIENT_OPTED_OUT`. Messages from your sender to this recipient are blocked.
+	// - `TEMPLATE_NOT_ELIGIBLE` — With `TEMPLATE_NOT_APPROVED`. WhatsApp can't send this template from your sender. Contact Wavix support.
+	// - `PER_RECIPIENT_MARKETING_LIMIT` — With `MARKETING_LIMIT_REACHED`. The recipient got the maximum number of marketing messages from all businesses for now.
+	// - `DAILY_PROMOTIONAL_LIMIT` — With `MARKETING_LIMIT_REACHED`. The recipient reached the daily limit on promotional messages.
+	// - `UNIQUE_RECIPIENTS_LIMIT` — With `SENDER_LIMIT_REACHED`. Your sender reached the number of recipients it can message in 24 hours.
+	// - `RECIPIENT_MESSAGE_LIMIT` — With `SENDER_LIMIT_REACHED`. Your sender reached the number of messages it can send to this recipient.
+	// - `LOW_QUALITY_RATING` — With `SENDER_RATE_LIMITED`. The quality rating of your sender limits how many recipients it can reach.
+	// - `SENDER_NOT_REGISTERED` — With `SENDER_UNAVAILABLE`. Your sender isn't registered on WhatsApp.
+	// - `SENDER_RESTRICTED` — With `SENDER_UNAVAILABLE`. WhatsApp restricted what your sender can do.
+	// - `SENDER_MISCONFIGURED` — With `SENDER_UNAVAILABLE`. Your sender's setup doesn't allow this message. Contact Wavix support.
+	// - `TEMPLATE_INVALID` — With `DELIVERY_FAILED`. The template is invalid or doesn't match its approved version.
+	// - `MEDIA_UNSUPPORTED` — With `DELIVERY_FAILED`. WhatsApp doesn't support the media file or its format.
+	// - `MEDIA_INVALID` — With `DELIVERY_FAILED`. The media file couldn't be read or uploaded.
+	// - `CONTENT_BLOCKED` — With `DELIVERY_FAILED`. WhatsApp blocked the content for a policy violation.
+	Subcode *string `json:"subcode,omitempty" url:"subcode,omitempty"`
+	// Short explanation for people, from the most specific of `subcode` and `code`. The text can change, so base your logic on `code`, `subcode`, and `action` instead.
+	Message string `json:"message" url:"message"`
+	// What to do about the message. Possible values:
+	//
+	// - `resend_later` — Send the message again later.
+	// - `fix_and_resend` — Change the message, template, or media, then send it again.
+	// - `do_not_resend` — Don't send the message again. It won't be delivered.
+	// - `contact_support` — Contact Wavix support.
+	Action WhatsAppMessageErrorAction `json:"action" url:"action"`
 	// Page for this code under `https://docs.wavix.com/errors/`. It explains the error, how to fix it, and whether sending the message again can help.
 	DocsURL string `json:"docs_url" url:"docs_url"`
 
@@ -19997,11 +20029,25 @@ func (w *WhatsAppMessageError) GetCode() WhatsAppMessageErrorCode {
 	return w.Code
 }
 
-func (w *WhatsAppMessageError) GetTitle() string {
+func (w *WhatsAppMessageError) GetSubcode() *string {
+	if w == nil {
+		return nil
+	}
+	return w.Subcode
+}
+
+func (w *WhatsAppMessageError) GetMessage() string {
 	if w == nil {
 		return ""
 	}
-	return w.Title
+	return w.Message
+}
+
+func (w *WhatsAppMessageError) GetAction() WhatsAppMessageErrorAction {
+	if w == nil {
+		return ""
+	}
+	return w.Action
 }
 
 func (w *WhatsAppMessageError) GetDocsURL() string {
@@ -20032,11 +20078,25 @@ func (w *WhatsAppMessageError) SetCode(code WhatsAppMessageErrorCode) {
 	w.require(whatsAppMessageErrorFieldCode)
 }
 
-// SetTitle sets the Title field and marks it as non-optional;
+// SetSubcode sets the Subcode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (w *WhatsAppMessageError) SetTitle(title string) {
-	w.Title = title
-	w.require(whatsAppMessageErrorFieldTitle)
+func (w *WhatsAppMessageError) SetSubcode(subcode *string) {
+	w.Subcode = subcode
+	w.require(whatsAppMessageErrorFieldSubcode)
+}
+
+// SetMessage sets the Message field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageError) SetMessage(message string) {
+	w.Message = message
+	w.require(whatsAppMessageErrorFieldMessage)
+}
+
+// SetAction sets the Action field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageError) SetAction(action WhatsAppMessageErrorAction) {
+	w.Action = action
+	w.require(whatsAppMessageErrorFieldAction)
 }
 
 // SetDocsURL sets the DocsURL field and marks it as non-optional;
@@ -20088,67 +20148,101 @@ func (w *WhatsAppMessageError) String() string {
 	return fmt.Sprintf("%#v", w)
 }
 
-// Wavix error code, in the same format as the `error_code` of WhatsApp API errors. Wavix can add codes, so handle a code you don't recognize as `WAVIX_DELIVERY_FAILED`. Possible values:
+// What to do about the message. Possible values:
 //
-// - `WAVIX_RECIPIENT_NOT_ON_WHATSAPP` — The recipient's number isn't on WhatsApp or can't receive messages.
-// - `WAVIX_RECIPIENT_OPTED_OUT` — The recipient stopped marketing messages from your sender.
-// - `WAVIX_SERVICE_WINDOW_CLOSED` — The message isn't a template, and the recipient hasn't messaged your sender in the last 24 hours. Send a template instead.
-// - `WAVIX_TEMPLATE_NOT_APPROVED` — The template is still pending review or was rejected, so it can't be sent yet.
-// - `WAVIX_TEMPLATE_PAUSED_OR_DISABLED` — The template is paused or disabled, so it can't be sent.
-// - `WAVIX_INVALID_TEMPLATE_PARAMETERS` — The parameters don't match the template. Correct them and send the message again.
-// - `WAVIX_MARKETING_LIMIT_REACHED` — WhatsApp limits how many marketing messages a recipient gets, and the limit for this recipient is reached.
-// - `WAVIX_SENDER_LIMIT_REACHED` — Your sender reached its messaging limit and can't start new conversations until the 24-hour window resets.
-// - `WAVIX_SENDER_RATE_LIMITED` — WhatsApp slowed down your sender, for example because recipients reported or blocked its messages.
-// - `WAVIX_SENDER_UNAVAILABLE` — Your sender isn't registered, or it's banned or disconnected.
-// - `WAVIX_SERVICE_UNAVAILABLE` — The provider was unavailable and couldn't take the message. Sending it again later can help.
-// - `WAVIX_MESSAGE_EXPIRED` — WhatsApp didn't confirm delivery before the message expired.
-// - `WAVIX_DELIVERY_FAILED` — The message wasn't delivered, and the cause isn't one of the other codes.
+// - `resend_later` — Send the message again later.
+// - `fix_and_resend` — Change the message, template, or media, then send it again.
+// - `do_not_resend` — Don't send the message again. It won't be delivered.
+// - `contact_support` — Contact Wavix support.
+type WhatsAppMessageErrorAction string
+
+const (
+	WhatsAppMessageErrorActionResendLater    WhatsAppMessageErrorAction = "resend_later"
+	WhatsAppMessageErrorActionFixAndResend   WhatsAppMessageErrorAction = "fix_and_resend"
+	WhatsAppMessageErrorActionDoNotResend    WhatsAppMessageErrorAction = "do_not_resend"
+	WhatsAppMessageErrorActionContactSupport WhatsAppMessageErrorAction = "contact_support"
+)
+
+func NewWhatsAppMessageErrorActionFromString(s string) (WhatsAppMessageErrorAction, error) {
+	switch s {
+	case "resend_later":
+		return WhatsAppMessageErrorActionResendLater, nil
+	case "fix_and_resend":
+		return WhatsAppMessageErrorActionFixAndResend, nil
+	case "do_not_resend":
+		return WhatsAppMessageErrorActionDoNotResend, nil
+	case "contact_support":
+		return WhatsAppMessageErrorActionContactSupport, nil
+	}
+	var t WhatsAppMessageErrorAction
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppMessageErrorAction) Ptr() *WhatsAppMessageErrorAction {
+	return &w
+}
+
+// Wavix error code, in the same format as the `error_code` of WhatsApp API errors. Wavix can add codes, so handle a code you don't recognize as `DELIVERY_FAILED`. Possible values:
+//
+// - `RECIPIENT_NOT_ON_WHATSAPP` — The recipient's number isn't on WhatsApp or can't receive messages.
+// - `RECIPIENT_OPTED_OUT` — The recipient turned off marketing messages or blocked your sender or template.
+// - `SERVICE_WINDOW_CLOSED` — The message isn't a template, and the recipient hasn't messaged your sender in the last 24 hours. Send a template instead.
+// - `TEMPLATE_NOT_APPROVED` — The template is pending review, was rejected, or WhatsApp hasn't finished preparing it, so it can't be sent yet.
+// - `TEMPLATE_PAUSED_OR_DISABLED` — The template is paused or disabled, so it can't be sent.
+// - `INVALID_TEMPLATE_PARAMETERS` — The parameters don't match the template. Correct them and send the message again.
+// - `MARKETING_LIMIT_REACHED` — WhatsApp limits how many marketing messages a recipient gets, and the limit for this recipient is reached.
+// - `SENDER_LIMIT_REACHED` — Your sender reached its messaging limit and can't start new conversations until the 24-hour window resets.
+// - `SENDER_RATE_LIMITED` — WhatsApp slowed down your sender, for example because recipients reported or blocked its messages.
+// - `SENDER_UNAVAILABLE` — Your sender isn't registered, or it's banned or disconnected.
+// - `SERVICE_UNAVAILABLE` — The provider was unavailable and couldn't take the message. Sending it again later can help.
+// - `MESSAGE_EXPIRED` — The message expired before it was delivered.
+// - `DELIVERY_FAILED` — The message wasn't delivered, and the cause isn't one of the other codes.
 type WhatsAppMessageErrorCode string
 
 const (
-	WhatsAppMessageErrorCodeWavixRecipientNotOnWhatsapp    WhatsAppMessageErrorCode = "WAVIX_RECIPIENT_NOT_ON_WHATSAPP"
-	WhatsAppMessageErrorCodeWavixRecipientOptedOut         WhatsAppMessageErrorCode = "WAVIX_RECIPIENT_OPTED_OUT"
-	WhatsAppMessageErrorCodeWavixServiceWindowClosed       WhatsAppMessageErrorCode = "WAVIX_SERVICE_WINDOW_CLOSED"
-	WhatsAppMessageErrorCodeWavixTemplateNotApproved       WhatsAppMessageErrorCode = "WAVIX_TEMPLATE_NOT_APPROVED"
-	WhatsAppMessageErrorCodeWavixTemplatePausedOrDisabled  WhatsAppMessageErrorCode = "WAVIX_TEMPLATE_PAUSED_OR_DISABLED"
-	WhatsAppMessageErrorCodeWavixInvalidTemplateParameters WhatsAppMessageErrorCode = "WAVIX_INVALID_TEMPLATE_PARAMETERS"
-	WhatsAppMessageErrorCodeWavixMarketingLimitReached     WhatsAppMessageErrorCode = "WAVIX_MARKETING_LIMIT_REACHED"
-	WhatsAppMessageErrorCodeWavixSenderLimitReached        WhatsAppMessageErrorCode = "WAVIX_SENDER_LIMIT_REACHED"
-	WhatsAppMessageErrorCodeWavixSenderRateLimited         WhatsAppMessageErrorCode = "WAVIX_SENDER_RATE_LIMITED"
-	WhatsAppMessageErrorCodeWavixSenderUnavailable         WhatsAppMessageErrorCode = "WAVIX_SENDER_UNAVAILABLE"
-	WhatsAppMessageErrorCodeWavixServiceUnavailable        WhatsAppMessageErrorCode = "WAVIX_SERVICE_UNAVAILABLE"
-	WhatsAppMessageErrorCodeWavixMessageExpired            WhatsAppMessageErrorCode = "WAVIX_MESSAGE_EXPIRED"
-	WhatsAppMessageErrorCodeWavixDeliveryFailed            WhatsAppMessageErrorCode = "WAVIX_DELIVERY_FAILED"
+	WhatsAppMessageErrorCodeRecipientNotOnWhatsapp    WhatsAppMessageErrorCode = "RECIPIENT_NOT_ON_WHATSAPP"
+	WhatsAppMessageErrorCodeRecipientOptedOut         WhatsAppMessageErrorCode = "RECIPIENT_OPTED_OUT"
+	WhatsAppMessageErrorCodeServiceWindowClosed       WhatsAppMessageErrorCode = "SERVICE_WINDOW_CLOSED"
+	WhatsAppMessageErrorCodeTemplateNotApproved       WhatsAppMessageErrorCode = "TEMPLATE_NOT_APPROVED"
+	WhatsAppMessageErrorCodeTemplatePausedOrDisabled  WhatsAppMessageErrorCode = "TEMPLATE_PAUSED_OR_DISABLED"
+	WhatsAppMessageErrorCodeInvalidTemplateParameters WhatsAppMessageErrorCode = "INVALID_TEMPLATE_PARAMETERS"
+	WhatsAppMessageErrorCodeMarketingLimitReached     WhatsAppMessageErrorCode = "MARKETING_LIMIT_REACHED"
+	WhatsAppMessageErrorCodeSenderLimitReached        WhatsAppMessageErrorCode = "SENDER_LIMIT_REACHED"
+	WhatsAppMessageErrorCodeSenderRateLimited         WhatsAppMessageErrorCode = "SENDER_RATE_LIMITED"
+	WhatsAppMessageErrorCodeSenderUnavailable         WhatsAppMessageErrorCode = "SENDER_UNAVAILABLE"
+	WhatsAppMessageErrorCodeServiceUnavailable        WhatsAppMessageErrorCode = "SERVICE_UNAVAILABLE"
+	WhatsAppMessageErrorCodeMessageExpired            WhatsAppMessageErrorCode = "MESSAGE_EXPIRED"
+	WhatsAppMessageErrorCodeDeliveryFailed            WhatsAppMessageErrorCode = "DELIVERY_FAILED"
 )
 
 func NewWhatsAppMessageErrorCodeFromString(s string) (WhatsAppMessageErrorCode, error) {
 	switch s {
-	case "WAVIX_RECIPIENT_NOT_ON_WHATSAPP":
-		return WhatsAppMessageErrorCodeWavixRecipientNotOnWhatsapp, nil
-	case "WAVIX_RECIPIENT_OPTED_OUT":
-		return WhatsAppMessageErrorCodeWavixRecipientOptedOut, nil
-	case "WAVIX_SERVICE_WINDOW_CLOSED":
-		return WhatsAppMessageErrorCodeWavixServiceWindowClosed, nil
-	case "WAVIX_TEMPLATE_NOT_APPROVED":
-		return WhatsAppMessageErrorCodeWavixTemplateNotApproved, nil
-	case "WAVIX_TEMPLATE_PAUSED_OR_DISABLED":
-		return WhatsAppMessageErrorCodeWavixTemplatePausedOrDisabled, nil
-	case "WAVIX_INVALID_TEMPLATE_PARAMETERS":
-		return WhatsAppMessageErrorCodeWavixInvalidTemplateParameters, nil
-	case "WAVIX_MARKETING_LIMIT_REACHED":
-		return WhatsAppMessageErrorCodeWavixMarketingLimitReached, nil
-	case "WAVIX_SENDER_LIMIT_REACHED":
-		return WhatsAppMessageErrorCodeWavixSenderLimitReached, nil
-	case "WAVIX_SENDER_RATE_LIMITED":
-		return WhatsAppMessageErrorCodeWavixSenderRateLimited, nil
-	case "WAVIX_SENDER_UNAVAILABLE":
-		return WhatsAppMessageErrorCodeWavixSenderUnavailable, nil
-	case "WAVIX_SERVICE_UNAVAILABLE":
-		return WhatsAppMessageErrorCodeWavixServiceUnavailable, nil
-	case "WAVIX_MESSAGE_EXPIRED":
-		return WhatsAppMessageErrorCodeWavixMessageExpired, nil
-	case "WAVIX_DELIVERY_FAILED":
-		return WhatsAppMessageErrorCodeWavixDeliveryFailed, nil
+	case "RECIPIENT_NOT_ON_WHATSAPP":
+		return WhatsAppMessageErrorCodeRecipientNotOnWhatsapp, nil
+	case "RECIPIENT_OPTED_OUT":
+		return WhatsAppMessageErrorCodeRecipientOptedOut, nil
+	case "SERVICE_WINDOW_CLOSED":
+		return WhatsAppMessageErrorCodeServiceWindowClosed, nil
+	case "TEMPLATE_NOT_APPROVED":
+		return WhatsAppMessageErrorCodeTemplateNotApproved, nil
+	case "TEMPLATE_PAUSED_OR_DISABLED":
+		return WhatsAppMessageErrorCodeTemplatePausedOrDisabled, nil
+	case "INVALID_TEMPLATE_PARAMETERS":
+		return WhatsAppMessageErrorCodeInvalidTemplateParameters, nil
+	case "MARKETING_LIMIT_REACHED":
+		return WhatsAppMessageErrorCodeMarketingLimitReached, nil
+	case "SENDER_LIMIT_REACHED":
+		return WhatsAppMessageErrorCodeSenderLimitReached, nil
+	case "SENDER_RATE_LIMITED":
+		return WhatsAppMessageErrorCodeSenderRateLimited, nil
+	case "SENDER_UNAVAILABLE":
+		return WhatsAppMessageErrorCodeSenderUnavailable, nil
+	case "SERVICE_UNAVAILABLE":
+		return WhatsAppMessageErrorCodeServiceUnavailable, nil
+	case "MESSAGE_EXPIRED":
+		return WhatsAppMessageErrorCodeMessageExpired, nil
+	case "DELIVERY_FAILED":
+		return WhatsAppMessageErrorCodeDeliveryFailed, nil
 	}
 	var t WhatsAppMessageErrorCode
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -20585,6 +20679,7 @@ var (
 	whatsAppMessageListItemFieldCreatedAt              = big.NewInt(1 << 6)
 	whatsAppMessageListItemFieldContent                = big.NewInt(1 << 7)
 	whatsAppMessageListItemFieldServiceWindowOpenUntil = big.NewInt(1 << 8)
+	whatsAppMessageListItemFieldError                  = big.NewInt(1 << 9)
 )
 
 type WhatsAppMessageListItem struct {
@@ -20617,6 +20712,8 @@ type WhatsAppMessageListItem struct {
 	Content *WhatsAppInboundMessageContent `json:"content,omitempty" url:"content,omitempty"`
 	// End of the 24-hour window in which you may reply to the customer without a template. It's `null` when the customer hasn't written to the sender in the retained history. A value in the past means the window is closed.
 	ServiceWindowOpenUntil *time.Time `json:"service_window_open_until,omitempty" url:"service_window_open_until,omitempty"`
+	// Why an `outbound` message wasn't delivered. It's `null` unless `status` is `undelivered`, `expired`, or `rejected`.
+	Error *WhatsAppMessageError `json:"error,omitempty" url:"error,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -20686,6 +20783,13 @@ func (w *WhatsAppMessageListItem) GetServiceWindowOpenUntil() *time.Time {
 		return nil
 	}
 	return w.ServiceWindowOpenUntil
+}
+
+func (w *WhatsAppMessageListItem) GetError() *WhatsAppMessageError {
+	if w == nil {
+		return nil
+	}
+	return w.Error
 }
 
 func (w *WhatsAppMessageListItem) GetExtraProperties() map[string]interface{} {
@@ -20763,6 +20867,13 @@ func (w *WhatsAppMessageListItem) SetContent(content *WhatsAppInboundMessageCont
 func (w *WhatsAppMessageListItem) SetServiceWindowOpenUntil(serviceWindowOpenUntil *time.Time) {
 	w.ServiceWindowOpenUntil = serviceWindowOpenUntil
 	w.require(whatsAppMessageListItemFieldServiceWindowOpenUntil)
+}
+
+// SetError sets the Error field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageListItem) SetError(error_ *WhatsAppMessageError) {
+	w.Error = error_
+	w.require(whatsAppMessageListItemFieldError)
 }
 
 func (w *WhatsAppMessageListItem) UnmarshalJSON(data []byte) error {
@@ -22410,7 +22521,7 @@ type WhatsAppProblem struct {
 	// - `rate_limited` — The request was rate limited. Retry later.
 	// - `invalid_template` — The template content is invalid.
 	ErrorClass *WhatsAppProblemErrorClass `json:"error_class,omitempty" url:"error_class,omitempty"`
-	// Stable machine-readable error code. It's the problem type slug in upper case with the `WAVIX_` prefix.
+	// Stable machine-readable error code. It's the problem type slug in upper case, with underscores in place of hyphens.
 	ErrorCode *string `json:"error_code,omitempty" url:"error_code,omitempty"`
 	// Time the 24-hour service window of the recipient closed. Returned with `service-window-closed`. It's `null` when the recipient never wrote to the sender or the last message is older than the retained history.
 	ServiceWindowClosedAt *time.Time `json:"service_window_closed_at,omitempty" url:"service_window_closed_at,omitempty"`

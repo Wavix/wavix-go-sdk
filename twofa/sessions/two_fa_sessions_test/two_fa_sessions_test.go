@@ -11,10 +11,10 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	client "github.com/wavix/wavix-go-sdk/client"
-	option "github.com/wavix/wavix-go-sdk/option"
-	twofa "github.com/wavix/wavix-go-sdk/twofa"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	client "github.com/wavix/wavix-go-sdk/v2/client"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
+	twofa "github.com/wavix/wavix-go-sdk/v2/twofa"
 )
 
 func VerifyRequestCount(
@@ -91,10 +91,10 @@ func TestTwoFaSessionsListWithWireMock(
 	)
 	request := &twofa.ListSessionsRequest{
 		ServiceID: "7204a030201211ee9fb47d093f2f127c",
-		From: wavixgosdk.MustParseDate(
+		From: v2.MustParseDate(
 			"2022-01-01",
 		),
-		To: wavixgosdk.MustParseDate(
+		To: v2.MustParseDate(
 			"2022-01-31",
 		),
 	}

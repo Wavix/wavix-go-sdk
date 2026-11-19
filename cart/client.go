@@ -5,10 +5,10 @@ package cart
 import (
 	context "context"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 type Client struct {
@@ -38,7 +38,7 @@ func NewClient(options *core.RequestOptions) *Client {
 func (c *Client) Get(
 	ctx context.Context,
 	opts ...option.RequestOption,
-) (*wavixgosdk.CartResponse, error) {
+) (*v2.CartResponse, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		opts...,
@@ -52,9 +52,9 @@ func (c *Client) Get(
 // Adds the listed phone numbers to the purchase cart.
 func (c *Client) Add(
 	ctx context.Context,
-	request *wavixgosdk.AddCartRequest,
+	request *v2.AddCartRequest,
 	opts ...option.RequestOption,
-) ([]*wavixgosdk.AvailableNumber, error) {
+) ([]*v2.AvailableNumber, error) {
 	response, err := c.WithRawResponse.Add(
 		ctx,
 		request,
@@ -69,9 +69,9 @@ func (c *Client) Add(
 // Removes the listed phone numbers from the purchase cart.
 func (c *Client) Remove(
 	ctx context.Context,
-	request *wavixgosdk.RemoveCartRequest,
+	request *v2.RemoveCartRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SuccessResponse, error) {
+) (*v2.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Remove(
 		ctx,
 		request,
@@ -86,9 +86,9 @@ func (c *Client) Remove(
 // Purchases the listed phone numbers from the cart. Activation and monthly fees are debited from the account balance immediately, and the purchase cannot be reversed through this API.
 func (c *Client) Checkout(
 	ctx context.Context,
-	request *wavixgosdk.CheckoutCartRequest,
+	request *v2.CheckoutCartRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SuccessResponse, error) {
+) (*v2.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Checkout(
 		ctx,
 		request,

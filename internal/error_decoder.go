@@ -8,7 +8,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/wavix/wavix-go-sdk/core"
+	"github.com/wavix/wavix-go-sdk/v2/core"
 )
 
 // ErrorCodes maps HTTP status codes to error constructors.

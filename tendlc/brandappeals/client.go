@@ -5,11 +5,11 @@ package brandappeals
 import (
 	context "context"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
-	tendlc "github.com/wavix/wavix-go-sdk/tendlc"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
+	tendlc "github.com/wavix/wavix-go-sdk/v2/tendlc"
 )
 
 type Client struct {
@@ -40,7 +40,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *tendlc.ListBrandAppealsRequest,
 	opts ...option.RequestOption,
-) ([]*wavixgosdk.TenDlcBrandAppeal, error) {
+) ([]*v2.TenDlcBrandAppeal, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
@@ -60,7 +60,7 @@ func (c *Client) Create(
 	ctx context.Context,
 	request *tendlc.CreateBrandAppealsRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SuccessResponse, error) {
+) (*v2.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,

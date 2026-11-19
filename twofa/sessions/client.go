@@ -5,11 +5,11 @@ package sessions
 import (
 	context "context"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
-	twofa "github.com/wavix/wavix-go-sdk/twofa"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
+	twofa "github.com/wavix/wavix-go-sdk/v2/twofa"
 )
 
 type Client struct {
@@ -40,7 +40,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *twofa.ListSessionsRequest,
 	opts ...option.RequestOption,
-) ([]*wavixgosdk.ListSessionsResponseItem, error) {
+) ([]*v2.ListSessionsResponseItem, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,

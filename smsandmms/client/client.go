@@ -3,11 +3,11 @@
 package client
 
 import (
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	messages "github.com/wavix/wavix-go-sdk/smsandmms/messages"
-	optouts "github.com/wavix/wavix-go-sdk/smsandmms/optouts"
-	senderids "github.com/wavix/wavix-go-sdk/smsandmms/senderids"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	messages "github.com/wavix/wavix-go-sdk/v2/smsandmms/messages"
+	optouts "github.com/wavix/wavix-go-sdk/v2/smsandmms/optouts"
+	senderids "github.com/wavix/wavix-go-sdk/v2/smsandmms/senderids"
 )
 
 type Client struct {

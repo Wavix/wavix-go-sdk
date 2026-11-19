@@ -5,11 +5,11 @@ package subscriptions
 import (
 	context "context"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
-	tendlc "github.com/wavix/wavix-go-sdk/tendlc"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
+	tendlc "github.com/wavix/wavix-go-sdk/v2/tendlc"
 )
 
 type Client struct {
@@ -39,7 +39,7 @@ func NewClient(options *core.RequestOptions) *Client {
 func (c *Client) List(
 	ctx context.Context,
 	opts ...option.RequestOption,
-) ([]*wavixgosdk.TenDlcEventSubscription, error) {
+) ([]*v2.TenDlcEventSubscription, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		opts...,
@@ -53,9 +53,9 @@ func (c *Client) List(
 // Registers a callback URL to receive Wavix 10DLC event notifications.
 func (c *Client) Create(
 	ctx context.Context,
-	request *wavixgosdk.TenDlcEventSubscription,
+	request *v2.TenDlcEventSubscription,
 	opts ...option.RequestOption,
-) (*wavixgosdk.TenDlcEventSubscription, error) {
+) (*v2.TenDlcEventSubscription, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -72,7 +72,7 @@ func (c *Client) Delete(
 	ctx context.Context,
 	request *tendlc.DeleteSubscriptionsRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SuccessResponse, error) {
+) (*v2.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,

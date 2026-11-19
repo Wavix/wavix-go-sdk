@@ -12,7 +12,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/wavix/wavix-go-sdk/core"
+	"github.com/wavix/wavix-go-sdk/v2/core"
 )
 
 const (

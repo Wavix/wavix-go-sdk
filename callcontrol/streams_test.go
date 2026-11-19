@@ -6,7 +6,7 @@ import (
 	json "encoding/json"
 	assert "github.com/stretchr/testify/assert"
 	require "github.com/stretchr/testify/require"
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
 	testing "testing"
 )
 
@@ -29,7 +29,7 @@ func TestSettersCallStreamCreateRequest(t *testing.T) {
 
 	t.Run("SetStreamType", func(t *testing.T) {
 		obj := &CallStreamCreateRequest{}
-		var fernTestValueStreamType wavixgosdk.CallStreamType
+		var fernTestValueStreamType v2.CallStreamType
 		obj.SetStreamType(fernTestValueStreamType)
 		assert.Equal(t, fernTestValueStreamType, obj.StreamType)
 		assert.NotNil(t, obj.explicitFields)
@@ -37,7 +37,7 @@ func TestSettersCallStreamCreateRequest(t *testing.T) {
 
 	t.Run("SetStreamChannel", func(t *testing.T) {
 		obj := &CallStreamCreateRequest{}
-		var fernTestValueStreamChannel wavixgosdk.CallStreamChannel
+		var fernTestValueStreamChannel v2.CallStreamChannel
 		obj.SetStreamChannel(fernTestValueStreamChannel)
 		assert.Equal(t, fernTestValueStreamChannel, obj.StreamChannel)
 		assert.NotNil(t, obj.explicitFields)
@@ -112,7 +112,7 @@ func TestSettersMarkExplicitCallStreamCreateRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &CallStreamCreateRequest{}
-		var fernTestValueStreamType wavixgosdk.CallStreamType
+		var fernTestValueStreamType v2.CallStreamType
 
 		// Act
 		obj.SetStreamType(fernTestValueStreamType)
@@ -143,7 +143,7 @@ func TestSettersMarkExplicitCallStreamCreateRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &CallStreamCreateRequest{}
-		var fernTestValueStreamChannel wavixgosdk.CallStreamChannel
+		var fernTestValueStreamChannel v2.CallStreamChannel
 
 		// Act
 		obj.SetStreamChannel(fernTestValueStreamChannel)

@@ -7,10 +7,10 @@ import (
 	fmt "fmt"
 	http "net/http"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 type RawClient struct {
@@ -35,9 +35,9 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 
 func (r *RawClient) Create(
 	ctx context.Context,
-	request *wavixgosdk.CreateSpeechAnalyticsRequest,
+	request *v2.CreateSpeechAnalyticsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.SubmitFileTranscriptionResponse], error) {
+) (*core.Response[*v2.SubmitFileTranscriptionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -66,7 +66,7 @@ func (r *RawClient) Create(
 	}
 	headers.Set("Content-Type", writer.ContentType())
 
-	var response *wavixgosdk.SubmitFileTranscriptionResponse
+	var response *v2.SubmitFileTranscriptionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -80,13 +80,13 @@ func (r *RawClient) Create(
 			Client:          options.HTTPClient,
 			Request:         writer.Buffer(),
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(wavixgosdk.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.SubmitFileTranscriptionResponse]{
+	return &core.Response[*v2.SubmitFileTranscriptionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -95,9 +95,9 @@ func (r *RawClient) Create(
 
 func (r *RawClient) Get(
 	ctx context.Context,
-	request *wavixgosdk.GetSpeechAnalyticsRequest,
+	request *v2.GetSpeechAnalyticsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.FileTranscriptionResponse], error) {
+) (*core.Response[*v2.FileTranscriptionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -112,7 +112,7 @@ func (r *RawClient) Get(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *wavixgosdk.FileTranscriptionResponse
+	var response *v2.FileTranscriptionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -125,13 +125,13 @@ func (r *RawClient) Get(
 			QueryParameters: options.QueryParameters,
 			Client:          options.HTTPClient,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(wavixgosdk.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.FileTranscriptionResponse]{
+	return &core.Response[*v2.FileTranscriptionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -140,9 +140,9 @@ func (r *RawClient) Get(
 
 func (r *RawClient) Retranscribe(
 	ctx context.Context,
-	request *wavixgosdk.SpeechAnalyticsRetranscribeRequest,
+	request *v2.SpeechAnalyticsRetranscribeRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.SuccessResponse], error) {
+) (*core.Response[*v2.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -158,7 +158,7 @@ func (r *RawClient) Retranscribe(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *wavixgosdk.SuccessResponse
+	var response *v2.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -172,13 +172,13 @@ func (r *RawClient) Retranscribe(
 			Client:          options.HTTPClient,
 			Request:         request,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(wavixgosdk.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.SuccessResponse]{
+	return &core.Response[*v2.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

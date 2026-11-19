@@ -38993,11 +38993,27 @@ func TestSettersWhatsAppMessageError(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetTitle", func(t *testing.T) {
+	t.Run("SetSubcode", func(t *testing.T) {
 		obj := &WhatsAppMessageError{}
-		var fernTestValueTitle string
-		obj.SetTitle(fernTestValueTitle)
-		assert.Equal(t, fernTestValueTitle, obj.Title)
+		var fernTestValueSubcode *string
+		obj.SetSubcode(fernTestValueSubcode)
+		assert.Equal(t, fernTestValueSubcode, obj.Subcode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMessage", func(t *testing.T) {
+		obj := &WhatsAppMessageError{}
+		var fernTestValueMessage string
+		obj.SetMessage(fernTestValueMessage)
+		assert.Equal(t, fernTestValueMessage, obj.Message)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAction", func(t *testing.T) {
+		obj := &WhatsAppMessageError{}
+		var fernTestValueAction WhatsAppMessageErrorAction
+		obj.SetAction(fernTestValueAction)
+		assert.Equal(t, fernTestValueAction, obj.Action)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -39035,18 +39051,28 @@ func TestGettersWhatsAppMessageError(t *testing.T) {
 		_ = obj.GetCode() // Should return zero value
 	})
 
-	t.Run("GetTitle", func(t *testing.T) {
+	t.Run("GetSubcode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &WhatsAppMessageError{}
-		var expected string
-		obj.Title = expected
+		var expected *string
+		obj.Subcode = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetTitle(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetSubcode(), "getter should return the property value")
 	})
 
-	t.Run("GetTitle_NilReceiver", func(t *testing.T) {
+	t.Run("GetSubcode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageError{}
+		obj.Subcode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubcode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubcode_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *WhatsAppMessageError
 		// Should not panic - getters should handle nil receiver gracefully
@@ -39055,7 +39081,53 @@ func TestGettersWhatsAppMessageError(t *testing.T) {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetTitle() // Should return zero value
+		_ = obj.GetSubcode() // Should return zero value
+	})
+
+	t.Run("GetMessage", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageError{}
+		var expected string
+		obj.Message = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMessage(), "getter should return the property value")
+	})
+
+	t.Run("GetMessage_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageError
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMessage() // Should return zero value
+	})
+
+	t.Run("GetAction", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageError{}
+		var expected WhatsAppMessageErrorAction
+		obj.Action = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAction(), "getter should return the property value")
+	})
+
+	t.Run("GetAction_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageError
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAction() // Should return zero value
 	})
 
 	t.Run("GetDocsURL", func(t *testing.T) {
@@ -39115,14 +39187,76 @@ func TestSettersMarkExplicitWhatsAppMessageError(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetTitle_MarksExplicit", func(t *testing.T) {
+	t.Run("SetSubcode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &WhatsAppMessageError{}
-		var fernTestValueTitle string
+		var fernTestValueSubcode *string
 
 		// Act
-		obj.SetTitle(fernTestValueTitle)
+		obj.SetSubcode(fernTestValueSubcode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMessage_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageError{}
+		var fernTestValueMessage string
+
+		// Act
+		obj.SetMessage(fernTestValueMessage)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAction_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageError{}
+		var fernTestValueAction WhatsAppMessageErrorAction
+
+		// Act
+		obj.SetAction(fernTestValueAction)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -39939,6 +40073,14 @@ func TestSettersWhatsAppMessageListItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetError", func(t *testing.T) {
+		obj := &WhatsAppMessageListItem{}
+		var fernTestValueError *WhatsAppMessageError
+		obj.SetError(fernTestValueError)
+		assert.Equal(t, fernTestValueError, obj.Error)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 }
 
 func TestGettersWhatsAppMessageListItem(t *testing.T) {
@@ -40177,6 +40319,39 @@ func TestGettersWhatsAppMessageListItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetServiceWindowOpenUntil() // Should return zero value
+	})
+
+	t.Run("GetError", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageListItem{}
+		var expected *WhatsAppMessageError
+		obj.Error = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetError(), "getter should return the property value")
+	})
+
+	t.Run("GetError_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageListItem{}
+		obj.Error = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetError(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetError_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WhatsAppMessageListItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetError() // Should return zero value
 	})
 
 }
@@ -40438,6 +40613,37 @@ func TestSettersMarkExplicitWhatsAppMessageListItem(t *testing.T) {
 
 		// Act
 		obj.SetServiceWindowOpenUntil(fernTestValueServiceWindowOpenUntil)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetError_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WhatsAppMessageListItem{}
+		var fernTestValueError *WhatsAppMessageError
+
+		// Act
+		obj.SetError(fernTestValueError)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -69378,96 +69584,139 @@ func TestEnumWhatsAppInboundReferralSourceType(t *testing.T) {
 	})
 }
 
+func TestEnumWhatsAppMessageErrorAction(t *testing.T) {
+	t.Run("NewFromString_resend_later", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageErrorActionFromString("resend_later")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageErrorAction("resend_later"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_fix_and_resend", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageErrorActionFromString("fix_and_resend")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageErrorAction("fix_and_resend"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_do_not_resend", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageErrorActionFromString("do_not_resend")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageErrorAction("do_not_resend"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_contact_support", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWhatsAppMessageErrorActionFromString("contact_support")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WhatsAppMessageErrorAction("contact_support"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewWhatsAppMessageErrorActionFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewWhatsAppMessageErrorActionFromString("resend_later")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumWhatsAppMessageErrorCode(t *testing.T) {
-	t.Run("NewFromString_WAVIX_RECIPIENT_NOT_ON_WHATSAPP", func(t *testing.T) {
+	t.Run("NewFromString_RECIPIENT_NOT_ON_WHATSAPP", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_RECIPIENT_NOT_ON_WHATSAPP")
+		val, err := NewWhatsAppMessageErrorCodeFromString("RECIPIENT_NOT_ON_WHATSAPP")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_RECIPIENT_NOT_ON_WHATSAPP"), val, "enum value should match expected wire value")
+		assert.Equal(t, WhatsAppMessageErrorCode("RECIPIENT_NOT_ON_WHATSAPP"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_WAVIX_RECIPIENT_OPTED_OUT", func(t *testing.T) {
+	t.Run("NewFromString_RECIPIENT_OPTED_OUT", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_RECIPIENT_OPTED_OUT")
+		val, err := NewWhatsAppMessageErrorCodeFromString("RECIPIENT_OPTED_OUT")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_RECIPIENT_OPTED_OUT"), val, "enum value should match expected wire value")
+		assert.Equal(t, WhatsAppMessageErrorCode("RECIPIENT_OPTED_OUT"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_WAVIX_SERVICE_WINDOW_CLOSED", func(t *testing.T) {
+	t.Run("NewFromString_SERVICE_WINDOW_CLOSED", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_SERVICE_WINDOW_CLOSED")
+		val, err := NewWhatsAppMessageErrorCodeFromString("SERVICE_WINDOW_CLOSED")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_SERVICE_WINDOW_CLOSED"), val, "enum value should match expected wire value")
+		assert.Equal(t, WhatsAppMessageErrorCode("SERVICE_WINDOW_CLOSED"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_WAVIX_TEMPLATE_NOT_APPROVED", func(t *testing.T) {
+	t.Run("NewFromString_TEMPLATE_NOT_APPROVED", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_TEMPLATE_NOT_APPROVED")
+		val, err := NewWhatsAppMessageErrorCodeFromString("TEMPLATE_NOT_APPROVED")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_TEMPLATE_NOT_APPROVED"), val, "enum value should match expected wire value")
+		assert.Equal(t, WhatsAppMessageErrorCode("TEMPLATE_NOT_APPROVED"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_WAVIX_TEMPLATE_PAUSED_OR_DISABLED", func(t *testing.T) {
+	t.Run("NewFromString_TEMPLATE_PAUSED_OR_DISABLED", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_TEMPLATE_PAUSED_OR_DISABLED")
+		val, err := NewWhatsAppMessageErrorCodeFromString("TEMPLATE_PAUSED_OR_DISABLED")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_TEMPLATE_PAUSED_OR_DISABLED"), val, "enum value should match expected wire value")
+		assert.Equal(t, WhatsAppMessageErrorCode("TEMPLATE_PAUSED_OR_DISABLED"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_WAVIX_INVALID_TEMPLATE_PARAMETERS", func(t *testing.T) {
+	t.Run("NewFromString_INVALID_TEMPLATE_PARAMETERS", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_INVALID_TEMPLATE_PARAMETERS")
+		val, err := NewWhatsAppMessageErrorCodeFromString("INVALID_TEMPLATE_PARAMETERS")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_INVALID_TEMPLATE_PARAMETERS"), val, "enum value should match expected wire value")
+		assert.Equal(t, WhatsAppMessageErrorCode("INVALID_TEMPLATE_PARAMETERS"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_WAVIX_MARKETING_LIMIT_REACHED", func(t *testing.T) {
+	t.Run("NewFromString_MARKETING_LIMIT_REACHED", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_MARKETING_LIMIT_REACHED")
+		val, err := NewWhatsAppMessageErrorCodeFromString("MARKETING_LIMIT_REACHED")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_MARKETING_LIMIT_REACHED"), val, "enum value should match expected wire value")
+		assert.Equal(t, WhatsAppMessageErrorCode("MARKETING_LIMIT_REACHED"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_WAVIX_SENDER_LIMIT_REACHED", func(t *testing.T) {
+	t.Run("NewFromString_SENDER_LIMIT_REACHED", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_SENDER_LIMIT_REACHED")
+		val, err := NewWhatsAppMessageErrorCodeFromString("SENDER_LIMIT_REACHED")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_SENDER_LIMIT_REACHED"), val, "enum value should match expected wire value")
+		assert.Equal(t, WhatsAppMessageErrorCode("SENDER_LIMIT_REACHED"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_WAVIX_SENDER_RATE_LIMITED", func(t *testing.T) {
+	t.Run("NewFromString_SENDER_RATE_LIMITED", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_SENDER_RATE_LIMITED")
+		val, err := NewWhatsAppMessageErrorCodeFromString("SENDER_RATE_LIMITED")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_SENDER_RATE_LIMITED"), val, "enum value should match expected wire value")
+		assert.Equal(t, WhatsAppMessageErrorCode("SENDER_RATE_LIMITED"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_WAVIX_SENDER_UNAVAILABLE", func(t *testing.T) {
+	t.Run("NewFromString_SENDER_UNAVAILABLE", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_SENDER_UNAVAILABLE")
+		val, err := NewWhatsAppMessageErrorCodeFromString("SENDER_UNAVAILABLE")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_SENDER_UNAVAILABLE"), val, "enum value should match expected wire value")
+		assert.Equal(t, WhatsAppMessageErrorCode("SENDER_UNAVAILABLE"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_WAVIX_SERVICE_UNAVAILABLE", func(t *testing.T) {
+	t.Run("NewFromString_SERVICE_UNAVAILABLE", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_SERVICE_UNAVAILABLE")
+		val, err := NewWhatsAppMessageErrorCodeFromString("SERVICE_UNAVAILABLE")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_SERVICE_UNAVAILABLE"), val, "enum value should match expected wire value")
+		assert.Equal(t, WhatsAppMessageErrorCode("SERVICE_UNAVAILABLE"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_WAVIX_MESSAGE_EXPIRED", func(t *testing.T) {
+	t.Run("NewFromString_MESSAGE_EXPIRED", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_MESSAGE_EXPIRED")
+		val, err := NewWhatsAppMessageErrorCodeFromString("MESSAGE_EXPIRED")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_MESSAGE_EXPIRED"), val, "enum value should match expected wire value")
+		assert.Equal(t, WhatsAppMessageErrorCode("MESSAGE_EXPIRED"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_WAVIX_DELIVERY_FAILED", func(t *testing.T) {
+	t.Run("NewFromString_DELIVERY_FAILED", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_DELIVERY_FAILED")
+		val, err := NewWhatsAppMessageErrorCodeFromString("DELIVERY_FAILED")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, WhatsAppMessageErrorCode("WAVIX_DELIVERY_FAILED"), val, "enum value should match expected wire value")
+		assert.Equal(t, WhatsAppMessageErrorCode("DELIVERY_FAILED"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
@@ -69476,7 +69725,7 @@ func TestEnumWhatsAppMessageErrorCode(t *testing.T) {
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewWhatsAppMessageErrorCodeFromString("WAVIX_RECIPIENT_NOT_ON_WHATSAPP")
+		val, err := NewWhatsAppMessageErrorCodeFromString("RECIPIENT_NOT_ON_WHATSAPP")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)

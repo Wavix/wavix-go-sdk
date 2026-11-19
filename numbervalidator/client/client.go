@@ -5,11 +5,11 @@ package client
 import (
 	context "context"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	results "github.com/wavix/wavix-go-sdk/numbervalidator/results"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	results "github.com/wavix/wavix-go-sdk/v2/numbervalidator/results"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 type Client struct {
@@ -40,9 +40,9 @@ func NewClient(options *core.RequestOptions) *Client {
 // Validates a single phone number and returns line type, carrier, portability, and reachability details. The response's `error_code` is a per-number result code (`000` success; `013` internal error; `021` invalid format; `041` remote timeout; `042` remote query failed; `091` insufficient funds) — distinct from the HTTP status codes below.
 func (c *Client) Get(
 	ctx context.Context,
-	request *wavixgosdk.GetNumberValidatorRequest,
+	request *v2.GetNumberValidatorRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.PhoneValidationResponse, error) {
+) (*v2.PhoneValidationResponse, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,
@@ -57,9 +57,9 @@ func (c *Client) Get(
 // Validates a batch of phone numbers. When `async` is `true`, returns a `request_id` to poll for results instead of the validation details.
 func (c *Client) CreateBulk(
 	ctx context.Context,
-	request *wavixgosdk.PhoneValidationRequest,
+	request *v2.PhoneValidationRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.NumberValidatorCreateBulkResponse, error) {
+) (*v2.NumberValidatorCreateBulkResponse, error) {
 	response, err := c.WithRawResponse.CreateBulk(
 		ctx,
 		request,
