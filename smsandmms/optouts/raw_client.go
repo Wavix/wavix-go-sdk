@@ -6,11 +6,11 @@ import (
 	context "context"
 	http "net/http"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
-	smsandmms "github.com/wavix/wavix-go-sdk/smsandmms"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
+	smsandmms "github.com/wavix/wavix-go-sdk/v2/smsandmms"
 )
 
 type RawClient struct {
@@ -37,7 +37,7 @@ func (r *RawClient) List(
 	ctx context.Context,
 	request *smsandmms.ListOptOutsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.OptOutsListResponse], error) {
+) (*core.Response[*v2.OptOutsListResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -56,7 +56,7 @@ func (r *RawClient) List(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *wavixgosdk.OptOutsListResponse
+	var response *v2.OptOutsListResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -75,7 +75,7 @@ func (r *RawClient) List(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.OptOutsListResponse]{
+	return &core.Response[*v2.OptOutsListResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -86,7 +86,7 @@ func (r *RawClient) Create(
 	ctx context.Context,
 	request *smsandmms.OptOutCreateRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.SuccessResponse], error) {
+) (*core.Response[*v2.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -99,7 +99,7 @@ func (r *RawClient) Create(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *wavixgosdk.SuccessResponse
+	var response *v2.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -119,7 +119,7 @@ func (r *RawClient) Create(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.SuccessResponse]{
+	return &core.Response[*v2.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

@@ -11,10 +11,10 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	callcontrol "github.com/wavix/wavix-go-sdk/callcontrol"
-	client "github.com/wavix/wavix-go-sdk/client"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	callcontrol "github.com/wavix/wavix-go-sdk/v2/callcontrol"
+	client "github.com/wavix/wavix-go-sdk/v2/client"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 func VerifyRequestCount(
@@ -92,8 +92,8 @@ func TestCallControlStreamsCreateWithWireMock(
 	request := &callcontrol.CallStreamCreateRequest{
 		CallID:        "call_id",
 		StreamURL:     "wss://examples.com/stream",
-		StreamType:    wavixgosdk.CallStreamTypeOneway,
-		StreamChannel: wavixgosdk.CallStreamChannelInbound,
+		StreamType:    v2.CallStreamTypeOneway,
+		StreamChannel: v2.CallStreamChannelInbound,
 	}
 	_, invocationErr := client.CallControl.Streams.Create(
 		context.TODO(),

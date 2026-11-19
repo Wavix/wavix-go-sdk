@@ -6,11 +6,11 @@ import (
 	context "context"
 	http "net/http"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	buy "github.com/wavix/wavix-go-sdk/buy"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	buy "github.com/wavix/wavix-go-sdk/v2/buy"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 type RawClient struct {
@@ -37,7 +37,7 @@ func (r *RawClient) List(
 	ctx context.Context,
 	request *buy.ListNumbersRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.AvailableNumberListResponse], error) {
+) (*core.Response[*v2.AvailableNumberListResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -60,7 +60,7 @@ func (r *RawClient) List(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *wavixgosdk.AvailableNumberListResponse
+	var response *v2.AvailableNumberListResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -79,7 +79,7 @@ func (r *RawClient) List(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.AvailableNumberListResponse]{
+	return &core.Response[*v2.AvailableNumberListResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

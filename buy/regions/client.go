@@ -5,11 +5,11 @@ package regions
 import (
 	context "context"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	buy "github.com/wavix/wavix-go-sdk/buy"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	buy "github.com/wavix/wavix-go-sdk/v2/buy"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 type Client struct {
@@ -40,7 +40,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *buy.ListRegionsRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.RegionListResponse, error) {
+) (*v2.RegionListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,

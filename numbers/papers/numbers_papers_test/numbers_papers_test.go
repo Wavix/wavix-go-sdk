@@ -12,10 +12,10 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	client "github.com/wavix/wavix-go-sdk/client"
-	numbers "github.com/wavix/wavix-go-sdk/numbers"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	client "github.com/wavix/wavix-go-sdk/v2/client"
+	numbers "github.com/wavix/wavix-go-sdk/v2/numbers"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 func VerifyRequestCount(
@@ -95,7 +95,7 @@ func TestNumbersPapersUploadWithWireMock(
 			"",
 		),
 		DidIDs: "did_ids",
-		DocID:  wavixgosdk.DocumentTypeID,
+		DocID:  v2.DocumentTypeID,
 	}
 	_, invocationErr := client.Numbers.Papers.Upload(
 		context.TODO(),

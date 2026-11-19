@@ -11,9 +11,9 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	client "github.com/wavix/wavix-go-sdk/client"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	client "github.com/wavix/wavix-go-sdk/v2/client"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 func VerifyRequestCount(
@@ -88,7 +88,7 @@ func TestLinkShortenerCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.ShortLinkCreateRequest{
+	request := &v2.ShortLinkCreateRequest{
 		Link: "https://your-site.com/long-url",
 	}
 	_, invocationErr := client.LinkShortener.Create(

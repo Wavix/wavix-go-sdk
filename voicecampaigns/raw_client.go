@@ -6,10 +6,10 @@ import (
 	context "context"
 	http "net/http"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 type RawClient struct {
@@ -34,9 +34,9 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 
 func (r *RawClient) Create(
 	ctx context.Context,
-	request *wavixgosdk.CreateVoiceCampaignsRequest,
+	request *v2.CreateVoiceCampaignsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.VoiceCampaignsCreateResponse], error) {
+) (*core.Response[*v2.VoiceCampaignsCreateResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -49,7 +49,7 @@ func (r *RawClient) Create(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *wavixgosdk.VoiceCampaignsCreateResponse
+	var response *v2.VoiceCampaignsCreateResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -63,13 +63,13 @@ func (r *RawClient) Create(
 			Client:          options.HTTPClient,
 			Request:         request,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(wavixgosdk.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.VoiceCampaignsCreateResponse]{
+	return &core.Response[*v2.VoiceCampaignsCreateResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -78,9 +78,9 @@ func (r *RawClient) Create(
 
 func (r *RawClient) Get(
 	ctx context.Context,
-	request *wavixgosdk.GetVoiceCampaignsRequest,
+	request *v2.GetVoiceCampaignsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.VoiceCampaignsGetResponse], error) {
+) (*core.Response[*v2.VoiceCampaignsGetResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -95,7 +95,7 @@ func (r *RawClient) Get(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *wavixgosdk.VoiceCampaignsGetResponse
+	var response *v2.VoiceCampaignsGetResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -108,13 +108,13 @@ func (r *RawClient) Get(
 			QueryParameters: options.QueryParameters,
 			Client:          options.HTTPClient,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(wavixgosdk.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.VoiceCampaignsGetResponse]{
+	return &core.Response[*v2.VoiceCampaignsGetResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

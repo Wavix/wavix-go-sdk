@@ -5,10 +5,10 @@ package siptrunks
 import (
 	context "context"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 type Client struct {
@@ -37,9 +37,9 @@ func NewClient(options *core.RequestOptions) *Client {
 // Returns a paginated list of SIP trunks for the authenticated account.
 func (c *Client) List(
 	ctx context.Context,
-	request *wavixgosdk.ListSipTrunksRequest,
+	request *v2.ListSipTrunksRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SipTrunkListResponse, error) {
+) (*v2.SipTrunkListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
@@ -54,9 +54,9 @@ func (c *Client) List(
 // Creates a SIP trunk for routing inbound and outbound calls. Returns the trunk with its generated `access_token`.
 func (c *Client) Create(
 	ctx context.Context,
-	request *wavixgosdk.SipTrunkCreateRequest,
+	request *v2.SipTrunkCreateRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SipTrunkResponse, error) {
+) (*v2.SipTrunkResponse, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -71,9 +71,9 @@ func (c *Client) Create(
 // Returns the SIP trunk identified by `id`.
 func (c *Client) Get(
 	ctx context.Context,
-	request *wavixgosdk.GetSipTrunksRequest,
+	request *v2.GetSipTrunksRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SipTrunkResponse, error) {
+) (*v2.SipTrunkResponse, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,
@@ -88,9 +88,9 @@ func (c *Client) Get(
 // Updates the SIP trunk identified by `id`. Only the provided fields are changed. On trial accounts, every update also applies the trial limits: a `call_limit` of at most 300 seconds (300 when omitted) and one concurrent call.
 func (c *Client) Update(
 	ctx context.Context,
-	request *wavixgosdk.SipTrunkUpdateRequest,
+	request *v2.SipTrunkUpdateRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SipTrunkResponse, error) {
+) (*v2.SipTrunkResponse, error) {
 	response, err := c.WithRawResponse.Update(
 		ctx,
 		request,
@@ -105,9 +105,9 @@ func (c *Client) Update(
 // Deletes the SIP trunk identified by `id`. Deletion is permanent and stops call routing through the trunk.
 func (c *Client) Delete(
 	ctx context.Context,
-	request *wavixgosdk.DeleteSipTrunksRequest,
+	request *v2.DeleteSipTrunksRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SuccessResponse, error) {
+) (*v2.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,

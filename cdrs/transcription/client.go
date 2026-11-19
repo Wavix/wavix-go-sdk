@@ -5,11 +5,11 @@ package transcription
 import (
 	context "context"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	cdrs "github.com/wavix/wavix-go-sdk/cdrs"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	cdrs "github.com/wavix/wavix-go-sdk/v2/cdrs"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 type Client struct {
@@ -40,7 +40,7 @@ func (c *Client) Get(
 	ctx context.Context,
 	request *cdrs.GetTranscriptionRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.CdrTranscriptionResponse, error) {
+) (*v2.CdrTranscriptionResponse, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,

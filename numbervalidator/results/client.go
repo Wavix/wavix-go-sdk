@@ -5,11 +5,11 @@ package results
 import (
 	context "context"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	numbervalidator "github.com/wavix/wavix-go-sdk/numbervalidator"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	numbervalidator "github.com/wavix/wavix-go-sdk/v2/numbervalidator"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 type Client struct {
@@ -40,7 +40,7 @@ func (c *Client) Get(
 	ctx context.Context,
 	request *numbervalidator.GetResultsRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.PhoneValidationBatchResultResponse, error) {
+) (*v2.PhoneValidationBatchResultResponse, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,

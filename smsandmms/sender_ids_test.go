@@ -6,7 +6,7 @@ import (
 	json "encoding/json"
 	assert "github.com/stretchr/testify/assert"
 	require "github.com/stretchr/testify/require"
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
 	testing "testing"
 )
 
@@ -21,7 +21,7 @@ func TestSettersSenderIDCreateRequest(t *testing.T) {
 
 	t.Run("SetType", func(t *testing.T) {
 		obj := &SenderIDCreateRequest{}
-		var fernTestValueType wavixgosdk.SenderIDType
+		var fernTestValueType v2.SenderIDType
 		obj.SetType(fernTestValueType)
 		assert.Equal(t, fernTestValueType, obj.Type)
 		assert.NotNil(t, obj.explicitFields)
@@ -97,7 +97,7 @@ func TestSettersMarkExplicitSenderIDCreateRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SenderIDCreateRequest{}
-		var fernTestValueType wavixgosdk.SenderIDType
+		var fernTestValueType v2.SenderIDType
 
 		// Act
 		obj.SetType(fernTestValueType)

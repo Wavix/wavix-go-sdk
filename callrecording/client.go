@@ -5,10 +5,10 @@ package callrecording
 import (
 	context "context"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 type Client struct {
@@ -37,9 +37,9 @@ func NewClient(options *core.RequestOptions) *Client {
 // Returns a paginated list of call recordings for the authenticated account, filtered by date range, number, call, or SIP trunk.
 func (c *Client) List(
 	ctx context.Context,
-	request *wavixgosdk.ListCallRecordingRequest,
+	request *v2.ListCallRecordingRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.CallRecordingListResponse, error) {
+) (*v2.CallRecordingListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
@@ -54,7 +54,7 @@ func (c *Client) List(
 // Redirects to the recording file for the call identified by `call_id`. The download URL is returned in the `Location` header.
 func (c *Client) GetByCall(
 	ctx context.Context,
-	request *wavixgosdk.GetByCallCallRecordingRequest,
+	request *v2.GetByCallCallRecordingRequest,
 	opts ...option.RequestOption,
 ) error {
 	_, err := c.WithRawResponse.GetByCall(
@@ -71,9 +71,9 @@ func (c *Client) GetByCall(
 // Returns the call recording identified by `id`, including its metadata and download URL.
 func (c *Client) Get(
 	ctx context.Context,
-	request *wavixgosdk.GetCallRecordingRequest,
+	request *v2.GetCallRecordingRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.Recording, error) {
+) (*v2.Recording, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,
@@ -88,9 +88,9 @@ func (c *Client) Get(
 // Deletes the call recording identified by `id`. Deletion is permanent — the audio file is unrecoverable.
 func (c *Client) Delete(
 	ctx context.Context,
-	request *wavixgosdk.DeleteCallRecordingRequest,
+	request *v2.DeleteCallRecordingRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SuccessResponse, error) {
+) (*v2.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,

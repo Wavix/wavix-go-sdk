@@ -11,9 +11,9 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	client "github.com/wavix/wavix-go-sdk/client"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	client "github.com/wavix/wavix-go-sdk/v2/client"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 func VerifyRequestCount(
@@ -88,8 +88,8 @@ func TestAPIKeysListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.ListAPIKeysRequest{
-		Label: wavixgosdk.String(
+	request := &v2.ListAPIKeysRequest{
+		Label: v2.String(
 			"production",
 		),
 	}
@@ -116,35 +116,35 @@ func TestAPIKeysCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.APIKeyCreateRequest{
+	request := &v2.APIKeyCreateRequest{
 		Label: "Production API Key",
-		Active: wavixgosdk.Bool(
+		Active: v2.Bool(
 			true,
 		),
-		Restricted: wavixgosdk.Bool(
+		Restricted: v2.Bool(
 			true,
 		),
 		PermittedIps: []string{
 			"192.168.1.1",
 			"10.0.0.1",
 		},
-		ScopesEnabled: wavixgosdk.Bool(
+		ScopesEnabled: v2.Bool(
 			true,
 		),
-		Numbers: &wavixgosdk.APIKeyScopePermission{
-			Allow: wavixgosdk.APIKeyScopePermissionAllowRead.Ptr(),
+		Numbers: &v2.APIKeyScopePermission{
+			Allow: v2.APIKeyScopePermissionAllowRead.Ptr(),
 		},
-		Calls: &wavixgosdk.APIKeyCallsScopePermission{
-			Allow: wavixgosdk.APIKeyCallsScopePermissionAllowRead.Ptr(),
+		Calls: &v2.APIKeyCallsScopePermission{
+			Allow: v2.APIKeyCallsScopePermissionAllowRead.Ptr(),
 		},
-		Messages: &wavixgosdk.APIKeyScopePermission{
-			Allow: wavixgosdk.APIKeyScopePermissionAllowWrite.Ptr(),
+		Messages: &v2.APIKeyScopePermission{
+			Allow: v2.APIKeyScopePermissionAllowWrite.Ptr(),
 		},
-		TwoFa: &wavixgosdk.APIKeyScopePermission{
-			Allow: wavixgosdk.APIKeyScopePermissionAllowWrite.Ptr(),
+		TwoFa: &v2.APIKeyScopePermission{
+			Allow: v2.APIKeyScopePermissionAllowWrite.Ptr(),
 		},
-		Billing: &wavixgosdk.APIKeyScopePermission{
-			Allow: wavixgosdk.APIKeyScopePermissionAllowRead.Ptr(),
+		Billing: &v2.APIKeyScopePermission{
+			Allow: v2.APIKeyScopePermissionAllowRead.Ptr(),
 		},
 	}
 	_, invocationErr := client.APIKeys.Create(
@@ -170,7 +170,7 @@ func TestAPIKeysDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.DeleteAPIKeysRequest{
+	request := &v2.DeleteAPIKeysRequest{
 		ID: 1,
 	}
 	_, invocationErr := client.APIKeys.Delete(
@@ -196,22 +196,22 @@ func TestAPIKeysUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.APIKeyUpdateRequest{
+	request := &v2.APIKeyUpdateRequest{
 		ID: 1,
-		Active: wavixgosdk.Bool(
+		Active: v2.Bool(
 			true,
 		),
-		Restricted: wavixgosdk.Bool(
+		Restricted: v2.Bool(
 			true,
 		),
-		ScopesEnabled: wavixgosdk.Bool(
+		ScopesEnabled: v2.Bool(
 			true,
 		),
 		PermittedIps: []string{
 			"192.168.1.1",
 			"10.0.0.1",
 		},
-		Label: wavixgosdk.String(
+		Label: v2.String(
 			"Production API Key",
 		),
 	}

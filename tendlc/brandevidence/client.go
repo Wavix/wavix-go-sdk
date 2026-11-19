@@ -6,11 +6,11 @@ import (
 	context "context"
 	io "io"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
-	tendlc "github.com/wavix/wavix-go-sdk/tendlc"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
+	tendlc "github.com/wavix/wavix-go-sdk/v2/tendlc"
 )
 
 type Client struct {
@@ -41,7 +41,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *tendlc.ListBrandEvidenceRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.ListBrandEvidenceResponse, error) {
+) (*v2.ListBrandEvidenceResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
@@ -58,7 +58,7 @@ func (c *Client) Upload(
 	ctx context.Context,
 	request *tendlc.UploadBrandEvidenceRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.TenDlcBrandEvidence, error) {
+) (*v2.TenDlcBrandEvidence, error) {
 	response, err := c.WithRawResponse.Upload(
 		ctx,
 		request,
@@ -92,7 +92,7 @@ func (c *Client) Delete(
 	ctx context.Context,
 	request *tendlc.DeleteBrandEvidenceRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SuccessResponse, error) {
+) (*v2.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,

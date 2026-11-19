@@ -11,9 +11,9 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	client "github.com/wavix/wavix-go-sdk/client"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	client "github.com/wavix/wavix-go-sdk/v2/client"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 func VerifyRequestCount(
@@ -88,30 +88,30 @@ func TestCdrsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.ListCdrsRequest{
-		From: wavixgosdk.MustParseDate(
+	request := &v2.ListCdrsRequest{
+		From: v2.MustParseDate(
 			"2023-01-01",
 		),
-		To: wavixgosdk.MustParseDate(
+		To: v2.MustParseDate(
 			"2023-09-01",
 		),
 		Type: "received",
-		FromSearch: wavixgosdk.String(
+		FromSearch: v2.String(
 			"13524815863",
 		),
-		ToSearch: wavixgosdk.String(
+		ToSearch: v2.String(
 			"12565378257",
 		),
-		SipTrunk: wavixgosdk.String(
+		SipTrunk: v2.String(
 			"12321",
 		),
-		UUID: wavixgosdk.String(
+		UUID: v2.String(
 			"99df5ffd-962a-410f-bcce-d08f1f7f328c",
 		),
-		Page: wavixgosdk.Int(
+		Page: v2.Int(
 			1,
 		),
-		PerPage: wavixgosdk.Int(
+		PerPage: v2.Int(
 			25,
 		),
 	}
@@ -138,12 +138,12 @@ func TestCdrsSearchWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.CdrSearchRequest{
-		Type: wavixgosdk.CdrSearchRequestTypePlaced,
-		From: wavixgosdk.MustParseDate(
+	request := &v2.CdrSearchRequest{
+		Type: v2.CdrSearchRequestTypePlaced,
+		From: v2.MustParseDate(
 			"2023-08-01",
 		),
-		To: wavixgosdk.MustParseDate(
+		To: v2.MustParseDate(
 			"2023-08-31",
 		),
 	}
@@ -170,7 +170,7 @@ func TestCdrsRetranscribeWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.CdrRetranscriptionRequest{
+	request := &v2.CdrRetranscriptionRequest{
 		CallID: "bbaa37bf-430a-46da-ade3-c248e4070160",
 	}
 	_, invocationErr := client.Cdrs.Retranscribe(
@@ -196,7 +196,7 @@ func TestCdrsTranscriptionsWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.TranscriptionsCdrsRequest{
+	request := &v2.TranscriptionsCdrsRequest{
 		CallID: "bbaa37bf-430a-46da-ade3-c248e4070160",
 	}
 	_, invocationErr := client.Cdrs.Transcriptions(
@@ -222,9 +222,9 @@ func TestCdrsGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.GetCdrsRequest{
+	request := &v2.GetCdrsRequest{
 		CallID: "aa566501-c591-4a8b-b3b9-cc1295398b72",
-		ShowTranscription: wavixgosdk.Bool(
+		ShowTranscription: v2.Bool(
 			true,
 		),
 	}
@@ -251,30 +251,30 @@ func TestCdrsListAllWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.ListAllCdrsRequest{
-		From: wavixgosdk.MustParseDate(
+	request := &v2.ListAllCdrsRequest{
+		From: v2.MustParseDate(
 			"2023-01-01",
 		),
-		To: wavixgosdk.MustParseDate(
+		To: v2.MustParseDate(
 			"2023-09-01",
 		),
 		Type: "received",
-		FromSearch: wavixgosdk.String(
+		FromSearch: v2.String(
 			"13524815863",
 		),
-		ToSearch: wavixgosdk.String(
+		ToSearch: v2.String(
 			"12565378257",
 		),
-		SipTrunk: wavixgosdk.String(
+		SipTrunk: v2.String(
 			"12321",
 		),
-		UUID: wavixgosdk.String(
+		UUID: v2.String(
 			"99df5ffd-962a-410f-bcce-d08f1f7f328c",
 		),
-		Page: wavixgosdk.Int(
+		Page: v2.Int(
 			1,
 		),
-		PerPage: wavixgosdk.Int(
+		PerPage: v2.Int(
 			25,
 		),
 	}

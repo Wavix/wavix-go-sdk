@@ -5,11 +5,11 @@ package client
 import (
 	context "context"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	metrics "github.com/wavix/wavix-go-sdk/linkshortener/metrics"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	metrics "github.com/wavix/wavix-go-sdk/v2/linkshortener/metrics"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 type Client struct {
@@ -40,9 +40,9 @@ func NewClient(options *core.RequestOptions) *Client {
 // Creates a short link that redirects to the target URL and tracks click metrics.
 func (c *Client) Create(
 	ctx context.Context,
-	request *wavixgosdk.ShortLinkCreateRequest,
+	request *v2.ShortLinkCreateRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.ShortLinkResponse, error) {
+) (*v2.ShortLinkResponse, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,

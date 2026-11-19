@@ -11,10 +11,10 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	client "github.com/wavix/wavix-go-sdk/client"
-	option "github.com/wavix/wavix-go-sdk/option"
-	webrtc "github.com/wavix/wavix-go-sdk/webrtc"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	client "github.com/wavix/wavix-go-sdk/v2/client"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
+	webrtc "github.com/wavix/wavix-go-sdk/v2/webrtc"
 )
 
 func VerifyRequestCount(
@@ -118,7 +118,7 @@ func TestWebrtcTokensCreateWithWireMock(
 		Payload: map[string]any{
 			"user_id": "42",
 		},
-		TTL: wavixgosdk.Int(
+		TTL: v2.Int(
 			3600,
 		),
 	}

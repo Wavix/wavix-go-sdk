@@ -5,8 +5,8 @@ package smsandmms
 import (
 	json "encoding/json"
 	fmt "fmt"
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	internal "github.com/wavix/wavix-go-sdk/internal"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
 	big "math/big"
 	time "time"
 )
@@ -62,7 +62,7 @@ type ListMessagesRequest struct {
 	// Filters by message recipient. For `outbound` messages, the destination phone number; for `inbound` messages, an SMS-enabled number on the Wavix platform.
 	To *string `json:"-" url:"to,omitempty"`
 	// Filters messages by delivery status. Accepts a `MessageDeliveryStatus` value.
-	Status *wavixgosdk.MessageDeliveryStatus `json:"-" url:"status,omitempty"`
+	Status *v2.MessageDeliveryStatus `json:"-" url:"status,omitempty"`
 	// Filters messages by `tag`. Supported for outbound messages only.
 	Tag *string `json:"-" url:"tag,omitempty"`
 	// Filters messages by type. One of `sms` (text message) or `mms` (multimedia message).
@@ -120,7 +120,7 @@ func (l *ListMessagesRequest) SetTo(to *string) {
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (l *ListMessagesRequest) SetStatus(status *wavixgosdk.MessageDeliveryStatus) {
+func (l *ListMessagesRequest) SetStatus(status *v2.MessageDeliveryStatus) {
 	l.Status = status
 	l.require(listMessagesRequestFieldStatus)
 }
@@ -176,7 +176,7 @@ type ListAllMessagesRequest struct {
 	// Filters by message recipient. For `outbound` messages, the destination phone number; for `inbound` messages, the SMS-enabled number that received the message.
 	To *string `json:"-" url:"to,omitempty"`
 	// Filters messages by delivery status. Accepts a `MessageDeliveryStatus` value.
-	Status *wavixgosdk.MessageDeliveryStatus `json:"-" url:"status,omitempty"`
+	Status *v2.MessageDeliveryStatus `json:"-" url:"status,omitempty"`
 	// Filters messages by `tag`. Supported for outbound messages only.
 	Tag *string `json:"-" url:"tag,omitempty"`
 	// Filters messages by type. One of `sms` (text message) or `mms` (multimedia message).
@@ -230,7 +230,7 @@ func (l *ListAllMessagesRequest) SetTo(to *string) {
 
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (l *ListAllMessagesRequest) SetStatus(status *wavixgosdk.MessageDeliveryStatus) {
+func (l *ListAllMessagesRequest) SetStatus(status *v2.MessageDeliveryStatus) {
 	l.Status = status
 	l.require(listAllMessagesRequestFieldStatus)
 }
@@ -262,8 +262,8 @@ type SendMessagesRequest struct {
 	// Sender ID. Numeric or alphanumeric.
 	From string `json:"from" url:"-"`
 	// Recipient phone number.
-	To          string                  `json:"to" url:"-"`
-	MessageBody *wavixgosdk.MessageBody `json:"message_body" url:"-"`
+	To          string          `json:"to" url:"-"`
+	MessageBody *v2.MessageBody `json:"message_body" url:"-"`
 	// Callback URL for delivery reports.
 	CallbackURL *string `json:"callback_url,omitempty" url:"-"`
 	// Message validity period in seconds. Delivery attempts stop after this period expires.
@@ -298,7 +298,7 @@ func (s *SendMessagesRequest) SetTo(to string) {
 
 // SetMessageBody sets the MessageBody field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SendMessagesRequest) SetMessageBody(messageBody *wavixgosdk.MessageBody) {
+func (s *SendMessagesRequest) SetMessageBody(messageBody *v2.MessageBody) {
 	s.MessageBody = messageBody
 	s.require(sendMessagesRequestFieldMessageBody)
 }

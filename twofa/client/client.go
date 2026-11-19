@@ -3,11 +3,11 @@
 package client
 
 import (
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	events "github.com/wavix/wavix-go-sdk/twofa/events"
-	sessions "github.com/wavix/wavix-go-sdk/twofa/sessions"
-	verification "github.com/wavix/wavix-go-sdk/twofa/verification"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	events "github.com/wavix/wavix-go-sdk/v2/twofa/events"
+	sessions "github.com/wavix/wavix-go-sdk/v2/twofa/sessions"
+	verification "github.com/wavix/wavix-go-sdk/v2/twofa/verification"
 )
 
 type Client struct {

@@ -5,10 +5,10 @@ package apikeys
 import (
 	context "context"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 type Client struct {
@@ -37,9 +37,9 @@ func NewClient(options *core.RequestOptions) *Client {
 // Returns the API keys belonging to the authenticated account.
 func (c *Client) List(
 	ctx context.Context,
-	request *wavixgosdk.ListAPIKeysRequest,
+	request *v2.ListAPIKeysRequest,
 	opts ...option.RequestOption,
-) ([]*wavixgosdk.APIKey, error) {
+) ([]*v2.APIKey, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
@@ -54,9 +54,9 @@ func (c *Client) List(
 // Creates an API key for the authenticated account. Restrict access by listing permitted IP addresses in `permitted_ips`.
 func (c *Client) Create(
 	ctx context.Context,
-	request *wavixgosdk.APIKeyCreateRequest,
+	request *v2.APIKeyCreateRequest,
 	opts ...option.RequestOption,
-) (wavixgosdk.APIKeyWithSecret, error) {
+) (v2.APIKeyWithSecret, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -71,9 +71,9 @@ func (c *Client) Create(
 // Deletes the API key identified by `id`. Deletion is permanent and revokes the key immediately.
 func (c *Client) Delete(
 	ctx context.Context,
-	request *wavixgosdk.DeleteAPIKeysRequest,
+	request *v2.DeleteAPIKeysRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SuccessResponse, error) {
+) (*v2.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,
@@ -88,9 +88,9 @@ func (c *Client) Delete(
 // Updates an API key identified by `id`. Only the provided fields are changed.
 func (c *Client) Update(
 	ctx context.Context,
-	request *wavixgosdk.APIKeyUpdateRequest,
+	request *v2.APIKeyUpdateRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.APIKey, error) {
+) (*v2.APIKey, error) {
 	response, err := c.WithRawResponse.Update(
 		ctx,
 		request,

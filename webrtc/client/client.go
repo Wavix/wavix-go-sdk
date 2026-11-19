@@ -3,9 +3,9 @@
 package client
 
 import (
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	tokens "github.com/wavix/wavix-go-sdk/webrtc/tokens"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	tokens "github.com/wavix/wavix-go-sdk/v2/webrtc/tokens"
 )
 
 type Client struct {

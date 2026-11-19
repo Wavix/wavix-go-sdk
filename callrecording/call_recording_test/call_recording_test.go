@@ -11,9 +11,9 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	client "github.com/wavix/wavix-go-sdk/client"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	client "github.com/wavix/wavix-go-sdk/v2/client"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 func VerifyRequestCount(
@@ -88,30 +88,30 @@ func TestCallRecordingListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.ListCallRecordingRequest{
-		FromDate: wavixgosdk.Time(
-			wavixgosdk.MustParseDate(
+	request := &v2.ListCallRecordingRequest{
+		FromDate: v2.Time(
+			v2.MustParseDate(
 				"2023-01-01",
 			),
 		),
-		ToDate: wavixgosdk.Time(
-			wavixgosdk.MustParseDate(
+		ToDate: v2.Time(
+			v2.MustParseDate(
 				"2023-12-31",
 			),
 		),
-		From: wavixgosdk.String(
+		From: v2.String(
 			"123456",
 		),
-		To: wavixgosdk.String(
+		To: v2.String(
 			"1987654321",
 		),
-		CallUUID: wavixgosdk.String(
+		CallUUID: v2.String(
 			"aa566501-c591-4a8b-b3b9-cc1295398b72",
 		),
-		Page: wavixgosdk.Int(
+		Page: v2.Int(
 			1,
 		),
-		PerPage: wavixgosdk.Int(
+		PerPage: v2.Int(
 			25,
 		),
 	}
@@ -138,7 +138,7 @@ func TestCallRecordingGetByCallWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.GetByCallCallRecordingRequest{
+	request := &v2.GetByCallCallRecordingRequest{
 		CallID: "aa566501-c591-4a8b-b3b9-cc1295398b72",
 	}
 	invocationErr := client.CallRecording.GetByCall(
@@ -164,7 +164,7 @@ func TestCallRecordingGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.GetCallRecordingRequest{
+	request := &v2.GetCallRecordingRequest{
 		ID: 123,
 	}
 	_, invocationErr := client.CallRecording.Get(
@@ -190,7 +190,7 @@ func TestCallRecordingDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.DeleteCallRecordingRequest{
+	request := &v2.DeleteCallRecordingRequest{
 		ID: 123,
 	}
 	_, invocationErr := client.CallRecording.Delete(

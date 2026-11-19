@@ -5,11 +5,11 @@ package client
 import (
 	context "context"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
-	file "github.com/wavix/wavix-go-sdk/speechanalytics/file"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
+	file "github.com/wavix/wavix-go-sdk/v2/speechanalytics/file"
 )
 
 type Client struct {
@@ -55,9 +55,9 @@ func NewClient(options *core.RequestOptions) *Client {
 // - `error`: Error description, or `null` when the transcription succeeded.
 func (c *Client) Create(
 	ctx context.Context,
-	request *wavixgosdk.CreateSpeechAnalyticsRequest,
+	request *v2.CreateSpeechAnalyticsRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SubmitFileTranscriptionResponse, error) {
+) (*v2.SubmitFileTranscriptionResponse, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -72,9 +72,9 @@ func (c *Client) Create(
 // Returns the transcription for the request identified by `request_id`, including transcript, speaker turns, and insights when available.
 func (c *Client) Get(
 	ctx context.Context,
-	request *wavixgosdk.GetSpeechAnalyticsRequest,
+	request *v2.GetSpeechAnalyticsRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.FileTranscriptionResponse, error) {
+) (*v2.FileTranscriptionResponse, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,
@@ -89,9 +89,9 @@ func (c *Client) Get(
 // Re-runs transcription on the file identified by `request_id`, replacing the existing transcript.
 func (c *Client) Retranscribe(
 	ctx context.Context,
-	request *wavixgosdk.SpeechAnalyticsRetranscribeRequest,
+	request *v2.SpeechAnalyticsRetranscribeRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SuccessResponse, error) {
+) (*v2.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Retranscribe(
 		ctx,
 		request,

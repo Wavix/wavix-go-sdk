@@ -6,10 +6,10 @@ import (
 	context "context"
 	http "net/http"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 type RawClient struct {
@@ -35,7 +35,7 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 func (r *RawClient) Get(
 	ctx context.Context,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.CartResponse], error) {
+) (*core.Response[*v2.CartResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -47,7 +47,7 @@ func (r *RawClient) Get(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *wavixgosdk.CartResponse
+	var response *v2.CartResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -60,13 +60,13 @@ func (r *RawClient) Get(
 			QueryParameters: options.QueryParameters,
 			Client:          options.HTTPClient,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(wavixgosdk.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.CartResponse]{
+	return &core.Response[*v2.CartResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -75,9 +75,9 @@ func (r *RawClient) Get(
 
 func (r *RawClient) Add(
 	ctx context.Context,
-	request *wavixgosdk.AddCartRequest,
+	request *v2.AddCartRequest,
 	opts ...option.RequestOption,
-) (*core.Response[[]*wavixgosdk.AvailableNumber], error) {
+) (*core.Response[[]*v2.AvailableNumber], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -90,7 +90,7 @@ func (r *RawClient) Add(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response []*wavixgosdk.AvailableNumber
+	var response []*v2.AvailableNumber
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -104,13 +104,13 @@ func (r *RawClient) Add(
 			Client:          options.HTTPClient,
 			Request:         request,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(wavixgosdk.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[[]*wavixgosdk.AvailableNumber]{
+	return &core.Response[[]*v2.AvailableNumber]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -119,9 +119,9 @@ func (r *RawClient) Add(
 
 func (r *RawClient) Remove(
 	ctx context.Context,
-	request *wavixgosdk.RemoveCartRequest,
+	request *v2.RemoveCartRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.SuccessResponse], error) {
+) (*core.Response[*v2.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -134,7 +134,7 @@ func (r *RawClient) Remove(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *wavixgosdk.SuccessResponse
+	var response *v2.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -148,13 +148,13 @@ func (r *RawClient) Remove(
 			Client:          options.HTTPClient,
 			Request:         request,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(wavixgosdk.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.SuccessResponse]{
+	return &core.Response[*v2.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -163,9 +163,9 @@ func (r *RawClient) Remove(
 
 func (r *RawClient) Checkout(
 	ctx context.Context,
-	request *wavixgosdk.CheckoutCartRequest,
+	request *v2.CheckoutCartRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.SuccessResponse], error) {
+) (*core.Response[*v2.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -178,7 +178,7 @@ func (r *RawClient) Checkout(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *wavixgosdk.SuccessResponse
+	var response *v2.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -192,13 +192,13 @@ func (r *RawClient) Checkout(
 			Client:          options.HTTPClient,
 			Request:         request,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(wavixgosdk.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.SuccessResponse]{
+	return &core.Response[*v2.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

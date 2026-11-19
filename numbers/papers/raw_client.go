@@ -6,11 +6,11 @@ import (
 	context "context"
 	http "net/http"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	numbers "github.com/wavix/wavix-go-sdk/numbers"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	numbers "github.com/wavix/wavix-go-sdk/v2/numbers"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 type RawClient struct {
@@ -37,7 +37,7 @@ func (r *RawClient) Upload(
 	ctx context.Context,
 	request *numbers.UploadPapersRequest,
 	opts ...option.RequestOption,
-) (*core.Response[[]*wavixgosdk.NumberDocument], error) {
+) (*core.Response[[]*v2.NumberDocument], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -64,7 +64,7 @@ func (r *RawClient) Upload(
 	}
 	headers.Set("Content-Type", writer.ContentType())
 
-	var response []*wavixgosdk.NumberDocument
+	var response []*v2.NumberDocument
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -84,7 +84,7 @@ func (r *RawClient) Upload(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[[]*wavixgosdk.NumberDocument]{
+	return &core.Response[[]*v2.NumberDocument]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

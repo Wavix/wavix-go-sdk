@@ -5,11 +5,11 @@ package campaigns
 import (
 	context "context"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
-	tendlc "github.com/wavix/wavix-go-sdk/tendlc"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
+	tendlc "github.com/wavix/wavix-go-sdk/v2/tendlc"
 )
 
 type Client struct {
@@ -40,7 +40,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *tendlc.ListCampaignsRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.TenDlcCampaignListResponse, error) {
+) (*v2.TenDlcCampaignListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
@@ -57,7 +57,7 @@ func (c *Client) ListByBrand(
 	ctx context.Context,
 	request *tendlc.ListByBrandCampaignsRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.TenDlcCampaignListResponse, error) {
+) (*v2.TenDlcCampaignListResponse, error) {
 	response, err := c.WithRawResponse.ListByBrand(
 		ctx,
 		request,
@@ -74,7 +74,7 @@ func (c *Client) Create(
 	ctx context.Context,
 	request *tendlc.TenDlcCampaignCreateRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.TenDlcCampaign, error) {
+) (*v2.TenDlcCampaign, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -91,7 +91,7 @@ func (c *Client) Get(
 	ctx context.Context,
 	request *tendlc.GetCampaignsRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.TenDlcCampaign, error) {
+) (*v2.TenDlcCampaign, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,
@@ -108,7 +108,7 @@ func (c *Client) Update(
 	ctx context.Context,
 	request *tendlc.TenDlcCampaignUpdateRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.TenDlcCampaign, error) {
+) (*v2.TenDlcCampaign, error) {
 	response, err := c.WithRawResponse.Update(
 		ctx,
 		request,
@@ -125,7 +125,7 @@ func (c *Client) Delete(
 	ctx context.Context,
 	request *tendlc.DeleteCampaignsRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SuccessResponse, error) {
+) (*v2.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,
@@ -146,7 +146,7 @@ func (c *Client) Nudge(
 	ctx context.Context,
 	request *tendlc.NudgeCampaignsRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SuccessResponse, error) {
+) (*v2.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Nudge(
 		ctx,
 		request,

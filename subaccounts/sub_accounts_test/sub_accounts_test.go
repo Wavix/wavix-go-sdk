@@ -11,9 +11,9 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	client "github.com/wavix/wavix-go-sdk/client"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	client "github.com/wavix/wavix-go-sdk/v2/client"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 func VerifyRequestCount(
@@ -88,7 +88,7 @@ func TestSubAccountsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.ListSubAccountsRequest{}
+	request := &v2.ListSubAccountsRequest{}
 	_, invocationErr := client.SubAccounts.List(
 		context.TODO(),
 		request,
@@ -112,13 +112,13 @@ func TestSubAccountsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.SubAccountsCreateRequest{
+	request := &v2.SubAccountsCreateRequest{
 		Name: "Company",
-		DefaultDestinations: &wavixgosdk.SubAccountsCreateRequestDefaultDestinations{
-			SmsEndpoint: wavixgosdk.String(
+		DefaultDestinations: &v2.SubAccountsCreateRequestDefaultDestinations{
+			SmsEndpoint: v2.String(
 				"https://examples.com/sms",
 			),
-			DlrEndpoint: wavixgosdk.String(
+			DlrEndpoint: v2.String(
 				"https://examples.com/dlr",
 			),
 		},
@@ -146,7 +146,7 @@ func TestSubAccountsGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.GetSubAccountsRequest{
+	request := &v2.GetSubAccountsRequest{
 		ID: 123,
 	}
 	_, invocationErr := client.SubAccounts.Get(
@@ -172,17 +172,17 @@ func TestSubAccountsUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.SubAccountsUpdateRequest{
+	request := &v2.SubAccountsUpdateRequest{
 		ID: 123,
-		Name: wavixgosdk.String(
+		Name: v2.String(
 			"Updated Company Name",
 		),
-		Status: wavixgosdk.SubAccountsUpdateRequestStatusEnabled.Ptr(),
-		DefaultDestinations: &wavixgosdk.SubAccountsUpdateRequestDefaultDestinations{
-			SmsEndpoint: wavixgosdk.String(
+		Status: v2.SubAccountsUpdateRequestStatusEnabled.Ptr(),
+		DefaultDestinations: &v2.SubAccountsUpdateRequestDefaultDestinations{
+			SmsEndpoint: v2.String(
 				"https://examples.com/sms",
 			),
-			DlrEndpoint: wavixgosdk.String(
+			DlrEndpoint: v2.String(
 				"https://examples.com/dlr",
 			),
 		},

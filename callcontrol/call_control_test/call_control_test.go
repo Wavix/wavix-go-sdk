@@ -11,9 +11,9 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	client "github.com/wavix/wavix-go-sdk/client"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	client "github.com/wavix/wavix-go-sdk/v2/client"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 func VerifyRequestCount(
@@ -110,7 +110,7 @@ func TestCallControlCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.CallRequest{
+	request := &v2.CallRequest{
 		From:        "+1234567890",
 		To:          "+1987654321",
 		CallbackURL: "https://examples.com/callback",
@@ -138,7 +138,7 @@ func TestCallControlGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.GetCallControlRequest{
+	request := &v2.GetCallControlRequest{
 		ID: "id",
 	}
 	_, invocationErr := client.CallControl.Get(
@@ -164,7 +164,7 @@ func TestCallControlDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.DeleteCallControlRequest{
+	request := &v2.DeleteCallControlRequest{
 		ID: "id",
 	}
 	_, invocationErr := client.CallControl.Delete(
@@ -190,7 +190,7 @@ func TestCallControlUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.UpdateCallRequest{
+	request := &v2.UpdateCallRequest{
 		ID:  "id",
 		Tag: "marketing-campaign",
 	}
@@ -217,7 +217,7 @@ func TestCallControlAnswerWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.CallAnswerRequest{
+	request := &v2.CallAnswerRequest{
 		ID: "id",
 	}
 	_, invocationErr := client.CallControl.Answer(
@@ -243,7 +243,7 @@ func TestCallControlCollectWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.CallDtmfCollectRequest{
+	request := &v2.CallDtmfCollectRequest{
 		ID: "id",
 	}
 	_, invocationErr := client.CallControl.Collect(

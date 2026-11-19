@@ -5,11 +5,11 @@ package messages
 import (
 	context "context"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
-	smsandmms "github.com/wavix/wavix-go-sdk/smsandmms"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
+	smsandmms "github.com/wavix/wavix-go-sdk/v2/smsandmms"
 )
 
 type Client struct {
@@ -40,7 +40,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *smsandmms.ListMessagesRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.MessageListResponse, error) {
+) (*v2.MessageListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
@@ -57,7 +57,7 @@ func (c *Client) Send(
 	ctx context.Context,
 	request *smsandmms.SendMessagesRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SendMessagesResponse, error) {
+) (*v2.SendMessagesResponse, error) {
 	response, err := c.WithRawResponse.Send(
 		ctx,
 		request,
@@ -74,7 +74,7 @@ func (c *Client) Get(
 	ctx context.Context,
 	request *smsandmms.GetMessagesRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.MessageResponse, error) {
+) (*v2.MessageResponse, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,

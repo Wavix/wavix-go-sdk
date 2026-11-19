@@ -5,11 +5,11 @@ package audio
 import (
 	context "context"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	callcontrol "github.com/wavix/wavix-go-sdk/callcontrol"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	callcontrol "github.com/wavix/wavix-go-sdk/v2/callcontrol"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 type Client struct {
@@ -40,7 +40,7 @@ func (c *Client) Play(
 	ctx context.Context,
 	request *callcontrol.CallAudioPlayRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SuccessResponse, error) {
+) (*v2.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Play(
 		ctx,
 		request,
@@ -57,7 +57,7 @@ func (c *Client) Stop(
 	ctx context.Context,
 	request *callcontrol.StopAudioRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SuccessResponse, error) {
+) (*v2.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Stop(
 		ctx,
 		request,

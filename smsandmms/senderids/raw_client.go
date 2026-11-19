@@ -6,11 +6,11 @@ import (
 	context "context"
 	http "net/http"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
-	smsandmms "github.com/wavix/wavix-go-sdk/smsandmms"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
+	smsandmms "github.com/wavix/wavix-go-sdk/v2/smsandmms"
 )
 
 type RawClient struct {
@@ -36,7 +36,7 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 func (r *RawClient) List(
 	ctx context.Context,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.SenderIDListResponse], error) {
+) (*core.Response[*v2.SenderIDListResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -48,7 +48,7 @@ func (r *RawClient) List(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *wavixgosdk.SenderIDListResponse
+	var response *v2.SenderIDListResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -67,7 +67,7 @@ func (r *RawClient) List(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.SenderIDListResponse]{
+	return &core.Response[*v2.SenderIDListResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -78,7 +78,7 @@ func (r *RawClient) Create(
 	ctx context.Context,
 	request *smsandmms.SenderIDCreateRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.SenderIDDetails], error) {
+) (*core.Response[*v2.SenderIDDetails], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -91,7 +91,7 @@ func (r *RawClient) Create(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *wavixgosdk.SenderIDDetails
+	var response *v2.SenderIDDetails
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -111,7 +111,7 @@ func (r *RawClient) Create(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.SenderIDDetails]{
+	return &core.Response[*v2.SenderIDDetails]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -122,7 +122,7 @@ func (r *RawClient) Get(
 	ctx context.Context,
 	request *smsandmms.GetSenderIDsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.SenderIDResponse], error) {
+) (*core.Response[*v2.SenderIDResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -137,7 +137,7 @@ func (r *RawClient) Get(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *wavixgosdk.SenderIDResponse
+	var response *v2.SenderIDResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -156,7 +156,7 @@ func (r *RawClient) Get(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.SenderIDResponse]{
+	return &core.Response[*v2.SenderIDResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -167,7 +167,7 @@ func (r *RawClient) Delete(
 	ctx context.Context,
 	request *smsandmms.DeleteSenderIDsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*wavixgosdk.SuccessResponse], error) {
+) (*core.Response[*v2.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -182,7 +182,7 @@ func (r *RawClient) Delete(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *wavixgosdk.SuccessResponse
+	var response *v2.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -201,7 +201,7 @@ func (r *RawClient) Delete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*wavixgosdk.SuccessResponse]{
+	return &core.Response[*v2.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

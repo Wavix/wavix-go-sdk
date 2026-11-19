@@ -3,13 +3,13 @@
 package client
 
 import (
-	cities "github.com/wavix/wavix-go-sdk/buy/cities"
-	countries "github.com/wavix/wavix-go-sdk/buy/countries"
-	numbers "github.com/wavix/wavix-go-sdk/buy/numbers"
-	regioncities "github.com/wavix/wavix-go-sdk/buy/regioncities"
-	regions "github.com/wavix/wavix-go-sdk/buy/regions"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
+	cities "github.com/wavix/wavix-go-sdk/v2/buy/cities"
+	countries "github.com/wavix/wavix-go-sdk/v2/buy/countries"
+	numbers "github.com/wavix/wavix-go-sdk/v2/buy/numbers"
+	regioncities "github.com/wavix/wavix-go-sdk/v2/buy/regioncities"
+	regions "github.com/wavix/wavix-go-sdk/v2/buy/regions"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
 )
 
 type Client struct {

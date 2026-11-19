@@ -11,10 +11,10 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	client "github.com/wavix/wavix-go-sdk/client"
-	option "github.com/wavix/wavix-go-sdk/option"
-	smsandmms "github.com/wavix/wavix-go-sdk/smsandmms"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	client "github.com/wavix/wavix-go-sdk/v2/client"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
+	smsandmms "github.com/wavix/wavix-go-sdk/v2/smsandmms"
 )
 
 func VerifyRequestCount(
@@ -90,30 +90,30 @@ func TestSmsAndMmsMessagesListWithWireMock(
 		option.WithToken("test-token"),
 	)
 	request := &smsandmms.ListMessagesRequest{
-		SentAfter: wavixgosdk.Time(
-			wavixgosdk.MustParseDate(
+		SentAfter: v2.Time(
+			v2.MustParseDate(
 				"2023-04-10",
 			),
 		),
-		SentBefore: wavixgosdk.Time(
-			wavixgosdk.MustParseDate(
+		SentBefore: v2.Time(
+			v2.MustParseDate(
 				"2023-04-13",
 			),
 		),
 		Type: "outbound",
-		From: wavixgosdk.String(
+		From: v2.String(
 			"15072429497",
 		),
-		To: wavixgosdk.String(
+		To: v2.String(
 			"16419252149",
 		),
-		Tag: wavixgosdk.String(
+		Tag: v2.String(
 			"campaignX",
 		),
-		Page: wavixgosdk.Int(
+		Page: v2.Int(
 			2,
 		),
-		PerPage: wavixgosdk.Int(
+		PerPage: v2.Int(
 			50,
 		),
 	}
@@ -143,16 +143,16 @@ func TestSmsAndMmsMessagesSendWithWireMock(
 	request := &smsandmms.SendMessagesRequest{
 		From: "Wavix",
 		To:   "+447537151866",
-		MessageBody: &wavixgosdk.MessageBody{
+		MessageBody: &v2.MessageBody{
 			Text: "Hi there, this is a message from Wavix",
 		},
-		CallbackURL: wavixgosdk.String(
+		CallbackURL: v2.String(
 			"https://you-site.com/webhook",
 		),
-		Validity: wavixgosdk.Int(
+		Validity: v2.Int(
 			3600,
 		),
-		Tag: wavixgosdk.String(
+		Tag: v2.String(
 			"Fall sale",
 		),
 	}
@@ -206,20 +206,20 @@ func TestSmsAndMmsMessagesListAllWithWireMock(
 		option.WithToken("test-token"),
 	)
 	request := &smsandmms.ListAllMessagesRequest{
-		SentAfter: wavixgosdk.String(
+		SentAfter: v2.String(
 			"2023-04-10T00:00:00",
 		),
-		SentBefore: wavixgosdk.String(
+		SentBefore: v2.String(
 			"2023-04-13T23:59:59",
 		),
 		Type: "outbound",
-		From: wavixgosdk.String(
+		From: v2.String(
 			"15072429497",
 		),
-		To: wavixgosdk.String(
+		To: v2.String(
 			"16419252149",
 		),
-		Tag: wavixgosdk.String(
+		Tag: v2.String(
 			"campaignX",
 		),
 	}

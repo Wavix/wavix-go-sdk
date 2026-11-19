@@ -5,11 +5,11 @@ package client
 import (
 	context "context"
 
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	core "github.com/wavix/wavix-go-sdk/core"
-	internal "github.com/wavix/wavix-go-sdk/internal"
-	option "github.com/wavix/wavix-go-sdk/option"
-	transactions "github.com/wavix/wavix-go-sdk/subaccounts/transactions"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	core "github.com/wavix/wavix-go-sdk/v2/core"
+	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
+	transactions "github.com/wavix/wavix-go-sdk/v2/subaccounts/transactions"
 )
 
 type Client struct {
@@ -40,9 +40,9 @@ func NewClient(options *core.RequestOptions) *Client {
 // Returns a paginated list of sub-accounts under the authenticated master account.
 func (c *Client) List(
 	ctx context.Context,
-	request *wavixgosdk.ListSubAccountsRequest,
+	request *v2.ListSubAccountsRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SubAccountsListResponse, error) {
+) (*v2.SubAccountsListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
@@ -57,9 +57,9 @@ func (c *Client) List(
 // Creates a sub-account under the authenticated master account. Returns the sub-account with its generated `api_key`.
 func (c *Client) Create(
 	ctx context.Context,
-	request *wavixgosdk.SubAccountsCreateRequest,
+	request *v2.SubAccountsCreateRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SubOrganizationResponse, error) {
+) (*v2.SubOrganizationResponse, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -74,9 +74,9 @@ func (c *Client) Create(
 // Returns the sub-account identified by `id`.
 func (c *Client) Get(
 	ctx context.Context,
-	request *wavixgosdk.GetSubAccountsRequest,
+	request *v2.GetSubAccountsRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SubOrganizationResponse, error) {
+) (*v2.SubOrganizationResponse, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,
@@ -91,9 +91,9 @@ func (c *Client) Get(
 // Updates the sub-account identified by `id`. Only the provided fields are changed.
 func (c *Client) Update(
 	ctx context.Context,
-	request *wavixgosdk.SubAccountsUpdateRequest,
+	request *v2.SubAccountsUpdateRequest,
 	opts ...option.RequestOption,
-) (*wavixgosdk.SubOrganizationResponse, error) {
+) (*v2.SubOrganizationResponse, error) {
 	response, err := c.WithRawResponse.Update(
 		ctx,
 		request,

@@ -11,9 +11,9 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	client "github.com/wavix/wavix-go-sdk/client"
-	option "github.com/wavix/wavix-go-sdk/option"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	client "github.com/wavix/wavix-go-sdk/v2/client"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
 )
 
 func VerifyRequestCount(
@@ -88,23 +88,23 @@ func TestNumbersListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.ListNumbersRequest{
-		CityID: wavixgosdk.Int(
+	request := &v2.ListNumbersRequest{
+		CityID: v2.Int(
 			123,
 		),
-		Search: wavixgosdk.String(
+		Search: v2.String(
 			"256537",
 		),
-		Label: wavixgosdk.String(
+		Label: v2.String(
 			"ALEX",
 		),
-		LabelPresent: wavixgosdk.Bool(
+		LabelPresent: v2.Bool(
 			true,
 		),
-		Page: wavixgosdk.Int(
+		Page: v2.Int(
 			2,
 		),
-		PerPage: wavixgosdk.Int(
+		PerPage: v2.Int(
 			50,
 		),
 	}
@@ -131,8 +131,8 @@ func TestNumbersDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.DeleteNumbersRequest{
-		Dids: wavixgosdk.String(
+	request := &v2.DeleteNumbersRequest{
+		Dids: v2.String(
 			"47832123321,47832123324,478321233215",
 		),
 	}
@@ -159,7 +159,7 @@ func TestNumbersBulkUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.NumberBulkUpdateRequest{
+	request := &v2.NumberBulkUpdateRequest{
 		IDs: []int{
 			123,
 			456,
@@ -188,7 +188,7 @@ func TestNumbersGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.GetNumbersRequest{
+	request := &v2.GetNumbersRequest{
 		ID: 123,
 	}
 	_, invocationErr := client.Numbers.Get(
@@ -214,7 +214,7 @@ func TestNumbersUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &wavixgosdk.NumberUpdateRequest{
+	request := &v2.NumberUpdateRequest{
 		ID: 123,
 	}
 	_, invocationErr := client.Numbers.Update(

@@ -11,10 +11,10 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	wavixgosdk "github.com/wavix/wavix-go-sdk"
-	client "github.com/wavix/wavix-go-sdk/client"
-	option "github.com/wavix/wavix-go-sdk/option"
-	tendlc "github.com/wavix/wavix-go-sdk/tendlc"
+	v2 "github.com/wavix/wavix-go-sdk/v2"
+	client "github.com/wavix/wavix-go-sdk/v2/client"
+	option "github.com/wavix/wavix-go-sdk/v2/option"
+	tendlc "github.com/wavix/wavix-go-sdk/v2/tendlc"
 )
 
 func VerifyRequestCount(
@@ -90,32 +90,32 @@ func TestTenDlcCampaignsListWithWireMock(
 		option.WithToken("test-token"),
 	)
 	request := &tendlc.ListCampaignsRequest{
-		Name: wavixgosdk.String(
+		Name: v2.String(
 			"Name",
 		),
-		Usecase: wavixgosdk.String(
+		Usecase: v2.String(
 			"2FA",
 		),
-		Status: wavixgosdk.String(
+		Status: v2.String(
 			"APPROVED",
 		),
-		Mock: wavixgosdk.Bool(
+		Mock: v2.Bool(
 			true,
 		),
-		CreatedBefore: wavixgosdk.Time(
-			wavixgosdk.MustParseDate(
+		CreatedBefore: v2.Time(
+			v2.MustParseDate(
 				"2024-08-22",
 			),
 		),
-		CreatedAfter: wavixgosdk.Time(
-			wavixgosdk.MustParseDate(
+		CreatedAfter: v2.Time(
+			v2.MustParseDate(
 				"2024-08-22",
 			),
 		),
-		Page: wavixgosdk.Int(
+		Page: v2.Int(
 			1,
 		),
-		PerPage: wavixgosdk.Int(
+		PerPage: v2.Int(
 			25,
 		),
 	}
@@ -144,32 +144,32 @@ func TestTenDlcCampaignsListByBrandWithWireMock(
 	)
 	request := &tendlc.ListByBrandCampaignsRequest{
 		BrandID: "BM20QP9",
-		Name: wavixgosdk.String(
+		Name: v2.String(
 			"Name",
 		),
-		Usecase: wavixgosdk.String(
+		Usecase: v2.String(
 			"2FA",
 		),
-		Status: wavixgosdk.String(
+		Status: v2.String(
 			"APPROVED",
 		),
-		Mock: wavixgosdk.Bool(
+		Mock: v2.Bool(
 			true,
 		),
-		CreatedBefore: wavixgosdk.Time(
-			wavixgosdk.MustParseDate(
+		CreatedBefore: v2.Time(
+			v2.MustParseDate(
 				"2024-08-22",
 			),
 		),
-		CreatedAfter: wavixgosdk.Time(
-			wavixgosdk.MustParseDate(
+		CreatedAfter: v2.Time(
+			v2.MustParseDate(
 				"2024-08-22",
 			),
 		),
-		Page: wavixgosdk.Int(
+		Page: v2.Int(
 			1,
 		),
-		PerPage: wavixgosdk.Int(
+		PerPage: v2.Int(
 			25,
 		),
 	}
@@ -203,10 +203,10 @@ func TestTenDlcCampaignsCreateWithWireMock(
 		AutoRenewal:        false,
 		DirectLending:      false,
 		EmbeddedLinks:      false,
-		EmbeddedPhones: wavixgosdk.Bool(
+		EmbeddedPhones: v2.Bool(
 			false,
 		),
-		EmbeddedLinkSample: wavixgosdk.String(
+		EmbeddedLinkSample: v2.String(
 			"https://site.com/verify",
 		),
 		Description:    "Our campaign aims to …",
@@ -222,21 +222,21 @@ func TestTenDlcCampaignsCreateWithWireMock(
 		OptoutMessage:  "You are now opted out and will receive no further messages",
 		Name:           "My first campaign",
 		Sample1:        "Your verification code is XXXXXX",
-		Sample2: wavixgosdk.String(
+		Sample2: v2.String(
 			"XXXX is your verification code",
 		),
-		Sample3: wavixgosdk.String(
+		Sample3: v2.String(
 			"Your code is XXXXXX, valid for 10 minutes",
 		),
-		Sample4: wavixgosdk.String(
+		Sample4: v2.String(
 			"Use code XXXXXX to confirm your login",
 		),
-		Sample5: wavixgosdk.String(
+		Sample5: v2.String(
 			"XXXXXX is your one-time passcode",
 		),
 		Mock:    false,
 		Usecase: "2FA",
-		PrivacyPolicy: wavixgosdk.String(
+		PrivacyPolicy: v2.String(
 			"https://site.com/privacy-policy",
 		),
 		TermsConditions: "https://site.com/terms-and-conditions",
