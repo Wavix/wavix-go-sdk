@@ -289,28 +289,28 @@ func TestGettersNumberValidatorCreateBulkResponse(t *testing.T) {
 		_ = obj.GetPhoneValidationBatchResponse() // Should return zero value
 	})
 
-	t.Run("GetNumberValidatorCreateBulkResponseRequestID", func(t *testing.T) {
+	t.Run("GetNumberValidatorCreateBulkResponseRequestUUID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &NumberValidatorCreateBulkResponse{}
-		var expected *NumberValidatorCreateBulkResponseRequestID
-		obj.NumberValidatorCreateBulkResponseRequestID = expected
+		var expected *NumberValidatorCreateBulkResponseRequestUUID
+		obj.NumberValidatorCreateBulkResponseRequestUUID = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetNumberValidatorCreateBulkResponseRequestID(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetNumberValidatorCreateBulkResponseRequestUUID(), "getter should return the property value")
 	})
 
-	t.Run("GetNumberValidatorCreateBulkResponseRequestID_NilValue", func(t *testing.T) {
+	t.Run("GetNumberValidatorCreateBulkResponseRequestUUID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &NumberValidatorCreateBulkResponse{}
-		obj.NumberValidatorCreateBulkResponseRequestID = nil
+		obj.NumberValidatorCreateBulkResponseRequestUUID = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetNumberValidatorCreateBulkResponseRequestID(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetNumberValidatorCreateBulkResponseRequestUUID(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetNumberValidatorCreateBulkResponseRequestID_NilReceiver", func(t *testing.T) {
+	t.Run("GetNumberValidatorCreateBulkResponseRequestUUID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *NumberValidatorCreateBulkResponse
 		// Should not panic - getters should handle nil receiver gracefully
@@ -319,67 +319,57 @@ func TestGettersNumberValidatorCreateBulkResponse(t *testing.T) {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetNumberValidatorCreateBulkResponseRequestID() // Should return zero value
+		_ = obj.GetNumberValidatorCreateBulkResponseRequestUUID() // Should return zero value
 	})
 
 }
 
-func TestSettersNumberValidatorCreateBulkResponseRequestID(t *testing.T) {
-	t.Run("SetRequestID", func(t *testing.T) {
-		obj := &NumberValidatorCreateBulkResponseRequestID{}
-		var fernTestValueRequestID *string
-		obj.SetRequestID(fernTestValueRequestID)
-		assert.Equal(t, fernTestValueRequestID, obj.RequestID)
+func TestSettersNumberValidatorCreateBulkResponseRequestUUID(t *testing.T) {
+	t.Run("SetRequestUUID", func(t *testing.T) {
+		obj := &NumberValidatorCreateBulkResponseRequestUUID{}
+		var fernTestValueRequestUUID string
+		obj.SetRequestUUID(fernTestValueRequestUUID)
+		assert.Equal(t, fernTestValueRequestUUID, obj.RequestUUID)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 }
 
-func TestGettersNumberValidatorCreateBulkResponseRequestID(t *testing.T) {
-	t.Run("GetRequestID", func(t *testing.T) {
+func TestGettersNumberValidatorCreateBulkResponseRequestUUID(t *testing.T) {
+	t.Run("GetRequestUUID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &NumberValidatorCreateBulkResponseRequestID{}
-		var expected *string
-		obj.RequestID = expected
+		obj := &NumberValidatorCreateBulkResponseRequestUUID{}
+		var expected string
+		obj.RequestUUID = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetRequestID(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetRequestUUID(), "getter should return the property value")
 	})
 
-	t.Run("GetRequestID_NilValue", func(t *testing.T) {
+	t.Run("GetRequestUUID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		// Arrange
-		obj := &NumberValidatorCreateBulkResponseRequestID{}
-		obj.RequestID = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetRequestID(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetRequestID_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *NumberValidatorCreateBulkResponseRequestID
+		var obj *NumberValidatorCreateBulkResponseRequestUUID
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetRequestID() // Should return zero value
+		_ = obj.GetRequestUUID() // Should return zero value
 	})
 
 }
 
-func TestSettersMarkExplicitNumberValidatorCreateBulkResponseRequestID(t *testing.T) {
-	t.Run("SetRequestID_MarksExplicit", func(t *testing.T) {
+func TestSettersMarkExplicitNumberValidatorCreateBulkResponseRequestUUID(t *testing.T) {
+	t.Run("SetRequestUUID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &NumberValidatorCreateBulkResponseRequestID{}
-		var fernTestValueRequestID *string
+		obj := &NumberValidatorCreateBulkResponseRequestUUID{}
+		var fernTestValueRequestUUID string
 
 		// Act
-		obj.SetRequestID(fernTestValueRequestID)
+		obj.SetRequestUUID(fernTestValueRequestUUID)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -1845,11 +1835,11 @@ func TestSettersMarkExplicitPhoneValidationResponse(t *testing.T) {
 
 }
 
-func TestJSONMarshalingNumberValidatorCreateBulkResponseRequestID(t *testing.T) {
+func TestJSONMarshalingNumberValidatorCreateBulkResponseRequestUUID(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &NumberValidatorCreateBulkResponseRequestID{}
+		obj := &NumberValidatorCreateBulkResponseRequestUUID{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -1858,21 +1848,21 @@ func TestJSONMarshalingNumberValidatorCreateBulkResponseRequestID(t *testing.T) 
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled NumberValidatorCreateBulkResponseRequestID
+		var unmarshaled NumberValidatorCreateBulkResponseRequestUUID
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj NumberValidatorCreateBulkResponseRequestID
+		var obj NumberValidatorCreateBulkResponseRequestUUID
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj NumberValidatorCreateBulkResponseRequestID
+		var obj NumberValidatorCreateBulkResponseRequestUUID
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
@@ -1944,17 +1934,17 @@ func TestJSONMarshalingPhoneValidationResponse(t *testing.T) {
 	})
 }
 
-func TestStringNumberValidatorCreateBulkResponseRequestID(t *testing.T) {
+func TestStringNumberValidatorCreateBulkResponseRequestUUID(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &NumberValidatorCreateBulkResponseRequestID{}
+		obj := &NumberValidatorCreateBulkResponseRequestUUID{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *NumberValidatorCreateBulkResponseRequestID
+		var obj *NumberValidatorCreateBulkResponseRequestUUID
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -2028,10 +2018,10 @@ func TestEnumPhoneNumberValidationType(t *testing.T) {
 	})
 }
 
-func TestExtraPropertiesNumberValidatorCreateBulkResponseRequestID(t *testing.T) {
+func TestExtraPropertiesNumberValidatorCreateBulkResponseRequestUUID(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &NumberValidatorCreateBulkResponseRequestID{}
+		obj := &NumberValidatorCreateBulkResponseRequestUUID{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -2045,7 +2035,7 @@ func TestExtraPropertiesNumberValidatorCreateBulkResponseRequestID(t *testing.T)
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *NumberValidatorCreateBulkResponseRequestID
+		var obj *NumberValidatorCreateBulkResponseRequestUUID
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

@@ -54,7 +54,7 @@ func (c *Client) Get(
 	return response.Body, nil
 }
 
-// Validates a batch of phone numbers. When `async` is `true`, returns a `request_id` to poll for results instead of the validation details.
+// Validates a batch of phone numbers. When `async` is `true`, returns a `request_uuid` to poll for results instead of the validation details.
 func (c *Client) CreateBulk(
 	ctx context.Context,
 	request *v3.PhoneValidationRequest,

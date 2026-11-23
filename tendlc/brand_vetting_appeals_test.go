@@ -44,7 +44,7 @@ func TestSettersTenDlcBrandVettingAppealCreateRequest(t *testing.T) {
 
 	t.Run("SetEvpID", func(t *testing.T) {
 		obj := &TenDlcBrandVettingAppealCreateRequest{}
-		var fernTestValueEvpID *string
+		var fernTestValueEvpID string
 		obj.SetEvpID(fernTestValueEvpID)
 		assert.Equal(t, fernTestValueEvpID, obj.EvpID)
 		assert.NotNil(t, obj.explicitFields)
@@ -52,7 +52,7 @@ func TestSettersTenDlcBrandVettingAppealCreateRequest(t *testing.T) {
 
 	t.Run("SetVettingID", func(t *testing.T) {
 		obj := &TenDlcBrandVettingAppealCreateRequest{}
-		var fernTestValueVettingID *string
+		var fernTestValueVettingID string
 		obj.SetVettingID(fernTestValueVettingID)
 		assert.Equal(t, fernTestValueVettingID, obj.VettingID)
 		assert.NotNil(t, obj.explicitFields)
@@ -189,7 +189,7 @@ func TestSettersMarkExplicitTenDlcBrandVettingAppealCreateRequest(t *testing.T) 
 		t.Parallel()
 		// Arrange
 		obj := &TenDlcBrandVettingAppealCreateRequest{}
-		var fernTestValueEvpID *string
+		var fernTestValueEvpID string
 
 		// Act
 		obj.SetEvpID(fernTestValueEvpID)
@@ -220,7 +220,7 @@ func TestSettersMarkExplicitTenDlcBrandVettingAppealCreateRequest(t *testing.T) 
 		t.Parallel()
 		// Arrange
 		obj := &TenDlcBrandVettingAppealCreateRequest{}
-		var fernTestValueVettingID *string
+		var fernTestValueVettingID string
 
 		// Act
 		obj.SetVettingID(fernTestValueVettingID)
