@@ -5,11 +5,11 @@ package client
 import (
 	context "context"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	transactions "github.com/wavix/wavix-go-sdk/v2/subaccounts/transactions"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	transactions "github.com/wavix/wavix-go-sdk/v3/subaccounts/transactions"
 )
 
 type Client struct {
@@ -40,9 +40,9 @@ func NewClient(options *core.RequestOptions) *Client {
 // Returns a paginated list of sub-accounts under the authenticated master account.
 func (c *Client) List(
 	ctx context.Context,
-	request *v2.ListSubAccountsRequest,
+	request *v3.ListSubAccountsRequest,
 	opts ...option.RequestOption,
-) (*v2.SubAccountsListResponse, error) {
+) (*v3.SubAccountsListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
@@ -54,12 +54,12 @@ func (c *Client) List(
 	return response.Body, nil
 }
 
-// Creates a sub-account under the authenticated master account. Returns the sub-account with its generated `api_key`.
+// Creates a sub-account under the authenticated master account. Returns the sub-account with its generated `api_key`. Store the returned `api_key` securely. Later reads return `redacted_api_key`, and `api_key` on reads is deprecated.
 func (c *Client) Create(
 	ctx context.Context,
-	request *v2.SubAccountsCreateRequest,
+	request *v3.SubAccountsCreateRequest,
 	opts ...option.RequestOption,
-) (*v2.SubOrganizationResponse, error) {
+) (*v3.SubOrganizationWithSecret, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -74,9 +74,9 @@ func (c *Client) Create(
 // Returns the sub-account identified by `id`.
 func (c *Client) Get(
 	ctx context.Context,
-	request *v2.GetSubAccountsRequest,
+	request *v3.GetSubAccountsRequest,
 	opts ...option.RequestOption,
-) (*v2.SubOrganizationResponse, error) {
+) (*v3.SubOrganizationResponse, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,
@@ -91,9 +91,9 @@ func (c *Client) Get(
 // Updates the sub-account identified by `id`. Only the provided fields are changed.
 func (c *Client) Update(
 	ctx context.Context,
-	request *v2.SubAccountsUpdateRequest,
+	request *v3.SubAccountsUpdateRequest,
 	opts ...option.RequestOption,
-) (*v2.SubOrganizationResponse, error) {
+) (*v3.SubOrganizationResponse, error) {
 	response, err := c.WithRawResponse.Update(
 		ctx,
 		request,

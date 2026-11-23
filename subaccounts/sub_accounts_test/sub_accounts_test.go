@@ -11,9 +11,9 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	client "github.com/wavix/wavix-go-sdk/v2/client"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	client "github.com/wavix/wavix-go-sdk/v3/client"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 func VerifyRequestCount(
@@ -88,7 +88,7 @@ func TestSubAccountsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.ListSubAccountsRequest{}
+	request := &v3.ListSubAccountsRequest{}
 	_, invocationErr := client.SubAccounts.List(
 		context.TODO(),
 		request,
@@ -112,13 +112,13 @@ func TestSubAccountsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.SubAccountsCreateRequest{
+	request := &v3.SubAccountsCreateRequest{
 		Name: "Company",
-		DefaultDestinations: &v2.SubAccountsCreateRequestDefaultDestinations{
-			SmsEndpoint: v2.String(
+		DefaultDestinations: &v3.SubAccountsCreateRequestDefaultDestinations{
+			SmsEndpoint: v3.String(
 				"https://examples.com/sms",
 			),
-			DlrEndpoint: v2.String(
+			DlrEndpoint: v3.String(
 				"https://examples.com/dlr",
 			),
 		},
@@ -146,7 +146,7 @@ func TestSubAccountsGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.GetSubAccountsRequest{
+	request := &v3.GetSubAccountsRequest{
 		ID: 123,
 	}
 	_, invocationErr := client.SubAccounts.Get(
@@ -172,17 +172,17 @@ func TestSubAccountsUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.SubAccountsUpdateRequest{
+	request := &v3.SubAccountsUpdateRequest{
 		ID: 123,
-		Name: v2.String(
+		Name: v3.String(
 			"Updated Company Name",
 		),
-		Status: v2.SubAccountsUpdateRequestStatusEnabled.Ptr(),
-		DefaultDestinations: &v2.SubAccountsUpdateRequestDefaultDestinations{
-			SmsEndpoint: v2.String(
+		Status: v3.SubAccountsUpdateRequestStatusEnabled.Ptr(),
+		DefaultDestinations: &v3.SubAccountsUpdateRequestDefaultDestinations{
+			SmsEndpoint: v3.String(
 				"https://examples.com/sms",
 			),
-			DlrEndpoint: v2.String(
+			DlrEndpoint: v3.String(
 				"https://examples.com/dlr",
 			),
 		},

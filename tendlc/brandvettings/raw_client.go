@@ -6,11 +6,11 @@ import (
 	context "context"
 	http "net/http"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	tendlc "github.com/wavix/wavix-go-sdk/v2/tendlc"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	tendlc "github.com/wavix/wavix-go-sdk/v3/tendlc"
 )
 
 type RawClient struct {
@@ -37,7 +37,7 @@ func (r *RawClient) List(
 	ctx context.Context,
 	request *tendlc.ListBrandVettingsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[[]*v2.TenDlcBrandVetting], error) {
+) (*core.Response[[]*v3.TenDlcBrandVetting], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -52,7 +52,7 @@ func (r *RawClient) List(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response []*v2.TenDlcBrandVetting
+	var response []*v3.TenDlcBrandVetting
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -71,7 +71,7 @@ func (r *RawClient) List(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[[]*v2.TenDlcBrandVetting]{
+	return &core.Response[[]*v3.TenDlcBrandVetting]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -82,7 +82,7 @@ func (r *RawClient) Create(
 	ctx context.Context,
 	request *tendlc.TenDlcBrandVettingCreateRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.TenDlcBrandVetting], error) {
+) (*core.Response[*v3.TenDlcBrandVetting], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -98,7 +98,7 @@ func (r *RawClient) Create(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *v2.TenDlcBrandVetting
+	var response *v3.TenDlcBrandVetting
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -118,7 +118,7 @@ func (r *RawClient) Create(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.TenDlcBrandVetting]{
+	return &core.Response[*v3.TenDlcBrandVetting]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -129,7 +129,7 @@ func (r *RawClient) Import(
 	ctx context.Context,
 	request *tendlc.TenDlcBrandVettingImportRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.TenDlcBrandVetting], error) {
+) (*core.Response[*v3.TenDlcBrandVetting], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -145,7 +145,7 @@ func (r *RawClient) Import(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *v2.TenDlcBrandVetting
+	var response *v3.TenDlcBrandVetting
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -165,7 +165,7 @@ func (r *RawClient) Import(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.TenDlcBrandVetting]{
+	return &core.Response[*v3.TenDlcBrandVetting]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

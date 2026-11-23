@@ -11,9 +11,9 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	client "github.com/wavix/wavix-go-sdk/v2/client"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	client "github.com/wavix/wavix-go-sdk/v3/client"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 func VerifyRequestCount(
@@ -110,7 +110,7 @@ func TestCallControlCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.CallRequest{
+	request := &v3.CallRequest{
 		From:        "+1234567890",
 		To:          "+1987654321",
 		CallbackURL: "https://examples.com/callback",
@@ -138,7 +138,7 @@ func TestCallControlGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.GetCallControlRequest{
+	request := &v3.GetCallControlRequest{
 		ID: "id",
 	}
 	_, invocationErr := client.CallControl.Get(
@@ -164,7 +164,7 @@ func TestCallControlDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.DeleteCallControlRequest{
+	request := &v3.DeleteCallControlRequest{
 		ID: "id",
 	}
 	_, invocationErr := client.CallControl.Delete(
@@ -190,7 +190,7 @@ func TestCallControlUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.UpdateCallRequest{
+	request := &v3.UpdateCallRequest{
 		ID:  "id",
 		Tag: "marketing-campaign",
 	}
@@ -217,7 +217,7 @@ func TestCallControlAnswerWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.CallAnswerRequest{
+	request := &v3.CallAnswerRequest{
 		ID: "id",
 	}
 	_, invocationErr := client.CallControl.Answer(
@@ -243,7 +243,7 @@ func TestCallControlCollectWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.CallDtmfCollectRequest{
+	request := &v3.CallDtmfCollectRequest{
 		ID: "id",
 	}
 	_, invocationErr := client.CallControl.Collect(

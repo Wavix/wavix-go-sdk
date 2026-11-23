@@ -6,11 +6,11 @@ import (
 	context "context"
 	http "net/http"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	profile "github.com/wavix/wavix-go-sdk/v2/profile"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	profile "github.com/wavix/wavix-go-sdk/v3/profile"
 )
 
 type RawClient struct {
@@ -36,7 +36,7 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 func (r *RawClient) Get(
 	ctx context.Context,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.ProfileConfigResponse], error) {
+) (*core.Response[*v3.ProfileConfigResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -48,7 +48,7 @@ func (r *RawClient) Get(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.ProfileConfigResponse
+	var response *v3.ProfileConfigResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -67,7 +67,7 @@ func (r *RawClient) Get(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.ProfileConfigResponse]{
+	return &core.Response[*v3.ProfileConfigResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

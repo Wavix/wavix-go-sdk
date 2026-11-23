@@ -6,7 +6,7 @@ import (
 	json "encoding/json"
 	assert "github.com/stretchr/testify/assert"
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
 	testing "testing"
 	time "time"
 )
@@ -14,7 +14,7 @@ import (
 func TestSettersOptOutCreateRequest(t *testing.T) {
 	t.Run("SetOptOut", func(t *testing.T) {
 		obj := &OptOutCreateRequest{}
-		var fernTestValueOptOut *v2.OptOut
+		var fernTestValueOptOut *v3.OptOut
 		obj.SetOptOut(fernTestValueOptOut)
 		assert.Equal(t, fernTestValueOptOut, obj.OptOut)
 		assert.NotNil(t, obj.explicitFields)
@@ -27,7 +27,7 @@ func TestSettersMarkExplicitOptOutCreateRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &OptOutCreateRequest{}
-		var fernTestValueOptOut *v2.OptOut
+		var fernTestValueOptOut *v3.OptOut
 
 		// Act
 		obj.SetOptOut(fernTestValueOptOut)

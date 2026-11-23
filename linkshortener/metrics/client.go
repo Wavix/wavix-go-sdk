@@ -5,11 +5,11 @@ package metrics
 import (
 	context "context"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	linkshortener "github.com/wavix/wavix-go-sdk/v2/linkshortener"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	linkshortener "github.com/wavix/wavix-go-sdk/v3/linkshortener"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 type Client struct {
@@ -40,7 +40,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *linkshortener.ListMetricsRequest,
 	opts ...option.RequestOption,
-) (*v2.ShortLinkMetricsResponse, error) {
+) (*v3.ShortLinkMetricsResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,

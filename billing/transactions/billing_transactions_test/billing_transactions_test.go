@@ -11,10 +11,10 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	billing "github.com/wavix/wavix-go-sdk/v2/billing"
-	client "github.com/wavix/wavix-go-sdk/v2/client"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	billing "github.com/wavix/wavix-go-sdk/v3/billing"
+	client "github.com/wavix/wavix-go-sdk/v3/client"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 func VerifyRequestCount(
@@ -90,22 +90,22 @@ func TestBillingTransactionsListWithWireMock(
 		option.WithToken("test-token"),
 	)
 	request := &billing.ListTransactionsRequest{
-		FromDate: v2.MustParseDate(
+		FromDate: v3.MustParseDate(
 			"2023-08-01",
 		),
-		ToDate: v2.MustParseDate(
+		ToDate: v3.MustParseDate(
 			"2023-08-31",
 		),
-		DetailsContains: v2.String(
+		DetailsContains: v3.String(
 			"monthly",
 		),
-		Payments: v2.Bool(
+		Payments: v3.Bool(
 			true,
 		),
-		Page: v2.Int(
+		Page: v3.Int(
 			1,
 		),
-		PerPage: v2.Int(
+		PerPage: v3.Int(
 			25,
 		),
 	}

@@ -6,10 +6,10 @@ import (
 	context "context"
 	http "net/http"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 type RawClient struct {
@@ -34,9 +34,9 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 
 func (r *RawClient) List(
 	ctx context.Context,
-	request *v2.ListCdrsRequest,
+	request *v3.ListCdrsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.CdrListResponse], error) {
+) (*core.Response[*v3.CdrListResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -55,7 +55,7 @@ func (r *RawClient) List(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.CdrListResponse
+	var response *v3.CdrListResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -68,13 +68,13 @@ func (r *RawClient) List(
 			QueryParameters: options.QueryParameters,
 			Client:          options.HTTPClient,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v3.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.CdrListResponse]{
+	return &core.Response[*v3.CdrListResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -83,9 +83,9 @@ func (r *RawClient) List(
 
 func (r *RawClient) Search(
 	ctx context.Context,
-	request *v2.CdrSearchRequest,
+	request *v3.CdrSearchRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.CdrTranscriptionSearchResponse], error) {
+) (*core.Response[*v3.CdrTranscriptionSearchResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -98,7 +98,7 @@ func (r *RawClient) Search(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *v2.CdrTranscriptionSearchResponse
+	var response *v3.CdrTranscriptionSearchResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -112,13 +112,13 @@ func (r *RawClient) Search(
 			Client:          options.HTTPClient,
 			Request:         request,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v3.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.CdrTranscriptionSearchResponse]{
+	return &core.Response[*v3.CdrTranscriptionSearchResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -127,9 +127,9 @@ func (r *RawClient) Search(
 
 func (r *RawClient) Retranscribe(
 	ctx context.Context,
-	request *v2.CdrRetranscriptionRequest,
+	request *v3.CdrRetranscriptionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.SuccessResponse], error) {
+) (*core.Response[*v3.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -145,7 +145,7 @@ func (r *RawClient) Retranscribe(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *v2.SuccessResponse
+	var response *v3.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -159,13 +159,13 @@ func (r *RawClient) Retranscribe(
 			Client:          options.HTTPClient,
 			Request:         request,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v3.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.SuccessResponse]{
+	return &core.Response[*v3.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -174,9 +174,9 @@ func (r *RawClient) Retranscribe(
 
 func (r *RawClient) Transcriptions(
 	ctx context.Context,
-	request *v2.TranscriptionsCdrsRequest,
+	request *v3.TranscriptionsCdrsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.CdrTranscriptionResponse], error) {
+) (*core.Response[*v3.CdrTranscriptionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -191,7 +191,7 @@ func (r *RawClient) Transcriptions(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.CdrTranscriptionResponse
+	var response *v3.CdrTranscriptionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -204,13 +204,13 @@ func (r *RawClient) Transcriptions(
 			QueryParameters: options.QueryParameters,
 			Client:          options.HTTPClient,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v3.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.CdrTranscriptionResponse]{
+	return &core.Response[*v3.CdrTranscriptionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -219,9 +219,9 @@ func (r *RawClient) Transcriptions(
 
 func (r *RawClient) Get(
 	ctx context.Context,
-	request *v2.GetCdrsRequest,
+	request *v3.GetCdrsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.CdrResponse], error) {
+) (*core.Response[*v3.CdrResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -243,7 +243,7 @@ func (r *RawClient) Get(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.CdrResponse
+	var response *v3.CdrResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -256,13 +256,13 @@ func (r *RawClient) Get(
 			QueryParameters: options.QueryParameters,
 			Client:          options.HTTPClient,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v3.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.CdrResponse]{
+	return &core.Response[*v3.CdrResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -271,7 +271,7 @@ func (r *RawClient) Get(
 
 func (r *RawClient) ListAll(
 	ctx context.Context,
-	request *v2.ListAllCdrsRequest,
+	request *v3.ListAllCdrsRequest,
 	opts ...option.RequestOption,
 ) (*core.Response[string], error) {
 	options := core.NewRequestOptions(opts...)
@@ -305,7 +305,7 @@ func (r *RawClient) ListAll(
 			QueryParameters: options.QueryParameters,
 			Client:          options.HTTPClient,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v3.ErrorCodes),
 		},
 	)
 	if err != nil {

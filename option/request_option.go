@@ -3,7 +3,7 @@
 package option
 
 import (
-	core "github.com/wavix/wavix-go-sdk/v2/core"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
 	http "net/http"
 	url "net/url"
 )

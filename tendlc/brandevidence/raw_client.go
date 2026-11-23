@@ -8,11 +8,11 @@ import (
 	io "io"
 	http "net/http"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	tendlc "github.com/wavix/wavix-go-sdk/v2/tendlc"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	tendlc "github.com/wavix/wavix-go-sdk/v3/tendlc"
 )
 
 type RawClient struct {
@@ -39,7 +39,7 @@ func (r *RawClient) List(
 	ctx context.Context,
 	request *tendlc.ListBrandEvidenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.ListBrandEvidenceResponse], error) {
+) (*core.Response[*v3.ListBrandEvidenceResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -54,7 +54,7 @@ func (r *RawClient) List(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.ListBrandEvidenceResponse
+	var response *v3.ListBrandEvidenceResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -73,7 +73,7 @@ func (r *RawClient) List(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.ListBrandEvidenceResponse]{
+	return &core.Response[*v3.ListBrandEvidenceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -84,7 +84,7 @@ func (r *RawClient) Upload(
 	ctx context.Context,
 	request *tendlc.UploadBrandEvidenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.TenDlcBrandEvidence], error) {
+) (*core.Response[*v3.TenDlcBrandEvidence], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -108,7 +108,7 @@ func (r *RawClient) Upload(
 	}
 	headers.Set("Content-Type", writer.ContentType())
 
-	var response *v2.TenDlcBrandEvidence
+	var response *v3.TenDlcBrandEvidence
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -128,7 +128,7 @@ func (r *RawClient) Upload(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.TenDlcBrandEvidence]{
+	return &core.Response[*v3.TenDlcBrandEvidence]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -185,7 +185,7 @@ func (r *RawClient) Delete(
 	ctx context.Context,
 	request *tendlc.DeleteBrandEvidenceRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.SuccessResponse], error) {
+) (*core.Response[*v3.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -201,7 +201,7 @@ func (r *RawClient) Delete(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.SuccessResponse
+	var response *v3.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -220,7 +220,7 @@ func (r *RawClient) Delete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.SuccessResponse]{
+	return &core.Response[*v3.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

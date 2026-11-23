@@ -6,11 +6,11 @@ import (
 	context "context"
 	http "net/http"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	twofa "github.com/wavix/wavix-go-sdk/v2/twofa"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	twofa "github.com/wavix/wavix-go-sdk/v3/twofa"
 )
 
 type RawClient struct {
@@ -37,7 +37,7 @@ func (r *RawClient) Create(
 	ctx context.Context,
 	request *twofa.TwoFactorVerificationCreateRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.TwoFactorVerificationResponse], error) {
+) (*core.Response[*v3.TwoFactorVerificationResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -50,7 +50,7 @@ func (r *RawClient) Create(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *v2.TwoFactorVerificationResponse
+	var response *v3.TwoFactorVerificationResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -70,7 +70,7 @@ func (r *RawClient) Create(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.TwoFactorVerificationResponse]{
+	return &core.Response[*v3.TwoFactorVerificationResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -81,7 +81,7 @@ func (r *RawClient) Resend(
 	ctx context.Context,
 	request *twofa.TwoFactorVerificationResendRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.TwoFactorVerificationResendResponse], error) {
+) (*core.Response[*v3.TwoFactorVerificationResendResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -97,7 +97,7 @@ func (r *RawClient) Resend(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *v2.TwoFactorVerificationResendResponse
+	var response *v3.TwoFactorVerificationResendResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -117,7 +117,7 @@ func (r *RawClient) Resend(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.TwoFactorVerificationResendResponse]{
+	return &core.Response[*v3.TwoFactorVerificationResendResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -128,7 +128,7 @@ func (r *RawClient) Check(
 	ctx context.Context,
 	request *twofa.TwoFactorVerificationCheckRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.TwoFactorVerificationCheckResponse], error) {
+) (*core.Response[*v3.TwoFactorVerificationCheckResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -144,7 +144,7 @@ func (r *RawClient) Check(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *v2.TwoFactorVerificationCheckResponse
+	var response *v3.TwoFactorVerificationCheckResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -164,7 +164,7 @@ func (r *RawClient) Check(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.TwoFactorVerificationCheckResponse]{
+	return &core.Response[*v3.TwoFactorVerificationCheckResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -175,7 +175,7 @@ func (r *RawClient) Cancel(
 	ctx context.Context,
 	request *twofa.CancelVerificationRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.SuccessResponse], error) {
+) (*core.Response[*v3.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -190,7 +190,7 @@ func (r *RawClient) Cancel(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.SuccessResponse
+	var response *v3.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -209,7 +209,7 @@ func (r *RawClient) Cancel(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.SuccessResponse]{
+	return &core.Response[*v3.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

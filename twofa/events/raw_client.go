@@ -6,11 +6,11 @@ import (
 	context "context"
 	http "net/http"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	twofa "github.com/wavix/wavix-go-sdk/v2/twofa"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	twofa "github.com/wavix/wavix-go-sdk/v3/twofa"
 )
 
 type RawClient struct {
@@ -37,7 +37,7 @@ func (r *RawClient) List(
 	ctx context.Context,
 	request *twofa.ListEventsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[[]*v2.TwoFactorVerificationEvent], error) {
+) (*core.Response[[]*v3.TwoFactorVerificationEvent], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -52,7 +52,7 @@ func (r *RawClient) List(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response []*v2.TwoFactorVerificationEvent
+	var response []*v3.TwoFactorVerificationEvent
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -71,7 +71,7 @@ func (r *RawClient) List(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[[]*v2.TwoFactorVerificationEvent]{
+	return &core.Response[[]*v3.TwoFactorVerificationEvent]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

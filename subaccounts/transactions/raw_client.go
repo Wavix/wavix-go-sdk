@@ -6,11 +6,11 @@ import (
 	context "context"
 	http "net/http"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	subaccounts "github.com/wavix/wavix-go-sdk/v2/subaccounts"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	subaccounts "github.com/wavix/wavix-go-sdk/v3/subaccounts"
 )
 
 type RawClient struct {
@@ -37,7 +37,7 @@ func (r *RawClient) List(
 	ctx context.Context,
 	request *subaccounts.ListTransactionsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.SubAccountsTransactionsListResponse], error) {
+) (*core.Response[*v3.SubAccountsTransactionsListResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -59,7 +59,7 @@ func (r *RawClient) List(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.SubAccountsTransactionsListResponse
+	var response *v3.SubAccountsTransactionsListResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -78,7 +78,7 @@ func (r *RawClient) List(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.SubAccountsTransactionsListResponse]{
+	return &core.Response[*v3.SubAccountsTransactionsListResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

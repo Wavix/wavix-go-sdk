@@ -5,11 +5,11 @@ package verification
 import (
 	context "context"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	twofa "github.com/wavix/wavix-go-sdk/v2/twofa"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	twofa "github.com/wavix/wavix-go-sdk/v3/twofa"
 )
 
 type Client struct {
@@ -45,7 +45,7 @@ func (c *Client) Create(
 	ctx context.Context,
 	request *twofa.TwoFactorVerificationCreateRequest,
 	opts ...option.RequestOption,
-) (*v2.TwoFactorVerificationResponse, error) {
+) (*v3.TwoFactorVerificationResponse, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -62,7 +62,7 @@ func (c *Client) Resend(
 	ctx context.Context,
 	request *twofa.TwoFactorVerificationResendRequest,
 	opts ...option.RequestOption,
-) (*v2.TwoFactorVerificationResendResponse, error) {
+) (*v3.TwoFactorVerificationResendResponse, error) {
 	response, err := c.WithRawResponse.Resend(
 		ctx,
 		request,
@@ -79,7 +79,7 @@ func (c *Client) Check(
 	ctx context.Context,
 	request *twofa.TwoFactorVerificationCheckRequest,
 	opts ...option.RequestOption,
-) (*v2.TwoFactorVerificationCheckResponse, error) {
+) (*v3.TwoFactorVerificationCheckResponse, error) {
 	response, err := c.WithRawResponse.Check(
 		ctx,
 		request,
@@ -96,7 +96,7 @@ func (c *Client) Cancel(
 	ctx context.Context,
 	request *twofa.CancelVerificationRequest,
 	opts ...option.RequestOption,
-) (*v2.SuccessResponse, error) {
+) (*v3.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Cancel(
 		ctx,
 		request,

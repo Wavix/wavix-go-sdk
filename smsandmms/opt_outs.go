@@ -4,8 +4,8 @@ package smsandmms
 
 import (
 	json "encoding/json"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
 	big "math/big"
 	time "time"
 )
@@ -15,7 +15,7 @@ var (
 )
 
 type OptOutCreateRequest struct {
-	OptOut *v2.OptOut `json:"opt_out" url:"-"`
+	OptOut *v3.OptOut `json:"opt_out" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -30,7 +30,7 @@ func (o *OptOutCreateRequest) require(field *big.Int) {
 
 // SetOptOut sets the OptOut field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (o *OptOutCreateRequest) SetOptOut(optOut *v2.OptOut) {
+func (o *OptOutCreateRequest) SetOptOut(optOut *v3.OptOut) {
 	o.OptOut = optOut
 	o.require(optOutCreateRequestFieldOptOut)
 }

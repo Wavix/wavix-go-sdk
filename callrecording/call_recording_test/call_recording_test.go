@@ -11,9 +11,9 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	client "github.com/wavix/wavix-go-sdk/v2/client"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	client "github.com/wavix/wavix-go-sdk/v3/client"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 func VerifyRequestCount(
@@ -88,30 +88,30 @@ func TestCallRecordingListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.ListCallRecordingRequest{
-		FromDate: v2.Time(
-			v2.MustParseDate(
+	request := &v3.ListCallRecordingRequest{
+		FromDate: v3.Time(
+			v3.MustParseDate(
 				"2023-01-01",
 			),
 		),
-		ToDate: v2.Time(
-			v2.MustParseDate(
+		ToDate: v3.Time(
+			v3.MustParseDate(
 				"2023-12-31",
 			),
 		),
-		From: v2.String(
+		From: v3.String(
 			"123456",
 		),
-		To: v2.String(
+		To: v3.String(
 			"1987654321",
 		),
-		CallUUID: v2.String(
+		CallUUID: v3.String(
 			"aa566501-c591-4a8b-b3b9-cc1295398b72",
 		),
-		Page: v2.Int(
+		Page: v3.Int(
 			1,
 		),
-		PerPage: v2.Int(
+		PerPage: v3.Int(
 			25,
 		),
 	}
@@ -138,7 +138,7 @@ func TestCallRecordingGetByCallWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.GetByCallCallRecordingRequest{
+	request := &v3.GetByCallCallRecordingRequest{
 		CallID: "aa566501-c591-4a8b-b3b9-cc1295398b72",
 	}
 	invocationErr := client.CallRecording.GetByCall(
@@ -164,7 +164,7 @@ func TestCallRecordingGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.GetCallRecordingRequest{
+	request := &v3.GetCallRecordingRequest{
 		ID: 123,
 	}
 	_, invocationErr := client.CallRecording.Get(
@@ -190,7 +190,7 @@ func TestCallRecordingDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.DeleteCallRecordingRequest{
+	request := &v3.DeleteCallRecordingRequest{
 		ID: 123,
 	}
 	_, invocationErr := client.CallRecording.Delete(

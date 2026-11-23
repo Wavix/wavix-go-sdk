@@ -5,7 +5,7 @@ package api
 import (
 	json "encoding/json"
 	fmt "fmt"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
 	io "io"
 	big "math/big"
 	time "time"

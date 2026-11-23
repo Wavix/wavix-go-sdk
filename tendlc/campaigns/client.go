@@ -5,11 +5,11 @@ package campaigns
 import (
 	context "context"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	tendlc "github.com/wavix/wavix-go-sdk/v2/tendlc"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	tendlc "github.com/wavix/wavix-go-sdk/v3/tendlc"
 )
 
 type Client struct {
@@ -40,7 +40,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *tendlc.ListCampaignsRequest,
 	opts ...option.RequestOption,
-) (*v2.TenDlcCampaignListResponse, error) {
+) (*v3.TenDlcCampaignListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
@@ -57,7 +57,7 @@ func (c *Client) ListByBrand(
 	ctx context.Context,
 	request *tendlc.ListByBrandCampaignsRequest,
 	opts ...option.RequestOption,
-) (*v2.TenDlcCampaignListResponse, error) {
+) (*v3.TenDlcCampaignListResponse, error) {
 	response, err := c.WithRawResponse.ListByBrand(
 		ctx,
 		request,
@@ -74,7 +74,7 @@ func (c *Client) Create(
 	ctx context.Context,
 	request *tendlc.TenDlcCampaignCreateRequest,
 	opts ...option.RequestOption,
-) (*v2.TenDlcCampaign, error) {
+) (*v3.TenDlcCampaign, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -91,7 +91,7 @@ func (c *Client) Get(
 	ctx context.Context,
 	request *tendlc.GetCampaignsRequest,
 	opts ...option.RequestOption,
-) (*v2.TenDlcCampaign, error) {
+) (*v3.TenDlcCampaign, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,
@@ -108,7 +108,7 @@ func (c *Client) Update(
 	ctx context.Context,
 	request *tendlc.TenDlcCampaignUpdateRequest,
 	opts ...option.RequestOption,
-) (*v2.TenDlcCampaign, error) {
+) (*v3.TenDlcCampaign, error) {
 	response, err := c.WithRawResponse.Update(
 		ctx,
 		request,
@@ -125,7 +125,7 @@ func (c *Client) Delete(
 	ctx context.Context,
 	request *tendlc.DeleteCampaignsRequest,
 	opts ...option.RequestOption,
-) (*v2.SuccessResponse, error) {
+) (*v3.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,
@@ -146,7 +146,7 @@ func (c *Client) Nudge(
 	ctx context.Context,
 	request *tendlc.NudgeCampaignsRequest,
 	opts ...option.RequestOption,
-) (*v2.SuccessResponse, error) {
+) (*v3.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Nudge(
 		ctx,
 		request,

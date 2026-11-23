@@ -4,7 +4,7 @@ package webrtc
 
 import (
 	json "encoding/json"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
 	big "math/big"
 )
 

@@ -11,9 +11,9 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	client "github.com/wavix/wavix-go-sdk/v2/client"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	client "github.com/wavix/wavix-go-sdk/v3/client"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 func VerifyRequestCount(
@@ -88,7 +88,7 @@ func TestSipTrunksListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.ListSipTrunksRequest{}
+	request := &v3.ListSipTrunksRequest{}
 	_, invocationErr := client.SipTrunks.List(
 		context.TODO(),
 		request,
@@ -112,7 +112,7 @@ func TestSipTrunksCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.SipTrunkCreateRequest{
+	request := &v3.SipTrunkCreateRequest{
 		Label:                  "My trunk",
 		Password:               "4r=h;EaCB85QNtr2",
 		Callerid:               "13132847320",
@@ -147,7 +147,7 @@ func TestSipTrunksGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.GetSipTrunksRequest{
+	request := &v3.GetSipTrunksRequest{
 		ID: 3107,
 	}
 	_, invocationErr := client.SipTrunks.Get(
@@ -173,7 +173,7 @@ func TestSipTrunksUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.SipTrunkUpdateRequest{
+	request := &v3.SipTrunkUpdateRequest{
 		ID: 3107,
 	}
 	_, invocationErr := client.SipTrunks.Update(
@@ -199,7 +199,7 @@ func TestSipTrunksDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.DeleteSipTrunksRequest{
+	request := &v3.DeleteSipTrunksRequest{
 		ID: 3107,
 	}
 	_, invocationErr := client.SipTrunks.Delete(

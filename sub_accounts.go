@@ -5,7 +5,7 @@ package api
 import (
 	json "encoding/json"
 	fmt "fmt"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
 	big "math/big"
 	time "time"
 )
@@ -246,9 +246,10 @@ var (
 	subOrganizationResponseFieldCreatedAt           = big.NewInt(1 << 1)
 	subOrganizationResponseFieldName                = big.NewInt(1 << 2)
 	subOrganizationResponseFieldAPIKey              = big.NewInt(1 << 3)
-	subOrganizationResponseFieldMasterOrganization  = big.NewInt(1 << 4)
-	subOrganizationResponseFieldStatus              = big.NewInt(1 << 5)
-	subOrganizationResponseFieldDefaultDestinations = big.NewInt(1 << 6)
+	subOrganizationResponseFieldRedactedAPIKey      = big.NewInt(1 << 4)
+	subOrganizationResponseFieldMasterOrganization  = big.NewInt(1 << 5)
+	subOrganizationResponseFieldStatus              = big.NewInt(1 << 6)
+	subOrganizationResponseFieldDefaultDestinations = big.NewInt(1 << 7)
 )
 
 type SubOrganizationResponse struct {
@@ -258,8 +259,10 @@ type SubOrganizationResponse struct {
 	CreatedAt time.Time `json:"created_at" url:"created_at"`
 	// Sub-account name.
 	Name string `json:"name" url:"name"`
-	// Sub-account API key.
+	// Sub-account API key. Deprecated; use `redacted_api_key`, which shows only the last 4 characters.
 	APIKey string `json:"api_key" url:"api_key"`
+	// Redacted sub-account API key, shown as `...` followed by the last 4 characters. Null when the sub-account has no active key.
+	RedactedAPIKey *string `json:"redacted_api_key,omitempty" url:"redacted_api_key,omitempty"`
 	// Master account ID.
 	MasterOrganization int `json:"master_organization" url:"master_organization"`
 	// Status of the subaccount. One of `enabled` (the subaccount is active and can be used) or `disabled` (the subaccount is suspended).
@@ -300,6 +303,13 @@ func (s *SubOrganizationResponse) GetAPIKey() string {
 		return ""
 	}
 	return s.APIKey
+}
+
+func (s *SubOrganizationResponse) GetRedactedAPIKey() *string {
+	if s == nil {
+		return nil
+	}
+	return s.RedactedAPIKey
 }
 
 func (s *SubOrganizationResponse) GetMasterOrganization() int {
@@ -363,6 +373,13 @@ func (s *SubOrganizationResponse) SetName(name string) {
 func (s *SubOrganizationResponse) SetAPIKey(apiKey string) {
 	s.APIKey = apiKey
 	s.require(subOrganizationResponseFieldAPIKey)
+}
+
+// SetRedactedAPIKey sets the RedactedAPIKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubOrganizationResponse) SetRedactedAPIKey(redactedAPIKey *string) {
+	s.RedactedAPIKey = redactedAPIKey
+	s.require(subOrganizationResponseFieldRedactedAPIKey)
 }
 
 // SetMasterOrganization sets the MasterOrganization field and marks it as non-optional;
@@ -559,6 +576,345 @@ func NewSubOrganizationResponseStatusFromString(s string) (SubOrganizationRespon
 }
 
 func (s SubOrganizationResponseStatus) Ptr() *SubOrganizationResponseStatus {
+	return &s
+}
+
+// Sub-account details including the full API key. Returned only by the create operation.
+var (
+	subOrganizationWithSecretFieldID                  = big.NewInt(1 << 0)
+	subOrganizationWithSecretFieldCreatedAt           = big.NewInt(1 << 1)
+	subOrganizationWithSecretFieldName                = big.NewInt(1 << 2)
+	subOrganizationWithSecretFieldAPIKey              = big.NewInt(1 << 3)
+	subOrganizationWithSecretFieldRedactedAPIKey      = big.NewInt(1 << 4)
+	subOrganizationWithSecretFieldMasterOrganization  = big.NewInt(1 << 5)
+	subOrganizationWithSecretFieldStatus              = big.NewInt(1 << 6)
+	subOrganizationWithSecretFieldDefaultDestinations = big.NewInt(1 << 7)
+)
+
+type SubOrganizationWithSecret struct {
+	// Sub-account ID.
+	ID int `json:"id" url:"id"`
+	// Date and time the sub-account was created in ISO 8601 format.
+	CreatedAt time.Time `json:"created_at" url:"created_at"`
+	// Sub-account name.
+	Name string `json:"name" url:"name"`
+	// Full sub-account API key.
+	APIKey string `json:"api_key" url:"api_key"`
+	// Redacted sub-account API key, shown as `...` followed by the last 4 characters. Null when the sub-account has no active key.
+	RedactedAPIKey *string `json:"redacted_api_key,omitempty" url:"redacted_api_key,omitempty"`
+	// Master account ID.
+	MasterOrganization int `json:"master_organization" url:"master_organization"`
+	// Status of the subaccount. One of `enabled` (the subaccount is active and can be used) or `disabled` (the subaccount is suspended).
+	Status SubOrganizationWithSecretStatus `json:"status" url:"status"`
+	// Default webhook URLs for inbound messages and delivery reports.
+	DefaultDestinations *SubOrganizationWithSecretDefaultDestinations `json:"default_destinations" url:"default_destinations"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubOrganizationWithSecret) GetID() int {
+	if s == nil {
+		return 0
+	}
+	return s.ID
+}
+
+func (s *SubOrganizationWithSecret) GetCreatedAt() time.Time {
+	if s == nil {
+		return time.Time{}
+	}
+	return s.CreatedAt
+}
+
+func (s *SubOrganizationWithSecret) GetName() string {
+	if s == nil {
+		return ""
+	}
+	return s.Name
+}
+
+func (s *SubOrganizationWithSecret) GetAPIKey() string {
+	if s == nil {
+		return ""
+	}
+	return s.APIKey
+}
+
+func (s *SubOrganizationWithSecret) GetRedactedAPIKey() *string {
+	if s == nil {
+		return nil
+	}
+	return s.RedactedAPIKey
+}
+
+func (s *SubOrganizationWithSecret) GetMasterOrganization() int {
+	if s == nil {
+		return 0
+	}
+	return s.MasterOrganization
+}
+
+func (s *SubOrganizationWithSecret) GetStatus() SubOrganizationWithSecretStatus {
+	if s == nil {
+		return ""
+	}
+	return s.Status
+}
+
+func (s *SubOrganizationWithSecret) GetDefaultDestinations() *SubOrganizationWithSecretDefaultDestinations {
+	if s == nil {
+		return nil
+	}
+	return s.DefaultDestinations
+}
+
+func (s *SubOrganizationWithSecret) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubOrganizationWithSecret) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubOrganizationWithSecret) SetID(id int) {
+	s.ID = id
+	s.require(subOrganizationWithSecretFieldID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubOrganizationWithSecret) SetCreatedAt(createdAt time.Time) {
+	s.CreatedAt = createdAt
+	s.require(subOrganizationWithSecretFieldCreatedAt)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubOrganizationWithSecret) SetName(name string) {
+	s.Name = name
+	s.require(subOrganizationWithSecretFieldName)
+}
+
+// SetAPIKey sets the APIKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubOrganizationWithSecret) SetAPIKey(apiKey string) {
+	s.APIKey = apiKey
+	s.require(subOrganizationWithSecretFieldAPIKey)
+}
+
+// SetRedactedAPIKey sets the RedactedAPIKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubOrganizationWithSecret) SetRedactedAPIKey(redactedAPIKey *string) {
+	s.RedactedAPIKey = redactedAPIKey
+	s.require(subOrganizationWithSecretFieldRedactedAPIKey)
+}
+
+// SetMasterOrganization sets the MasterOrganization field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubOrganizationWithSecret) SetMasterOrganization(masterOrganization int) {
+	s.MasterOrganization = masterOrganization
+	s.require(subOrganizationWithSecretFieldMasterOrganization)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubOrganizationWithSecret) SetStatus(status SubOrganizationWithSecretStatus) {
+	s.Status = status
+	s.require(subOrganizationWithSecretFieldStatus)
+}
+
+// SetDefaultDestinations sets the DefaultDestinations field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubOrganizationWithSecret) SetDefaultDestinations(defaultDestinations *SubOrganizationWithSecretDefaultDestinations) {
+	s.DefaultDestinations = defaultDestinations
+	s.require(subOrganizationWithSecretFieldDefaultDestinations)
+}
+
+func (s *SubOrganizationWithSecret) UnmarshalJSON(data []byte) error {
+	type embed SubOrganizationWithSecret
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"created_at"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*s = SubOrganizationWithSecret(unmarshaler.embed)
+	s.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubOrganizationWithSecret) MarshalJSON() ([]byte, error) {
+	type embed SubOrganizationWithSecret
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"created_at"`
+	}{
+		embed:     embed(*s),
+		CreatedAt: internal.NewDateTime(s.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubOrganizationWithSecret) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+// Default webhook URLs for inbound messages and delivery reports.
+var (
+	subOrganizationWithSecretDefaultDestinationsFieldSmsEndpoint = big.NewInt(1 << 0)
+	subOrganizationWithSecretDefaultDestinationsFieldDlrEndpoint = big.NewInt(1 << 1)
+)
+
+type SubOrganizationWithSecretDefaultDestinations struct {
+	// Inbound messages webhook URL.
+	SmsEndpoint string `json:"sms_endpoint" url:"sms_endpoint"`
+	// Delivery report webhook URL.
+	DlrEndpoint string `json:"dlr_endpoint" url:"dlr_endpoint"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubOrganizationWithSecretDefaultDestinations) GetSmsEndpoint() string {
+	if s == nil {
+		return ""
+	}
+	return s.SmsEndpoint
+}
+
+func (s *SubOrganizationWithSecretDefaultDestinations) GetDlrEndpoint() string {
+	if s == nil {
+		return ""
+	}
+	return s.DlrEndpoint
+}
+
+func (s *SubOrganizationWithSecretDefaultDestinations) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubOrganizationWithSecretDefaultDestinations) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetSmsEndpoint sets the SmsEndpoint field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubOrganizationWithSecretDefaultDestinations) SetSmsEndpoint(smsEndpoint string) {
+	s.SmsEndpoint = smsEndpoint
+	s.require(subOrganizationWithSecretDefaultDestinationsFieldSmsEndpoint)
+}
+
+// SetDlrEndpoint sets the DlrEndpoint field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubOrganizationWithSecretDefaultDestinations) SetDlrEndpoint(dlrEndpoint string) {
+	s.DlrEndpoint = dlrEndpoint
+	s.require(subOrganizationWithSecretDefaultDestinationsFieldDlrEndpoint)
+}
+
+func (s *SubOrganizationWithSecretDefaultDestinations) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubOrganizationWithSecretDefaultDestinations
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubOrganizationWithSecretDefaultDestinations(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubOrganizationWithSecretDefaultDestinations) MarshalJSON() ([]byte, error) {
+	type embed SubOrganizationWithSecretDefaultDestinations
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubOrganizationWithSecretDefaultDestinations) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+// Status of the subaccount. One of `enabled` (the subaccount is active and can be used) or `disabled` (the subaccount is suspended).
+type SubOrganizationWithSecretStatus string
+
+const (
+	SubOrganizationWithSecretStatusEnabled  SubOrganizationWithSecretStatus = "enabled"
+	SubOrganizationWithSecretStatusDisabled SubOrganizationWithSecretStatus = "disabled"
+)
+
+func NewSubOrganizationWithSecretStatusFromString(s string) (SubOrganizationWithSecretStatus, error) {
+	switch s {
+	case "enabled":
+		return SubOrganizationWithSecretStatusEnabled, nil
+	case "disabled":
+		return SubOrganizationWithSecretStatusDisabled, nil
+	}
+	var t SubOrganizationWithSecretStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SubOrganizationWithSecretStatus) Ptr() *SubOrganizationWithSecretStatus {
 	return &s
 }
 

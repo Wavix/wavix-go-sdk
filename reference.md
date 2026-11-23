@@ -1,6 +1,6 @@
 # Reference
 ## API Keys
-<details><summary><code>client.APIKeys.List() -> []*v2.APIKey</code></summary>
+<details><summary><code>client.APIKeys.List() -> []*v3.APIKey</code></summary>
 <dl>
 <dd>
 
@@ -27,8 +27,8 @@ Returns the API keys belonging to the authenticated account.
 <dd>
 
 ```go
-request := &v2.ListAPIKeysRequest{
-        Label: v2.String(
+request := &v3.ListAPIKeysRequest{
+        Label: v3.String(
             "production",
         ),
     }
@@ -63,7 +63,7 @@ client.APIKeys.List(
 </dl>
 </details>
 
-<details><summary><code>client.APIKeys.Create(request) -> v2.APIKeyWithSecret</code></summary>
+<details><summary><code>client.APIKeys.Create(request) -> *v3.APIKeyWithSecret</code></summary>
 <dl>
 <dd>
 
@@ -75,7 +75,7 @@ client.APIKeys.List(
 <dl>
 <dd>
 
-Creates an API key for the authenticated account. Restrict access by listing permitted IP addresses in `permitted_ips`.
+Creates an API key for the authenticated account. Restrict access by listing permitted IP addresses in `permitted_ips`. Store the returned `value` securely. Later reads return `redacted_value`, and `value` on reads is deprecated.
 </dd>
 </dl>
 </dd>
@@ -90,35 +90,35 @@ Creates an API key for the authenticated account. Restrict access by listing per
 <dd>
 
 ```go
-request := &v2.APIKeyCreateRequest{
+request := &v3.APIKeyCreateRequest{
         Label: "Production API Key",
-        Active: v2.Bool(
+        Active: v3.Bool(
             true,
         ),
-        Restricted: v2.Bool(
+        Restricted: v3.Bool(
             true,
         ),
         PermittedIps: []string{
             "192.168.1.1",
             "10.0.0.1",
         },
-        ScopesEnabled: v2.Bool(
+        ScopesEnabled: v3.Bool(
             true,
         ),
-        Numbers: &v2.APIKeyScopePermission{
-            Allow: v2.APIKeyScopePermissionAllowRead.Ptr(),
+        Numbers: &v3.APIKeyScopePermission{
+            Allow: v3.APIKeyScopePermissionAllowRead.Ptr(),
         },
-        Calls: &v2.APIKeyCallsScopePermission{
-            Allow: v2.APIKeyCallsScopePermissionAllowRead.Ptr(),
+        Calls: &v3.APIKeyCallsScopePermission{
+            Allow: v3.APIKeyCallsScopePermissionAllowRead.Ptr(),
         },
-        Messages: &v2.APIKeyScopePermission{
-            Allow: v2.APIKeyScopePermissionAllowWrite.Ptr(),
+        Messages: &v3.APIKeyScopePermission{
+            Allow: v3.APIKeyScopePermissionAllowWrite.Ptr(),
         },
-        TwoFa: &v2.APIKeyScopePermission{
-            Allow: v2.APIKeyScopePermissionAllowWrite.Ptr(),
+        TwoFa: &v3.APIKeyScopePermission{
+            Allow: v3.APIKeyScopePermissionAllowWrite.Ptr(),
         },
-        Billing: &v2.APIKeyScopePermission{
-            Allow: v2.APIKeyScopePermissionAllowRead.Ptr(),
+        Billing: &v3.APIKeyScopePermission{
+            Allow: v3.APIKeyScopePermissionAllowRead.Ptr(),
         },
     }
 client.APIKeys.Create(
@@ -184,7 +184,7 @@ so with `scopes_enabled: true` and no scopes set the key has no access.
 <dl>
 <dd>
 
-**numbers:** `*v2.APIKeyScopePermission` — View, buy, release, and configure phone numbers, browse inventory, and manage the cart.
+**numbers:** `*v3.APIKeyScopePermission` — View, buy, release, and configure phone numbers, browse inventory, and manage the cart.
     
 </dd>
 </dl>
@@ -192,7 +192,7 @@ so with `scopes_enabled: true` and no scopes set the key has no access.
 <dl>
 <dd>
 
-**trunks:** `*v2.APIKeyScopePermission` — View, create, update, and delete SIP trunks and their settings.
+**trunks:** `*v3.APIKeyScopePermission` — View, create, update, and delete SIP trunks and their settings.
     
 </dd>
 </dl>
@@ -200,7 +200,7 @@ so with `scopes_enabled: true` and no scopes set the key has no access.
 <dl>
 <dd>
 
-**calls:** `*v2.APIKeyCallsScopePermission` — Access call records and active calls, and control live call actions such as starting, answering, ending, audio playback, DTMF, streaming, and transcription requests.
+**calls:** `*v3.APIKeyCallsScopePermission` — Access call records and active calls, and control live call actions such as starting, answering, ending, audio playback, DTMF, streaming, and transcription requests.
     
 </dd>
 </dl>
@@ -208,7 +208,7 @@ so with `scopes_enabled: true` and no scopes set the key has no access.
 <dl>
 <dd>
 
-**messages:** `*v2.APIKeyScopePermission` — Access message history and Sender IDs, send messages, manage opt-outs, and create or delete Sender IDs.
+**messages:** `*v3.APIKeyScopePermission` — Access message history and Sender IDs, send messages, manage opt-outs, and create or delete Sender IDs.
     
 </dd>
 </dl>
@@ -216,7 +216,7 @@ so with `scopes_enabled: true` and no scopes set the key has no access.
 <dl>
 <dd>
 
-**recordings:** `*v2.APIKeyScopePermission` — List, download, and delete call recordings.
+**recordings:** `*v3.APIKeyScopePermission` — List, download, and delete call recordings.
     
 </dd>
 </dl>
@@ -224,7 +224,7 @@ so with `scopes_enabled: true` and no scopes set the key has no access.
 <dl>
 <dd>
 
-**campaigns:** `*v2.APIKeyScopePermission` — View campaign analytics and Sender ID or Brand status, schedule bulk voice or SMS campaigns, register Brands, and create short links.
+**campaigns:** `*v3.APIKeyScopePermission` — View campaign analytics and Sender ID or Brand status, schedule bulk voice or SMS campaigns, register Brands, and create short links.
     
 </dd>
 </dl>
@@ -232,7 +232,7 @@ so with `scopes_enabled: true` and no scopes set the key has no access.
 <dl>
 <dd>
 
-**twoFa:** `*v2.APIKeyScopePermission` — View 2FA service details and verification logs, trigger OTPs by voice or SMS, and validate verification codes.
+**twoFa:** `*v3.APIKeyScopePermission` — View 2FA service details and verification logs, trigger OTPs by voice or SMS, and validate verification codes.
     
 </dd>
 </dl>
@@ -240,7 +240,7 @@ so with `scopes_enabled: true` and no scopes set the key has no access.
 <dl>
 <dd>
 
-**validator:** `*v2.APIKeyScopePermission` — View number validation results and trigger single or bulk validation or HLR lookup requests.
+**validator:** `*v3.APIKeyScopePermission` — View number validation results and trigger single or bulk validation or HLR lookup requests.
     
 </dd>
 </dl>
@@ -248,7 +248,7 @@ so with `scopes_enabled: true` and no scopes set the key has no access.
 <dl>
 <dd>
 
-**webhooks:** `*v2.APIKeyScopePermission` — List, create, and delete webhooks.
+**webhooks:** `*v3.APIKeyScopePermission` — List, create, and delete webhooks.
     
 </dd>
 </dl>
@@ -256,7 +256,7 @@ so with `scopes_enabled: true` and no scopes set the key has no access.
 <dl>
 <dd>
 
-**embeddable:** `*v2.APIKeyScopePermission` — Manage widget tokens, including listing, viewing, creating, updating, and deleting them.
+**embeddable:** `*v3.APIKeyScopePermission` — Manage widget tokens, including listing, viewing, creating, updating, and deleting them.
     
 </dd>
 </dl>
@@ -264,7 +264,7 @@ so with `scopes_enabled: true` and no scopes set the key has no access.
 <dl>
 <dd>
 
-**billing:** `*v2.APIKeyScopePermission` — Access statements, balance, payment methods, usage reports, and billing settings, including payment method updates.
+**billing:** `*v3.APIKeyScopePermission` — Access statements, balance, payment methods, usage reports, and billing settings, including payment method updates.
     
 </dd>
 </dl>
@@ -272,7 +272,7 @@ so with `scopes_enabled: true` and no scopes set the key has no access.
 <dl>
 <dd>
 
-**account:** `*v2.APIKeyScopePermission` — View and update account profile information and timezone.
+**account:** `*v3.APIKeyScopePermission` — View and update account profile information and timezone.
     
 </dd>
 </dl>
@@ -280,7 +280,7 @@ so with `scopes_enabled: true` and no scopes set the key has no access.
 <dl>
 <dd>
 
-**subaccounts:** `*v2.APIKeyScopePermission` — Manage subaccounts: list and view them, create, update, and suspend them.
+**subaccounts:** `*v3.APIKeyScopePermission` — Manage subaccounts: list and view them, create, update, and suspend them.
     
 </dd>
 </dl>
@@ -292,7 +292,7 @@ so with `scopes_enabled: true` and no scopes set the key has no access.
 </dl>
 </details>
 
-<details><summary><code>client.APIKeys.Delete(ID) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.APIKeys.Delete(ID) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -319,7 +319,7 @@ Deletes the API key identified by `id`. Deletion is permanent and revokes the ke
 <dd>
 
 ```go
-request := &v2.DeleteAPIKeysRequest{
+request := &v3.DeleteAPIKeysRequest{
         ID: 1,
     }
 client.APIKeys.Delete(
@@ -353,7 +353,7 @@ client.APIKeys.Delete(
 </dl>
 </details>
 
-<details><summary><code>client.APIKeys.Update(ID, request) -> *v2.APIKey</code></summary>
+<details><summary><code>client.APIKeys.Update(ID, request) -> *v3.APIKey</code></summary>
 <dl>
 <dd>
 
@@ -380,22 +380,22 @@ Updates an API key identified by `id`. Only the provided fields are changed.
 <dd>
 
 ```go
-request := &v2.APIKeyUpdateRequest{
+request := &v3.APIKeyUpdateRequest{
         ID: 1,
-        Active: v2.Bool(
+        Active: v3.Bool(
             true,
         ),
-        Restricted: v2.Bool(
+        Restricted: v3.Bool(
             true,
         ),
-        ScopesEnabled: v2.Bool(
+        ScopesEnabled: v3.Bool(
             true,
         ),
         PermittedIps: []string{
             "192.168.1.1",
             "10.0.0.1",
         },
-        Label: v2.String(
+        Label: v3.String(
             "Production API Key",
         ),
     }
@@ -466,7 +466,7 @@ client.APIKeys.Update(
 <dl>
 <dd>
 
-**numbers:** `*v2.APIKeyScopePermission` — View, buy, release, and configure phone numbers, browse inventory, and manage the cart.
+**numbers:** `*v3.APIKeyScopePermission` — View, buy, release, and configure phone numbers, browse inventory, and manage the cart.
     
 </dd>
 </dl>
@@ -474,7 +474,7 @@ client.APIKeys.Update(
 <dl>
 <dd>
 
-**trunks:** `*v2.APIKeyScopePermission` — View, create, update, and delete SIP trunks and their settings.
+**trunks:** `*v3.APIKeyScopePermission` — View, create, update, and delete SIP trunks and their settings.
     
 </dd>
 </dl>
@@ -482,7 +482,7 @@ client.APIKeys.Update(
 <dl>
 <dd>
 
-**calls:** `*v2.APIKeyCallsScopePermission` — Access call records and active calls, and control live call actions such as starting, answering, ending, audio playback, DTMF, streaming, and transcription requests.
+**calls:** `*v3.APIKeyCallsScopePermission` — Access call records and active calls, and control live call actions such as starting, answering, ending, audio playback, DTMF, streaming, and transcription requests.
     
 </dd>
 </dl>
@@ -490,7 +490,7 @@ client.APIKeys.Update(
 <dl>
 <dd>
 
-**messages:** `*v2.APIKeyScopePermission` — Access message history and Sender IDs, send messages, manage opt-outs, and create or delete Sender IDs.
+**messages:** `*v3.APIKeyScopePermission` — Access message history and Sender IDs, send messages, manage opt-outs, and create or delete Sender IDs.
     
 </dd>
 </dl>
@@ -498,7 +498,7 @@ client.APIKeys.Update(
 <dl>
 <dd>
 
-**recordings:** `*v2.APIKeyScopePermission` — List, download, and delete call recordings.
+**recordings:** `*v3.APIKeyScopePermission` — List, download, and delete call recordings.
     
 </dd>
 </dl>
@@ -506,7 +506,7 @@ client.APIKeys.Update(
 <dl>
 <dd>
 
-**campaigns:** `*v2.APIKeyScopePermission` — View campaign analytics and Sender ID or Brand status, schedule bulk voice or SMS campaigns, register Brands, and create short links.
+**campaigns:** `*v3.APIKeyScopePermission` — View campaign analytics and Sender ID or Brand status, schedule bulk voice or SMS campaigns, register Brands, and create short links.
     
 </dd>
 </dl>
@@ -514,7 +514,7 @@ client.APIKeys.Update(
 <dl>
 <dd>
 
-**twoFa:** `*v2.APIKeyScopePermission` — View 2FA service details and verification logs, trigger OTPs by voice or SMS, and validate verification codes.
+**twoFa:** `*v3.APIKeyScopePermission` — View 2FA service details and verification logs, trigger OTPs by voice or SMS, and validate verification codes.
     
 </dd>
 </dl>
@@ -522,7 +522,7 @@ client.APIKeys.Update(
 <dl>
 <dd>
 
-**validator:** `*v2.APIKeyScopePermission` — View number validation results and trigger single or bulk validation or HLR lookup requests.
+**validator:** `*v3.APIKeyScopePermission` — View number validation results and trigger single or bulk validation or HLR lookup requests.
     
 </dd>
 </dl>
@@ -530,7 +530,7 @@ client.APIKeys.Update(
 <dl>
 <dd>
 
-**webhooks:** `*v2.APIKeyScopePermission` — List, create, and delete webhooks.
+**webhooks:** `*v3.APIKeyScopePermission` — List, create, and delete webhooks.
     
 </dd>
 </dl>
@@ -538,7 +538,7 @@ client.APIKeys.Update(
 <dl>
 <dd>
 
-**embeddable:** `*v2.APIKeyScopePermission` — Manage widget tokens, including listing, viewing, creating, updating, and deleting them.
+**embeddable:** `*v3.APIKeyScopePermission` — Manage widget tokens, including listing, viewing, creating, updating, and deleting them.
     
 </dd>
 </dl>
@@ -546,7 +546,7 @@ client.APIKeys.Update(
 <dl>
 <dd>
 
-**billing:** `*v2.APIKeyScopePermission` — Access statements, balance, payment methods, usage reports, and billing settings, including payment method updates.
+**billing:** `*v3.APIKeyScopePermission` — Access statements, balance, payment methods, usage reports, and billing settings, including payment method updates.
     
 </dd>
 </dl>
@@ -554,7 +554,7 @@ client.APIKeys.Update(
 <dl>
 <dd>
 
-**account:** `*v2.APIKeyScopePermission` — View and update account profile information and timezone.
+**account:** `*v3.APIKeyScopePermission` — View and update account profile information and timezone.
     
 </dd>
 </dl>
@@ -562,7 +562,7 @@ client.APIKeys.Update(
 <dl>
 <dd>
 
-**subaccounts:** `*v2.APIKeyScopePermission` — Manage subaccounts: list and view them, create, update, and suspend them.
+**subaccounts:** `*v3.APIKeyScopePermission` — Manage subaccounts: list and view them, create, update, and suspend them.
     
 </dd>
 </dl>
@@ -575,7 +575,7 @@ client.APIKeys.Update(
 </details>
 
 ## SIP trunks
-<details><summary><code>client.SipTrunks.List() -> *v2.SipTrunkListResponse</code></summary>
+<details><summary><code>client.SipTrunks.List() -> *v3.SipTrunkListResponse</code></summary>
 <dl>
 <dd>
 
@@ -602,7 +602,7 @@ Returns a paginated list of SIP trunks for the authenticated account.
 <dd>
 
 ```go
-request := &v2.ListSipTrunksRequest{}
+request := &v3.ListSipTrunksRequest{}
 client.SipTrunks.List(
         context.TODO(),
         request,
@@ -642,7 +642,7 @@ client.SipTrunks.List(
 </dl>
 </details>
 
-<details><summary><code>client.SipTrunks.Create(request) -> *v2.SipTrunkResponse</code></summary>
+<details><summary><code>client.SipTrunks.Create(request) -> *v3.SipTrunkResponse</code></summary>
 <dl>
 <dd>
 
@@ -669,7 +669,7 @@ Creates a SIP trunk for routing inbound and outbound calls. Returns the trunk wi
 <dd>
 
 ```go
-request := &v2.SipTrunkCreateRequest{
+request := &v3.SipTrunkCreateRequest{
         Label: "My trunk",
         Password: "4r=h;EaCB85QNtr2",
         Callerid: "13132847320",
@@ -716,7 +716,7 @@ client.SipTrunks.Create(
 <dl>
 <dd>
 
-**hostRequest:** `*v2.SipTrunkCreateRequestHostRequest` — For SIP trunks with IP authentication, includes the SIP endpoint public static IP address and the status of the authentication request. Wavix authenticates all SIP traffic originating from this IP address.
+**hostRequest:** `*v3.SipTrunkCreateRequestHostRequest` — For SIP trunks with IP authentication, includes the SIP endpoint public static IP address and the status of the authentication request. Wavix authenticates all SIP traffic originating from this IP address.
     
 </dd>
 </dl>
@@ -748,7 +748,7 @@ client.SipTrunks.Create(
 <dl>
 <dd>
 
-**allowedIps:** `[]*v2.SipTrunkCreateRequestAllowedIpsItem` — A list of public static IP addresses allowed to register with the SIP trunk
+**allowedIps:** `[]*v3.SipTrunkCreateRequestAllowedIpsItem` — A list of public static IP addresses allowed to register with the SIP trunk
     
 </dd>
 </dl>
@@ -889,7 +889,7 @@ Available for `Flex Pro` customers only.
 </dl>
 </details>
 
-<details><summary><code>client.SipTrunks.Get(ID) -> *v2.SipTrunkResponse</code></summary>
+<details><summary><code>client.SipTrunks.Get(ID) -> *v3.SipTrunkResponse</code></summary>
 <dl>
 <dd>
 
@@ -916,7 +916,7 @@ Returns the SIP trunk identified by `id`.
 <dd>
 
 ```go
-request := &v2.GetSipTrunksRequest{
+request := &v3.GetSipTrunksRequest{
         ID: 3107,
     }
 client.SipTrunks.Get(
@@ -950,7 +950,7 @@ client.SipTrunks.Get(
 </dl>
 </details>
 
-<details><summary><code>client.SipTrunks.Update(ID, request) -> *v2.SipTrunkResponse</code></summary>
+<details><summary><code>client.SipTrunks.Update(ID, request) -> *v3.SipTrunkResponse</code></summary>
 <dl>
 <dd>
 
@@ -977,7 +977,7 @@ Updates the SIP trunk identified by `id`. Only the provided fields are changed. 
 <dd>
 
 ```go
-request := &v2.SipTrunkUpdateRequest{
+request := &v3.SipTrunkUpdateRequest{
         ID: 3107,
     }
 client.SipTrunks.Update(
@@ -1023,7 +1023,7 @@ client.SipTrunks.Update(
 <dl>
 <dd>
 
-**hostRequest:** `*v2.SipTrunkUpdateRequestHostRequest` — For SIP trunks with IP authentication, the SIP endpoint public static IP address. Wavix authenticates all SIP traffic originating from this IP address. Ignored when the trunk already has a host request that is pending or approved. Not supported on trial accounts.
+**hostRequest:** `*v3.SipTrunkUpdateRequestHostRequest` — For SIP trunks with IP authentication, the SIP endpoint public static IP address. Wavix authenticates all SIP traffic originating from this IP address. Ignored when the trunk already has a host request that is pending or approved. Not supported on trial accounts.
     
 </dd>
 </dl>
@@ -1055,7 +1055,7 @@ client.SipTrunks.Update(
 <dl>
 <dd>
 
-**allowedIps:** `[]*v2.SipTrunkUpdateRequestAllowedIpsItem` — Public static IP addresses to add to the list allowed to register with the SIP trunk. Addresses already on the list are kept.
+**allowedIps:** `[]*v3.SipTrunkUpdateRequestAllowedIpsItem` — Public static IP addresses to add to the list allowed to register with the SIP trunk. Addresses already on the list are kept.
     
 </dd>
 </dl>
@@ -1196,7 +1196,7 @@ Available for `Flex Pro` customers only.
 </dl>
 </details>
 
-<details><summary><code>client.SipTrunks.Delete(ID) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.SipTrunks.Delete(ID) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -1223,7 +1223,7 @@ Deletes the SIP trunk identified by `id`. Deletion is permanent and stops call r
 <dd>
 
 ```go
-request := &v2.DeleteSipTrunksRequest{
+request := &v3.DeleteSipTrunksRequest{
         ID: 3107,
     }
 client.SipTrunks.Delete(
@@ -1258,7 +1258,7 @@ client.SipTrunks.Delete(
 </details>
 
 ## Cart
-<details><summary><code>client.Cart.Get() -> *v2.CartResponse</code></summary>
+<details><summary><code>client.Cart.Get() -> *v3.CartResponse</code></summary>
 <dl>
 <dd>
 
@@ -1300,7 +1300,7 @@ client.Cart.Get(
 </dl>
 </details>
 
-<details><summary><code>client.Cart.Add(request) -> []*v2.AvailableNumber</code></summary>
+<details><summary><code>client.Cart.Add(request) -> []*v3.AvailableNumber</code></summary>
 <dl>
 <dd>
 
@@ -1327,7 +1327,7 @@ Adds the listed phone numbers to the purchase cart.
 <dd>
 
 ```go
-request := &v2.AddCartRequest{
+request := &v3.AddCartRequest{
         IDs: []string{
             "541139862174",
             "541139862175",
@@ -1364,7 +1364,7 @@ client.Cart.Add(
 </dl>
 </details>
 
-<details><summary><code>client.Cart.Remove(request) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.Cart.Remove(request) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -1391,7 +1391,7 @@ Removes the listed phone numbers from the purchase cart.
 <dd>
 
 ```go
-request := &v2.RemoveCartRequest{
+request := &v3.RemoveCartRequest{
         IDs: []string{
             "541139862174",
             "541139862175",
@@ -1428,7 +1428,7 @@ client.Cart.Remove(
 </dl>
 </details>
 
-<details><summary><code>client.Cart.Checkout(request) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.Cart.Checkout(request) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -1455,7 +1455,7 @@ Purchases the listed phone numbers from the cart. Activation and monthly fees ar
 <dd>
 
 ```go
-request := &v2.CheckoutCartRequest{
+request := &v3.CheckoutCartRequest{
         IDs: []string{
             "541139862174",
             "541139862175",
@@ -1493,7 +1493,7 @@ client.Cart.Checkout(
 </details>
 
 ## Numbers
-<details><summary><code>client.Numbers.List() -> *v2.NumberListResponse</code></summary>
+<details><summary><code>client.Numbers.List() -> *v3.NumberListResponse</code></summary>
 <dl>
 <dd>
 
@@ -1520,23 +1520,23 @@ Returns a paginated list of the phone numbers owned by the authenticated account
 <dd>
 
 ```go
-request := &v2.ListNumbersRequest{
-        CityID: v2.Int(
+request := &v3.ListNumbersRequest{
+        CityID: v3.Int(
             123,
         ),
-        Search: v2.String(
+        Search: v3.String(
             "256537",
         ),
-        Label: v2.String(
+        Label: v3.String(
             "ALEX",
         ),
-        LabelPresent: v2.Bool(
+        LabelPresent: v3.Bool(
             true,
         ),
-        Page: v2.Int(
+        Page: v3.Int(
             2,
         ),
-        PerPage: v2.Int(
+        PerPage: v3.Int(
             50,
         ),
     }
@@ -1611,7 +1611,7 @@ client.Numbers.List(
 </dl>
 </details>
 
-<details><summary><code>client.Numbers.Delete() -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.Numbers.Delete() -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -1638,8 +1638,8 @@ Releases the listed phone numbers back to stock. Selection accepts either `ids` 
 <dd>
 
 ```go
-request := &v2.DeleteNumbersRequest{
-        Dids: v2.String(
+request := &v3.DeleteNumbersRequest{
+        Dids: v3.String(
             "47832123321,47832123324,478321233215",
         ),
     }
@@ -1682,7 +1682,7 @@ client.Numbers.Delete(
 </dl>
 </details>
 
-<details><summary><code>client.Numbers.BulkUpdate(request) -> *v2.BulkUpdateNumbersResponse</code></summary>
+<details><summary><code>client.Numbers.BulkUpdate(request) -> *v3.BulkUpdateNumbersResponse</code></summary>
 <dl>
 <dd>
 
@@ -1709,7 +1709,7 @@ Applies the same changes to every listed phone number. Only the provided fields 
 <dd>
 
 ```go
-request := &v2.NumberBulkUpdateRequest{
+request := &v3.NumberBulkUpdateRequest{
         IDs: []int{
             123,
             456,
@@ -1753,7 +1753,7 @@ applied to every listed number.
 <dl>
 <dd>
 
-**destinations:** `[]*v2.NumberDestination` — Inbound call routing destinations for the phone numbers.
+**destinations:** `[]*v3.NumberDestination` — Inbound call routing destinations for the phone numbers.
     
 </dd>
 </dl>
@@ -1805,7 +1805,7 @@ applied to every listed number.
 </dl>
 </details>
 
-<details><summary><code>client.Numbers.Get(ID) -> *v2.Number</code></summary>
+<details><summary><code>client.Numbers.Get(ID) -> *v3.Number</code></summary>
 <dl>
 <dd>
 
@@ -1832,7 +1832,7 @@ Returns the phone number identified by `id`, including its destinations, documen
 <dd>
 
 ```go
-request := &v2.GetNumbersRequest{
+request := &v3.GetNumbersRequest{
         ID: 123,
     }
 client.Numbers.Get(
@@ -1866,7 +1866,7 @@ client.Numbers.Get(
 </dl>
 </details>
 
-<details><summary><code>client.Numbers.Update(ID, request) -> *v2.Number</code></summary>
+<details><summary><code>client.Numbers.Update(ID, request) -> *v3.Number</code></summary>
 <dl>
 <dd>
 
@@ -1895,7 +1895,7 @@ Updates the phone number identified by `id`. Only the provided fields are change
 <dd>
 
 ```go
-request := &v2.NumberUpdateRequest{
+request := &v3.NumberUpdateRequest{
         ID: 123,
     }
 client.Numbers.Update(
@@ -1933,7 +1933,7 @@ client.Numbers.Update(
 <dl>
 <dd>
 
-**destinations:** `[]*v2.NumberDestination` — Inbound call routing destinations for the phone number.
+**destinations:** `[]*v3.NumberDestination` — Inbound call routing destinations for the phone number.
     
 </dd>
 </dl>
@@ -1994,7 +1994,7 @@ client.Numbers.Update(
 </details>
 
 ## CDRs
-<details><summary><code>client.Cdrs.List() -> *v2.CdrListResponse</code></summary>
+<details><summary><code>client.Cdrs.List() -> *v3.CdrListResponse</code></summary>
 <dl>
 <dd>
 
@@ -2021,30 +2021,30 @@ Returns a paginated list of call detail records for the authenticated account, w
 <dd>
 
 ```go
-request := &v2.ListCdrsRequest{
-        From: v2.MustParseDate(
+request := &v3.ListCdrsRequest{
+        From: v3.MustParseDate(
             "2023-01-01",
         ),
-        To: v2.MustParseDate(
+        To: v3.MustParseDate(
             "2023-09-01",
         ),
         Type: "received",
-        FromSearch: v2.String(
+        FromSearch: v3.String(
             "13524815863",
         ),
-        ToSearch: v2.String(
+        ToSearch: v3.String(
             "12565378257",
         ),
-        SipTrunk: v2.String(
+        SipTrunk: v3.String(
             "12321",
         ),
-        UUID: v2.String(
+        UUID: v3.String(
             "99df5ffd-962a-410f-bcce-d08f1f7f328c",
         ),
-        Page: v2.Int(
+        Page: v3.Int(
             1,
         ),
-        PerPage: v2.Int(
+        PerPage: v3.Int(
             25,
         ),
     }
@@ -2091,7 +2091,7 @@ client.Cdrs.List(
 <dl>
 <dd>
 
-**disposition:** `*v2.CallDisposition` — Filters CDRs by call disposition. One of `answered` (the called party answered), `noanswer` (no answer within the ring timeout), `busy` (the called party was busy), `failed` (the call could not be routed), or `all` (no disposition filter).
+**disposition:** `*v3.CallDisposition` — Filters CDRs by call disposition. One of `answered` (the called party answered), `noanswer` (no answer within the ring timeout), `busy` (the called party was busy), `failed` (the call could not be routed), or `all` (no disposition filter).
     
 </dd>
 </dl>
@@ -2151,7 +2151,7 @@ client.Cdrs.List(
 </dl>
 </details>
 
-<details><summary><code>client.Cdrs.Search(request) -> *v2.CdrTranscriptionSearchResponse</code></summary>
+<details><summary><code>client.Cdrs.Search(request) -> *v3.CdrTranscriptionSearchResponse</code></summary>
 <dl>
 <dd>
 
@@ -2178,12 +2178,12 @@ Searches call transcriptions for the given keywords or phrases and returns the m
 <dd>
 
 ```go
-request := &v2.CdrSearchRequest{
-        Type: v2.CdrSearchRequestTypePlaced,
-        From: v2.MustParseDate(
+request := &v3.CdrSearchRequest{
+        Type: v3.CdrSearchRequestTypePlaced,
+        From: v3.MustParseDate(
             "2023-08-01",
         ),
-        To: v2.MustParseDate(
+        To: v3.MustParseDate(
             "2023-08-31",
         ),
     }
@@ -2206,7 +2206,7 @@ client.Cdrs.Search(
 <dl>
 <dd>
 
-**type_:** `*v2.CdrSearchRequestType` — Filters by call type. One of `placed` (outbound calls dialed by the account) or `received` (inbound calls answered by the account).
+**type_:** `*v3.CdrSearchRequestType` — Filters by call type. One of `placed` (outbound calls dialed by the account) or `received` (inbound calls answered by the account).
     
 </dd>
 </dl>
@@ -2262,7 +2262,7 @@ client.Cdrs.Search(
 <dl>
 <dd>
 
-**transcription:** `*v2.TranscriptionFilter` 
+**transcription:** `*v3.TranscriptionFilter` 
     
 </dd>
 </dl>
@@ -2278,7 +2278,7 @@ client.Cdrs.Search(
 <dl>
 <dd>
 
-**disposition:** `*v2.CallDisposition` 
+**disposition:** `*v3.CallDisposition` 
 
 Call disposition to filter results.  If omitted, returns only answered
  calls. Allowed values: `answered`, `noanswer`, `busy`,
@@ -2311,7 +2311,7 @@ Call disposition to filter results.  If omitted, returns only answered
 </dl>
 </details>
 
-<details><summary><code>client.Cdrs.Retranscribe(CallID, request) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.Cdrs.Retranscribe(CallID, request) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -2338,7 +2338,7 @@ Transcribes the recording of the call identified by `call_id`. Transcription is 
 <dd>
 
 ```go
-request := &v2.CdrRetranscriptionRequest{
+request := &v3.CdrRetranscriptionRequest{
         CallID: "bbaa37bf-430a-46da-ade3-c248e4070160",
     }
 client.Cdrs.Retranscribe(
@@ -2368,7 +2368,7 @@ client.Cdrs.Retranscribe(
 <dl>
 <dd>
 
-**language:** `*v2.TranscriptionLanguage` 
+**language:** `*v3.TranscriptionLanguage` 
     
 </dd>
 </dl>
@@ -2388,7 +2388,7 @@ client.Cdrs.Retranscribe(
 </dl>
 </details>
 
-<details><summary><code>client.Cdrs.Transcriptions(CallID) -> *v2.CdrTranscriptionResponse</code></summary>
+<details><summary><code>client.Cdrs.Transcriptions(CallID) -> *v3.CdrTranscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -2415,7 +2415,7 @@ Returns the transcription of the recorded call identified by `call_id`. Alias of
 <dd>
 
 ```go
-request := &v2.TranscriptionsCdrsRequest{
+request := &v3.TranscriptionsCdrsRequest{
         CallID: "bbaa37bf-430a-46da-ade3-c248e4070160",
     }
 client.Cdrs.Transcriptions(
@@ -2449,7 +2449,7 @@ client.Cdrs.Transcriptions(
 </dl>
 </details>
 
-<details><summary><code>client.Cdrs.Get(CallID) -> *v2.CdrResponse</code></summary>
+<details><summary><code>client.Cdrs.Get(CallID) -> *v3.CdrResponse</code></summary>
 <dl>
 <dd>
 
@@ -2476,9 +2476,9 @@ Returns the call detail record for the call identified by `call_id`.
 <dd>
 
 ```go
-request := &v2.GetCdrsRequest{
+request := &v3.GetCdrsRequest{
         CallID: "aa566501-c591-4a8b-b3b9-cc1295398b72",
-        ShowTranscription: v2.Bool(
+        ShowTranscription: v3.Bool(
             true,
         ),
     }
@@ -2548,30 +2548,30 @@ Streams matching call detail records as newline-delimited JSON (NDJSON), one rec
 <dd>
 
 ```go
-request := &v2.ListAllCdrsRequest{
-        From: v2.MustParseDate(
+request := &v3.ListAllCdrsRequest{
+        From: v3.MustParseDate(
             "2023-01-01",
         ),
-        To: v2.MustParseDate(
+        To: v3.MustParseDate(
             "2023-09-01",
         ),
         Type: "received",
-        FromSearch: v2.String(
+        FromSearch: v3.String(
             "13524815863",
         ),
-        ToSearch: v2.String(
+        ToSearch: v3.String(
             "12565378257",
         ),
-        SipTrunk: v2.String(
+        SipTrunk: v3.String(
             "12321",
         ),
-        UUID: v2.String(
+        UUID: v3.String(
             "99df5ffd-962a-410f-bcce-d08f1f7f328c",
         ),
-        Page: v2.Int(
+        Page: v3.Int(
             1,
         ),
-        PerPage: v2.Int(
+        PerPage: v3.Int(
             25,
         ),
     }
@@ -2618,7 +2618,7 @@ client.Cdrs.ListAll(
 <dl>
 <dd>
 
-**disposition:** `*v2.CallDisposition` — Filters CDRs by call disposition. One of `answered` (the called party answered), `noanswer` (no answer within the ring timeout), `busy` (the called party was busy), `failed` (the call could not be routed), or `all` (no disposition filter).
+**disposition:** `*v3.CallDisposition` — Filters CDRs by call disposition. One of `answered` (the called party answered), `noanswer` (no answer within the ring timeout), `busy` (the called party was busy), `failed` (the call could not be routed), or `all` (no disposition filter).
     
 </dd>
 </dl>
@@ -2679,7 +2679,7 @@ client.Cdrs.ListAll(
 </details>
 
 ## Call recording
-<details><summary><code>client.CallRecording.List() -> *v2.CallRecordingListResponse</code></summary>
+<details><summary><code>client.CallRecording.List() -> *v3.CallRecordingListResponse</code></summary>
 <dl>
 <dd>
 
@@ -2706,30 +2706,30 @@ Returns a paginated list of call recordings for the authenticated account, filte
 <dd>
 
 ```go
-request := &v2.ListCallRecordingRequest{
-        FromDate: v2.Time(
-            v2.MustParseDate(
+request := &v3.ListCallRecordingRequest{
+        FromDate: v3.Time(
+            v3.MustParseDate(
                 "2023-01-01",
             ),
         ),
-        ToDate: v2.Time(
-            v2.MustParseDate(
+        ToDate: v3.Time(
+            v3.MustParseDate(
                 "2023-12-31",
             ),
         ),
-        From: v2.String(
+        From: v3.String(
             "123456",
         ),
-        To: v2.String(
+        To: v3.String(
             "1987654321",
         ),
-        CallUUID: v2.String(
+        CallUUID: v3.String(
             "aa566501-c591-4a8b-b3b9-cc1295398b72",
         ),
-        Page: v2.Int(
+        Page: v3.Int(
             1,
         ),
-        PerPage: v2.Int(
+        PerPage: v3.Int(
             25,
         ),
     }
@@ -2847,7 +2847,7 @@ Redirects to the recording file for the call identified by `call_id`. The downlo
 <dd>
 
 ```go
-request := &v2.GetByCallCallRecordingRequest{
+request := &v3.GetByCallCallRecordingRequest{
         CallID: "aa566501-c591-4a8b-b3b9-cc1295398b72",
     }
 client.CallRecording.GetByCall(
@@ -2881,7 +2881,7 @@ client.CallRecording.GetByCall(
 </dl>
 </details>
 
-<details><summary><code>client.CallRecording.Get(ID) -> *v2.Recording</code></summary>
+<details><summary><code>client.CallRecording.Get(ID) -> *v3.Recording</code></summary>
 <dl>
 <dd>
 
@@ -2908,7 +2908,7 @@ Returns the call recording identified by `id`, including its metadata and downlo
 <dd>
 
 ```go
-request := &v2.GetCallRecordingRequest{
+request := &v3.GetCallRecordingRequest{
         ID: 123,
     }
 client.CallRecording.Get(
@@ -2942,7 +2942,7 @@ client.CallRecording.Get(
 </dl>
 </details>
 
-<details><summary><code>client.CallRecording.Delete(ID) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.CallRecording.Delete(ID) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -2969,7 +2969,7 @@ Deletes the call recording identified by `id`. Deletion is permanent — the aud
 <dd>
 
 ```go
-request := &v2.DeleteCallRecordingRequest{
+request := &v3.DeleteCallRecordingRequest{
         ID: 123,
     }
 client.CallRecording.Delete(
@@ -3004,7 +3004,7 @@ client.CallRecording.Delete(
 </details>
 
 ## Speech Analytics
-<details><summary><code>client.SpeechAnalytics.Create(request) -> *v2.SubmitFileTranscriptionResponse</code></summary>
+<details><summary><code>client.SpeechAnalytics.Create(request) -> *v3.SubmitFileTranscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -3044,7 +3044,7 @@ Callback body:
 <dd>
 
 ```go
-request := &v2.CreateSpeechAnalyticsRequest{
+request := &v3.CreateSpeechAnalyticsRequest{
         File: strings.NewReader(
             "",
         ),
@@ -3066,7 +3066,7 @@ client.SpeechAnalytics.Create(
 </dl>
 </details>
 
-<details><summary><code>client.SpeechAnalytics.Get(RequestID) -> *v2.FileTranscriptionResponse</code></summary>
+<details><summary><code>client.SpeechAnalytics.Get(RequestID) -> *v3.FileTranscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -3093,7 +3093,7 @@ Returns the transcription for the request identified by `request_id`, including 
 <dd>
 
 ```go
-request := &v2.GetSpeechAnalyticsRequest{
+request := &v3.GetSpeechAnalyticsRequest{
         RequestID: "e865ea07-25af-4fdd-876e-04b0d41d5ebd",
     }
 client.SpeechAnalytics.Get(
@@ -3127,7 +3127,7 @@ client.SpeechAnalytics.Get(
 </dl>
 </details>
 
-<details><summary><code>client.SpeechAnalytics.Retranscribe(RequestID, request) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.SpeechAnalytics.Retranscribe(RequestID, request) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -3154,7 +3154,7 @@ Re-runs transcription on the file identified by `request_id`, replacing the exis
 <dd>
 
 ```go
-request := &v2.SpeechAnalyticsRetranscribeRequest{
+request := &v3.SpeechAnalyticsRetranscribeRequest{
         RequestID: "e865ea07-25af-4fdd-876e-04b0d41d5ebd",
         CallbackURL: "https://you-site.com/webhook",
     }
@@ -3206,7 +3206,7 @@ client.SpeechAnalytics.Retranscribe(
 </details>
 
 ## Call webhooks
-<details><summary><code>client.CallWebhooks.List() -> v2.CallWebhookListResponse</code></summary>
+<details><summary><code>client.CallWebhooks.List() -> v3.CallWebhookListResponse</code></summary>
 <dl>
 <dd>
 
@@ -3248,7 +3248,7 @@ client.CallWebhooks.List(
 </dl>
 </details>
 
-<details><summary><code>client.CallWebhooks.Create(request) -> *v2.CallWebhook</code></summary>
+<details><summary><code>client.CallWebhooks.Create(request) -> *v3.CallWebhook</code></summary>
 <dl>
 <dd>
 
@@ -3277,9 +3277,9 @@ Registers a callback URL for the `on-call` or `post-call` event. Wavix sends a P
 <dd>
 
 ```go
-request := &v2.CallWebhooksCreateRequest{
+request := &v3.CallWebhooksCreateRequest{
         URL: "https://you-site.com/webhook",
-        EventType: v2.CallWebhooksCreateRequestEventTypePostCall,
+        EventType: v3.CallWebhooksCreateRequestEventTypePostCall,
     }
 client.CallWebhooks.Create(
         context.TODO(),
@@ -3308,7 +3308,7 @@ client.CallWebhooks.Create(
 <dl>
 <dd>
 
-**eventType:** `*v2.CallWebhooksCreateRequestEventType` 
+**eventType:** `*v3.CallWebhooksCreateRequestEventType` 
 
 Allowed values: `on-call`, `post-call`.
  - `on-call`: Sends real-time status updates
@@ -3335,7 +3335,7 @@ Allowed values: `on-call`, `post-call`.
 </dl>
 </details>
 
-<details><summary><code>client.CallWebhooks.Delete() -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.CallWebhooks.Delete() -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -3364,9 +3364,9 @@ Removes the call webhook for the given event type. Wavix stops sending callbacks
 <dd>
 
 ```go
-request := &v2.DeleteCallWebhooksRequest{
-        EventType: v2.DeleteCallWebhooksRequestEventTypePostCall,
-        ExpectedURL: v2.String(
+request := &v3.DeleteCallWebhooksRequest{
+        EventType: v3.DeleteCallWebhooksRequestEventTypePostCall,
+        ExpectedURL: v3.String(
             "https://your-site.com/webhook",
         ),
     }
@@ -3389,7 +3389,7 @@ client.CallWebhooks.Delete(
 <dl>
 <dd>
 
-**eventType:** `*v2.DeleteCallWebhooksRequestEventType` — Event type of the webhook to delete. One of `post-call` (callbacks sent after a call ends) or `on-call` (real-time call status callbacks during a call).
+**eventType:** `*v3.DeleteCallWebhooksRequestEventType` — Event type of the webhook to delete. One of `post-call` (callbacks sent after a call ends) or `on-call` (real-time call status callbacks during a call).
     
 </dd>
 </dl>
@@ -3410,7 +3410,7 @@ client.CallWebhooks.Delete(
 </details>
 
 ## Call control
-<details><summary><code>client.CallControl.List() -> *v2.CallListResponse</code></summary>
+<details><summary><code>client.CallControl.List() -> *v3.CallListResponse</code></summary>
 <dl>
 <dd>
 
@@ -3452,7 +3452,7 @@ client.CallControl.List(
 </dl>
 </details>
 
-<details><summary><code>client.CallControl.Create(request) -> *v2.CallCreateResponse</code></summary>
+<details><summary><code>client.CallControl.Create(request) -> *v3.CallCreateResponse</code></summary>
 <dl>
 <dd>
 
@@ -3479,7 +3479,7 @@ Places a real, billable outbound PSTN call. Returns the call with its `uuid` for
 <dd>
 
 ```go
-request := &v2.CallRequest{
+request := &v3.CallRequest{
         From: "+1234567890",
         To: "+1987654321",
         CallbackURL: "https://examples.com/callback",
@@ -3563,7 +3563,7 @@ client.CallControl.Create(
 </dl>
 </details>
 
-<details><summary><code>client.CallControl.Get(ID) -> *v2.CallResponse</code></summary>
+<details><summary><code>client.CallControl.Get(ID) -> *v3.CallResponse</code></summary>
 <dl>
 <dd>
 
@@ -3590,7 +3590,7 @@ Returns the call identified by `id`, including its current event and timestamps.
 <dd>
 
 ```go
-request := &v2.GetCallControlRequest{
+request := &v3.GetCallControlRequest{
         ID: "id",
     }
 client.CallControl.Get(
@@ -3624,7 +3624,7 @@ client.CallControl.Get(
 </dl>
 </details>
 
-<details><summary><code>client.CallControl.Delete(ID) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.CallControl.Delete(ID) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -3651,7 +3651,7 @@ Ends the active call identified by `id` by hanging up. Irreversible — the call
 <dd>
 
 ```go
-request := &v2.DeleteCallControlRequest{
+request := &v3.DeleteCallControlRequest{
         ID: "id",
     }
 client.CallControl.Delete(
@@ -3685,7 +3685,7 @@ client.CallControl.Delete(
 </dl>
 </details>
 
-<details><summary><code>client.CallControl.Update(ID, request) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.CallControl.Update(ID, request) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -3712,7 +3712,7 @@ Updates the active call identified by `id`. Only the `tag` field can be changed.
 <dd>
 
 ```go
-request := &v2.UpdateCallRequest{
+request := &v3.UpdateCallRequest{
         ID: "id",
         Tag: "marketing-campaign",
     }
@@ -3755,7 +3755,7 @@ client.CallControl.Update(
 </dl>
 </details>
 
-<details><summary><code>client.CallControl.Answer(ID, request) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.CallControl.Answer(ID, request) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -3782,7 +3782,7 @@ Answers the inbound call identified by `id`. Optionally starts recording, post-c
 <dd>
 
 ```go
-request := &v2.CallAnswerRequest{
+request := &v3.CallAnswerRequest{
         ID: "id",
     }
 client.CallControl.Answer(
@@ -3836,7 +3836,7 @@ client.CallControl.Answer(
 <dl>
 <dd>
 
-**streamType:** `*v2.CallStreamType` — Direction of audio streamed to `stream_url`.
+**streamType:** `*v3.CallStreamType` — Direction of audio streamed to `stream_url`.
     
 </dd>
 </dl>
@@ -3844,7 +3844,7 @@ client.CallControl.Answer(
 <dl>
 <dd>
 
-**streamChannel:** `*v2.CallStreamChannel` — Audio channel streamed to `stream_url`.
+**streamChannel:** `*v3.CallStreamChannel` — Audio channel streamed to `stream_url`.
     
 </dd>
 </dl>
@@ -3856,7 +3856,7 @@ client.CallControl.Answer(
 </dl>
 </details>
 
-<details><summary><code>client.CallControl.Collect(ID, request) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.CallControl.Collect(ID, request) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -3883,7 +3883,7 @@ Collects DTMF keypad input from the caller on the active call identified by `id`
 <dd>
 
 ```go
-request := &v2.CallDtmfCollectRequest{
+request := &v3.CallDtmfCollectRequest{
         ID: "id",
     }
 client.CallControl.Collect(
@@ -3945,7 +3945,7 @@ client.CallControl.Collect(
 <dl>
 <dd>
 
-**prompt:** `*v2.CallDtmfCollectRequestPrompt` 
+**prompt:** `*v3.CallDtmfCollectRequestPrompt` 
 
 Prompt to play before collecting digits.
  Play a prerecorded audio file or use Wavix Text-To-Speech.
@@ -3961,7 +3961,7 @@ Prompt to play before collecting digits.
 </details>
 
 ## NumberValidator
-<details><summary><code>client.NumberValidator.Get() -> *v2.PhoneValidationResponse</code></summary>
+<details><summary><code>client.NumberValidator.Get() -> *v3.PhoneValidationResponse</code></summary>
 <dl>
 <dd>
 
@@ -3988,9 +3988,9 @@ Validates a single phone number and returns line type, carrier, portability, and
 <dd>
 
 ```go
-request := &v2.GetNumberValidatorRequest{
+request := &v3.GetNumberValidatorRequest{
         PhoneNumber: "971569483322",
-        Type: v2.PhoneNumberValidationTypeFormat,
+        Type: v3.PhoneNumberValidationTypeFormat,
     }
 client.NumberValidator.Get(
         context.TODO(),
@@ -4019,7 +4019,7 @@ client.NumberValidator.Get(
 <dl>
 <dd>
 
-**type_:** `*v2.PhoneNumberValidationType` — Depth of validation to perform. Accepts a `PhoneNumberValidationType` value.
+**type_:** `*v3.PhoneNumberValidationType` — Depth of validation to perform. Accepts a `PhoneNumberValidationType` value.
     
 </dd>
 </dl>
@@ -4031,7 +4031,7 @@ client.NumberValidator.Get(
 </dl>
 </details>
 
-<details><summary><code>client.NumberValidator.CreateBulk(request) -> *v2.NumberValidatorCreateBulkResponse</code></summary>
+<details><summary><code>client.NumberValidator.CreateBulk(request) -> *v3.NumberValidatorCreateBulkResponse</code></summary>
 <dl>
 <dd>
 
@@ -4058,12 +4058,12 @@ Validates a batch of phone numbers. When `async` is `true`, returns a `request_i
 <dd>
 
 ```go
-request := &v2.PhoneValidationRequest{
+request := &v3.PhoneValidationRequest{
         PhoneNumbers: []string{
             "971501390098",
             "971504359195",
         },
-        Type: v2.PhoneNumberValidationTypeFormat,
+        Type: v3.PhoneNumberValidationTypeFormat,
     }
 client.NumberValidator.CreateBulk(
         context.TODO(),
@@ -4092,7 +4092,7 @@ client.NumberValidator.CreateBulk(
 <dl>
 <dd>
 
-**type_:** `*v2.PhoneNumberValidationType` 
+**type_:** `*v3.PhoneNumberValidationType` 
     
 </dd>
 </dl>
@@ -4121,7 +4121,7 @@ client.NumberValidator.CreateBulk(
 </details>
 
 ## Voice campaigns
-<details><summary><code>client.VoiceCampaigns.Create(request) -> *v2.VoiceCampaignsCreateResponse</code></summary>
+<details><summary><code>client.VoiceCampaigns.Create(request) -> *v3.VoiceCampaignsCreateResponse</code></summary>
 <dl>
 <dd>
 
@@ -4148,8 +4148,8 @@ Launches a voice campaign that places a real outbound call using a pre-configure
 <dd>
 
 ```go
-request := &v2.CreateVoiceCampaignsRequest{
-        VoiceCampaign: &v2.VoiceCampaignResponse{
+request := &v3.CreateVoiceCampaignsRequest{
+        VoiceCampaign: &v3.VoiceCampaignResponse{
             CallflowID: 3212,
             CallerID: "13123310912",
             Contact: "16729923812",
@@ -4174,7 +4174,7 @@ client.VoiceCampaigns.Create(
 <dl>
 <dd>
 
-**voiceCampaign:** `*v2.VoiceCampaignResponse` 
+**voiceCampaign:** `*v3.VoiceCampaignResponse` 
     
 </dd>
 </dl>
@@ -4186,7 +4186,7 @@ client.VoiceCampaigns.Create(
 </dl>
 </details>
 
-<details><summary><code>client.VoiceCampaigns.Get(ID) -> *v2.VoiceCampaignsGetResponse</code></summary>
+<details><summary><code>client.VoiceCampaigns.Get(ID) -> *v3.VoiceCampaignsGetResponse</code></summary>
 <dl>
 <dd>
 
@@ -4213,7 +4213,7 @@ Returns the voice campaign identified by `id`, including its current status.
 <dd>
 
 ```go
-request := &v2.GetVoiceCampaignsRequest{
+request := &v3.GetVoiceCampaignsRequest{
         ID: 2321423,
     }
 client.VoiceCampaigns.Get(
@@ -4248,7 +4248,7 @@ client.VoiceCampaigns.Get(
 </details>
 
 ## Link shortener
-<details><summary><code>client.LinkShortener.Create(request) -> *v2.ShortLinkResponse</code></summary>
+<details><summary><code>client.LinkShortener.Create(request) -> *v3.ShortLinkResponse</code></summary>
 <dl>
 <dd>
 
@@ -4275,7 +4275,7 @@ Creates a short link that redirects to the target URL and tracks click metrics.
 <dd>
 
 ```go
-request := &v2.ShortLinkCreateRequest{
+request := &v3.ShortLinkCreateRequest{
         Link: "https://your-site.com/long-url",
     }
 client.LinkShortener.Create(
@@ -4342,7 +4342,7 @@ client.LinkShortener.Create(
 </details>
 
 ## Profile
-<details><summary><code>client.Profile.Get() -> *v2.ProfileResponse</code></summary>
+<details><summary><code>client.Profile.Get() -> *v3.ProfileResponse</code></summary>
 <dl>
 <dd>
 
@@ -4384,7 +4384,7 @@ client.Profile.Get(
 </dl>
 </details>
 
-<details><summary><code>client.Profile.Update(request) -> *v2.ProfileResponse</code></summary>
+<details><summary><code>client.Profile.Update(request) -> *v3.ProfileResponse</code></summary>
 <dl>
 <dd>
 
@@ -4411,7 +4411,7 @@ Updates the profile and billing details of the authenticated account.
 <dd>
 
 ```go
-request := &v2.ProfileUpdateRequest{}
+request := &v3.ProfileUpdateRequest{}
 client.Profile.Update(
         context.TODO(),
         request,
@@ -4511,7 +4511,7 @@ client.Profile.Update(
 <dl>
 <dd>
 
-**companyInfo:** `*v2.ProfileUpdateRequestCompanyInfo` 
+**companyInfo:** `*v3.ProfileUpdateRequestCompanyInfo` 
     
 </dd>
 </dl>
@@ -4524,7 +4524,7 @@ client.Profile.Update(
 </details>
 
 ## SubAccounts
-<details><summary><code>client.SubAccounts.List() -> *v2.SubAccountsListResponse</code></summary>
+<details><summary><code>client.SubAccounts.List() -> *v3.SubAccountsListResponse</code></summary>
 <dl>
 <dd>
 
@@ -4551,7 +4551,7 @@ Returns a paginated list of sub-accounts under the authenticated master account.
 <dd>
 
 ```go
-request := &v2.ListSubAccountsRequest{}
+request := &v3.ListSubAccountsRequest{}
 client.SubAccounts.List(
         context.TODO(),
         request,
@@ -4571,7 +4571,7 @@ client.SubAccounts.List(
 <dl>
 <dd>
 
-**status:** `*v2.ListSubAccountsRequestStatus` — Filters sub-accounts by status. One of `enabled` (the sub-account is active) or `disabled` (the sub-account is suspended).
+**status:** `*v3.ListSubAccountsRequestStatus` — Filters sub-accounts by status. One of `enabled` (the sub-account is active) or `disabled` (the sub-account is suspended).
     
 </dd>
 </dl>
@@ -4599,7 +4599,7 @@ client.SubAccounts.List(
 </dl>
 </details>
 
-<details><summary><code>client.SubAccounts.Create(request) -> *v2.SubOrganizationResponse</code></summary>
+<details><summary><code>client.SubAccounts.Create(request) -> *v3.SubOrganizationWithSecret</code></summary>
 <dl>
 <dd>
 
@@ -4611,7 +4611,7 @@ client.SubAccounts.List(
 <dl>
 <dd>
 
-Creates a sub-account under the authenticated master account. Returns the sub-account with its generated `api_key`.
+Creates a sub-account under the authenticated master account. Returns the sub-account with its generated `api_key`. Store the returned `api_key` securely. Later reads return `redacted_api_key`, and `api_key` on reads is deprecated.
 </dd>
 </dl>
 </dd>
@@ -4626,13 +4626,13 @@ Creates a sub-account under the authenticated master account. Returns the sub-ac
 <dd>
 
 ```go
-request := &v2.SubAccountsCreateRequest{
+request := &v3.SubAccountsCreateRequest{
         Name: "Company",
-        DefaultDestinations: &v2.SubAccountsCreateRequestDefaultDestinations{
-            SmsEndpoint: v2.String(
+        DefaultDestinations: &v3.SubAccountsCreateRequestDefaultDestinations{
+            SmsEndpoint: v3.String(
                 "https://examples.com/sms",
             ),
-            DlrEndpoint: v2.String(
+            DlrEndpoint: v3.String(
                 "https://examples.com/dlr",
             ),
         },
@@ -4664,7 +4664,7 @@ client.SubAccounts.Create(
 <dl>
 <dd>
 
-**defaultDestinations:** `*v2.SubAccountsCreateRequestDefaultDestinations` — Default webhook URLs for inbound messages and delivery reports.
+**defaultDestinations:** `*v3.SubAccountsCreateRequestDefaultDestinations` — Default webhook URLs for inbound messages and delivery reports.
     
 </dd>
 </dl>
@@ -4676,7 +4676,7 @@ client.SubAccounts.Create(
 </dl>
 </details>
 
-<details><summary><code>client.SubAccounts.Get(ID) -> *v2.SubOrganizationResponse</code></summary>
+<details><summary><code>client.SubAccounts.Get(ID) -> *v3.SubOrganizationResponse</code></summary>
 <dl>
 <dd>
 
@@ -4703,7 +4703,7 @@ Returns the sub-account identified by `id`.
 <dd>
 
 ```go
-request := &v2.GetSubAccountsRequest{
+request := &v3.GetSubAccountsRequest{
         ID: 123,
     }
 client.SubAccounts.Get(
@@ -4737,7 +4737,7 @@ client.SubAccounts.Get(
 </dl>
 </details>
 
-<details><summary><code>client.SubAccounts.Update(ID, request) -> *v2.SubOrganizationResponse</code></summary>
+<details><summary><code>client.SubAccounts.Update(ID, request) -> *v3.SubOrganizationResponse</code></summary>
 <dl>
 <dd>
 
@@ -4764,17 +4764,17 @@ Updates the sub-account identified by `id`. Only the provided fields are changed
 <dd>
 
 ```go
-request := &v2.SubAccountsUpdateRequest{
+request := &v3.SubAccountsUpdateRequest{
         ID: 123,
-        Name: v2.String(
+        Name: v3.String(
             "Updated Company Name",
         ),
-        Status: v2.SubAccountsUpdateRequestStatusEnabled.Ptr(),
-        DefaultDestinations: &v2.SubAccountsUpdateRequestDefaultDestinations{
-            SmsEndpoint: v2.String(
+        Status: v3.SubAccountsUpdateRequestStatusEnabled.Ptr(),
+        DefaultDestinations: &v3.SubAccountsUpdateRequestDefaultDestinations{
+            SmsEndpoint: v3.String(
                 "https://examples.com/sms",
             ),
-            DlrEndpoint: v2.String(
+            DlrEndpoint: v3.String(
                 "https://examples.com/dlr",
             ),
         },
@@ -4814,7 +4814,7 @@ client.SubAccounts.Update(
 <dl>
 <dd>
 
-**status:** `*v2.SubAccountsUpdateRequestStatus` — Status of the subaccount. One of `enabled` (the subaccount is active and can be used) or `disabled` (the subaccount is suspended).
+**status:** `*v3.SubAccountsUpdateRequestStatus` — Status of the subaccount. One of `enabled` (the subaccount is active and can be used) or `disabled` (the subaccount is suspended).
     
 </dd>
 </dl>
@@ -4822,7 +4822,7 @@ client.SubAccounts.Update(
 <dl>
 <dd>
 
-**defaultDestinations:** `*v2.SubAccountsUpdateRequestDefaultDestinations` — Default webhook URLs for inbound messages and delivery reports.
+**defaultDestinations:** `*v3.SubAccountsUpdateRequestDefaultDestinations` — Default webhook URLs for inbound messages and delivery reports.
     
 </dd>
 </dl>
@@ -4835,7 +4835,7 @@ client.SubAccounts.Update(
 </details>
 
 ## Billing Transactions
-<details><summary><code>client.Billing.Transactions.List() -> *v2.BillingTransactionListResponse</code></summary>
+<details><summary><code>client.Billing.Transactions.List() -> *v3.BillingTransactionListResponse</code></summary>
 <dl>
 <dd>
 
@@ -4863,22 +4863,22 @@ Returns a paginated list of billing transactions for the authenticated account w
 
 ```go
 request := &billing.ListTransactionsRequest{
-        FromDate: v2.MustParseDate(
+        FromDate: v3.MustParseDate(
             "2023-08-01",
         ),
-        ToDate: v2.MustParseDate(
+        ToDate: v3.MustParseDate(
             "2023-08-31",
         ),
-        DetailsContains: v2.String(
+        DetailsContains: v3.String(
             "monthly",
         ),
-        Payments: v2.Bool(
+        Payments: v3.Bool(
             true,
         ),
-        Page: v2.Int(
+        Page: v3.Int(
             1,
         ),
-        PerPage: v2.Int(
+        PerPage: v3.Int(
             25,
         ),
     }
@@ -4917,7 +4917,7 @@ client.Billing.Transactions.List(
 <dl>
 <dd>
 
-**type_:** `*v2.TransactionType` — Filters transactions by type. Accepts a `TransactionType` value.
+**type_:** `*v3.TransactionType` — Filters transactions by type. Accepts a `TransactionType` value.
     
 </dd>
 </dl>
@@ -4962,7 +4962,7 @@ client.Billing.Transactions.List(
 </details>
 
 ## Billing Invoices
-<details><summary><code>client.Billing.Invoices.List() -> *v2.InvoiceListResponse</code></summary>
+<details><summary><code>client.Billing.Invoices.List() -> *v3.InvoiceListResponse</code></summary>
 <dl>
 <dd>
 
@@ -4990,10 +4990,10 @@ Returns the auto-generated financial statements for the authenticated account, p
 
 ```go
 request := &billing.ListInvoicesRequest{
-        Page: v2.Int(
+        Page: v3.Int(
             1,
         ),
-        PerPage: v2.Int(
+        PerPage: v3.Int(
             25,
         ),
     }
@@ -5098,7 +5098,7 @@ client.Billing.Invoices.Download(
 </details>
 
 ## Buy Countries
-<details><summary><code>client.Buy.Countries.List() -> *v2.CountryListResponse</code></summary>
+<details><summary><code>client.Buy.Countries.List() -> *v3.CountryListResponse</code></summary>
 <dl>
 <dd>
 
@@ -5158,7 +5158,7 @@ client.Buy.Countries.List(
 </details>
 
 ## Buy Regions
-<details><summary><code>client.Buy.Regions.List(CountryID) -> *v2.RegionListResponse</code></summary>
+<details><summary><code>client.Buy.Regions.List(CountryID) -> *v3.RegionListResponse</code></summary>
 <dl>
 <dd>
 
@@ -5228,7 +5228,7 @@ client.Buy.Regions.List(
 </details>
 
 ## Buy Cities
-<details><summary><code>client.Buy.Cities.List(CountryID) -> *v2.CityListResponse</code></summary>
+<details><summary><code>client.Buy.Cities.List(CountryID) -> *v3.CityListResponse</code></summary>
 <dl>
 <dd>
 
@@ -5299,7 +5299,7 @@ client.Buy.Cities.List(
 </details>
 
 ## Buy RegionCities
-<details><summary><code>client.Buy.RegionCities.List(CountryID, RegionID) -> *v2.CityListResponse</code></summary>
+<details><summary><code>client.Buy.RegionCities.List(CountryID, RegionID) -> *v3.CityListResponse</code></summary>
 <dl>
 <dd>
 
@@ -5378,7 +5378,7 @@ client.Buy.RegionCities.List(
 </details>
 
 ## Buy Numbers
-<details><summary><code>client.Buy.Numbers.List(CountryID, CityID) -> *v2.AvailableNumberListResponse</code></summary>
+<details><summary><code>client.Buy.Numbers.List(CountryID, CityID) -> *v3.AvailableNumberListResponse</code></summary>
 <dl>
 <dd>
 
@@ -5473,7 +5473,7 @@ client.Buy.Numbers.List(
 </details>
 
 ## CallControl Streams
-<details><summary><code>client.CallControl.Streams.Create(CallID, request) -> *v2.CallStreamResponse</code></summary>
+<details><summary><code>client.CallControl.Streams.Create(CallID, request) -> *v3.CallStreamResponse</code></summary>
 <dl>
 <dd>
 
@@ -5503,8 +5503,8 @@ Starts streaming the audio of the call identified by `call_id` to the WebSocket 
 request := &callcontrol.CallStreamCreateRequest{
         CallID: "call_id",
         StreamURL: "wss://examples.com/stream",
-        StreamType: v2.CallStreamTypeOneway,
-        StreamChannel: v2.CallStreamChannelInbound,
+        StreamType: v3.CallStreamTypeOneway,
+        StreamChannel: v3.CallStreamChannelInbound,
     }
 client.CallControl.Streams.Create(
         context.TODO(),
@@ -5541,7 +5541,7 @@ client.CallControl.Streams.Create(
 <dl>
 <dd>
 
-**streamType:** `*v2.CallStreamType` — Direction of audio streamed to `stream_url`.
+**streamType:** `*v3.CallStreamType` — Direction of audio streamed to `stream_url`.
     
 </dd>
 </dl>
@@ -5549,7 +5549,7 @@ client.CallControl.Streams.Create(
 <dl>
 <dd>
 
-**streamChannel:** `*v2.CallStreamChannel` — Audio channel streamed to `stream_url`.
+**streamChannel:** `*v3.CallStreamChannel` — Audio channel streamed to `stream_url`.
     
 </dd>
 </dl>
@@ -5561,7 +5561,7 @@ client.CallControl.Streams.Create(
 </dl>
 </details>
 
-<details><summary><code>client.CallControl.Streams.Delete(CallID, ID) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.CallControl.Streams.Delete(CallID, ID) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -5632,7 +5632,7 @@ client.CallControl.Streams.Delete(
 </details>
 
 ## CallControl Audio
-<details><summary><code>client.CallControl.Audio.Play(ID, request) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.CallControl.Audio.Play(ID, request) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -5702,7 +5702,7 @@ client.CallControl.Audio.Play(
 </dl>
 </details>
 
-<details><summary><code>client.CallControl.Audio.Stop(ID) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.CallControl.Audio.Stop(ID) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -5764,7 +5764,7 @@ client.CallControl.Audio.Stop(
 </details>
 
 ## Cdrs Transcription
-<details><summary><code>client.Cdrs.Transcription.Get(CallID) -> *v2.CdrTranscriptionResponse</code></summary>
+<details><summary><code>client.Cdrs.Transcription.Get(CallID) -> *v3.CdrTranscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -5826,7 +5826,7 @@ client.Cdrs.Transcription.Get(
 </details>
 
 ## LinkShortener Metrics
-<details><summary><code>client.LinkShortener.Metrics.List() -> *v2.ShortLinkMetricsResponse</code></summary>
+<details><summary><code>client.LinkShortener.Metrics.List() -> *v3.ShortLinkMetricsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5854,22 +5854,22 @@ Returns per-click metrics for short links, including device, location, and campa
 
 ```go
 request := &linkshortener.ListMetricsRequest{
-        From: v2.MustParseDate(
+        From: v3.MustParseDate(
             "2023-05-01",
         ),
-        To: v2.MustParseDate(
+        To: v3.MustParseDate(
             "2023-05-31",
         ),
-        Phone: v2.String(
+        Phone: v3.String(
             "1872025555",
         ),
-        UtmCampaign: v2.String(
+        UtmCampaign: v3.String(
             "summer",
         ),
-        Page: v2.Int(
+        Page: v3.Int(
             1,
         ),
-        PerPage: v2.Int(
+        PerPage: v3.Int(
             25,
         ),
     }
@@ -5945,7 +5945,7 @@ client.LinkShortener.Metrics.List(
 </details>
 
 ## NumberValidator Results
-<details><summary><code>client.NumberValidator.Results.Get(RequestID) -> *v2.PhoneValidationBatchResultResponse</code></summary>
+<details><summary><code>client.NumberValidator.Results.Get(RequestID) -> *v3.PhoneValidationBatchResultResponse</code></summary>
 <dl>
 <dd>
 
@@ -6007,7 +6007,7 @@ client.NumberValidator.Results.Get(
 </details>
 
 ## Numbers Papers
-<details><summary><code>client.Numbers.Papers.Upload(request) -> []*v2.NumberDocument</code></summary>
+<details><summary><code>client.Numbers.Papers.Upload(request) -> []*v3.NumberDocument</code></summary>
 <dl>
 <dd>
 
@@ -6044,7 +6044,7 @@ request := &numbers.UploadPapersRequest{
             "",
         ),
         DidIDs: "did_ids",
-        DocID: v2.DocumentTypeID,
+        DocID: v3.DocumentTypeID,
     }
 client.Numbers.Papers.Upload(
         context.TODO(),
@@ -6063,7 +6063,7 @@ client.Numbers.Papers.Upload(
 </details>
 
 ## Profile Config
-<details><summary><code>client.Profile.Config.Get() -> *v2.ProfileConfigResponse</code></summary>
+<details><summary><code>client.Profile.Config.Get() -> *v3.ProfileConfigResponse</code></summary>
 <dl>
 <dd>
 
@@ -6106,7 +6106,7 @@ client.Profile.Config.Get(
 </details>
 
 ## SmsAndMms SenderIDs
-<details><summary><code>client.SmsAndMms.SenderIDs.List() -> *v2.SenderIDListResponse</code></summary>
+<details><summary><code>client.SmsAndMms.SenderIDs.List() -> *v3.SenderIDListResponse</code></summary>
 <dl>
 <dd>
 
@@ -6148,7 +6148,7 @@ client.SmsAndMms.SenderIDs.List(
 </dl>
 </details>
 
-<details><summary><code>client.SmsAndMms.SenderIDs.Create(request) -> *v2.SenderIDDetails</code></summary>
+<details><summary><code>client.SmsAndMms.SenderIDs.Create(request) -> *v3.SenderIDDetails</code></summary>
 <dl>
 <dd>
 
@@ -6177,7 +6177,7 @@ Creates a Sender ID. Use the 10DLC API to create Sender IDs in the US. Registeri
 ```go
 request := &smsandmms.SenderIDCreateRequest{
         SenderID: "Wavix",
-        Type: v2.SenderIDTypeNumeric,
+        Type: v3.SenderIDTypeNumeric,
         Countries: []string{
             "countries",
         },
@@ -6210,7 +6210,7 @@ client.SmsAndMms.SenderIDs.Create(
 <dl>
 <dd>
 
-**type_:** `*v2.SenderIDType` 
+**type_:** `*v3.SenderIDType` 
     
 </dd>
 </dl>
@@ -6254,7 +6254,7 @@ client.SmsAndMms.SenderIDs.Create(
 </dl>
 </details>
 
-<details><summary><code>client.SmsAndMms.SenderIDs.Get(ID) -> *v2.SenderIDResponse</code></summary>
+<details><summary><code>client.SmsAndMms.SenderIDs.Get(ID) -> *v3.SenderIDResponse</code></summary>
 <dl>
 <dd>
 
@@ -6315,7 +6315,7 @@ client.SmsAndMms.SenderIDs.Get(
 </dl>
 </details>
 
-<details><summary><code>client.SmsAndMms.SenderIDs.Delete(ID) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.SmsAndMms.SenderIDs.Delete(ID) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -6377,7 +6377,7 @@ client.SmsAndMms.SenderIDs.Delete(
 </details>
 
 ## SmsAndMms OptOuts
-<details><summary><code>client.SmsAndMms.OptOuts.List() -> *v2.OptOutsListResponse</code></summary>
+<details><summary><code>client.SmsAndMms.OptOuts.List() -> *v3.OptOutsListResponse</code></summary>
 <dl>
 <dd>
 
@@ -6405,19 +6405,19 @@ Returns a paginated list of phone numbers that have opted out of receiving messa
 
 ```go
 request := &smsandmms.ListOptOutsRequest{
-        SenderID: v2.String(
+        SenderID: v3.String(
             "MySender",
         ),
-        CampaignID: v2.String(
+        CampaignID: v3.String(
             "C123456",
         ),
-        CreatedAfter: v2.Time(
-            v2.MustParseDate(
+        CreatedAfter: v3.Time(
+            v3.MustParseDate(
                 "2024-01-01",
             ),
         ),
-        CreatedBefore: v2.Time(
-            v2.MustParseDate(
+        CreatedBefore: v3.Time(
+            v3.MustParseDate(
                 "2024-12-31",
             ),
         ),
@@ -6493,7 +6493,7 @@ client.SmsAndMms.OptOuts.List(
 </dl>
 </details>
 
-<details><summary><code>client.SmsAndMms.OptOuts.Create(request) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.SmsAndMms.OptOuts.Create(request) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -6521,9 +6521,9 @@ Opts a phone number out of receiving messages from a Sender ID, a 10DLC campaign
 
 ```go
 request := &smsandmms.OptOutCreateRequest{
-        OptOut: &v2.OptOut{
+        OptOut: &v3.OptOut{
             Number: "16419252149",
-            SenderID: v2.String(
+            SenderID: v3.String(
                 "15072429497",
             ),
         },
@@ -6547,7 +6547,7 @@ client.SmsAndMms.OptOuts.Create(
 <dl>
 <dd>
 
-**optOut:** `*v2.OptOut` 
+**optOut:** `*v3.OptOut` 
     
 </dd>
 </dl>
@@ -6560,7 +6560,7 @@ client.SmsAndMms.OptOuts.Create(
 </details>
 
 ## SmsAndMms Messages
-<details><summary><code>client.SmsAndMms.Messages.List() -> *v2.MessageListResponse</code></summary>
+<details><summary><code>client.SmsAndMms.Messages.List() -> *v3.MessageListResponse</code></summary>
 <dl>
 <dd>
 
@@ -6588,30 +6588,30 @@ Returns a paginated list of SMS and MMS messages for the authenticated account, 
 
 ```go
 request := &smsandmms.ListMessagesRequest{
-        SentAfter: v2.Time(
-            v2.MustParseDate(
+        SentAfter: v3.Time(
+            v3.MustParseDate(
                 "2023-04-10",
             ),
         ),
-        SentBefore: v2.Time(
-            v2.MustParseDate(
+        SentBefore: v3.Time(
+            v3.MustParseDate(
                 "2023-04-13",
             ),
         ),
         Type: "outbound",
-        From: v2.String(
+        From: v3.String(
             "15072429497",
         ),
-        To: v2.String(
+        To: v3.String(
             "16419252149",
         ),
-        Tag: v2.String(
+        Tag: v3.String(
             "campaignX",
         ),
-        Page: v2.Int(
+        Page: v3.Int(
             2,
         ),
-        PerPage: v2.Int(
+        PerPage: v3.Int(
             50,
         ),
     }
@@ -6674,7 +6674,7 @@ client.SmsAndMms.Messages.List(
 <dl>
 <dd>
 
-**status:** `*v2.MessageDeliveryStatus` — Filters messages by delivery status. Accepts a `MessageDeliveryStatus` value.
+**status:** `*v3.MessageDeliveryStatus` — Filters messages by delivery status. Accepts a `MessageDeliveryStatus` value.
     
 </dd>
 </dl>
@@ -6718,7 +6718,7 @@ client.SmsAndMms.Messages.List(
 </dl>
 </details>
 
-<details><summary><code>client.SmsAndMms.Messages.Send(request) -> *v2.SendMessagesResponse</code></summary>
+<details><summary><code>client.SmsAndMms.Messages.Send(request) -> *v3.SendMessagesResponse</code></summary>
 <dl>
 <dd>
 
@@ -6748,16 +6748,16 @@ Sends an SMS or MMS message. MMS is supported for U.S. numbers only. Track deliv
 request := &smsandmms.SendMessagesRequest{
         From: "Wavix",
         To: "+447537151866",
-        MessageBody: &v2.MessageBody{
+        MessageBody: &v3.MessageBody{
             Text: "Hi there, this is a message from Wavix",
         },
-        CallbackURL: v2.String(
+        CallbackURL: v3.String(
             "https://you-site.com/webhook",
         ),
-        Validity: v2.Int(
+        Validity: v3.Int(
             3600,
         ),
-        Tag: v2.String(
+        Tag: v3.String(
             "Fall sale",
         ),
     }
@@ -6796,7 +6796,7 @@ client.SmsAndMms.Messages.Send(
 <dl>
 <dd>
 
-**messageBody:** `*v2.MessageBody` 
+**messageBody:** `*v3.MessageBody` 
     
 </dd>
 </dl>
@@ -6832,7 +6832,7 @@ client.SmsAndMms.Messages.Send(
 </dl>
 </details>
 
-<details><summary><code>client.SmsAndMms.Messages.Get(ID) -> *v2.MessageResponse</code></summary>
+<details><summary><code>client.SmsAndMms.Messages.Get(ID) -> *v3.MessageResponse</code></summary>
 <dl>
 <dd>
 
@@ -6921,20 +6921,20 @@ Streams matching SMS and MMS messages as newline-delimited JSON (NDJSON), one me
 
 ```go
 request := &smsandmms.ListAllMessagesRequest{
-        SentAfter: v2.String(
+        SentAfter: v3.String(
             "2023-04-10T00:00:00",
         ),
-        SentBefore: v2.String(
+        SentBefore: v3.String(
             "2023-04-13T23:59:59",
         ),
         Type: "outbound",
-        From: v2.String(
+        From: v3.String(
             "15072429497",
         ),
-        To: v2.String(
+        To: v3.String(
             "16419252149",
         ),
-        Tag: v2.String(
+        Tag: v3.String(
             "campaignX",
         ),
     }
@@ -6997,7 +6997,7 @@ client.SmsAndMms.Messages.ListAll(
 <dl>
 <dd>
 
-**status:** `*v2.MessageDeliveryStatus` — Filters messages by delivery status. Accepts a `MessageDeliveryStatus` value.
+**status:** `*v3.MessageDeliveryStatus` — Filters messages by delivery status. Accepts a `MessageDeliveryStatus` value.
     
 </dd>
 </dl>
@@ -7088,7 +7088,7 @@ client.SpeechAnalytics.File.Get(
 </details>
 
 ## SubAccounts Transactions
-<details><summary><code>client.SubAccounts.Transactions.List(ID) -> *v2.SubAccountsTransactionsListResponse</code></summary>
+<details><summary><code>client.SubAccounts.Transactions.List(ID) -> *v3.SubAccountsTransactionsListResponse</code></summary>
 <dl>
 <dd>
 
@@ -7117,21 +7117,21 @@ Returns a paginated list of billing transactions for the sub-account identified 
 ```go
 request := &subaccounts.ListTransactionsRequest{
         ID: 123,
-        FromDate: v2.MustParseDate(
+        FromDate: v3.MustParseDate(
             "2023-01-01",
         ),
-        ToDate: v2.MustParseDate(
+        ToDate: v3.MustParseDate(
             "2023-12-31",
         ),
         Type: []*int{
-            v2.Int(
+            v3.Int(
                 1,
             ),
         },
-        Page: v2.Int(
+        Page: v3.Int(
             1,
         ),
-        PerPage: v2.Int(
+        PerPage: v3.Int(
             25,
         ),
     }
@@ -7207,7 +7207,7 @@ client.SubAccounts.Transactions.List(
 </details>
 
 ## TenDlc Brands
-<details><summary><code>client.TenDlc.Brands.List() -> *v2.TenDlcBrandListResponse</code></summary>
+<details><summary><code>client.TenDlc.Brands.List() -> *v3.TenDlcBrandListResponse</code></summary>
 <dl>
 <dd>
 
@@ -7235,40 +7235,40 @@ Returns a paginated list of 10DLC Brands for the authenticated account, filtered
 
 ```go
 request := &tendlc.ListBrandsRequest{
-        DbaName: v2.String(
+        DbaName: v3.String(
             "Brand",
         ),
-        CompanyName: v2.String(
+        CompanyName: v3.String(
             "Company",
         ),
-        EntityType: v2.String(
+        EntityType: v3.String(
             "PRIVATE_PROFIT",
         ),
-        Status: v2.String(
+        Status: v3.String(
             "VERIFIED",
         ),
-        Country: v2.String(
+        Country: v3.String(
             "US",
         ),
-        ShowDeleted: v2.Bool(
+        ShowDeleted: v3.Bool(
             false,
         ),
-        EinTaxid: v2.String(
+        EinTaxid: v3.String(
             "999999999",
         ),
-        Mock: v2.Bool(
+        Mock: v3.Bool(
             false,
         ),
-        CreatedBefore: v2.String(
+        CreatedBefore: v3.String(
             "2024-08-22",
         ),
-        CreatedAfter: v2.String(
+        CreatedAfter: v3.String(
             "2024-08-22",
         ),
-        Page: v2.Int(
+        Page: v3.Int(
             1,
         ),
-        PerPage: v2.Int(
+        PerPage: v3.Int(
             25,
         ),
     }
@@ -7391,7 +7391,7 @@ client.TenDlc.Brands.List(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Brands.Create(request) -> *v2.TenDlcBrand</code></summary>
+<details><summary><code>client.TenDlc.Brands.Create(request) -> *v3.TenDlcBrand</code></summary>
 <dl>
 <dd>
 
@@ -7418,8 +7418,8 @@ Registers a 10DLC Brand. Submits the company's legal identity data (EIN/Tax ID, 
 <dd>
 
 ```go
-request := &v2.TenDlcBrandCreateRequest{
-        TenDlcBrandCreateRequestZero: &v2.TenDlcBrandCreateRequestZero{},
+request := &v3.TenDlcBrandCreateRequest{
+        TenDlcBrandCreateRequestZero: &v3.TenDlcBrandCreateRequestZero{},
     }
 client.TenDlc.Brands.Create(
         context.TODO(),
@@ -7440,7 +7440,7 @@ client.TenDlc.Brands.Create(
 <dl>
 <dd>
 
-**request:** `*v2.TenDlcBrandCreateRequest` 
+**request:** `*v3.TenDlcBrandCreateRequest` 
     
 </dd>
 </dl>
@@ -7452,7 +7452,7 @@ client.TenDlc.Brands.Create(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Brands.Get(BrandID) -> *v2.TenDlcBrand</code></summary>
+<details><summary><code>client.TenDlc.Brands.Get(BrandID) -> *v3.TenDlcBrand</code></summary>
 <dl>
 <dd>
 
@@ -7513,7 +7513,7 @@ client.TenDlc.Brands.Get(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Brands.Update(BrandID, request) -> *v2.TenDlcBrand</code></summary>
+<details><summary><code>client.TenDlc.Brands.Update(BrandID, request) -> *v3.TenDlcBrand</code></summary>
 <dl>
 <dd>
 
@@ -7738,7 +7738,7 @@ Business segment the Brand operates in. One of:
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Brands.Delete(BrandID) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.TenDlc.Brands.Delete(BrandID) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -7799,7 +7799,7 @@ client.TenDlc.Brands.Delete(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Brands.QualifyUsecase(BrandID, UseCase) -> *v2.TenDlcBrandQualificationResult</code></summary>
+<details><summary><code>client.TenDlc.Brands.QualifyUsecase(BrandID, UseCase) -> *v3.TenDlcBrandQualificationResult</code></summary>
 <dl>
 <dd>
 
@@ -7870,7 +7870,7 @@ client.TenDlc.Brands.QualifyUsecase(
 </details>
 
 ## TenDlc BrandAppeals
-<details><summary><code>client.TenDlc.BrandAppeals.List(BrandID) -> []*v2.TenDlcBrandAppeal</code></summary>
+<details><summary><code>client.TenDlc.BrandAppeals.List(BrandID) -> []*v3.TenDlcBrandAppeal</code></summary>
 <dl>
 <dd>
 
@@ -7931,7 +7931,7 @@ client.TenDlc.BrandAppeals.List(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.BrandAppeals.Create(BrandID, request) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.TenDlc.BrandAppeals.Create(BrandID, request) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -8026,7 +8026,7 @@ client.TenDlc.BrandAppeals.Create(
 </details>
 
 ## TenDlc BrandEvidence
-<details><summary><code>client.TenDlc.BrandEvidence.List(BrandID) -> *v2.ListBrandEvidenceResponse</code></summary>
+<details><summary><code>client.TenDlc.BrandEvidence.List(BrandID) -> *v3.ListBrandEvidenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -8087,7 +8087,7 @@ client.TenDlc.BrandEvidence.List(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.BrandEvidence.Upload(BrandID, request) -> *v2.TenDlcBrandEvidence</code></summary>
+<details><summary><code>client.TenDlc.BrandEvidence.Upload(BrandID, request) -> *v3.TenDlcBrandEvidence</code></summary>
 <dl>
 <dd>
 
@@ -8221,7 +8221,7 @@ client.TenDlc.BrandEvidence.Get(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.BrandEvidence.Delete(BrandID, ID) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.TenDlc.BrandEvidence.Delete(BrandID, ID) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -8292,7 +8292,7 @@ client.TenDlc.BrandEvidence.Delete(
 </details>
 
 ## TenDlc BrandVettings
-<details><summary><code>client.TenDlc.BrandVettings.List(BrandID) -> []*v2.TenDlcBrandVetting</code></summary>
+<details><summary><code>client.TenDlc.BrandVettings.List(BrandID) -> []*v3.TenDlcBrandVetting</code></summary>
 <dl>
 <dd>
 
@@ -8353,7 +8353,7 @@ client.TenDlc.BrandVettings.List(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.BrandVettings.Create(BrandID, request) -> *v2.TenDlcBrandVetting</code></summary>
+<details><summary><code>client.TenDlc.BrandVettings.Create(BrandID, request) -> *v3.TenDlcBrandVetting</code></summary>
 <dl>
 <dd>
 
@@ -8432,7 +8432,7 @@ client.TenDlc.BrandVettings.Create(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.BrandVettings.Import(BrandID, request) -> *v2.TenDlcBrandVetting</code></summary>
+<details><summary><code>client.TenDlc.BrandVettings.Import(BrandID, request) -> *v3.TenDlcBrandVetting</code></summary>
 <dl>
 <dd>
 
@@ -8521,7 +8521,7 @@ client.TenDlc.BrandVettings.Import(
 </details>
 
 ## TenDlc BrandVettingAppeals
-<details><summary><code>client.TenDlc.BrandVettingAppeals.List(BrandID) -> []*v2.TenDlcBrandVettingAppeal</code></summary>
+<details><summary><code>client.TenDlc.BrandVettingAppeals.List(BrandID) -> []*v3.TenDlcBrandVettingAppeal</code></summary>
 <dl>
 <dd>
 
@@ -8582,7 +8582,7 @@ client.TenDlc.BrandVettingAppeals.List(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.BrandVettingAppeals.Create(BrandID, request) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.TenDlc.BrandVettingAppeals.Create(BrandID, request) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -8690,7 +8690,7 @@ client.TenDlc.BrandVettingAppeals.Create(
 </details>
 
 ## TenDlc Campaigns
-<details><summary><code>client.TenDlc.Campaigns.List() -> *v2.TenDlcCampaignListResponse</code></summary>
+<details><summary><code>client.TenDlc.Campaigns.List() -> *v3.TenDlcCampaignListResponse</code></summary>
 <dl>
 <dd>
 
@@ -8718,32 +8718,32 @@ Returns a paginated list of 10DLC Campaigns for the authenticated account, filte
 
 ```go
 request := &tendlc.ListCampaignsRequest{
-        Name: v2.String(
+        Name: v3.String(
             "Name",
         ),
-        Usecase: v2.String(
+        Usecase: v3.String(
             "2FA",
         ),
-        Status: v2.String(
+        Status: v3.String(
             "APPROVED",
         ),
-        Mock: v2.Bool(
+        Mock: v3.Bool(
             true,
         ),
-        CreatedBefore: v2.Time(
-            v2.MustParseDate(
+        CreatedBefore: v3.Time(
+            v3.MustParseDate(
                 "2024-08-22",
             ),
         ),
-        CreatedAfter: v2.Time(
-            v2.MustParseDate(
+        CreatedAfter: v3.Time(
+            v3.MustParseDate(
                 "2024-08-22",
             ),
         ),
-        Page: v2.Int(
+        Page: v3.Int(
             1,
         ),
-        PerPage: v2.Int(
+        PerPage: v3.Int(
             25,
         ),
     }
@@ -8834,7 +8834,7 @@ client.TenDlc.Campaigns.List(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Campaigns.ListByBrand(BrandID) -> *v2.TenDlcCampaignListResponse</code></summary>
+<details><summary><code>client.TenDlc.Campaigns.ListByBrand(BrandID) -> *v3.TenDlcCampaignListResponse</code></summary>
 <dl>
 <dd>
 
@@ -8863,32 +8863,32 @@ Returns a paginated list of 10DLC Campaigns associated with the 10DLC Brand iden
 ```go
 request := &tendlc.ListByBrandCampaignsRequest{
         BrandID: "BM20QP9",
-        Name: v2.String(
+        Name: v3.String(
             "Name",
         ),
-        Usecase: v2.String(
+        Usecase: v3.String(
             "2FA",
         ),
-        Status: v2.String(
+        Status: v3.String(
             "APPROVED",
         ),
-        Mock: v2.Bool(
+        Mock: v3.Bool(
             true,
         ),
-        CreatedBefore: v2.Time(
-            v2.MustParseDate(
+        CreatedBefore: v3.Time(
+            v3.MustParseDate(
                 "2024-08-22",
             ),
         ),
-        CreatedAfter: v2.Time(
-            v2.MustParseDate(
+        CreatedAfter: v3.Time(
+            v3.MustParseDate(
                 "2024-08-22",
             ),
         ),
-        Page: v2.Int(
+        Page: v3.Int(
             1,
         ),
-        PerPage: v2.Int(
+        PerPage: v3.Int(
             25,
         ),
     }
@@ -8987,7 +8987,7 @@ client.TenDlc.Campaigns.ListByBrand(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Campaigns.Create(BrandID, request) -> *v2.TenDlcCampaign</code></summary>
+<details><summary><code>client.TenDlc.Campaigns.Create(BrandID, request) -> *v3.TenDlcCampaign</code></summary>
 <dl>
 <dd>
 
@@ -9021,10 +9021,10 @@ request := &tendlc.TenDlcCampaignCreateRequest{
         AutoRenewal: false,
         DirectLending: false,
         EmbeddedLinks: false,
-        EmbeddedPhones: v2.Bool(
+        EmbeddedPhones: v3.Bool(
             false,
         ),
-        EmbeddedLinkSample: v2.String(
+        EmbeddedLinkSample: v3.String(
             "https://site.com/verify",
         ),
         Description: "Our campaign aims to …",
@@ -9040,21 +9040,21 @@ request := &tendlc.TenDlcCampaignCreateRequest{
         OptoutMessage: "You are now opted out and will receive no further messages",
         Name: "My first campaign",
         Sample1: "Your verification code is XXXXXX",
-        Sample2: v2.String(
+        Sample2: v3.String(
             "XXXX is your verification code",
         ),
-        Sample3: v2.String(
+        Sample3: v3.String(
             "Your code is XXXXXX, valid for 10 minutes",
         ),
-        Sample4: v2.String(
+        Sample4: v3.String(
             "Use code XXXXXX to confirm your login",
         ),
-        Sample5: v2.String(
+        Sample5: v3.String(
             "XXXXXX is your one-time passcode",
         ),
         Mock: false,
         Usecase: "2FA",
-        PrivacyPolicy: v2.String(
+        PrivacyPolicy: v3.String(
             "https://site.com/privacy-policy",
         ),
         TermsConditions: "https://site.com/terms-and-conditions",
@@ -9314,7 +9314,7 @@ client.TenDlc.Campaigns.Create(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Campaigns.Get(BrandID, CampaignID) -> *v2.TenDlcCampaign</code></summary>
+<details><summary><code>client.TenDlc.Campaigns.Get(BrandID, CampaignID) -> *v3.TenDlcCampaign</code></summary>
 <dl>
 <dd>
 
@@ -9384,7 +9384,7 @@ client.TenDlc.Campaigns.Get(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Campaigns.Update(BrandID, CampaignID, request) -> *v2.TenDlcCampaign</code></summary>
+<details><summary><code>client.TenDlc.Campaigns.Update(BrandID, CampaignID, request) -> *v3.TenDlcCampaign</code></summary>
 <dl>
 <dd>
 
@@ -9662,7 +9662,7 @@ client.TenDlc.Campaigns.Update(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Campaigns.Delete(BrandID, CampaignID) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.TenDlc.Campaigns.Delete(BrandID, CampaignID) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -9732,7 +9732,7 @@ client.TenDlc.Campaigns.Delete(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Campaigns.Nudge(BrandID, CampaignID, request) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.TenDlc.Campaigns.Nudge(BrandID, CampaignID, request) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -9825,7 +9825,7 @@ client.TenDlc.Campaigns.Nudge(
 </details>
 
 ## TenDlc Subscriptions
-<details><summary><code>client.TenDlc.Subscriptions.List() -> []*v2.TenDlcEventSubscription</code></summary>
+<details><summary><code>client.TenDlc.Subscriptions.List() -> []*v3.TenDlcEventSubscription</code></summary>
 <dl>
 <dd>
 
@@ -9867,7 +9867,7 @@ client.TenDlc.Subscriptions.List(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Subscriptions.Create(request) -> *v2.TenDlcEventSubscription</code></summary>
+<details><summary><code>client.TenDlc.Subscriptions.Create(request) -> *v3.TenDlcEventSubscription</code></summary>
 <dl>
 <dd>
 
@@ -9894,7 +9894,7 @@ Registers a callback URL to receive Wavix 10DLC event notifications.
 <dd>
 
 ```go
-request := &v2.TenDlcEventSubscription{
+request := &v3.TenDlcEventSubscription{
         SubscriptionCategory: "brand",
         URL: "https://webhook.url",
     }
@@ -9917,7 +9917,7 @@ client.TenDlc.Subscriptions.Create(
 <dl>
 <dd>
 
-**request:** `*v2.TenDlcEventSubscription` 
+**request:** `*v3.TenDlcEventSubscription` 
     
 </dd>
 </dl>
@@ -9929,7 +9929,7 @@ client.TenDlc.Subscriptions.Create(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.Subscriptions.Delete() -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.TenDlc.Subscriptions.Delete() -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -9991,7 +9991,7 @@ client.TenDlc.Subscriptions.Delete(
 </details>
 
 ## TenDlc CampaignNumbers
-<details><summary><code>client.TenDlc.CampaignNumbers.Link(BrandID, CampaignID, Number) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.TenDlc.CampaignNumbers.Link(BrandID, CampaignID, Number) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -10070,7 +10070,7 @@ client.TenDlc.CampaignNumbers.Link(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.CampaignNumbers.Unlink(BrandID, CampaignID, Number) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.TenDlc.CampaignNumbers.Unlink(BrandID, CampaignID, Number) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -10149,7 +10149,7 @@ client.TenDlc.CampaignNumbers.Unlink(
 </dl>
 </details>
 
-<details><summary><code>client.TenDlc.CampaignNumbers.List(BrandID, CampaignID) -> *v2.TenDlcCampaignNumberListResponse</code></summary>
+<details><summary><code>client.TenDlc.CampaignNumbers.List(BrandID, CampaignID) -> *v3.TenDlcCampaignNumberListResponse</code></summary>
 <dl>
 <dd>
 
@@ -10220,7 +10220,7 @@ client.TenDlc.CampaignNumbers.List(
 </details>
 
 ## TwoFa Verification
-<details><summary><code>client.TwoFa.Verification.Create(request) -> *v2.TwoFactorVerificationResponse</code></summary>
+<details><summary><code>client.TwoFa.Verification.Create(request) -> *v3.TwoFactorVerificationResponse</code></summary>
 <dl>
 <dd>
 
@@ -10304,7 +10304,7 @@ client.TwoFa.Verification.Create(
 </dl>
 </details>
 
-<details><summary><code>client.TwoFa.Verification.Resend(SessionID, request) -> *v2.TwoFactorVerificationResendResponse</code></summary>
+<details><summary><code>client.TwoFa.Verification.Resend(SessionID, request) -> *v3.TwoFactorVerificationResendResponse</code></summary>
 <dl>
 <dd>
 
@@ -10374,7 +10374,7 @@ client.TwoFa.Verification.Resend(
 </dl>
 </details>
 
-<details><summary><code>client.TwoFa.Verification.Check(SessionID, request) -> *v2.TwoFactorVerificationCheckResponse</code></summary>
+<details><summary><code>client.TwoFa.Verification.Check(SessionID, request) -> *v3.TwoFactorVerificationCheckResponse</code></summary>
 <dl>
 <dd>
 
@@ -10444,7 +10444,7 @@ client.TwoFa.Verification.Check(
 </dl>
 </details>
 
-<details><summary><code>client.TwoFa.Verification.Cancel(SessionID) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.TwoFa.Verification.Cancel(SessionID) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 
@@ -10506,7 +10506,7 @@ client.TwoFa.Verification.Cancel(
 </details>
 
 ## TwoFa Sessions
-<details><summary><code>client.TwoFa.Sessions.List(ServiceID) -> []*v2.ListSessionsResponseItem</code></summary>
+<details><summary><code>client.TwoFa.Sessions.List(ServiceID) -> []*v3.ListSessionsResponseItem</code></summary>
 <dl>
 <dd>
 
@@ -10535,10 +10535,10 @@ Returns the 2FA verifications for the service identified by `service_id`, within
 ```go
 request := &twofa.ListSessionsRequest{
         ServiceID: "7204a030201211ee9fb47d093f2f127c",
-        From: v2.MustParseDate(
+        From: v3.MustParseDate(
             "2022-01-01",
         ),
-        To: v2.MustParseDate(
+        To: v3.MustParseDate(
             "2022-01-31",
         ),
     }
@@ -10590,7 +10590,7 @@ client.TwoFa.Sessions.List(
 </details>
 
 ## TwoFa Events
-<details><summary><code>client.TwoFa.Events.List(SessionID) -> []*v2.TwoFactorVerificationEvent</code></summary>
+<details><summary><code>client.TwoFa.Events.List(SessionID) -> []*v3.TwoFactorVerificationEvent</code></summary>
 <dl>
 <dd>
 
@@ -10652,7 +10652,7 @@ client.TwoFa.Events.List(
 </details>
 
 ## Webrtc Tokens
-<details><summary><code>client.Webrtc.Tokens.List() -> *v2.WebRtcTokensListResponse</code></summary>
+<details><summary><code>client.Webrtc.Tokens.List() -> *v3.WebRtcTokensListResponse</code></summary>
 <dl>
 <dd>
 
@@ -10719,7 +10719,7 @@ client.Webrtc.Tokens.List(
 </dl>
 </details>
 
-<details><summary><code>client.Webrtc.Tokens.Create(request) -> *v2.WebRtcTokenResponse</code></summary>
+<details><summary><code>client.Webrtc.Tokens.Create(request) -> *v3.WebRtcTokenResponse</code></summary>
 <dl>
 <dd>
 
@@ -10751,7 +10751,7 @@ request := &webrtc.WebRtcTokenCreateRequest{
         Payload: map[string]any{
             "user_id": "42",
         },
-        TTL: v2.Int(
+        TTL: v3.Int(
             3600,
         ),
     }
@@ -10802,7 +10802,7 @@ client.Webrtc.Tokens.Create(
 </dl>
 </details>
 
-<details><summary><code>client.Webrtc.Tokens.Get(ID) -> *v2.WebRtcToken</code></summary>
+<details><summary><code>client.Webrtc.Tokens.Get(ID) -> *v3.WebRtcToken</code></summary>
 <dl>
 <dd>
 
@@ -10863,7 +10863,7 @@ client.Webrtc.Tokens.Get(
 </dl>
 </details>
 
-<details><summary><code>client.Webrtc.Tokens.Update(ID, request) -> *v2.WebRtcToken</code></summary>
+<details><summary><code>client.Webrtc.Tokens.Update(ID, request) -> *v3.WebRtcToken</code></summary>
 <dl>
 <dd>
 
@@ -10935,7 +10935,7 @@ client.Webrtc.Tokens.Update(
 </dl>
 </details>
 
-<details><summary><code>client.Webrtc.Tokens.Delete(ID) -> *v2.SuccessResponse</code></summary>
+<details><summary><code>client.Webrtc.Tokens.Delete(ID) -> *v3.SuccessResponse</code></summary>
 <dl>
 <dd>
 

@@ -6,7 +6,7 @@ import (
 	json "encoding/json"
 	assert "github.com/stretchr/testify/assert"
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
 	testing "testing"
 	time "time"
 )
@@ -99,7 +99,7 @@ func TestSettersListMessagesRequest(t *testing.T) {
 
 	t.Run("SetStatus", func(t *testing.T) {
 		obj := &ListMessagesRequest{}
-		var fernTestValueStatus *v2.MessageDeliveryStatus
+		var fernTestValueStatus *v3.MessageDeliveryStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
@@ -299,7 +299,7 @@ func TestSettersMarkExplicitListMessagesRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &ListMessagesRequest{}
-		var fernTestValueStatus *v2.MessageDeliveryStatus
+		var fernTestValueStatus *v3.MessageDeliveryStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -495,7 +495,7 @@ func TestSettersListAllMessagesRequest(t *testing.T) {
 
 	t.Run("SetStatus", func(t *testing.T) {
 		obj := &ListAllMessagesRequest{}
-		var fernTestValueStatus *v2.MessageDeliveryStatus
+		var fernTestValueStatus *v3.MessageDeliveryStatus
 		obj.SetStatus(fernTestValueStatus)
 		assert.Equal(t, fernTestValueStatus, obj.Status)
 		assert.NotNil(t, obj.explicitFields)
@@ -679,7 +679,7 @@ func TestSettersMarkExplicitListAllMessagesRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &ListAllMessagesRequest{}
-		var fernTestValueStatus *v2.MessageDeliveryStatus
+		var fernTestValueStatus *v3.MessageDeliveryStatus
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
@@ -789,7 +789,7 @@ func TestSettersSendMessagesRequest(t *testing.T) {
 
 	t.Run("SetMessageBody", func(t *testing.T) {
 		obj := &SendMessagesRequest{}
-		var fernTestValueMessageBody *v2.MessageBody
+		var fernTestValueMessageBody *v3.MessageBody
 		obj.SetMessageBody(fernTestValueMessageBody)
 		assert.Equal(t, fernTestValueMessageBody, obj.MessageBody)
 		assert.NotNil(t, obj.explicitFields)
@@ -888,7 +888,7 @@ func TestSettersMarkExplicitSendMessagesRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SendMessagesRequest{}
-		var fernTestValueMessageBody *v2.MessageBody
+		var fernTestValueMessageBody *v3.MessageBody
 
 		// Act
 		obj.SetMessageBody(fernTestValueMessageBody)

@@ -4,7 +4,7 @@ package tendlc
 
 import (
 	json "encoding/json"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
 	io "io"
 	big "math/big"
 )

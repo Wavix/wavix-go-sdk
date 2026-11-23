@@ -3,39 +3,39 @@
 package smsandmms
 
 import (
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
 )
 
 var ErrorCodes internal.ErrorCodes = internal.ErrorCodes{
 	400: func(apiError *core.APIError) error {
-		return &v2.BadRequestError{
+		return &v3.BadRequestError{
 			APIError: apiError,
 		}
 	},
 	401: func(apiError *core.APIError) error {
-		return &v2.UnauthorizedError{
+		return &v3.UnauthorizedError{
 			APIError: apiError,
 		}
 	},
 	403: func(apiError *core.APIError) error {
-		return &v2.ForbiddenError{
+		return &v3.ForbiddenError{
 			APIError: apiError,
 		}
 	},
 	404: func(apiError *core.APIError) error {
-		return &v2.NotFoundError{
+		return &v3.NotFoundError{
 			APIError: apiError,
 		}
 	},
 	422: func(apiError *core.APIError) error {
-		return &v2.UnprocessableEntityError{
+		return &v3.UnprocessableEntityError{
 			APIError: apiError,
 		}
 	},
 	429: func(apiError *core.APIError) error {
-		return &v2.TooManyRequestsError{
+		return &v3.TooManyRequestsError{
 			APIError: apiError,
 		}
 	},

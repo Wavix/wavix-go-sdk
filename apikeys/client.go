@@ -5,10 +5,10 @@ package apikeys
 import (
 	context "context"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 type Client struct {
@@ -37,9 +37,9 @@ func NewClient(options *core.RequestOptions) *Client {
 // Returns the API keys belonging to the authenticated account.
 func (c *Client) List(
 	ctx context.Context,
-	request *v2.ListAPIKeysRequest,
+	request *v3.ListAPIKeysRequest,
 	opts ...option.RequestOption,
-) ([]*v2.APIKey, error) {
+) ([]*v3.APIKey, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
@@ -51,12 +51,12 @@ func (c *Client) List(
 	return response.Body, nil
 }
 
-// Creates an API key for the authenticated account. Restrict access by listing permitted IP addresses in `permitted_ips`.
+// Creates an API key for the authenticated account. Restrict access by listing permitted IP addresses in `permitted_ips`. Store the returned `value` securely. Later reads return `redacted_value`, and `value` on reads is deprecated.
 func (c *Client) Create(
 	ctx context.Context,
-	request *v2.APIKeyCreateRequest,
+	request *v3.APIKeyCreateRequest,
 	opts ...option.RequestOption,
-) (v2.APIKeyWithSecret, error) {
+) (*v3.APIKeyWithSecret, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -71,9 +71,9 @@ func (c *Client) Create(
 // Deletes the API key identified by `id`. Deletion is permanent and revokes the key immediately.
 func (c *Client) Delete(
 	ctx context.Context,
-	request *v2.DeleteAPIKeysRequest,
+	request *v3.DeleteAPIKeysRequest,
 	opts ...option.RequestOption,
-) (*v2.SuccessResponse, error) {
+) (*v3.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,
@@ -88,9 +88,9 @@ func (c *Client) Delete(
 // Updates an API key identified by `id`. Only the provided fields are changed.
 func (c *Client) Update(
 	ctx context.Context,
-	request *v2.APIKeyUpdateRequest,
+	request *v3.APIKeyUpdateRequest,
 	opts ...option.RequestOption,
-) (*v2.APIKey, error) {
+) (*v3.APIKey, error) {
 	response, err := c.WithRawResponse.Update(
 		ctx,
 		request,

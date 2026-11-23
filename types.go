@@ -5,7 +5,7 @@ package api
 import (
 	json "encoding/json"
 	fmt "fmt"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
 	big "math/big"
 	time "time"
 )
@@ -5387,7 +5387,6 @@ var (
 	numberDocumentFieldDocFileName    = big.NewInt(1 << 4)
 	numberDocumentFieldDocType        = big.NewInt(1 << 5)
 	numberDocumentFieldStatus         = big.NewInt(1 << 6)
-	numberDocumentFieldURL            = big.NewInt(1 << 7)
 )
 
 type NumberDocument struct {
@@ -5405,8 +5404,6 @@ type NumberDocument struct {
 	DocType *DocumentType `json:"doc_type,omitempty" url:"doc_type,omitempty"`
 	// Status of the uploaded document. Can be either `approved`, `pending`, or `rejected`
 	Status string `json:"status" url:"status"`
-	// A link to the uploaded document
-	URL string `json:"url" url:"url"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5462,13 +5459,6 @@ func (n *NumberDocument) GetStatus() string {
 		return ""
 	}
 	return n.Status
-}
-
-func (n *NumberDocument) GetURL() string {
-	if n == nil {
-		return ""
-	}
-	return n.URL
 }
 
 func (n *NumberDocument) GetExtraProperties() map[string]interface{} {
@@ -5532,13 +5522,6 @@ func (n *NumberDocument) SetDocType(docType *DocumentType) {
 func (n *NumberDocument) SetStatus(status string) {
 	n.Status = status
 	n.require(numberDocumentFieldStatus)
-}
-
-// SetURL sets the URL field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (n *NumberDocument) SetURL(url string) {
-	n.URL = url
-	n.require(numberDocumentFieldURL)
 }
 
 func (n *NumberDocument) UnmarshalJSON(data []byte) error {

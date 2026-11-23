@@ -12,9 +12,9 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	client "github.com/wavix/wavix-go-sdk/v2/client"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	client "github.com/wavix/wavix-go-sdk/v3/client"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 func VerifyRequestCount(
@@ -89,7 +89,7 @@ func TestSpeechAnalyticsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.CreateSpeechAnalyticsRequest{
+	request := &v3.CreateSpeechAnalyticsRequest{
 		File: strings.NewReader(
 			"",
 		),
@@ -118,7 +118,7 @@ func TestSpeechAnalyticsGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.GetSpeechAnalyticsRequest{
+	request := &v3.GetSpeechAnalyticsRequest{
 		RequestID: "e865ea07-25af-4fdd-876e-04b0d41d5ebd",
 	}
 	_, invocationErr := client.SpeechAnalytics.Get(
@@ -144,7 +144,7 @@ func TestSpeechAnalyticsRetranscribeWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.SpeechAnalyticsRetranscribeRequest{
+	request := &v3.SpeechAnalyticsRetranscribeRequest{
 		RequestID:   "e865ea07-25af-4fdd-876e-04b0d41d5ebd",
 		CallbackURL: "https://you-site.com/webhook",
 	}

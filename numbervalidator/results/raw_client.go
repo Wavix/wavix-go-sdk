@@ -6,11 +6,11 @@ import (
 	context "context"
 	http "net/http"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	numbervalidator "github.com/wavix/wavix-go-sdk/v2/numbervalidator"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	numbervalidator "github.com/wavix/wavix-go-sdk/v3/numbervalidator"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 type RawClient struct {
@@ -37,7 +37,7 @@ func (r *RawClient) Get(
 	ctx context.Context,
 	request *numbervalidator.GetResultsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.PhoneValidationBatchResultResponse], error) {
+) (*core.Response[*v3.PhoneValidationBatchResultResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -52,7 +52,7 @@ func (r *RawClient) Get(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.PhoneValidationBatchResultResponse
+	var response *v3.PhoneValidationBatchResultResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -71,7 +71,7 @@ func (r *RawClient) Get(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.PhoneValidationBatchResultResponse]{
+	return &core.Response[*v3.PhoneValidationBatchResultResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

@@ -5,7 +5,7 @@ package api
 import (
 	json "encoding/json"
 	fmt "fmt"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
 	big "math/big"
 	time "time"
 )
@@ -281,30 +281,31 @@ func (l *ListAPIKeysRequest) SetLabel(label *string) {
 	l.require(listAPIKeysRequestFieldLabel)
 }
 
-// API key details including IP restrictions and scope permissions.
+// API key details including IP restrictions and scope permissions. The `value` field is deprecated; use `redacted_value`.
 var (
 	aPIKeyFieldID            = big.NewInt(1 << 0)
 	aPIKeyFieldLabel         = big.NewInt(1 << 1)
-	aPIKeyFieldValue         = big.NewInt(1 << 2)
-	aPIKeyFieldActive        = big.NewInt(1 << 3)
-	aPIKeyFieldRestricted    = big.NewInt(1 << 4)
-	aPIKeyFieldPermittedIps  = big.NewInt(1 << 5)
-	aPIKeyFieldScopesEnabled = big.NewInt(1 << 6)
-	aPIKeyFieldLastUsedAt    = big.NewInt(1 << 7)
-	aPIKeyFieldNumbers       = big.NewInt(1 << 8)
-	aPIKeyFieldTrunks        = big.NewInt(1 << 9)
-	aPIKeyFieldCalls         = big.NewInt(1 << 10)
-	aPIKeyFieldMessages      = big.NewInt(1 << 11)
-	aPIKeyFieldRecordings    = big.NewInt(1 << 12)
-	aPIKeyFieldCampaigns     = big.NewInt(1 << 13)
-	aPIKeyFieldTwoFa         = big.NewInt(1 << 14)
-	aPIKeyFieldValidator     = big.NewInt(1 << 15)
-	aPIKeyFieldWebhooks      = big.NewInt(1 << 16)
-	aPIKeyFieldEmbeddable    = big.NewInt(1 << 17)
-	aPIKeyFieldBilling       = big.NewInt(1 << 18)
-	aPIKeyFieldAccount       = big.NewInt(1 << 19)
-	aPIKeyFieldSubaccounts   = big.NewInt(1 << 20)
-	aPIKeyFieldCreatedAt     = big.NewInt(1 << 21)
+	aPIKeyFieldActive        = big.NewInt(1 << 2)
+	aPIKeyFieldRestricted    = big.NewInt(1 << 3)
+	aPIKeyFieldPermittedIps  = big.NewInt(1 << 4)
+	aPIKeyFieldScopesEnabled = big.NewInt(1 << 5)
+	aPIKeyFieldLastUsedAt    = big.NewInt(1 << 6)
+	aPIKeyFieldNumbers       = big.NewInt(1 << 7)
+	aPIKeyFieldTrunks        = big.NewInt(1 << 8)
+	aPIKeyFieldCalls         = big.NewInt(1 << 9)
+	aPIKeyFieldMessages      = big.NewInt(1 << 10)
+	aPIKeyFieldRecordings    = big.NewInt(1 << 11)
+	aPIKeyFieldCampaigns     = big.NewInt(1 << 12)
+	aPIKeyFieldTwoFa         = big.NewInt(1 << 13)
+	aPIKeyFieldValidator     = big.NewInt(1 << 14)
+	aPIKeyFieldWebhooks      = big.NewInt(1 << 15)
+	aPIKeyFieldEmbeddable    = big.NewInt(1 << 16)
+	aPIKeyFieldBilling       = big.NewInt(1 << 17)
+	aPIKeyFieldAccount       = big.NewInt(1 << 18)
+	aPIKeyFieldSubaccounts   = big.NewInt(1 << 19)
+	aPIKeyFieldCreatedAt     = big.NewInt(1 << 20)
+	aPIKeyFieldValue         = big.NewInt(1 << 21)
+	aPIKeyFieldRedactedValue = big.NewInt(1 << 22)
 )
 
 type APIKey struct {
@@ -312,8 +313,6 @@ type APIKey struct {
 	ID int `json:"id" url:"id"`
 	// API key label.
 	Label string `json:"label" url:"label"`
-	// API key value.
-	Value string `json:"value" url:"value"`
 	// Indicates whether the API key is active.
 	Active bool `json:"active" url:"active"`
 	// Indicates whether IP restrictions are enabled. When enabled,
@@ -358,6 +357,10 @@ type APIKey struct {
 	Subaccounts *APIKeyScopePermission `json:"subaccounts,omitempty" url:"subaccounts,omitempty"`
 	// Creation date and time in ISO 8601 format.
 	CreatedAt time.Time `json:"created_at" url:"created_at"`
+	// Full API key value. Deprecated; use `redacted_value`, which shows only the last 4 characters.
+	Value string `json:"value" url:"value"`
+	// Redacted API key value, shown as `...` followed by the last 4 characters.
+	RedactedValue *string `json:"redacted_value,omitempty" url:"redacted_value,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -378,13 +381,6 @@ func (a *APIKey) GetLabel() string {
 		return ""
 	}
 	return a.Label
-}
-
-func (a *APIKey) GetValue() string {
-	if a == nil {
-		return ""
-	}
-	return a.Value
 }
 
 func (a *APIKey) GetActive() bool {
@@ -520,6 +516,20 @@ func (a *APIKey) GetCreatedAt() time.Time {
 	return a.CreatedAt
 }
 
+func (a *APIKey) GetValue() string {
+	if a == nil {
+		return ""
+	}
+	return a.Value
+}
+
+func (a *APIKey) GetRedactedValue() *string {
+	if a == nil {
+		return nil
+	}
+	return a.RedactedValue
+}
+
 func (a *APIKey) GetExtraProperties() map[string]interface{} {
 	if a == nil {
 		return nil
@@ -546,13 +556,6 @@ func (a *APIKey) SetID(id int) {
 func (a *APIKey) SetLabel(label string) {
 	a.Label = label
 	a.require(aPIKeyFieldLabel)
-}
-
-// SetValue sets the Value field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (a *APIKey) SetValue(value string) {
-	a.Value = value
-	a.require(aPIKeyFieldValue)
 }
 
 // SetActive sets the Active field and marks it as non-optional;
@@ -688,6 +691,20 @@ func (a *APIKey) SetCreatedAt(createdAt time.Time) {
 	a.require(aPIKeyFieldCreatedAt)
 }
 
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKey) SetValue(value string) {
+	a.Value = value
+	a.require(aPIKeyFieldValue)
+}
+
+// SetRedactedValue sets the RedactedValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKey) SetRedactedValue(redactedValue *string) {
+	a.RedactedValue = redactedValue
+	a.require(aPIKeyFieldRedactedValue)
+}
+
 func (a *APIKey) UnmarshalJSON(data []byte) error {
 	type embed APIKey
 	var unmarshaler = struct {
@@ -728,6 +745,450 @@ func (a *APIKey) MarshalJSON() ([]byte, error) {
 }
 
 func (a *APIKey) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+// Shared API key fields without the secret value.
+var (
+	aPIKeyBaseFieldID            = big.NewInt(1 << 0)
+	aPIKeyBaseFieldLabel         = big.NewInt(1 << 1)
+	aPIKeyBaseFieldActive        = big.NewInt(1 << 2)
+	aPIKeyBaseFieldRestricted    = big.NewInt(1 << 3)
+	aPIKeyBaseFieldPermittedIps  = big.NewInt(1 << 4)
+	aPIKeyBaseFieldScopesEnabled = big.NewInt(1 << 5)
+	aPIKeyBaseFieldLastUsedAt    = big.NewInt(1 << 6)
+	aPIKeyBaseFieldNumbers       = big.NewInt(1 << 7)
+	aPIKeyBaseFieldTrunks        = big.NewInt(1 << 8)
+	aPIKeyBaseFieldCalls         = big.NewInt(1 << 9)
+	aPIKeyBaseFieldMessages      = big.NewInt(1 << 10)
+	aPIKeyBaseFieldRecordings    = big.NewInt(1 << 11)
+	aPIKeyBaseFieldCampaigns     = big.NewInt(1 << 12)
+	aPIKeyBaseFieldTwoFa         = big.NewInt(1 << 13)
+	aPIKeyBaseFieldValidator     = big.NewInt(1 << 14)
+	aPIKeyBaseFieldWebhooks      = big.NewInt(1 << 15)
+	aPIKeyBaseFieldEmbeddable    = big.NewInt(1 << 16)
+	aPIKeyBaseFieldBilling       = big.NewInt(1 << 17)
+	aPIKeyBaseFieldAccount       = big.NewInt(1 << 18)
+	aPIKeyBaseFieldSubaccounts   = big.NewInt(1 << 19)
+	aPIKeyBaseFieldCreatedAt     = big.NewInt(1 << 20)
+)
+
+type APIKeyBase struct {
+	// API key ID.
+	ID int `json:"id" url:"id"`
+	// API key label.
+	Label string `json:"label" url:"label"`
+	// Indicates whether the API key is active.
+	Active bool `json:"active" url:"active"`
+	// Indicates whether IP restrictions are enabled. When enabled,
+	//
+	//	the API key works only from IP addresses in `permitted_ips`.
+	Restricted bool `json:"restricted" url:"restricted"`
+	// List of permitted IP addresses. If `restricted` is false,
+	//
+	//	an empty list means no IP restrictions. If `restricted` is true,
+	//	 an empty list prevents all requests.
+	PermittedIps []string `json:"permitted_ips" url:"permitted_ips"`
+	// When `true`, the key is restricted to the permissions defined in the
+	// scope fields below. When `false`, the key has full access.
+	ScopesEnabled bool `json:"scopes_enabled" url:"scopes_enabled"`
+	// Timestamp of the most recent authenticated request made with this key.
+	LastUsedAt *time.Time `json:"last_used_at,omitempty" url:"last_used_at,omitempty"`
+	// View, buy, release, and configure phone numbers, browse inventory, and manage the cart.
+	Numbers *APIKeyScopePermission `json:"numbers,omitempty" url:"numbers,omitempty"`
+	// View, create, update, and delete SIP trunks and their settings.
+	Trunks *APIKeyScopePermission `json:"trunks,omitempty" url:"trunks,omitempty"`
+	// Access call records and active calls, and control live call actions such as starting, answering, ending, audio playback, DTMF, streaming, and transcription requests.
+	Calls *APIKeyCallsScopePermission `json:"calls,omitempty" url:"calls,omitempty"`
+	// Access message history and Sender IDs, send messages, manage opt-outs, and create or delete Sender IDs.
+	Messages *APIKeyScopePermission `json:"messages,omitempty" url:"messages,omitempty"`
+	// List, download, and delete call recordings.
+	Recordings *APIKeyScopePermission `json:"recordings,omitempty" url:"recordings,omitempty"`
+	// View campaign analytics and Sender ID or Brand status, schedule bulk voice or SMS campaigns, register Brands, and create short links.
+	Campaigns *APIKeyScopePermission `json:"campaigns,omitempty" url:"campaigns,omitempty"`
+	// View 2FA service details and verification logs, trigger OTPs by voice or SMS, and validate verification codes.
+	TwoFa *APIKeyScopePermission `json:"two_fa,omitempty" url:"two_fa,omitempty"`
+	// View number validation results and trigger single or bulk validation or HLR lookup requests.
+	Validator *APIKeyScopePermission `json:"validator,omitempty" url:"validator,omitempty"`
+	// List, create, and delete webhooks.
+	Webhooks *APIKeyScopePermission `json:"webhooks,omitempty" url:"webhooks,omitempty"`
+	// Manage widget tokens, including listing, viewing, creating, updating, and deleting them.
+	Embeddable *APIKeyScopePermission `json:"embeddable,omitempty" url:"embeddable,omitempty"`
+	// Access statements, balance, payment methods, usage reports, and billing settings, including payment method updates.
+	Billing *APIKeyScopePermission `json:"billing,omitempty" url:"billing,omitempty"`
+	// View and update account profile information and timezone.
+	Account *APIKeyScopePermission `json:"account,omitempty" url:"account,omitempty"`
+	// Manage subaccounts: list and view them, create, update, and suspend them.
+	Subaccounts *APIKeyScopePermission `json:"subaccounts,omitempty" url:"subaccounts,omitempty"`
+	// Creation date and time in ISO 8601 format.
+	CreatedAt time.Time `json:"created_at" url:"created_at"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *APIKeyBase) GetID() int {
+	if a == nil {
+		return 0
+	}
+	return a.ID
+}
+
+func (a *APIKeyBase) GetLabel() string {
+	if a == nil {
+		return ""
+	}
+	return a.Label
+}
+
+func (a *APIKeyBase) GetActive() bool {
+	if a == nil {
+		return false
+	}
+	return a.Active
+}
+
+func (a *APIKeyBase) GetRestricted() bool {
+	if a == nil {
+		return false
+	}
+	return a.Restricted
+}
+
+func (a *APIKeyBase) GetPermittedIps() []string {
+	if a == nil {
+		return nil
+	}
+	return a.PermittedIps
+}
+
+func (a *APIKeyBase) GetScopesEnabled() bool {
+	if a == nil {
+		return false
+	}
+	return a.ScopesEnabled
+}
+
+func (a *APIKeyBase) GetLastUsedAt() *time.Time {
+	if a == nil {
+		return nil
+	}
+	return a.LastUsedAt
+}
+
+func (a *APIKeyBase) GetNumbers() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Numbers
+}
+
+func (a *APIKeyBase) GetTrunks() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Trunks
+}
+
+func (a *APIKeyBase) GetCalls() *APIKeyCallsScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Calls
+}
+
+func (a *APIKeyBase) GetMessages() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Messages
+}
+
+func (a *APIKeyBase) GetRecordings() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Recordings
+}
+
+func (a *APIKeyBase) GetCampaigns() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Campaigns
+}
+
+func (a *APIKeyBase) GetTwoFa() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.TwoFa
+}
+
+func (a *APIKeyBase) GetValidator() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Validator
+}
+
+func (a *APIKeyBase) GetWebhooks() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Webhooks
+}
+
+func (a *APIKeyBase) GetEmbeddable() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Embeddable
+}
+
+func (a *APIKeyBase) GetBilling() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Billing
+}
+
+func (a *APIKeyBase) GetAccount() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Account
+}
+
+func (a *APIKeyBase) GetSubaccounts() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Subaccounts
+}
+
+func (a *APIKeyBase) GetCreatedAt() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.CreatedAt
+}
+
+func (a *APIKeyBase) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *APIKeyBase) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyBase) SetID(id int) {
+	a.ID = id
+	a.require(aPIKeyBaseFieldID)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyBase) SetLabel(label string) {
+	a.Label = label
+	a.require(aPIKeyBaseFieldLabel)
+}
+
+// SetActive sets the Active field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyBase) SetActive(active bool) {
+	a.Active = active
+	a.require(aPIKeyBaseFieldActive)
+}
+
+// SetRestricted sets the Restricted field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyBase) SetRestricted(restricted bool) {
+	a.Restricted = restricted
+	a.require(aPIKeyBaseFieldRestricted)
+}
+
+// SetPermittedIps sets the PermittedIps field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyBase) SetPermittedIps(permittedIps []string) {
+	a.PermittedIps = permittedIps
+	a.require(aPIKeyBaseFieldPermittedIps)
+}
+
+// SetScopesEnabled sets the ScopesEnabled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyBase) SetScopesEnabled(scopesEnabled bool) {
+	a.ScopesEnabled = scopesEnabled
+	a.require(aPIKeyBaseFieldScopesEnabled)
+}
+
+// SetLastUsedAt sets the LastUsedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyBase) SetLastUsedAt(lastUsedAt *time.Time) {
+	a.LastUsedAt = lastUsedAt
+	a.require(aPIKeyBaseFieldLastUsedAt)
+}
+
+// SetNumbers sets the Numbers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyBase) SetNumbers(numbers *APIKeyScopePermission) {
+	a.Numbers = numbers
+	a.require(aPIKeyBaseFieldNumbers)
+}
+
+// SetTrunks sets the Trunks field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyBase) SetTrunks(trunks *APIKeyScopePermission) {
+	a.Trunks = trunks
+	a.require(aPIKeyBaseFieldTrunks)
+}
+
+// SetCalls sets the Calls field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyBase) SetCalls(calls *APIKeyCallsScopePermission) {
+	a.Calls = calls
+	a.require(aPIKeyBaseFieldCalls)
+}
+
+// SetMessages sets the Messages field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyBase) SetMessages(messages *APIKeyScopePermission) {
+	a.Messages = messages
+	a.require(aPIKeyBaseFieldMessages)
+}
+
+// SetRecordings sets the Recordings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyBase) SetRecordings(recordings *APIKeyScopePermission) {
+	a.Recordings = recordings
+	a.require(aPIKeyBaseFieldRecordings)
+}
+
+// SetCampaigns sets the Campaigns field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyBase) SetCampaigns(campaigns *APIKeyScopePermission) {
+	a.Campaigns = campaigns
+	a.require(aPIKeyBaseFieldCampaigns)
+}
+
+// SetTwoFa sets the TwoFa field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyBase) SetTwoFa(twoFa *APIKeyScopePermission) {
+	a.TwoFa = twoFa
+	a.require(aPIKeyBaseFieldTwoFa)
+}
+
+// SetValidator sets the Validator field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyBase) SetValidator(validator *APIKeyScopePermission) {
+	a.Validator = validator
+	a.require(aPIKeyBaseFieldValidator)
+}
+
+// SetWebhooks sets the Webhooks field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyBase) SetWebhooks(webhooks *APIKeyScopePermission) {
+	a.Webhooks = webhooks
+	a.require(aPIKeyBaseFieldWebhooks)
+}
+
+// SetEmbeddable sets the Embeddable field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyBase) SetEmbeddable(embeddable *APIKeyScopePermission) {
+	a.Embeddable = embeddable
+	a.require(aPIKeyBaseFieldEmbeddable)
+}
+
+// SetBilling sets the Billing field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyBase) SetBilling(billing *APIKeyScopePermission) {
+	a.Billing = billing
+	a.require(aPIKeyBaseFieldBilling)
+}
+
+// SetAccount sets the Account field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyBase) SetAccount(account *APIKeyScopePermission) {
+	a.Account = account
+	a.require(aPIKeyBaseFieldAccount)
+}
+
+// SetSubaccounts sets the Subaccounts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyBase) SetSubaccounts(subaccounts *APIKeyScopePermission) {
+	a.Subaccounts = subaccounts
+	a.require(aPIKeyBaseFieldSubaccounts)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyBase) SetCreatedAt(createdAt time.Time) {
+	a.CreatedAt = createdAt
+	a.require(aPIKeyBaseFieldCreatedAt)
+}
+
+func (a *APIKeyBase) UnmarshalJSON(data []byte) error {
+	type embed APIKeyBase
+	var unmarshaler = struct {
+		embed
+		LastUsedAt *internal.DateTime `json:"last_used_at,omitempty"`
+		CreatedAt  *internal.DateTime `json:"created_at"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*a = APIKeyBase(unmarshaler.embed)
+	a.LastUsedAt = unmarshaler.LastUsedAt.TimePtr()
+	a.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *APIKeyBase) MarshalJSON() ([]byte, error) {
+	type embed APIKeyBase
+	var marshaler = struct {
+		embed
+		LastUsedAt *internal.DateTime `json:"last_used_at,omitempty"`
+		CreatedAt  *internal.DateTime `json:"created_at"`
+	}{
+		embed:      embed(*a),
+		LastUsedAt: internal.NewOptionalDateTime(a.LastUsedAt),
+		CreatedAt:  internal.NewDateTime(a.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *APIKeyBase) String() string {
 	if a == nil {
 		return "<nil>"
 	}
@@ -978,9 +1439,484 @@ func (a APIKeyScopePermissionAllow) Ptr() *APIKeyScopePermissionAllow {
 	return &a
 }
 
-// API key details, including the secret `value`. Returned only at creation time —
-// store it securely, it cannot be retrieved again.
-type APIKeyWithSecret = *APIKey
+// API key details, including the secret `value`. Store the `value` securely. Later reads return `redacted_value`,
+// and `value` on reads is deprecated.
+var (
+	aPIKeyWithSecretFieldID            = big.NewInt(1 << 0)
+	aPIKeyWithSecretFieldLabel         = big.NewInt(1 << 1)
+	aPIKeyWithSecretFieldActive        = big.NewInt(1 << 2)
+	aPIKeyWithSecretFieldRestricted    = big.NewInt(1 << 3)
+	aPIKeyWithSecretFieldPermittedIps  = big.NewInt(1 << 4)
+	aPIKeyWithSecretFieldScopesEnabled = big.NewInt(1 << 5)
+	aPIKeyWithSecretFieldLastUsedAt    = big.NewInt(1 << 6)
+	aPIKeyWithSecretFieldNumbers       = big.NewInt(1 << 7)
+	aPIKeyWithSecretFieldTrunks        = big.NewInt(1 << 8)
+	aPIKeyWithSecretFieldCalls         = big.NewInt(1 << 9)
+	aPIKeyWithSecretFieldMessages      = big.NewInt(1 << 10)
+	aPIKeyWithSecretFieldRecordings    = big.NewInt(1 << 11)
+	aPIKeyWithSecretFieldCampaigns     = big.NewInt(1 << 12)
+	aPIKeyWithSecretFieldTwoFa         = big.NewInt(1 << 13)
+	aPIKeyWithSecretFieldValidator     = big.NewInt(1 << 14)
+	aPIKeyWithSecretFieldWebhooks      = big.NewInt(1 << 15)
+	aPIKeyWithSecretFieldEmbeddable    = big.NewInt(1 << 16)
+	aPIKeyWithSecretFieldBilling       = big.NewInt(1 << 17)
+	aPIKeyWithSecretFieldAccount       = big.NewInt(1 << 18)
+	aPIKeyWithSecretFieldSubaccounts   = big.NewInt(1 << 19)
+	aPIKeyWithSecretFieldCreatedAt     = big.NewInt(1 << 20)
+	aPIKeyWithSecretFieldValue         = big.NewInt(1 << 21)
+	aPIKeyWithSecretFieldRedactedValue = big.NewInt(1 << 22)
+)
+
+type APIKeyWithSecret struct {
+	// API key ID.
+	ID int `json:"id" url:"id"`
+	// API key label.
+	Label string `json:"label" url:"label"`
+	// Indicates whether the API key is active.
+	Active bool `json:"active" url:"active"`
+	// Indicates whether IP restrictions are enabled. When enabled,
+	//
+	//	the API key works only from IP addresses in `permitted_ips`.
+	Restricted bool `json:"restricted" url:"restricted"`
+	// List of permitted IP addresses. If `restricted` is false,
+	//
+	//	an empty list means no IP restrictions. If `restricted` is true,
+	//	 an empty list prevents all requests.
+	PermittedIps []string `json:"permitted_ips" url:"permitted_ips"`
+	// When `true`, the key is restricted to the permissions defined in the
+	// scope fields below. When `false`, the key has full access.
+	ScopesEnabled bool `json:"scopes_enabled" url:"scopes_enabled"`
+	// Timestamp of the most recent authenticated request made with this key.
+	LastUsedAt *time.Time `json:"last_used_at,omitempty" url:"last_used_at,omitempty"`
+	// View, buy, release, and configure phone numbers, browse inventory, and manage the cart.
+	Numbers *APIKeyScopePermission `json:"numbers,omitempty" url:"numbers,omitempty"`
+	// View, create, update, and delete SIP trunks and their settings.
+	Trunks *APIKeyScopePermission `json:"trunks,omitempty" url:"trunks,omitempty"`
+	// Access call records and active calls, and control live call actions such as starting, answering, ending, audio playback, DTMF, streaming, and transcription requests.
+	Calls *APIKeyCallsScopePermission `json:"calls,omitempty" url:"calls,omitempty"`
+	// Access message history and Sender IDs, send messages, manage opt-outs, and create or delete Sender IDs.
+	Messages *APIKeyScopePermission `json:"messages,omitempty" url:"messages,omitempty"`
+	// List, download, and delete call recordings.
+	Recordings *APIKeyScopePermission `json:"recordings,omitempty" url:"recordings,omitempty"`
+	// View campaign analytics and Sender ID or Brand status, schedule bulk voice or SMS campaigns, register Brands, and create short links.
+	Campaigns *APIKeyScopePermission `json:"campaigns,omitempty" url:"campaigns,omitempty"`
+	// View 2FA service details and verification logs, trigger OTPs by voice or SMS, and validate verification codes.
+	TwoFa *APIKeyScopePermission `json:"two_fa,omitempty" url:"two_fa,omitempty"`
+	// View number validation results and trigger single or bulk validation or HLR lookup requests.
+	Validator *APIKeyScopePermission `json:"validator,omitempty" url:"validator,omitempty"`
+	// List, create, and delete webhooks.
+	Webhooks *APIKeyScopePermission `json:"webhooks,omitempty" url:"webhooks,omitempty"`
+	// Manage widget tokens, including listing, viewing, creating, updating, and deleting them.
+	Embeddable *APIKeyScopePermission `json:"embeddable,omitempty" url:"embeddable,omitempty"`
+	// Access statements, balance, payment methods, usage reports, and billing settings, including payment method updates.
+	Billing *APIKeyScopePermission `json:"billing,omitempty" url:"billing,omitempty"`
+	// View and update account profile information and timezone.
+	Account *APIKeyScopePermission `json:"account,omitempty" url:"account,omitempty"`
+	// Manage subaccounts: list and view them, create, update, and suspend them.
+	Subaccounts *APIKeyScopePermission `json:"subaccounts,omitempty" url:"subaccounts,omitempty"`
+	// Creation date and time in ISO 8601 format.
+	CreatedAt time.Time `json:"created_at" url:"created_at"`
+	// Full API key value.
+	Value string `json:"value" url:"value"`
+	// Redacted API key value, shown as `...` followed by the last 4 characters.
+	RedactedValue *string `json:"redacted_value,omitempty" url:"redacted_value,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *APIKeyWithSecret) GetID() int {
+	if a == nil {
+		return 0
+	}
+	return a.ID
+}
+
+func (a *APIKeyWithSecret) GetLabel() string {
+	if a == nil {
+		return ""
+	}
+	return a.Label
+}
+
+func (a *APIKeyWithSecret) GetActive() bool {
+	if a == nil {
+		return false
+	}
+	return a.Active
+}
+
+func (a *APIKeyWithSecret) GetRestricted() bool {
+	if a == nil {
+		return false
+	}
+	return a.Restricted
+}
+
+func (a *APIKeyWithSecret) GetPermittedIps() []string {
+	if a == nil {
+		return nil
+	}
+	return a.PermittedIps
+}
+
+func (a *APIKeyWithSecret) GetScopesEnabled() bool {
+	if a == nil {
+		return false
+	}
+	return a.ScopesEnabled
+}
+
+func (a *APIKeyWithSecret) GetLastUsedAt() *time.Time {
+	if a == nil {
+		return nil
+	}
+	return a.LastUsedAt
+}
+
+func (a *APIKeyWithSecret) GetNumbers() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Numbers
+}
+
+func (a *APIKeyWithSecret) GetTrunks() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Trunks
+}
+
+func (a *APIKeyWithSecret) GetCalls() *APIKeyCallsScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Calls
+}
+
+func (a *APIKeyWithSecret) GetMessages() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Messages
+}
+
+func (a *APIKeyWithSecret) GetRecordings() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Recordings
+}
+
+func (a *APIKeyWithSecret) GetCampaigns() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Campaigns
+}
+
+func (a *APIKeyWithSecret) GetTwoFa() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.TwoFa
+}
+
+func (a *APIKeyWithSecret) GetValidator() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Validator
+}
+
+func (a *APIKeyWithSecret) GetWebhooks() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Webhooks
+}
+
+func (a *APIKeyWithSecret) GetEmbeddable() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Embeddable
+}
+
+func (a *APIKeyWithSecret) GetBilling() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Billing
+}
+
+func (a *APIKeyWithSecret) GetAccount() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Account
+}
+
+func (a *APIKeyWithSecret) GetSubaccounts() *APIKeyScopePermission {
+	if a == nil {
+		return nil
+	}
+	return a.Subaccounts
+}
+
+func (a *APIKeyWithSecret) GetCreatedAt() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.CreatedAt
+}
+
+func (a *APIKeyWithSecret) GetValue() string {
+	if a == nil {
+		return ""
+	}
+	return a.Value
+}
+
+func (a *APIKeyWithSecret) GetRedactedValue() *string {
+	if a == nil {
+		return nil
+	}
+	return a.RedactedValue
+}
+
+func (a *APIKeyWithSecret) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *APIKeyWithSecret) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetID(id int) {
+	a.ID = id
+	a.require(aPIKeyWithSecretFieldID)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetLabel(label string) {
+	a.Label = label
+	a.require(aPIKeyWithSecretFieldLabel)
+}
+
+// SetActive sets the Active field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetActive(active bool) {
+	a.Active = active
+	a.require(aPIKeyWithSecretFieldActive)
+}
+
+// SetRestricted sets the Restricted field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetRestricted(restricted bool) {
+	a.Restricted = restricted
+	a.require(aPIKeyWithSecretFieldRestricted)
+}
+
+// SetPermittedIps sets the PermittedIps field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetPermittedIps(permittedIps []string) {
+	a.PermittedIps = permittedIps
+	a.require(aPIKeyWithSecretFieldPermittedIps)
+}
+
+// SetScopesEnabled sets the ScopesEnabled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetScopesEnabled(scopesEnabled bool) {
+	a.ScopesEnabled = scopesEnabled
+	a.require(aPIKeyWithSecretFieldScopesEnabled)
+}
+
+// SetLastUsedAt sets the LastUsedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetLastUsedAt(lastUsedAt *time.Time) {
+	a.LastUsedAt = lastUsedAt
+	a.require(aPIKeyWithSecretFieldLastUsedAt)
+}
+
+// SetNumbers sets the Numbers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetNumbers(numbers *APIKeyScopePermission) {
+	a.Numbers = numbers
+	a.require(aPIKeyWithSecretFieldNumbers)
+}
+
+// SetTrunks sets the Trunks field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetTrunks(trunks *APIKeyScopePermission) {
+	a.Trunks = trunks
+	a.require(aPIKeyWithSecretFieldTrunks)
+}
+
+// SetCalls sets the Calls field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetCalls(calls *APIKeyCallsScopePermission) {
+	a.Calls = calls
+	a.require(aPIKeyWithSecretFieldCalls)
+}
+
+// SetMessages sets the Messages field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetMessages(messages *APIKeyScopePermission) {
+	a.Messages = messages
+	a.require(aPIKeyWithSecretFieldMessages)
+}
+
+// SetRecordings sets the Recordings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetRecordings(recordings *APIKeyScopePermission) {
+	a.Recordings = recordings
+	a.require(aPIKeyWithSecretFieldRecordings)
+}
+
+// SetCampaigns sets the Campaigns field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetCampaigns(campaigns *APIKeyScopePermission) {
+	a.Campaigns = campaigns
+	a.require(aPIKeyWithSecretFieldCampaigns)
+}
+
+// SetTwoFa sets the TwoFa field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetTwoFa(twoFa *APIKeyScopePermission) {
+	a.TwoFa = twoFa
+	a.require(aPIKeyWithSecretFieldTwoFa)
+}
+
+// SetValidator sets the Validator field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetValidator(validator *APIKeyScopePermission) {
+	a.Validator = validator
+	a.require(aPIKeyWithSecretFieldValidator)
+}
+
+// SetWebhooks sets the Webhooks field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetWebhooks(webhooks *APIKeyScopePermission) {
+	a.Webhooks = webhooks
+	a.require(aPIKeyWithSecretFieldWebhooks)
+}
+
+// SetEmbeddable sets the Embeddable field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetEmbeddable(embeddable *APIKeyScopePermission) {
+	a.Embeddable = embeddable
+	a.require(aPIKeyWithSecretFieldEmbeddable)
+}
+
+// SetBilling sets the Billing field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetBilling(billing *APIKeyScopePermission) {
+	a.Billing = billing
+	a.require(aPIKeyWithSecretFieldBilling)
+}
+
+// SetAccount sets the Account field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetAccount(account *APIKeyScopePermission) {
+	a.Account = account
+	a.require(aPIKeyWithSecretFieldAccount)
+}
+
+// SetSubaccounts sets the Subaccounts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetSubaccounts(subaccounts *APIKeyScopePermission) {
+	a.Subaccounts = subaccounts
+	a.require(aPIKeyWithSecretFieldSubaccounts)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetCreatedAt(createdAt time.Time) {
+	a.CreatedAt = createdAt
+	a.require(aPIKeyWithSecretFieldCreatedAt)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetValue(value string) {
+	a.Value = value
+	a.require(aPIKeyWithSecretFieldValue)
+}
+
+// SetRedactedValue sets the RedactedValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeyWithSecret) SetRedactedValue(redactedValue *string) {
+	a.RedactedValue = redactedValue
+	a.require(aPIKeyWithSecretFieldRedactedValue)
+}
+
+func (a *APIKeyWithSecret) UnmarshalJSON(data []byte) error {
+	type embed APIKeyWithSecret
+	var unmarshaler = struct {
+		embed
+		LastUsedAt *internal.DateTime `json:"last_used_at,omitempty"`
+		CreatedAt  *internal.DateTime `json:"created_at"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*a = APIKeyWithSecret(unmarshaler.embed)
+	a.LastUsedAt = unmarshaler.LastUsedAt.TimePtr()
+	a.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *APIKeyWithSecret) MarshalJSON() ([]byte, error) {
+	type embed APIKeyWithSecret
+	var marshaler = struct {
+		embed
+		LastUsedAt *internal.DateTime `json:"last_used_at,omitempty"`
+		CreatedAt  *internal.DateTime `json:"created_at"`
+	}{
+		embed:      embed(*a),
+		LastUsedAt: internal.NewOptionalDateTime(a.LastUsedAt),
+		CreatedAt:  internal.NewDateTime(a.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *APIKeyWithSecret) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
 
 var (
 	aPIKeyUpdateRequestFieldID            = big.NewInt(1 << 0)

@@ -5,10 +5,10 @@ package callwebhooks
 import (
 	context "context"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 type Client struct {
@@ -38,7 +38,7 @@ func NewClient(options *core.RequestOptions) *Client {
 func (c *Client) List(
 	ctx context.Context,
 	opts ...option.RequestOption,
-) (v2.CallWebhookListResponse, error) {
+) (v3.CallWebhookListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		opts...,
@@ -54,9 +54,9 @@ func (c *Client) List(
 // **Behavior:** Without `expected_url`, the webhook is set to `url` whatever it was before. With `expected_url`, the webhook is set only while it currently has that URL; an empty string matches an unset webhook. Otherwise the call returns `409` and the webhook is unchanged. Setting the URL the webhook already has succeeds. If the call returns a `Something went wrong` error, the webhook is unchanged and you can retry the request.
 func (c *Client) Create(
 	ctx context.Context,
-	request *v2.CallWebhooksCreateRequest,
+	request *v3.CallWebhooksCreateRequest,
 	opts ...option.RequestOption,
-) (*v2.CallWebhook, error) {
+) (*v3.CallWebhook, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -73,9 +73,9 @@ func (c *Client) Create(
 // **Behavior:** Without `expected_url`, the webhook is cleared whatever URL it has. With `expected_url`, the webhook is cleared only while it currently has that URL; an empty value matches an unset webhook. Otherwise the call returns `409` and the webhook is unchanged. Clearing an unset webhook succeeds. Percent-encode the `expected_url` value in the query string. If the call returns a `Something went wrong` error, the webhook is unchanged and you can retry the request.
 func (c *Client) Delete(
 	ctx context.Context,
-	request *v2.DeleteCallWebhooksRequest,
+	request *v3.DeleteCallWebhooksRequest,
 	opts ...option.RequestOption,
-) (*v2.SuccessResponse, error) {
+) (*v3.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,
