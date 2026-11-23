@@ -6,10 +6,10 @@ import (
 	context "context"
 	http "net/http"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 type RawClient struct {
@@ -35,7 +35,7 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 func (r *RawClient) Get(
 	ctx context.Context,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.CartResponse], error) {
+) (*core.Response[*v3.CartResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -47,7 +47,7 @@ func (r *RawClient) Get(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.CartResponse
+	var response *v3.CartResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -60,13 +60,13 @@ func (r *RawClient) Get(
 			QueryParameters: options.QueryParameters,
 			Client:          options.HTTPClient,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v3.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.CartResponse]{
+	return &core.Response[*v3.CartResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -75,9 +75,9 @@ func (r *RawClient) Get(
 
 func (r *RawClient) Add(
 	ctx context.Context,
-	request *v2.AddCartRequest,
+	request *v3.AddCartRequest,
 	opts ...option.RequestOption,
-) (*core.Response[[]*v2.AvailableNumber], error) {
+) (*core.Response[[]*v3.AvailableNumber], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -90,7 +90,7 @@ func (r *RawClient) Add(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response []*v2.AvailableNumber
+	var response []*v3.AvailableNumber
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -104,13 +104,13 @@ func (r *RawClient) Add(
 			Client:          options.HTTPClient,
 			Request:         request,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v3.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[[]*v2.AvailableNumber]{
+	return &core.Response[[]*v3.AvailableNumber]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -119,9 +119,9 @@ func (r *RawClient) Add(
 
 func (r *RawClient) Remove(
 	ctx context.Context,
-	request *v2.RemoveCartRequest,
+	request *v3.RemoveCartRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.SuccessResponse], error) {
+) (*core.Response[*v3.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -134,7 +134,7 @@ func (r *RawClient) Remove(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *v2.SuccessResponse
+	var response *v3.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -148,13 +148,13 @@ func (r *RawClient) Remove(
 			Client:          options.HTTPClient,
 			Request:         request,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v3.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.SuccessResponse]{
+	return &core.Response[*v3.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -163,9 +163,9 @@ func (r *RawClient) Remove(
 
 func (r *RawClient) Checkout(
 	ctx context.Context,
-	request *v2.CheckoutCartRequest,
+	request *v3.CheckoutCartRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.SuccessResponse], error) {
+) (*core.Response[*v3.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -178,7 +178,7 @@ func (r *RawClient) Checkout(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *v2.SuccessResponse
+	var response *v3.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -192,13 +192,13 @@ func (r *RawClient) Checkout(
 			Client:          options.HTTPClient,
 			Request:         request,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v3.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.SuccessResponse]{
+	return &core.Response[*v3.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

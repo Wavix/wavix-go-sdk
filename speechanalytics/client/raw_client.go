@@ -7,10 +7,10 @@ import (
 	fmt "fmt"
 	http "net/http"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 type RawClient struct {
@@ -35,9 +35,9 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 
 func (r *RawClient) Create(
 	ctx context.Context,
-	request *v2.CreateSpeechAnalyticsRequest,
+	request *v3.CreateSpeechAnalyticsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.SubmitFileTranscriptionResponse], error) {
+) (*core.Response[*v3.SubmitFileTranscriptionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -66,7 +66,7 @@ func (r *RawClient) Create(
 	}
 	headers.Set("Content-Type", writer.ContentType())
 
-	var response *v2.SubmitFileTranscriptionResponse
+	var response *v3.SubmitFileTranscriptionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -80,13 +80,13 @@ func (r *RawClient) Create(
 			Client:          options.HTTPClient,
 			Request:         writer.Buffer(),
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v3.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.SubmitFileTranscriptionResponse]{
+	return &core.Response[*v3.SubmitFileTranscriptionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -95,9 +95,9 @@ func (r *RawClient) Create(
 
 func (r *RawClient) Get(
 	ctx context.Context,
-	request *v2.GetSpeechAnalyticsRequest,
+	request *v3.GetSpeechAnalyticsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.FileTranscriptionResponse], error) {
+) (*core.Response[*v3.FileTranscriptionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -112,7 +112,7 @@ func (r *RawClient) Get(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.FileTranscriptionResponse
+	var response *v3.FileTranscriptionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -125,13 +125,13 @@ func (r *RawClient) Get(
 			QueryParameters: options.QueryParameters,
 			Client:          options.HTTPClient,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v3.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.FileTranscriptionResponse]{
+	return &core.Response[*v3.FileTranscriptionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -140,9 +140,9 @@ func (r *RawClient) Get(
 
 func (r *RawClient) Retranscribe(
 	ctx context.Context,
-	request *v2.SpeechAnalyticsRetranscribeRequest,
+	request *v3.SpeechAnalyticsRetranscribeRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.SuccessResponse], error) {
+) (*core.Response[*v3.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -158,7 +158,7 @@ func (r *RawClient) Retranscribe(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *v2.SuccessResponse
+	var response *v3.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -172,13 +172,13 @@ func (r *RawClient) Retranscribe(
 			Client:          options.HTTPClient,
 			Request:         request,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v3.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.SuccessResponse]{
+	return &core.Response[*v3.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

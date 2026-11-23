@@ -11,9 +11,9 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	client "github.com/wavix/wavix-go-sdk/v2/client"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	client "github.com/wavix/wavix-go-sdk/v3/client"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 func VerifyRequestCount(
@@ -110,9 +110,9 @@ func TestCallWebhooksCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.CallWebhooksCreateRequest{
+	request := &v3.CallWebhooksCreateRequest{
 		URL:       "https://you-site.com/webhook",
-		EventType: v2.CallWebhooksCreateRequestEventTypePostCall,
+		EventType: v3.CallWebhooksCreateRequestEventTypePostCall,
 	}
 	_, invocationErr := client.CallWebhooks.Create(
 		context.TODO(),
@@ -137,9 +137,9 @@ func TestCallWebhooksDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.DeleteCallWebhooksRequest{
-		EventType: v2.DeleteCallWebhooksRequestEventTypePostCall,
-		ExpectedURL: v2.String(
+	request := &v3.DeleteCallWebhooksRequest{
+		EventType: v3.DeleteCallWebhooksRequestEventTypePostCall,
+		ExpectedURL: v3.String(
 			"https://your-site.com/webhook",
 		),
 	}

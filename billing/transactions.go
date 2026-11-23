@@ -3,7 +3,7 @@
 package billing
 
 import (
-	v2 "github.com/wavix/wavix-go-sdk/v2"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
 	big "math/big"
 	time "time"
 )
@@ -24,7 +24,7 @@ type ListTransactionsRequest struct {
 	// End of the date range to query, in `YYYY-MM-DD` format. Inclusive.
 	ToDate time.Time `json:"-" url:"to_date" format:"date"`
 	// Filters transactions by type. Accepts a `TransactionType` value.
-	Type *v2.TransactionType `json:"-" url:"type,omitempty"`
+	Type *v3.TransactionType `json:"-" url:"type,omitempty"`
 	// Filters transactions whose `details` contain the given substring.
 	DetailsContains *string `json:"-" url:"details_contains,omitempty"`
 	// When `true`, returns only account top-up transactions. Defaults to all transaction types.
@@ -61,7 +61,7 @@ func (l *ListTransactionsRequest) SetToDate(toDate time.Time) {
 
 // SetType sets the Type field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (l *ListTransactionsRequest) SetType(type_ *v2.TransactionType) {
+func (l *ListTransactionsRequest) SetType(type_ *v3.TransactionType) {
 	l.Type = type_
 	l.require(listTransactionsRequestFieldType)
 }

@@ -6,10 +6,10 @@ import (
 	context "context"
 	http "net/http"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 type RawClient struct {
@@ -35,7 +35,7 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 func (r *RawClient) List(
 	ctx context.Context,
 	opts ...option.RequestOption,
-) (*core.Response[v2.CallWebhookListResponse], error) {
+) (*core.Response[v3.CallWebhookListResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -47,7 +47,7 @@ func (r *RawClient) List(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response v2.CallWebhookListResponse
+	var response v3.CallWebhookListResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -60,13 +60,13 @@ func (r *RawClient) List(
 			QueryParameters: options.QueryParameters,
 			Client:          options.HTTPClient,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v3.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[v2.CallWebhookListResponse]{
+	return &core.Response[v3.CallWebhookListResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -75,9 +75,9 @@ func (r *RawClient) List(
 
 func (r *RawClient) Create(
 	ctx context.Context,
-	request *v2.CallWebhooksCreateRequest,
+	request *v3.CallWebhooksCreateRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.CallWebhook], error) {
+) (*core.Response[*v3.CallWebhook], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -90,7 +90,7 @@ func (r *RawClient) Create(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *v2.CallWebhook
+	var response *v3.CallWebhook
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -104,13 +104,13 @@ func (r *RawClient) Create(
 			Client:          options.HTTPClient,
 			Request:         request,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v3.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.CallWebhook]{
+	return &core.Response[*v3.CallWebhook]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -119,9 +119,9 @@ func (r *RawClient) Create(
 
 func (r *RawClient) Delete(
 	ctx context.Context,
-	request *v2.DeleteCallWebhooksRequest,
+	request *v3.DeleteCallWebhooksRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.SuccessResponse], error) {
+) (*core.Response[*v3.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -140,7 +140,7 @@ func (r *RawClient) Delete(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.SuccessResponse
+	var response *v3.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -153,13 +153,13 @@ func (r *RawClient) Delete(
 			QueryParameters: options.QueryParameters,
 			Client:          options.HTTPClient,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v3.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.SuccessResponse]{
+	return &core.Response[*v3.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

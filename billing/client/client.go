@@ -3,10 +3,10 @@
 package client
 
 import (
-	invoices "github.com/wavix/wavix-go-sdk/v2/billing/invoices"
-	transactions "github.com/wavix/wavix-go-sdk/v2/billing/transactions"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	invoices "github.com/wavix/wavix-go-sdk/v3/billing/invoices"
+	transactions "github.com/wavix/wavix-go-sdk/v3/billing/transactions"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
 )
 
 type Client struct {

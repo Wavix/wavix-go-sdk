@@ -6,11 +6,11 @@ import (
 	context "context"
 	http "net/http"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	cdrs "github.com/wavix/wavix-go-sdk/v2/cdrs"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	cdrs "github.com/wavix/wavix-go-sdk/v3/cdrs"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 type RawClient struct {
@@ -37,7 +37,7 @@ func (r *RawClient) Get(
 	ctx context.Context,
 	request *cdrs.GetTranscriptionRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.CdrTranscriptionResponse], error) {
+) (*core.Response[*v3.CdrTranscriptionResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -52,7 +52,7 @@ func (r *RawClient) Get(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.CdrTranscriptionResponse
+	var response *v3.CdrTranscriptionResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -71,7 +71,7 @@ func (r *RawClient) Get(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.CdrTranscriptionResponse]{
+	return &core.Response[*v3.CdrTranscriptionResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

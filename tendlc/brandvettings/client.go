@@ -5,11 +5,11 @@ package brandvettings
 import (
 	context "context"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	tendlc "github.com/wavix/wavix-go-sdk/v2/tendlc"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	tendlc "github.com/wavix/wavix-go-sdk/v3/tendlc"
 )
 
 type Client struct {
@@ -40,7 +40,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *tendlc.ListBrandVettingsRequest,
 	opts ...option.RequestOption,
-) ([]*v2.TenDlcBrandVetting, error) {
+) ([]*v3.TenDlcBrandVetting, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
@@ -57,7 +57,7 @@ func (c *Client) Create(
 	ctx context.Context,
 	request *tendlc.TenDlcBrandVettingCreateRequest,
 	opts ...option.RequestOption,
-) (*v2.TenDlcBrandVetting, error) {
+) (*v3.TenDlcBrandVetting, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -74,7 +74,7 @@ func (c *Client) Import(
 	ctx context.Context,
 	request *tendlc.TenDlcBrandVettingImportRequest,
 	opts ...option.RequestOption,
-) (*v2.TenDlcBrandVetting, error) {
+) (*v3.TenDlcBrandVetting, error) {
 	response, err := c.WithRawResponse.Import(
 		ctx,
 		request,

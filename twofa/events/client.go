@@ -5,11 +5,11 @@ package events
 import (
 	context "context"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	twofa "github.com/wavix/wavix-go-sdk/v2/twofa"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	twofa "github.com/wavix/wavix-go-sdk/v3/twofa"
 )
 
 type Client struct {
@@ -40,7 +40,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *twofa.ListEventsRequest,
 	opts ...option.RequestOption,
-) ([]*v2.TwoFactorVerificationEvent, error) {
+) ([]*v3.TwoFactorVerificationEvent, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,

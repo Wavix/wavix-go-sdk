@@ -11,10 +11,10 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	client "github.com/wavix/wavix-go-sdk/v2/client"
-	linkshortener "github.com/wavix/wavix-go-sdk/v2/linkshortener"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	client "github.com/wavix/wavix-go-sdk/v3/client"
+	linkshortener "github.com/wavix/wavix-go-sdk/v3/linkshortener"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 func VerifyRequestCount(
@@ -90,22 +90,22 @@ func TestLinkShortenerMetricsListWithWireMock(
 		option.WithToken("test-token"),
 	)
 	request := &linkshortener.ListMetricsRequest{
-		From: v2.MustParseDate(
+		From: v3.MustParseDate(
 			"2023-05-01",
 		),
-		To: v2.MustParseDate(
+		To: v3.MustParseDate(
 			"2023-05-31",
 		),
-		Phone: v2.String(
+		Phone: v3.String(
 			"1872025555",
 		),
-		UtmCampaign: v2.String(
+		UtmCampaign: v3.String(
 			"summer",
 		),
-		Page: v2.Int(
+		Page: v3.Int(
 			1,
 		),
-		PerPage: v2.Int(
+		PerPage: v3.Int(
 			25,
 		),
 	}

@@ -5,11 +5,11 @@ package client
 import (
 	context "context"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	file "github.com/wavix/wavix-go-sdk/v2/speechanalytics/file"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	file "github.com/wavix/wavix-go-sdk/v3/speechanalytics/file"
 )
 
 type Client struct {
@@ -55,9 +55,9 @@ func NewClient(options *core.RequestOptions) *Client {
 // - `error`: Error description, or `null` when the transcription succeeded.
 func (c *Client) Create(
 	ctx context.Context,
-	request *v2.CreateSpeechAnalyticsRequest,
+	request *v3.CreateSpeechAnalyticsRequest,
 	opts ...option.RequestOption,
-) (*v2.SubmitFileTranscriptionResponse, error) {
+) (*v3.SubmitFileTranscriptionResponse, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -72,9 +72,9 @@ func (c *Client) Create(
 // Returns the transcription for the request identified by `request_id`, including transcript, speaker turns, and insights when available.
 func (c *Client) Get(
 	ctx context.Context,
-	request *v2.GetSpeechAnalyticsRequest,
+	request *v3.GetSpeechAnalyticsRequest,
 	opts ...option.RequestOption,
-) (*v2.FileTranscriptionResponse, error) {
+) (*v3.FileTranscriptionResponse, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,
@@ -89,9 +89,9 @@ func (c *Client) Get(
 // Re-runs transcription on the file identified by `request_id`, replacing the existing transcript.
 func (c *Client) Retranscribe(
 	ctx context.Context,
-	request *v2.SpeechAnalyticsRetranscribeRequest,
+	request *v3.SpeechAnalyticsRetranscribeRequest,
 	opts ...option.RequestOption,
-) (*v2.SuccessResponse, error) {
+) (*v3.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Retranscribe(
 		ctx,
 		request,

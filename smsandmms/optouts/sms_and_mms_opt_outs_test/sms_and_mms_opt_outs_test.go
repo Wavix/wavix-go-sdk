@@ -11,10 +11,10 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	client "github.com/wavix/wavix-go-sdk/v2/client"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	smsandmms "github.com/wavix/wavix-go-sdk/v2/smsandmms"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	client "github.com/wavix/wavix-go-sdk/v3/client"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	smsandmms "github.com/wavix/wavix-go-sdk/v3/smsandmms"
 )
 
 func VerifyRequestCount(
@@ -90,19 +90,19 @@ func TestSmsAndMmsOptOutsListWithWireMock(
 		option.WithToken("test-token"),
 	)
 	request := &smsandmms.ListOptOutsRequest{
-		SenderID: v2.String(
+		SenderID: v3.String(
 			"MySender",
 		),
-		CampaignID: v2.String(
+		CampaignID: v3.String(
 			"C123456",
 		),
-		CreatedAfter: v2.Time(
-			v2.MustParseDate(
+		CreatedAfter: v3.Time(
+			v3.MustParseDate(
 				"2024-01-01",
 			),
 		),
-		CreatedBefore: v2.Time(
-			v2.MustParseDate(
+		CreatedBefore: v3.Time(
+			v3.MustParseDate(
 				"2024-12-31",
 			),
 		),
@@ -131,9 +131,9 @@ func TestSmsAndMmsOptOutsCreateWithWireMock(
 		option.WithToken("test-token"),
 	)
 	request := &smsandmms.OptOutCreateRequest{
-		OptOut: &v2.OptOut{
+		OptOut: &v3.OptOut{
 			Number: "16419252149",
-			SenderID: v2.String(
+			SenderID: v3.String(
 				"15072429497",
 			),
 		},

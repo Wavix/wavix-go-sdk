@@ -6,11 +6,11 @@ import (
 	context "context"
 	http "net/http"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	smsandmms "github.com/wavix/wavix-go-sdk/v2/smsandmms"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	smsandmms "github.com/wavix/wavix-go-sdk/v3/smsandmms"
 )
 
 type RawClient struct {
@@ -37,7 +37,7 @@ func (r *RawClient) List(
 	ctx context.Context,
 	request *smsandmms.ListOptOutsRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.OptOutsListResponse], error) {
+) (*core.Response[*v3.OptOutsListResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -56,7 +56,7 @@ func (r *RawClient) List(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.OptOutsListResponse
+	var response *v3.OptOutsListResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -75,7 +75,7 @@ func (r *RawClient) List(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.OptOutsListResponse]{
+	return &core.Response[*v3.OptOutsListResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -86,7 +86,7 @@ func (r *RawClient) Create(
 	ctx context.Context,
 	request *smsandmms.OptOutCreateRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.SuccessResponse], error) {
+) (*core.Response[*v3.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -99,7 +99,7 @@ func (r *RawClient) Create(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *v2.SuccessResponse
+	var response *v3.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -119,7 +119,7 @@ func (r *RawClient) Create(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.SuccessResponse]{
+	return &core.Response[*v3.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

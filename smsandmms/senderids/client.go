@@ -5,11 +5,11 @@ package senderids
 import (
 	context "context"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	smsandmms "github.com/wavix/wavix-go-sdk/v2/smsandmms"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	smsandmms "github.com/wavix/wavix-go-sdk/v3/smsandmms"
 )
 
 type Client struct {
@@ -39,7 +39,7 @@ func NewClient(options *core.RequestOptions) *Client {
 func (c *Client) List(
 	ctx context.Context,
 	opts ...option.RequestOption,
-) (*v2.SenderIDListResponse, error) {
+) (*v3.SenderIDListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		opts...,
@@ -55,7 +55,7 @@ func (c *Client) Create(
 	ctx context.Context,
 	request *smsandmms.SenderIDCreateRequest,
 	opts ...option.RequestOption,
-) (*v2.SenderIDDetails, error) {
+) (*v3.SenderIDDetails, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -72,7 +72,7 @@ func (c *Client) Get(
 	ctx context.Context,
 	request *smsandmms.GetSenderIDsRequest,
 	opts ...option.RequestOption,
-) (*v2.SenderIDResponse, error) {
+) (*v3.SenderIDResponse, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,
@@ -89,7 +89,7 @@ func (c *Client) Delete(
 	ctx context.Context,
 	request *smsandmms.DeleteSenderIDsRequest,
 	opts ...option.RequestOption,
-) (*v2.SuccessResponse, error) {
+) (*v3.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,

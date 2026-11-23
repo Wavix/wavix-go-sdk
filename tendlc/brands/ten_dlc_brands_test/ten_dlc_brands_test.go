@@ -11,10 +11,10 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	client "github.com/wavix/wavix-go-sdk/v2/client"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	tendlc "github.com/wavix/wavix-go-sdk/v2/tendlc"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	client "github.com/wavix/wavix-go-sdk/v3/client"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	tendlc "github.com/wavix/wavix-go-sdk/v3/tendlc"
 )
 
 func VerifyRequestCount(
@@ -90,40 +90,40 @@ func TestTenDlcBrandsListWithWireMock(
 		option.WithToken("test-token"),
 	)
 	request := &tendlc.ListBrandsRequest{
-		DbaName: v2.String(
+		DbaName: v3.String(
 			"Brand",
 		),
-		CompanyName: v2.String(
+		CompanyName: v3.String(
 			"Company",
 		),
-		EntityType: v2.String(
+		EntityType: v3.String(
 			"PRIVATE_PROFIT",
 		),
-		Status: v2.String(
+		Status: v3.String(
 			"VERIFIED",
 		),
-		Country: v2.String(
+		Country: v3.String(
 			"US",
 		),
-		ShowDeleted: v2.Bool(
+		ShowDeleted: v3.Bool(
 			false,
 		),
-		EinTaxid: v2.String(
+		EinTaxid: v3.String(
 			"999999999",
 		),
-		Mock: v2.Bool(
+		Mock: v3.Bool(
 			false,
 		),
-		CreatedBefore: v2.String(
+		CreatedBefore: v3.String(
 			"2024-08-22",
 		),
-		CreatedAfter: v2.String(
+		CreatedAfter: v3.String(
 			"2024-08-22",
 		),
-		Page: v2.Int(
+		Page: v3.Int(
 			1,
 		),
-		PerPage: v2.Int(
+		PerPage: v3.Int(
 			25,
 		),
 	}
@@ -150,8 +150,8 @@ func TestTenDlcBrandsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.TenDlcBrandCreateRequest{
-		TenDlcBrandCreateRequestZero: &v2.TenDlcBrandCreateRequestZero{},
+	request := &v3.TenDlcBrandCreateRequest{
+		TenDlcBrandCreateRequestZero: &v3.TenDlcBrandCreateRequestZero{},
 	}
 	_, invocationErr := client.TenDlc.Brands.Create(
 		context.TODO(),

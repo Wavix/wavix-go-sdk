@@ -11,9 +11,9 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	callcontrol "github.com/wavix/wavix-go-sdk/v2/callcontrol"
-	client "github.com/wavix/wavix-go-sdk/v2/client"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	callcontrol "github.com/wavix/wavix-go-sdk/v3/callcontrol"
+	client "github.com/wavix/wavix-go-sdk/v3/client"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 func VerifyRequestCount(

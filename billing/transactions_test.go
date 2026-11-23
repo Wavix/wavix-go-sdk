@@ -6,7 +6,7 @@ import (
 	json "encoding/json"
 	assert "github.com/stretchr/testify/assert"
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
 	testing "testing"
 	time "time"
 )
@@ -30,7 +30,7 @@ func TestSettersListTransactionsRequest(t *testing.T) {
 
 	t.Run("SetType", func(t *testing.T) {
 		obj := &ListTransactionsRequest{}
-		var fernTestValueType *v2.TransactionType
+		var fernTestValueType *v3.TransactionType
 		obj.SetType(fernTestValueType)
 		assert.Equal(t, fernTestValueType, obj.Type)
 		assert.NotNil(t, obj.explicitFields)
@@ -137,7 +137,7 @@ func TestSettersMarkExplicitListTransactionsRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &ListTransactionsRequest{}
-		var fernTestValueType *v2.TransactionType
+		var fernTestValueType *v3.TransactionType
 
 		// Act
 		obj.SetType(fernTestValueType)

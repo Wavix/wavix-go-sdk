@@ -5,10 +5,10 @@ package voicecampaigns
 import (
 	context "context"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 type Client struct {
@@ -37,9 +37,9 @@ func NewClient(options *core.RequestOptions) *Client {
 // Launches a voice campaign that places a real outbound call using a pre-configured scenario. Track progress with the returned voice campaign `id`.
 func (c *Client) Create(
 	ctx context.Context,
-	request *v2.CreateVoiceCampaignsRequest,
+	request *v3.CreateVoiceCampaignsRequest,
 	opts ...option.RequestOption,
-) (*v2.VoiceCampaignsCreateResponse, error) {
+) (*v3.VoiceCampaignsCreateResponse, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -54,9 +54,9 @@ func (c *Client) Create(
 // Returns the voice campaign identified by `id`, including its current status.
 func (c *Client) Get(
 	ctx context.Context,
-	request *v2.GetVoiceCampaignsRequest,
+	request *v3.GetVoiceCampaignsRequest,
 	opts ...option.RequestOption,
-) (*v2.VoiceCampaignsGetResponse, error) {
+) (*v3.VoiceCampaignsGetResponse, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,

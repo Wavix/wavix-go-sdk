@@ -11,10 +11,10 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	client "github.com/wavix/wavix-go-sdk/v2/client"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	smsandmms "github.com/wavix/wavix-go-sdk/v2/smsandmms"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	client "github.com/wavix/wavix-go-sdk/v3/client"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	smsandmms "github.com/wavix/wavix-go-sdk/v3/smsandmms"
 )
 
 func VerifyRequestCount(
@@ -90,30 +90,30 @@ func TestSmsAndMmsMessagesListWithWireMock(
 		option.WithToken("test-token"),
 	)
 	request := &smsandmms.ListMessagesRequest{
-		SentAfter: v2.Time(
-			v2.MustParseDate(
+		SentAfter: v3.Time(
+			v3.MustParseDate(
 				"2023-04-10",
 			),
 		),
-		SentBefore: v2.Time(
-			v2.MustParseDate(
+		SentBefore: v3.Time(
+			v3.MustParseDate(
 				"2023-04-13",
 			),
 		),
 		Type: "outbound",
-		From: v2.String(
+		From: v3.String(
 			"15072429497",
 		),
-		To: v2.String(
+		To: v3.String(
 			"16419252149",
 		),
-		Tag: v2.String(
+		Tag: v3.String(
 			"campaignX",
 		),
-		Page: v2.Int(
+		Page: v3.Int(
 			2,
 		),
-		PerPage: v2.Int(
+		PerPage: v3.Int(
 			50,
 		),
 	}
@@ -143,16 +143,16 @@ func TestSmsAndMmsMessagesSendWithWireMock(
 	request := &smsandmms.SendMessagesRequest{
 		From: "Wavix",
 		To:   "+447537151866",
-		MessageBody: &v2.MessageBody{
+		MessageBody: &v3.MessageBody{
 			Text: "Hi there, this is a message from Wavix",
 		},
-		CallbackURL: v2.String(
+		CallbackURL: v3.String(
 			"https://you-site.com/webhook",
 		),
-		Validity: v2.Int(
+		Validity: v3.Int(
 			3600,
 		),
-		Tag: v2.String(
+		Tag: v3.String(
 			"Fall sale",
 		),
 	}
@@ -206,20 +206,20 @@ func TestSmsAndMmsMessagesListAllWithWireMock(
 		option.WithToken("test-token"),
 	)
 	request := &smsandmms.ListAllMessagesRequest{
-		SentAfter: v2.String(
+		SentAfter: v3.String(
 			"2023-04-10T00:00:00",
 		),
-		SentBefore: v2.String(
+		SentBefore: v3.String(
 			"2023-04-13T23:59:59",
 		),
 		Type: "outbound",
-		From: v2.String(
+		From: v3.String(
 			"15072429497",
 		),
-		To: v2.String(
+		To: v3.String(
 			"16419252149",
 		),
-		Tag: v2.String(
+		Tag: v3.String(
 			"campaignX",
 		),
 	}

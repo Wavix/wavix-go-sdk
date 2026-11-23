@@ -11,9 +11,9 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	client "github.com/wavix/wavix-go-sdk/v2/client"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	client "github.com/wavix/wavix-go-sdk/v3/client"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 func VerifyRequestCount(
@@ -88,23 +88,23 @@ func TestNumbersListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.ListNumbersRequest{
-		CityID: v2.Int(
+	request := &v3.ListNumbersRequest{
+		CityID: v3.Int(
 			123,
 		),
-		Search: v2.String(
+		Search: v3.String(
 			"256537",
 		),
-		Label: v2.String(
+		Label: v3.String(
 			"ALEX",
 		),
-		LabelPresent: v2.Bool(
+		LabelPresent: v3.Bool(
 			true,
 		),
-		Page: v2.Int(
+		Page: v3.Int(
 			2,
 		),
-		PerPage: v2.Int(
+		PerPage: v3.Int(
 			50,
 		),
 	}
@@ -131,8 +131,8 @@ func TestNumbersDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.DeleteNumbersRequest{
-		Dids: v2.String(
+	request := &v3.DeleteNumbersRequest{
+		Dids: v3.String(
 			"47832123321,47832123324,478321233215",
 		),
 	}
@@ -159,7 +159,7 @@ func TestNumbersBulkUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.NumberBulkUpdateRequest{
+	request := &v3.NumberBulkUpdateRequest{
 		IDs: []int{
 			123,
 			456,
@@ -188,7 +188,7 @@ func TestNumbersGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.GetNumbersRequest{
+	request := &v3.GetNumbersRequest{
 		ID: 123,
 	}
 	_, invocationErr := client.Numbers.Get(
@@ -214,7 +214,7 @@ func TestNumbersUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.NumberUpdateRequest{
+	request := &v3.NumberUpdateRequest{
 		ID: 123,
 	}
 	_, invocationErr := client.Numbers.Update(

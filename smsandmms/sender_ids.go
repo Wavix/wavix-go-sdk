@@ -5,8 +5,8 @@ package smsandmms
 import (
 	json "encoding/json"
 	fmt "fmt"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
 	big "math/big"
 )
 
@@ -22,7 +22,7 @@ var (
 type SenderIDCreateRequest struct {
 	// Sender ID name. Can be either an alphanumeric string or a  phone number.
 	SenderID string          `json:"sender_id" url:"-"`
-	Type     v2.SenderIDType `json:"type" url:"-"`
+	Type     v3.SenderIDType `json:"type" url:"-"`
 	// Two-letter ISO country codes where the Sender ID is allowlisted.
 	Countries []string `json:"countries" url:"-"`
 	// Primary use case for the Sender ID. One of `transactional` (account or order notifications), `promo` (marketing and promotional messages), or `authentication` (one-time passcodes and verification codes).
@@ -52,7 +52,7 @@ func (s *SenderIDCreateRequest) SetSenderID(senderID string) {
 
 // SetType sets the Type field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SenderIDCreateRequest) SetType(type_ v2.SenderIDType) {
+func (s *SenderIDCreateRequest) SetType(type_ v3.SenderIDType) {
 	s.Type = type_
 	s.require(senderIDCreateRequestFieldType)
 }

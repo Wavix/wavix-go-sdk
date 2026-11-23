@@ -11,9 +11,9 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	client "github.com/wavix/wavix-go-sdk/v2/client"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	client "github.com/wavix/wavix-go-sdk/v3/client"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 func VerifyRequestCount(
@@ -88,8 +88,8 @@ func TestAPIKeysListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.ListAPIKeysRequest{
-		Label: v2.String(
+	request := &v3.ListAPIKeysRequest{
+		Label: v3.String(
 			"production",
 		),
 	}
@@ -116,35 +116,35 @@ func TestAPIKeysCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.APIKeyCreateRequest{
+	request := &v3.APIKeyCreateRequest{
 		Label: "Production API Key",
-		Active: v2.Bool(
+		Active: v3.Bool(
 			true,
 		),
-		Restricted: v2.Bool(
+		Restricted: v3.Bool(
 			true,
 		),
 		PermittedIps: []string{
 			"192.168.1.1",
 			"10.0.0.1",
 		},
-		ScopesEnabled: v2.Bool(
+		ScopesEnabled: v3.Bool(
 			true,
 		),
-		Numbers: &v2.APIKeyScopePermission{
-			Allow: v2.APIKeyScopePermissionAllowRead.Ptr(),
+		Numbers: &v3.APIKeyScopePermission{
+			Allow: v3.APIKeyScopePermissionAllowRead.Ptr(),
 		},
-		Calls: &v2.APIKeyCallsScopePermission{
-			Allow: v2.APIKeyCallsScopePermissionAllowRead.Ptr(),
+		Calls: &v3.APIKeyCallsScopePermission{
+			Allow: v3.APIKeyCallsScopePermissionAllowRead.Ptr(),
 		},
-		Messages: &v2.APIKeyScopePermission{
-			Allow: v2.APIKeyScopePermissionAllowWrite.Ptr(),
+		Messages: &v3.APIKeyScopePermission{
+			Allow: v3.APIKeyScopePermissionAllowWrite.Ptr(),
 		},
-		TwoFa: &v2.APIKeyScopePermission{
-			Allow: v2.APIKeyScopePermissionAllowWrite.Ptr(),
+		TwoFa: &v3.APIKeyScopePermission{
+			Allow: v3.APIKeyScopePermissionAllowWrite.Ptr(),
 		},
-		Billing: &v2.APIKeyScopePermission{
-			Allow: v2.APIKeyScopePermissionAllowRead.Ptr(),
+		Billing: &v3.APIKeyScopePermission{
+			Allow: v3.APIKeyScopePermissionAllowRead.Ptr(),
 		},
 	}
 	_, invocationErr := client.APIKeys.Create(
@@ -170,7 +170,7 @@ func TestAPIKeysDeleteWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.DeleteAPIKeysRequest{
+	request := &v3.DeleteAPIKeysRequest{
 		ID: 1,
 	}
 	_, invocationErr := client.APIKeys.Delete(
@@ -196,22 +196,22 @@ func TestAPIKeysUpdateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.APIKeyUpdateRequest{
+	request := &v3.APIKeyUpdateRequest{
 		ID: 1,
-		Active: v2.Bool(
+		Active: v3.Bool(
 			true,
 		),
-		Restricted: v2.Bool(
+		Restricted: v3.Bool(
 			true,
 		),
-		ScopesEnabled: v2.Bool(
+		ScopesEnabled: v3.Bool(
 			true,
 		),
 		PermittedIps: []string{
 			"192.168.1.1",
 			"10.0.0.1",
 		},
-		Label: v2.String(
+		Label: v3.String(
 			"Production API Key",
 		),
 	}

@@ -5,11 +5,11 @@ package transactions
 import (
 	context "context"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	subaccounts "github.com/wavix/wavix-go-sdk/v2/subaccounts"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	subaccounts "github.com/wavix/wavix-go-sdk/v3/subaccounts"
 )
 
 type Client struct {
@@ -40,7 +40,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *subaccounts.ListTransactionsRequest,
 	opts ...option.RequestOption,
-) (*v2.SubAccountsTransactionsListResponse, error) {
+) (*v3.SubAccountsTransactionsListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,

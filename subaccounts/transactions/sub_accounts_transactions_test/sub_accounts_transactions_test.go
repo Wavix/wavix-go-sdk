@@ -11,10 +11,10 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	client "github.com/wavix/wavix-go-sdk/v2/client"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	subaccounts "github.com/wavix/wavix-go-sdk/v2/subaccounts"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	client "github.com/wavix/wavix-go-sdk/v3/client"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	subaccounts "github.com/wavix/wavix-go-sdk/v3/subaccounts"
 )
 
 func VerifyRequestCount(
@@ -91,21 +91,21 @@ func TestSubAccountsTransactionsListWithWireMock(
 	)
 	request := &subaccounts.ListTransactionsRequest{
 		ID: 123,
-		FromDate: v2.MustParseDate(
+		FromDate: v3.MustParseDate(
 			"2023-01-01",
 		),
-		ToDate: v2.MustParseDate(
+		ToDate: v3.MustParseDate(
 			"2023-12-31",
 		),
 		Type: []*int{
-			v2.Int(
+			v3.Int(
 				1,
 			),
 		},
-		Page: v2.Int(
+		Page: v3.Int(
 			1,
 		),
-		PerPage: v2.Int(
+		PerPage: v3.Int(
 			25,
 		),
 	}

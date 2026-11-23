@@ -5,11 +5,11 @@ package tokens
 import (
 	context "context"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	webrtc "github.com/wavix/wavix-go-sdk/v2/webrtc"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	webrtc "github.com/wavix/wavix-go-sdk/v3/webrtc"
 )
 
 type Client struct {
@@ -40,7 +40,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *webrtc.ListTokensRequest,
 	opts ...option.RequestOption,
-) (*v2.WebRtcTokensListResponse, error) {
+) (*v3.WebRtcTokensListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
@@ -57,7 +57,7 @@ func (c *Client) Create(
 	ctx context.Context,
 	request *webrtc.WebRtcTokenCreateRequest,
 	opts ...option.RequestOption,
-) (*v2.WebRtcTokenResponse, error) {
+) (*v3.WebRtcTokenResponse, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -74,7 +74,7 @@ func (c *Client) Get(
 	ctx context.Context,
 	request *webrtc.GetTokensRequest,
 	opts ...option.RequestOption,
-) (*v2.WebRtcToken, error) {
+) (*v3.WebRtcToken, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,
@@ -91,7 +91,7 @@ func (c *Client) Update(
 	ctx context.Context,
 	request *webrtc.WebRtcTokenUpdateRequest,
 	opts ...option.RequestOption,
-) (*v2.WebRtcToken, error) {
+) (*v3.WebRtcToken, error) {
 	response, err := c.WithRawResponse.Update(
 		ctx,
 		request,
@@ -108,7 +108,7 @@ func (c *Client) Delete(
 	ctx context.Context,
 	request *webrtc.DeleteTokensRequest,
 	opts ...option.RequestOption,
-) (*v2.SuccessResponse, error) {
+) (*v3.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,

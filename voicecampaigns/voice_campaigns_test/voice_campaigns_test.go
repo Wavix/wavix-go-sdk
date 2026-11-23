@@ -11,9 +11,9 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	client "github.com/wavix/wavix-go-sdk/v2/client"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	client "github.com/wavix/wavix-go-sdk/v3/client"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 func VerifyRequestCount(
@@ -88,8 +88,8 @@ func TestVoiceCampaignsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.CreateVoiceCampaignsRequest{
-		VoiceCampaign: &v2.VoiceCampaignResponse{
+	request := &v3.CreateVoiceCampaignsRequest{
+		VoiceCampaign: &v3.VoiceCampaignResponse{
 			CallflowID: 3212,
 			CallerID:   "13123310912",
 			Contact:    "16729923812",
@@ -118,7 +118,7 @@ func TestVoiceCampaignsGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.GetVoiceCampaignsRequest{
+	request := &v3.GetVoiceCampaignsRequest{
 		ID: 2321423,
 	}
 	_, invocationErr := client.VoiceCampaigns.Get(

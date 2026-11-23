@@ -5,7 +5,7 @@ package api
 import (
 	json "encoding/json"
 	fmt "fmt"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
 	big "math/big"
 	time "time"
 )
@@ -2309,7 +2309,7 @@ var (
 type TranscriptionReference struct {
 	// Unique identifier of the call transcription.
 	UUID string `json:"uuid" url:"uuid"`
-	// URL for retrieving the full call transcription.
+	// URL for retrieving the full call transcription. Call it with your usual `Authorization` header.
 	URL string `json:"url" url:"url"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted

@@ -6,10 +6,10 @@ import (
 	context "context"
 	io "io"
 
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	speechanalytics "github.com/wavix/wavix-go-sdk/v2/speechanalytics"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	speechanalytics "github.com/wavix/wavix-go-sdk/v3/speechanalytics"
 )
 
 type Client struct {

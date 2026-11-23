@@ -5,12 +5,12 @@ package client
 import (
 	context "context"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	audio "github.com/wavix/wavix-go-sdk/v2/callcontrol/audio"
-	streams "github.com/wavix/wavix-go-sdk/v2/callcontrol/streams"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	audio "github.com/wavix/wavix-go-sdk/v3/callcontrol/audio"
+	streams "github.com/wavix/wavix-go-sdk/v3/callcontrol/streams"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 type Client struct {
@@ -44,7 +44,7 @@ func NewClient(options *core.RequestOptions) *Client {
 func (c *Client) List(
 	ctx context.Context,
 	opts ...option.RequestOption,
-) (*v2.CallListResponse, error) {
+) (*v3.CallListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		opts...,
@@ -58,9 +58,9 @@ func (c *Client) List(
 // Places a real, billable outbound PSTN call. Returns the call with its `uuid` for tracking and control.
 func (c *Client) Create(
 	ctx context.Context,
-	request *v2.CallRequest,
+	request *v3.CallRequest,
 	opts ...option.RequestOption,
-) (*v2.CallCreateResponse, error) {
+) (*v3.CallCreateResponse, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -75,9 +75,9 @@ func (c *Client) Create(
 // Returns the call identified by `id`, including its current event and timestamps.
 func (c *Client) Get(
 	ctx context.Context,
-	request *v2.GetCallControlRequest,
+	request *v3.GetCallControlRequest,
 	opts ...option.RequestOption,
-) (*v2.CallResponse, error) {
+) (*v3.CallResponse, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,
@@ -92,9 +92,9 @@ func (c *Client) Get(
 // Ends the active call identified by `id` by hanging up. Irreversible — the call cannot be resumed once ended.
 func (c *Client) Delete(
 	ctx context.Context,
-	request *v2.DeleteCallControlRequest,
+	request *v3.DeleteCallControlRequest,
 	opts ...option.RequestOption,
-) (*v2.SuccessResponse, error) {
+) (*v3.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,
@@ -109,9 +109,9 @@ func (c *Client) Delete(
 // Updates the active call identified by `id`. Only the `tag` field can be changed.
 func (c *Client) Update(
 	ctx context.Context,
-	request *v2.UpdateCallRequest,
+	request *v3.UpdateCallRequest,
 	opts ...option.RequestOption,
-) (*v2.SuccessResponse, error) {
+) (*v3.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Update(
 		ctx,
 		request,
@@ -126,9 +126,9 @@ func (c *Client) Update(
 // Answers the inbound call identified by `id`. Optionally starts recording, post-call transcription, or live media streaming on answer.
 func (c *Client) Answer(
 	ctx context.Context,
-	request *v2.CallAnswerRequest,
+	request *v3.CallAnswerRequest,
 	opts ...option.RequestOption,
-) (*v2.SuccessResponse, error) {
+) (*v3.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Answer(
 		ctx,
 		request,
@@ -143,9 +143,9 @@ func (c *Client) Answer(
 // Collects DTMF keypad input from the caller on the active call identified by `id`.
 func (c *Client) Collect(
 	ctx context.Context,
-	request *v2.CallDtmfCollectRequest,
+	request *v3.CallDtmfCollectRequest,
 	opts ...option.RequestOption,
-) (*v2.SuccessResponse, error) {
+) (*v3.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Collect(
 		ctx,
 		request,

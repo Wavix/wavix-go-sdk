@@ -5,11 +5,11 @@ package brands
 import (
 	context "context"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	tendlc "github.com/wavix/wavix-go-sdk/v2/tendlc"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	tendlc "github.com/wavix/wavix-go-sdk/v3/tendlc"
 )
 
 type Client struct {
@@ -40,7 +40,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *tendlc.ListBrandsRequest,
 	opts ...option.RequestOption,
-) (*v2.TenDlcBrandListResponse, error) {
+) (*v3.TenDlcBrandListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
@@ -55,9 +55,9 @@ func (c *Client) List(
 // Registers a 10DLC Brand. Submits the company's legal identity data (EIN/Tax ID, legal company name, contact and address) to The Campaign Registry (TCR), which verifies the brand identity. Charges a 10DLC brand registration fee on successful submission; fails with an insufficient-funds error when the balance cannot cover it. Only brands with `VERIFIED` or `VETTED_VERIFIED` identity status can register 10DLC Campaigns.
 func (c *Client) Create(
 	ctx context.Context,
-	request *v2.TenDlcBrandCreateRequest,
+	request *v3.TenDlcBrandCreateRequest,
 	opts ...option.RequestOption,
-) (*v2.TenDlcBrand, error) {
+) (*v3.TenDlcBrand, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,
@@ -74,7 +74,7 @@ func (c *Client) Get(
 	ctx context.Context,
 	request *tendlc.GetBrandsRequest,
 	opts ...option.RequestOption,
-) (*v2.TenDlcBrand, error) {
+) (*v3.TenDlcBrand, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,
@@ -91,7 +91,7 @@ func (c *Client) Update(
 	ctx context.Context,
 	request *tendlc.TenDlcBrandUpdateRequest,
 	opts ...option.RequestOption,
-) (*v2.TenDlcBrand, error) {
+) (*v3.TenDlcBrand, error) {
 	response, err := c.WithRawResponse.Update(
 		ctx,
 		request,
@@ -108,7 +108,7 @@ func (c *Client) Delete(
 	ctx context.Context,
 	request *tendlc.DeleteBrandsRequest,
 	opts ...option.RequestOption,
-) (*v2.SuccessResponse, error) {
+) (*v3.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Delete(
 		ctx,
 		request,
@@ -125,7 +125,7 @@ func (c *Client) QualifyUsecase(
 	ctx context.Context,
 	request *tendlc.QualifyUsecaseBrandsRequest,
 	opts ...option.RequestOption,
-) (*v2.TenDlcBrandQualificationResult, error) {
+) (*v3.TenDlcBrandQualificationResult, error) {
 	response, err := c.WithRawResponse.QualifyUsecase(
 		ctx,
 		request,

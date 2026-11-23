@@ -6,11 +6,11 @@ import (
 	context "context"
 	http "net/http"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	webrtc "github.com/wavix/wavix-go-sdk/v2/webrtc"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	webrtc "github.com/wavix/wavix-go-sdk/v3/webrtc"
 )
 
 type RawClient struct {
@@ -37,7 +37,7 @@ func (r *RawClient) List(
 	ctx context.Context,
 	request *webrtc.ListTokensRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.WebRtcTokensListResponse], error) {
+) (*core.Response[*v3.WebRtcTokensListResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -56,7 +56,7 @@ func (r *RawClient) List(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.WebRtcTokensListResponse
+	var response *v3.WebRtcTokensListResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -75,7 +75,7 @@ func (r *RawClient) List(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.WebRtcTokensListResponse]{
+	return &core.Response[*v3.WebRtcTokensListResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -86,7 +86,7 @@ func (r *RawClient) Create(
 	ctx context.Context,
 	request *webrtc.WebRtcTokenCreateRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.WebRtcTokenResponse], error) {
+) (*core.Response[*v3.WebRtcTokenResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -99,7 +99,7 @@ func (r *RawClient) Create(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *v2.WebRtcTokenResponse
+	var response *v3.WebRtcTokenResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -119,7 +119,7 @@ func (r *RawClient) Create(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.WebRtcTokenResponse]{
+	return &core.Response[*v3.WebRtcTokenResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -130,7 +130,7 @@ func (r *RawClient) Get(
 	ctx context.Context,
 	request *webrtc.GetTokensRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.WebRtcToken], error) {
+) (*core.Response[*v3.WebRtcToken], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -145,7 +145,7 @@ func (r *RawClient) Get(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.WebRtcToken
+	var response *v3.WebRtcToken
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -164,7 +164,7 @@ func (r *RawClient) Get(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.WebRtcToken]{
+	return &core.Response[*v3.WebRtcToken]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -175,7 +175,7 @@ func (r *RawClient) Update(
 	ctx context.Context,
 	request *webrtc.WebRtcTokenUpdateRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.WebRtcToken], error) {
+) (*core.Response[*v3.WebRtcToken], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -191,7 +191,7 @@ func (r *RawClient) Update(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *v2.WebRtcToken
+	var response *v3.WebRtcToken
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -211,7 +211,7 @@ func (r *RawClient) Update(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.WebRtcToken]{
+	return &core.Response[*v3.WebRtcToken]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -222,7 +222,7 @@ func (r *RawClient) Delete(
 	ctx context.Context,
 	request *webrtc.DeleteTokensRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.SuccessResponse], error) {
+) (*core.Response[*v3.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -237,7 +237,7 @@ func (r *RawClient) Delete(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.SuccessResponse
+	var response *v3.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -256,7 +256,7 @@ func (r *RawClient) Delete(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.SuccessResponse]{
+	return &core.Response[*v3.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

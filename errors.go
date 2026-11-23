@@ -4,7 +4,7 @@ package api
 
 import (
 	json "encoding/json"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
 )
 
 // Request failed. Missing or invalid parameter <param_name>

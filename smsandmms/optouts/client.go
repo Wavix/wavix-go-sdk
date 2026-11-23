@@ -5,11 +5,11 @@ package optouts
 import (
 	context "context"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	smsandmms "github.com/wavix/wavix-go-sdk/v2/smsandmms"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	smsandmms "github.com/wavix/wavix-go-sdk/v3/smsandmms"
 )
 
 type Client struct {
@@ -40,7 +40,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *smsandmms.ListOptOutsRequest,
 	opts ...option.RequestOption,
-) (*v2.OptOutsListResponse, error) {
+) (*v3.OptOutsListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
@@ -57,7 +57,7 @@ func (c *Client) Create(
 	ctx context.Context,
 	request *smsandmms.OptOutCreateRequest,
 	opts ...option.RequestOption,
-) (*v2.SuccessResponse, error) {
+) (*v3.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Create(
 		ctx,
 		request,

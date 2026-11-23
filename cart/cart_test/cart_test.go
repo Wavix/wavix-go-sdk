@@ -11,9 +11,9 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	client "github.com/wavix/wavix-go-sdk/v2/client"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	client "github.com/wavix/wavix-go-sdk/v3/client"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 func VerifyRequestCount(
@@ -110,7 +110,7 @@ func TestCartAddWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.AddCartRequest{
+	request := &v3.AddCartRequest{
 		IDs: []string{
 			"541139862174",
 			"541139862175",
@@ -139,7 +139,7 @@ func TestCartRemoveWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.RemoveCartRequest{
+	request := &v3.RemoveCartRequest{
 		IDs: []string{
 			"541139862174",
 			"541139862175",
@@ -168,7 +168,7 @@ func TestCartCheckoutWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.CheckoutCartRequest{
+	request := &v3.CheckoutCartRequest{
 		IDs: []string{
 			"541139862174",
 			"541139862175",

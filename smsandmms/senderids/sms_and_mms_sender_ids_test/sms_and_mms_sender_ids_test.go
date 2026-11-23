@@ -11,10 +11,10 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	client "github.com/wavix/wavix-go-sdk/v2/client"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	smsandmms "github.com/wavix/wavix-go-sdk/v2/smsandmms"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	client "github.com/wavix/wavix-go-sdk/v3/client"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	smsandmms "github.com/wavix/wavix-go-sdk/v3/smsandmms"
 )
 
 func VerifyRequestCount(
@@ -113,7 +113,7 @@ func TestSmsAndMmsSenderIDsCreateWithWireMock(
 	)
 	request := &smsandmms.SenderIDCreateRequest{
 		SenderID: "Wavix",
-		Type:     v2.SenderIDTypeNumeric,
+		Type:     v3.SenderIDTypeNumeric,
 		Countries: []string{
 			"countries",
 		},

@@ -5,11 +5,11 @@ package client
 import (
 	context "context"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	transcription "github.com/wavix/wavix-go-sdk/v2/cdrs/transcription"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	transcription "github.com/wavix/wavix-go-sdk/v3/cdrs/transcription"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 type Client struct {
@@ -40,9 +40,9 @@ func NewClient(options *core.RequestOptions) *Client {
 // Returns a paginated list of call detail records for the authenticated account, within the requested date range.
 func (c *Client) List(
 	ctx context.Context,
-	request *v2.ListCdrsRequest,
+	request *v3.ListCdrsRequest,
 	opts ...option.RequestOption,
-) (*v2.CdrListResponse, error) {
+) (*v3.CdrListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
@@ -57,9 +57,9 @@ func (c *Client) List(
 // Searches call transcriptions for the given keywords or phrases and returns the matching CDRs with their transcriptions.
 func (c *Client) Search(
 	ctx context.Context,
-	request *v2.CdrSearchRequest,
+	request *v3.CdrSearchRequest,
 	opts ...option.RequestOption,
-) (*v2.CdrTranscriptionSearchResponse, error) {
+) (*v3.CdrTranscriptionSearchResponse, error) {
 	response, err := c.WithRawResponse.Search(
 		ctx,
 		request,
@@ -74,9 +74,9 @@ func (c *Client) Search(
 // Transcribes the recording of the call identified by `call_id`. Transcription is asynchronous; poll the transcription endpoint for the result. When it completes, the new transcription replaces any earlier one that the transcription endpoints return. Billed per minute at the account's call-transcription rate; fails with an insufficient-funds error when the balance cannot cover it.
 func (c *Client) Retranscribe(
 	ctx context.Context,
-	request *v2.CdrRetranscriptionRequest,
+	request *v3.CdrRetranscriptionRequest,
 	opts ...option.RequestOption,
-) (*v2.SuccessResponse, error) {
+) (*v3.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Retranscribe(
 		ctx,
 		request,
@@ -91,9 +91,9 @@ func (c *Client) Retranscribe(
 // Returns the transcription of the recorded call identified by `call_id`. Alias of the `transcription` endpoint.
 func (c *Client) Transcriptions(
 	ctx context.Context,
-	request *v2.TranscriptionsCdrsRequest,
+	request *v3.TranscriptionsCdrsRequest,
 	opts ...option.RequestOption,
-) (*v2.CdrTranscriptionResponse, error) {
+) (*v3.CdrTranscriptionResponse, error) {
 	response, err := c.WithRawResponse.Transcriptions(
 		ctx,
 		request,
@@ -108,9 +108,9 @@ func (c *Client) Transcriptions(
 // Returns the call detail record for the call identified by `call_id`.
 func (c *Client) Get(
 	ctx context.Context,
-	request *v2.GetCdrsRequest,
+	request *v3.GetCdrsRequest,
 	opts ...option.RequestOption,
-) (*v2.CdrResponse, error) {
+) (*v3.CdrResponse, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		request,
@@ -125,7 +125,7 @@ func (c *Client) Get(
 // Streams matching call detail records as newline-delimited JSON (NDJSON), one record per line, for bulk export.
 func (c *Client) ListAll(
 	ctx context.Context,
-	request *v2.ListAllCdrsRequest,
+	request *v3.ListAllCdrsRequest,
 	opts ...option.RequestOption,
 ) (string, error) {
 	response, err := c.WithRawResponse.ListAll(

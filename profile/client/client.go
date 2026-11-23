@@ -5,11 +5,11 @@ package client
 import (
 	context "context"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	config "github.com/wavix/wavix-go-sdk/v2/profile/config"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	config "github.com/wavix/wavix-go-sdk/v3/profile/config"
 )
 
 type Client struct {
@@ -41,7 +41,7 @@ func NewClient(options *core.RequestOptions) *Client {
 func (c *Client) Get(
 	ctx context.Context,
 	opts ...option.RequestOption,
-) (*v2.ProfileResponse, error) {
+) (*v3.ProfileResponse, error) {
 	response, err := c.WithRawResponse.Get(
 		ctx,
 		opts...,
@@ -55,9 +55,9 @@ func (c *Client) Get(
 // Updates the profile and billing details of the authenticated account.
 func (c *Client) Update(
 	ctx context.Context,
-	request *v2.ProfileUpdateRequest,
+	request *v3.ProfileUpdateRequest,
 	opts ...option.RequestOption,
-) (*v2.ProfileResponse, error) {
+) (*v3.ProfileResponse, error) {
 	response, err := c.WithRawResponse.Update(
 		ctx,
 		request,

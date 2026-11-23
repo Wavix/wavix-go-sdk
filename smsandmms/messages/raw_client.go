@@ -6,11 +6,11 @@ import (
 	context "context"
 	http "net/http"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	smsandmms "github.com/wavix/wavix-go-sdk/v2/smsandmms"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	smsandmms "github.com/wavix/wavix-go-sdk/v3/smsandmms"
 )
 
 type RawClient struct {
@@ -37,7 +37,7 @@ func (r *RawClient) List(
 	ctx context.Context,
 	request *smsandmms.ListMessagesRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.MessageListResponse], error) {
+) (*core.Response[*v3.MessageListResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -56,7 +56,7 @@ func (r *RawClient) List(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.MessageListResponse
+	var response *v3.MessageListResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -75,7 +75,7 @@ func (r *RawClient) List(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.MessageListResponse]{
+	return &core.Response[*v3.MessageListResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -86,7 +86,7 @@ func (r *RawClient) Send(
 	ctx context.Context,
 	request *smsandmms.SendMessagesRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.SendMessagesResponse], error) {
+) (*core.Response[*v3.SendMessagesResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -99,7 +99,7 @@ func (r *RawClient) Send(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *v2.SendMessagesResponse
+	var response *v3.SendMessagesResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -119,7 +119,7 @@ func (r *RawClient) Send(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.SendMessagesResponse]{
+	return &core.Response[*v3.SendMessagesResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -130,7 +130,7 @@ func (r *RawClient) Get(
 	ctx context.Context,
 	request *smsandmms.GetMessagesRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.MessageResponse], error) {
+) (*core.Response[*v3.MessageResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -145,7 +145,7 @@ func (r *RawClient) Get(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.MessageResponse
+	var response *v3.MessageResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -164,7 +164,7 @@ func (r *RawClient) Get(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.MessageResponse]{
+	return &core.Response[*v3.MessageResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

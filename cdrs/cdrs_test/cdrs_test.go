@@ -11,9 +11,9 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	client "github.com/wavix/wavix-go-sdk/v2/client"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	client "github.com/wavix/wavix-go-sdk/v3/client"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 func VerifyRequestCount(
@@ -88,30 +88,30 @@ func TestCdrsListWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.ListCdrsRequest{
-		From: v2.MustParseDate(
+	request := &v3.ListCdrsRequest{
+		From: v3.MustParseDate(
 			"2023-01-01",
 		),
-		To: v2.MustParseDate(
+		To: v3.MustParseDate(
 			"2023-09-01",
 		),
 		Type: "received",
-		FromSearch: v2.String(
+		FromSearch: v3.String(
 			"13524815863",
 		),
-		ToSearch: v2.String(
+		ToSearch: v3.String(
 			"12565378257",
 		),
-		SipTrunk: v2.String(
+		SipTrunk: v3.String(
 			"12321",
 		),
-		UUID: v2.String(
+		UUID: v3.String(
 			"99df5ffd-962a-410f-bcce-d08f1f7f328c",
 		),
-		Page: v2.Int(
+		Page: v3.Int(
 			1,
 		),
-		PerPage: v2.Int(
+		PerPage: v3.Int(
 			25,
 		),
 	}
@@ -138,12 +138,12 @@ func TestCdrsSearchWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.CdrSearchRequest{
-		Type: v2.CdrSearchRequestTypePlaced,
-		From: v2.MustParseDate(
+	request := &v3.CdrSearchRequest{
+		Type: v3.CdrSearchRequestTypePlaced,
+		From: v3.MustParseDate(
 			"2023-08-01",
 		),
-		To: v2.MustParseDate(
+		To: v3.MustParseDate(
 			"2023-08-31",
 		),
 	}
@@ -170,7 +170,7 @@ func TestCdrsRetranscribeWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.CdrRetranscriptionRequest{
+	request := &v3.CdrRetranscriptionRequest{
 		CallID: "bbaa37bf-430a-46da-ade3-c248e4070160",
 	}
 	_, invocationErr := client.Cdrs.Retranscribe(
@@ -196,7 +196,7 @@ func TestCdrsTranscriptionsWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.TranscriptionsCdrsRequest{
+	request := &v3.TranscriptionsCdrsRequest{
 		CallID: "bbaa37bf-430a-46da-ade3-c248e4070160",
 	}
 	_, invocationErr := client.Cdrs.Transcriptions(
@@ -222,9 +222,9 @@ func TestCdrsGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.GetCdrsRequest{
+	request := &v3.GetCdrsRequest{
 		CallID: "aa566501-c591-4a8b-b3b9-cc1295398b72",
-		ShowTranscription: v2.Bool(
+		ShowTranscription: v3.Bool(
 			true,
 		),
 	}
@@ -251,30 +251,30 @@ func TestCdrsListAllWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.ListAllCdrsRequest{
-		From: v2.MustParseDate(
+	request := &v3.ListAllCdrsRequest{
+		From: v3.MustParseDate(
 			"2023-01-01",
 		),
-		To: v2.MustParseDate(
+		To: v3.MustParseDate(
 			"2023-09-01",
 		),
 		Type: "received",
-		FromSearch: v2.String(
+		FromSearch: v3.String(
 			"13524815863",
 		),
-		ToSearch: v2.String(
+		ToSearch: v3.String(
 			"12565378257",
 		),
-		SipTrunk: v2.String(
+		SipTrunk: v3.String(
 			"12321",
 		),
-		UUID: v2.String(
+		UUID: v3.String(
 			"99df5ffd-962a-410f-bcce-d08f1f7f328c",
 		),
-		Page: v2.Int(
+		Page: v3.Int(
 			1,
 		),
-		PerPage: v2.Int(
+		PerPage: v3.Int(
 			25,
 		),
 	}

@@ -5,11 +5,11 @@ package campaignnumbers
 import (
 	context "context"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	tendlc "github.com/wavix/wavix-go-sdk/v2/tendlc"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	tendlc "github.com/wavix/wavix-go-sdk/v3/tendlc"
 )
 
 type Client struct {
@@ -40,7 +40,7 @@ func (c *Client) Link(
 	ctx context.Context,
 	request *tendlc.LinkCampaignNumbersRequest,
 	opts ...option.RequestOption,
-) (*v2.SuccessResponse, error) {
+) (*v3.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Link(
 		ctx,
 		request,
@@ -57,7 +57,7 @@ func (c *Client) Unlink(
 	ctx context.Context,
 	request *tendlc.UnlinkCampaignNumbersRequest,
 	opts ...option.RequestOption,
-) (*v2.SuccessResponse, error) {
+) (*v3.SuccessResponse, error) {
 	response, err := c.WithRawResponse.Unlink(
 		ctx,
 		request,
@@ -74,7 +74,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *tendlc.ListCampaignNumbersRequest,
 	opts ...option.RequestOption,
-) (*v2.TenDlcCampaignNumberListResponse, error) {
+) (*v3.TenDlcCampaignNumberListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,

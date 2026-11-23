@@ -11,10 +11,10 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	client "github.com/wavix/wavix-go-sdk/v2/client"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
-	tendlc "github.com/wavix/wavix-go-sdk/v2/tendlc"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	client "github.com/wavix/wavix-go-sdk/v3/client"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
+	tendlc "github.com/wavix/wavix-go-sdk/v3/tendlc"
 )
 
 func VerifyRequestCount(
@@ -90,32 +90,32 @@ func TestTenDlcCampaignsListWithWireMock(
 		option.WithToken("test-token"),
 	)
 	request := &tendlc.ListCampaignsRequest{
-		Name: v2.String(
+		Name: v3.String(
 			"Name",
 		),
-		Usecase: v2.String(
+		Usecase: v3.String(
 			"2FA",
 		),
-		Status: v2.String(
+		Status: v3.String(
 			"APPROVED",
 		),
-		Mock: v2.Bool(
+		Mock: v3.Bool(
 			true,
 		),
-		CreatedBefore: v2.Time(
-			v2.MustParseDate(
+		CreatedBefore: v3.Time(
+			v3.MustParseDate(
 				"2024-08-22",
 			),
 		),
-		CreatedAfter: v2.Time(
-			v2.MustParseDate(
+		CreatedAfter: v3.Time(
+			v3.MustParseDate(
 				"2024-08-22",
 			),
 		),
-		Page: v2.Int(
+		Page: v3.Int(
 			1,
 		),
-		PerPage: v2.Int(
+		PerPage: v3.Int(
 			25,
 		),
 	}
@@ -144,32 +144,32 @@ func TestTenDlcCampaignsListByBrandWithWireMock(
 	)
 	request := &tendlc.ListByBrandCampaignsRequest{
 		BrandID: "BM20QP9",
-		Name: v2.String(
+		Name: v3.String(
 			"Name",
 		),
-		Usecase: v2.String(
+		Usecase: v3.String(
 			"2FA",
 		),
-		Status: v2.String(
+		Status: v3.String(
 			"APPROVED",
 		),
-		Mock: v2.Bool(
+		Mock: v3.Bool(
 			true,
 		),
-		CreatedBefore: v2.Time(
-			v2.MustParseDate(
+		CreatedBefore: v3.Time(
+			v3.MustParseDate(
 				"2024-08-22",
 			),
 		),
-		CreatedAfter: v2.Time(
-			v2.MustParseDate(
+		CreatedAfter: v3.Time(
+			v3.MustParseDate(
 				"2024-08-22",
 			),
 		),
-		Page: v2.Int(
+		Page: v3.Int(
 			1,
 		),
-		PerPage: v2.Int(
+		PerPage: v3.Int(
 			25,
 		),
 	}
@@ -203,10 +203,10 @@ func TestTenDlcCampaignsCreateWithWireMock(
 		AutoRenewal:        false,
 		DirectLending:      false,
 		EmbeddedLinks:      false,
-		EmbeddedPhones: v2.Bool(
+		EmbeddedPhones: v3.Bool(
 			false,
 		),
-		EmbeddedLinkSample: v2.String(
+		EmbeddedLinkSample: v3.String(
 			"https://site.com/verify",
 		),
 		Description:    "Our campaign aims to …",
@@ -222,21 +222,21 @@ func TestTenDlcCampaignsCreateWithWireMock(
 		OptoutMessage:  "You are now opted out and will receive no further messages",
 		Name:           "My first campaign",
 		Sample1:        "Your verification code is XXXXXX",
-		Sample2: v2.String(
+		Sample2: v3.String(
 			"XXXX is your verification code",
 		),
-		Sample3: v2.String(
+		Sample3: v3.String(
 			"Your code is XXXXXX, valid for 10 minutes",
 		),
-		Sample4: v2.String(
+		Sample4: v3.String(
 			"Use code XXXXXX to confirm your login",
 		),
-		Sample5: v2.String(
+		Sample5: v3.String(
 			"XXXXXX is your one-time passcode",
 		),
 		Mock:    false,
 		Usecase: "2FA",
-		PrivacyPolicy: v2.String(
+		PrivacyPolicy: v3.String(
 			"https://site.com/privacy-policy",
 		),
 		TermsConditions: "https://site.com/terms-and-conditions",

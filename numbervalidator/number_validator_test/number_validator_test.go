@@ -11,9 +11,9 @@ import (
 	testing "testing"
 
 	require "github.com/stretchr/testify/require"
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	client "github.com/wavix/wavix-go-sdk/v2/client"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	client "github.com/wavix/wavix-go-sdk/v3/client"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 func VerifyRequestCount(
@@ -88,9 +88,9 @@ func TestNumberValidatorGetWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.GetNumberValidatorRequest{
+	request := &v3.GetNumberValidatorRequest{
 		PhoneNumber: "971569483322",
-		Type:        v2.PhoneNumberValidationTypeFormat,
+		Type:        v3.PhoneNumberValidationTypeFormat,
 	}
 	_, invocationErr := client.NumberValidator.Get(
 		context.TODO(),
@@ -115,12 +115,12 @@ func TestNumberValidatorCreateBulkWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &v2.PhoneValidationRequest{
+	request := &v3.PhoneValidationRequest{
 		PhoneNumbers: []string{
 			"971501390098",
 			"971504359195",
 		},
-		Type: v2.PhoneNumberValidationTypeFormat,
+		Type: v3.PhoneNumberValidationTypeFormat,
 	}
 	_, invocationErr := client.NumberValidator.CreateBulk(
 		context.TODO(),

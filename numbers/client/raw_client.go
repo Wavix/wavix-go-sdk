@@ -6,10 +6,10 @@ import (
 	context "context"
 	http "net/http"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 type RawClient struct {
@@ -34,9 +34,9 @@ func NewRawClient(options *core.RequestOptions) *RawClient {
 
 func (r *RawClient) List(
 	ctx context.Context,
-	request *v2.ListNumbersRequest,
+	request *v3.ListNumbersRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.NumberListResponse], error) {
+) (*core.Response[*v3.NumberListResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -55,7 +55,7 @@ func (r *RawClient) List(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.NumberListResponse
+	var response *v3.NumberListResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -68,13 +68,13 @@ func (r *RawClient) List(
 			QueryParameters: options.QueryParameters,
 			Client:          options.HTTPClient,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v3.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.NumberListResponse]{
+	return &core.Response[*v3.NumberListResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -83,9 +83,9 @@ func (r *RawClient) List(
 
 func (r *RawClient) Delete(
 	ctx context.Context,
-	request *v2.DeleteNumbersRequest,
+	request *v3.DeleteNumbersRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.SuccessResponse], error) {
+) (*core.Response[*v3.SuccessResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -104,7 +104,7 @@ func (r *RawClient) Delete(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.SuccessResponse
+	var response *v3.SuccessResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -117,13 +117,13 @@ func (r *RawClient) Delete(
 			QueryParameters: options.QueryParameters,
 			Client:          options.HTTPClient,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v3.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.SuccessResponse]{
+	return &core.Response[*v3.SuccessResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -132,9 +132,9 @@ func (r *RawClient) Delete(
 
 func (r *RawClient) BulkUpdate(
 	ctx context.Context,
-	request *v2.NumberBulkUpdateRequest,
+	request *v3.NumberBulkUpdateRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.BulkUpdateNumbersResponse], error) {
+) (*core.Response[*v3.BulkUpdateNumbersResponse], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -147,7 +147,7 @@ func (r *RawClient) BulkUpdate(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *v2.BulkUpdateNumbersResponse
+	var response *v3.BulkUpdateNumbersResponse
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -161,13 +161,13 @@ func (r *RawClient) BulkUpdate(
 			Client:          options.HTTPClient,
 			Request:         request,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v3.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.BulkUpdateNumbersResponse]{
+	return &core.Response[*v3.BulkUpdateNumbersResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -176,9 +176,9 @@ func (r *RawClient) BulkUpdate(
 
 func (r *RawClient) Get(
 	ctx context.Context,
-	request *v2.GetNumbersRequest,
+	request *v3.GetNumbersRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.Number], error) {
+) (*core.Response[*v3.Number], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -193,7 +193,7 @@ func (r *RawClient) Get(
 		r.options.ToHeader(),
 		options.ToHeader(),
 	)
-	var response *v2.Number
+	var response *v3.Number
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -206,13 +206,13 @@ func (r *RawClient) Get(
 			QueryParameters: options.QueryParameters,
 			Client:          options.HTTPClient,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v3.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.Number]{
+	return &core.Response[*v3.Number]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -221,9 +221,9 @@ func (r *RawClient) Get(
 
 func (r *RawClient) Update(
 	ctx context.Context,
-	request *v2.NumberUpdateRequest,
+	request *v3.NumberUpdateRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*v2.Number], error) {
+) (*core.Response[*v3.Number], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
@@ -239,7 +239,7 @@ func (r *RawClient) Update(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *v2.Number
+	var response *v3.Number
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -253,13 +253,13 @@ func (r *RawClient) Update(
 			Client:          options.HTTPClient,
 			Request:         request,
 			Response:        &response,
-			ErrorDecoder:    internal.NewErrorDecoder(v2.ErrorCodes),
+			ErrorDecoder:    internal.NewErrorDecoder(v3.ErrorCodes),
 		},
 	)
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*v2.Number]{
+	return &core.Response[*v3.Number]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

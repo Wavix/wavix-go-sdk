@@ -4,7 +4,7 @@ package client
 
 import (
 	assert "github.com/stretchr/testify/assert"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 	http "net/http"
 	testing "testing"
 	time "time"

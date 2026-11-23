@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/wavix/wavix-go-sdk/v2/core"
+	"github.com/wavix/wavix-go-sdk/v3/core"
 )
 
 func TestErrorDecoder(t *testing.T) {

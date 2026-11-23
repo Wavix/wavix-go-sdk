@@ -448,6 +448,14 @@ func TestSettersSubOrganizationResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetRedactedAPIKey", func(t *testing.T) {
+		obj := &SubOrganizationResponse{}
+		var fernTestValueRedactedAPIKey *string
+		obj.SetRedactedAPIKey(fernTestValueRedactedAPIKey)
+		assert.Equal(t, fernTestValueRedactedAPIKey, obj.RedactedAPIKey)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetMasterOrganization", func(t *testing.T) {
 		obj := &SubOrganizationResponse{}
 		var fernTestValueMasterOrganization int
@@ -565,6 +573,39 @@ func TestGettersSubOrganizationResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetAPIKey() // Should return zero value
+	})
+
+	t.Run("GetRedactedAPIKey", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationResponse{}
+		var expected *string
+		obj.RedactedAPIKey = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRedactedAPIKey(), "getter should return the property value")
+	})
+
+	t.Run("GetRedactedAPIKey_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationResponse{}
+		obj.RedactedAPIKey = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRedactedAPIKey(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRedactedAPIKey_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubOrganizationResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRedactedAPIKey() // Should return zero value
 	})
 
 	t.Run("GetMasterOrganization", func(t *testing.T) {
@@ -750,6 +791,37 @@ func TestSettersMarkExplicitSubOrganizationResponse(t *testing.T) {
 
 		// Act
 		obj.SetAPIKey(fernTestValueAPIKey)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRedactedAPIKey_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationResponse{}
+		var fernTestValueRedactedAPIKey *string
+
+		// Act
+		obj.SetRedactedAPIKey(fernTestValueRedactedAPIKey)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -972,6 +1044,664 @@ func TestSettersMarkExplicitSubOrganizationResponseDefaultDestinations(t *testin
 		t.Parallel()
 		// Arrange
 		obj := &SubOrganizationResponseDefaultDestinations{}
+		var fernTestValueDlrEndpoint string
+
+		// Act
+		obj.SetDlrEndpoint(fernTestValueDlrEndpoint)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersSubOrganizationWithSecret(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &SubOrganizationWithSecret{}
+		var fernTestValueID int
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCreatedAt", func(t *testing.T) {
+		obj := &SubOrganizationWithSecret{}
+		var fernTestValueCreatedAt time.Time
+		obj.SetCreatedAt(fernTestValueCreatedAt)
+		assert.Equal(t, fernTestValueCreatedAt, obj.CreatedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetName", func(t *testing.T) {
+		obj := &SubOrganizationWithSecret{}
+		var fernTestValueName string
+		obj.SetName(fernTestValueName)
+		assert.Equal(t, fernTestValueName, obj.Name)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAPIKey", func(t *testing.T) {
+		obj := &SubOrganizationWithSecret{}
+		var fernTestValueAPIKey string
+		obj.SetAPIKey(fernTestValueAPIKey)
+		assert.Equal(t, fernTestValueAPIKey, obj.APIKey)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRedactedAPIKey", func(t *testing.T) {
+		obj := &SubOrganizationWithSecret{}
+		var fernTestValueRedactedAPIKey *string
+		obj.SetRedactedAPIKey(fernTestValueRedactedAPIKey)
+		assert.Equal(t, fernTestValueRedactedAPIKey, obj.RedactedAPIKey)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMasterOrganization", func(t *testing.T) {
+		obj := &SubOrganizationWithSecret{}
+		var fernTestValueMasterOrganization int
+		obj.SetMasterOrganization(fernTestValueMasterOrganization)
+		assert.Equal(t, fernTestValueMasterOrganization, obj.MasterOrganization)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetStatus", func(t *testing.T) {
+		obj := &SubOrganizationWithSecret{}
+		var fernTestValueStatus SubOrganizationWithSecretStatus
+		obj.SetStatus(fernTestValueStatus)
+		assert.Equal(t, fernTestValueStatus, obj.Status)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDefaultDestinations", func(t *testing.T) {
+		obj := &SubOrganizationWithSecret{}
+		var fernTestValueDefaultDestinations *SubOrganizationWithSecretDefaultDestinations
+		obj.SetDefaultDestinations(fernTestValueDefaultDestinations)
+		assert.Equal(t, fernTestValueDefaultDestinations, obj.DefaultDestinations)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersSubOrganizationWithSecret(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecret{}
+		var expected int
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubOrganizationWithSecret
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetCreatedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecret{}
+		var expected time.Time
+		obj.CreatedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCreatedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetCreatedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubOrganizationWithSecret
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCreatedAt() // Should return zero value
+	})
+
+	t.Run("GetName", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecret{}
+		var expected string
+		obj.Name = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetName(), "getter should return the property value")
+	})
+
+	t.Run("GetName_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubOrganizationWithSecret
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetName() // Should return zero value
+	})
+
+	t.Run("GetAPIKey", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecret{}
+		var expected string
+		obj.APIKey = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAPIKey(), "getter should return the property value")
+	})
+
+	t.Run("GetAPIKey_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubOrganizationWithSecret
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAPIKey() // Should return zero value
+	})
+
+	t.Run("GetRedactedAPIKey", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecret{}
+		var expected *string
+		obj.RedactedAPIKey = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRedactedAPIKey(), "getter should return the property value")
+	})
+
+	t.Run("GetRedactedAPIKey_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecret{}
+		obj.RedactedAPIKey = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRedactedAPIKey(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRedactedAPIKey_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubOrganizationWithSecret
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRedactedAPIKey() // Should return zero value
+	})
+
+	t.Run("GetMasterOrganization", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecret{}
+		var expected int
+		obj.MasterOrganization = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMasterOrganization(), "getter should return the property value")
+	})
+
+	t.Run("GetMasterOrganization_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubOrganizationWithSecret
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMasterOrganization() // Should return zero value
+	})
+
+	t.Run("GetStatus", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecret{}
+		var expected SubOrganizationWithSecretStatus
+		obj.Status = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetStatus(), "getter should return the property value")
+	})
+
+	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubOrganizationWithSecret
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetStatus() // Should return zero value
+	})
+
+	t.Run("GetDefaultDestinations", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecret{}
+		var expected *SubOrganizationWithSecretDefaultDestinations
+		obj.DefaultDestinations = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDefaultDestinations(), "getter should return the property value")
+	})
+
+	t.Run("GetDefaultDestinations_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecret{}
+		obj.DefaultDestinations = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDefaultDestinations(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDefaultDestinations_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubOrganizationWithSecret
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDefaultDestinations() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitSubOrganizationWithSecret(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecret{}
+		var fernTestValueID int
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecret{}
+		var fernTestValueCreatedAt time.Time
+
+		// Act
+		obj.SetCreatedAt(fernTestValueCreatedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecret{}
+		var fernTestValueName string
+
+		// Act
+		obj.SetName(fernTestValueName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAPIKey_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecret{}
+		var fernTestValueAPIKey string
+
+		// Act
+		obj.SetAPIKey(fernTestValueAPIKey)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRedactedAPIKey_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecret{}
+		var fernTestValueRedactedAPIKey *string
+
+		// Act
+		obj.SetRedactedAPIKey(fernTestValueRedactedAPIKey)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMasterOrganization_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecret{}
+		var fernTestValueMasterOrganization int
+
+		// Act
+		obj.SetMasterOrganization(fernTestValueMasterOrganization)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecret{}
+		var fernTestValueStatus SubOrganizationWithSecretStatus
+
+		// Act
+		obj.SetStatus(fernTestValueStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDefaultDestinations_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecret{}
+		var fernTestValueDefaultDestinations *SubOrganizationWithSecretDefaultDestinations
+
+		// Act
+		obj.SetDefaultDestinations(fernTestValueDefaultDestinations)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersSubOrganizationWithSecretDefaultDestinations(t *testing.T) {
+	t.Run("SetSmsEndpoint", func(t *testing.T) {
+		obj := &SubOrganizationWithSecretDefaultDestinations{}
+		var fernTestValueSmsEndpoint string
+		obj.SetSmsEndpoint(fernTestValueSmsEndpoint)
+		assert.Equal(t, fernTestValueSmsEndpoint, obj.SmsEndpoint)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDlrEndpoint", func(t *testing.T) {
+		obj := &SubOrganizationWithSecretDefaultDestinations{}
+		var fernTestValueDlrEndpoint string
+		obj.SetDlrEndpoint(fernTestValueDlrEndpoint)
+		assert.Equal(t, fernTestValueDlrEndpoint, obj.DlrEndpoint)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersSubOrganizationWithSecretDefaultDestinations(t *testing.T) {
+	t.Run("GetSmsEndpoint", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecretDefaultDestinations{}
+		var expected string
+		obj.SmsEndpoint = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSmsEndpoint(), "getter should return the property value")
+	})
+
+	t.Run("GetSmsEndpoint_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubOrganizationWithSecretDefaultDestinations
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSmsEndpoint() // Should return zero value
+	})
+
+	t.Run("GetDlrEndpoint", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecretDefaultDestinations{}
+		var expected string
+		obj.DlrEndpoint = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDlrEndpoint(), "getter should return the property value")
+	})
+
+	t.Run("GetDlrEndpoint_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubOrganizationWithSecretDefaultDestinations
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDlrEndpoint() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitSubOrganizationWithSecretDefaultDestinations(t *testing.T) {
+	t.Run("SetSmsEndpoint_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecretDefaultDestinations{}
+		var fernTestValueSmsEndpoint string
+
+		// Act
+		obj.SetSmsEndpoint(fernTestValueSmsEndpoint)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDlrEndpoint_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecretDefaultDestinations{}
 		var fernTestValueDlrEndpoint string
 
 		// Act
@@ -1634,6 +2364,72 @@ func TestJSONMarshalingSubOrganizationResponseDefaultDestinations(t *testing.T) 
 	})
 }
 
+func TestJSONMarshalingSubOrganizationWithSecret(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecret{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled SubOrganizationWithSecret
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj SubOrganizationWithSecret
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj SubOrganizationWithSecret
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingSubOrganizationWithSecretDefaultDestinations(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubOrganizationWithSecretDefaultDestinations{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled SubOrganizationWithSecretDefaultDestinations
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj SubOrganizationWithSecretDefaultDestinations
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj SubOrganizationWithSecretDefaultDestinations
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestStringSubAccountsCreateRequestDefaultDestinations(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -1709,6 +2505,38 @@ func TestStringSubOrganizationResponseDefaultDestinations(t *testing.T) {
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *SubOrganizationResponseDefaultDestinations
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringSubOrganizationWithSecret(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &SubOrganizationWithSecret{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubOrganizationWithSecret
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringSubOrganizationWithSecretDefaultDestinations(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &SubOrganizationWithSecretDefaultDestinations{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubOrganizationWithSecretDefaultDestinations
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -1794,6 +2622,35 @@ func TestEnumSubOrganizationResponseStatus(t *testing.T) {
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewSubOrganizationResponseStatusFromString("enabled")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumSubOrganizationWithSecretStatus(t *testing.T) {
+	t.Run("NewFromString_enabled", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubOrganizationWithSecretStatusFromString("enabled")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubOrganizationWithSecretStatus("enabled"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_disabled", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubOrganizationWithSecretStatusFromString("disabled")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubOrganizationWithSecretStatus("disabled"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewSubOrganizationWithSecretStatusFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewSubOrganizationWithSecretStatusFromString("enabled")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -1911,6 +2768,52 @@ func TestExtraPropertiesSubOrganizationResponseDefaultDestinations(t *testing.T)
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *SubOrganizationResponseDefaultDestinations
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesSubOrganizationWithSecret(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &SubOrganizationWithSecret{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubOrganizationWithSecret
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesSubOrganizationWithSecretDefaultDestinations(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &SubOrganizationWithSecretDefaultDestinations{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubOrganizationWithSecretDefaultDestinations
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

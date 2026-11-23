@@ -5,11 +5,11 @@ package cities
 import (
 	context "context"
 
-	v2 "github.com/wavix/wavix-go-sdk/v2"
-	buy "github.com/wavix/wavix-go-sdk/v2/buy"
-	core "github.com/wavix/wavix-go-sdk/v2/core"
-	internal "github.com/wavix/wavix-go-sdk/v2/internal"
-	option "github.com/wavix/wavix-go-sdk/v2/option"
+	v3 "github.com/wavix/wavix-go-sdk/v3"
+	buy "github.com/wavix/wavix-go-sdk/v3/buy"
+	core "github.com/wavix/wavix-go-sdk/v3/core"
+	internal "github.com/wavix/wavix-go-sdk/v3/internal"
+	option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 type Client struct {
@@ -42,7 +42,7 @@ func (c *Client) List(
 	ctx context.Context,
 	request *buy.ListCitiesRequest,
 	opts ...option.RequestOption,
-) (*v2.CityListResponse, error) {
+) (*v3.CityListResponse, error) {
 	response, err := c.WithRawResponse.List(
 		ctx,
 		request,
