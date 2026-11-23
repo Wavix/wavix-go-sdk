@@ -122,6 +122,8 @@ func TestTenDlcBrandVettingAppealsCreateWithWireMock(
 		Evidence: []string{
 			"855dff49-c097-4645-3983-08dcb9856232",
 		},
+		EvpID:     "AEGIS",
+		VettingID: "48c0ffaa-4e51-4d44-3982-08dcb9856232",
 	}
 	_, invocationErr := client.TenDlc.BrandVettingAppeals.Create(
 		context.TODO(),

@@ -17,7 +17,7 @@ var (
 )
 
 type PhoneValidationRequest struct {
-	// List of phone numbers to get detailed information about. Maximum 1000 numbers per request.
+	// List of phone numbers to get detailed information about. Maximum 500 numbers per request, or 100000 when `async` is `true`.
 	PhoneNumbers []string                  `json:"phone_numbers" url:"-"`
 	Type         PhoneNumberValidationType `json:"type" url:"-"`
 	// Indicates whether the request should be executed asynchronously. If `true`, the response will include a `request_uuid` that can be used to poll for results. If `false` (default), the response will include validation results directly.
@@ -123,8 +123,8 @@ func (g *GetNumberValidatorRequest) SetType(type_ PhoneNumberValidationType) {
 
 type NumberValidatorCreateBulkResponse struct {
 	PhoneValidationBatchResponse *PhoneValidationBatchResponse
-	// Returned when validation runs asynchronously; poll results using `request_id`.
-	NumberValidatorCreateBulkResponseRequestID *NumberValidatorCreateBulkResponseRequestID
+	// Returned when validation runs asynchronously; poll results using `request_uuid`.
+	NumberValidatorCreateBulkResponseRequestUUID *NumberValidatorCreateBulkResponseRequestUUID
 
 	typ string
 }
@@ -136,11 +136,11 @@ func (n *NumberValidatorCreateBulkResponse) GetPhoneValidationBatchResponse() *P
 	return n.PhoneValidationBatchResponse
 }
 
-func (n *NumberValidatorCreateBulkResponse) GetNumberValidatorCreateBulkResponseRequestID() *NumberValidatorCreateBulkResponseRequestID {
+func (n *NumberValidatorCreateBulkResponse) GetNumberValidatorCreateBulkResponseRequestUUID() *NumberValidatorCreateBulkResponseRequestUUID {
 	if n == nil {
 		return nil
 	}
-	return n.NumberValidatorCreateBulkResponseRequestID
+	return n.NumberValidatorCreateBulkResponseRequestUUID
 }
 
 func (n *NumberValidatorCreateBulkResponse) UnmarshalJSON(data []byte) error {
@@ -150,10 +150,10 @@ func (n *NumberValidatorCreateBulkResponse) UnmarshalJSON(data []byte) error {
 		n.PhoneValidationBatchResponse = valuePhoneValidationBatchResponse
 		return nil
 	}
-	valueNumberValidatorCreateBulkResponseRequestID := new(NumberValidatorCreateBulkResponseRequestID)
-	if err := json.Unmarshal(data, &valueNumberValidatorCreateBulkResponseRequestID); err == nil {
-		n.typ = "NumberValidatorCreateBulkResponseRequestID"
-		n.NumberValidatorCreateBulkResponseRequestID = valueNumberValidatorCreateBulkResponseRequestID
+	valueNumberValidatorCreateBulkResponseRequestUUID := new(NumberValidatorCreateBulkResponseRequestUUID)
+	if err := json.Unmarshal(data, &valueNumberValidatorCreateBulkResponseRequestUUID); err == nil {
+		n.typ = "NumberValidatorCreateBulkResponseRequestUUID"
+		n.NumberValidatorCreateBulkResponseRequestUUID = valueNumberValidatorCreateBulkResponseRequestUUID
 		return nil
 	}
 	return fmt.Errorf("%s cannot be deserialized as a %T", data, n)
@@ -163,35 +163,35 @@ func (n NumberValidatorCreateBulkResponse) MarshalJSON() ([]byte, error) {
 	if n.typ == "PhoneValidationBatchResponse" || n.PhoneValidationBatchResponse != nil {
 		return json.Marshal(n.PhoneValidationBatchResponse)
 	}
-	if n.typ == "NumberValidatorCreateBulkResponseRequestID" || n.NumberValidatorCreateBulkResponseRequestID != nil {
-		return json.Marshal(n.NumberValidatorCreateBulkResponseRequestID)
+	if n.typ == "NumberValidatorCreateBulkResponseRequestUUID" || n.NumberValidatorCreateBulkResponseRequestUUID != nil {
+		return json.Marshal(n.NumberValidatorCreateBulkResponseRequestUUID)
 	}
 	return nil, fmt.Errorf("type %T does not include a non-empty union type", n)
 }
 
 type NumberValidatorCreateBulkResponseVisitor interface {
 	VisitPhoneValidationBatchResponse(*PhoneValidationBatchResponse) error
-	VisitNumberValidatorCreateBulkResponseRequestID(*NumberValidatorCreateBulkResponseRequestID) error
+	VisitNumberValidatorCreateBulkResponseRequestUUID(*NumberValidatorCreateBulkResponseRequestUUID) error
 }
 
 func (n *NumberValidatorCreateBulkResponse) Accept(visitor NumberValidatorCreateBulkResponseVisitor) error {
 	if n.typ == "PhoneValidationBatchResponse" || n.PhoneValidationBatchResponse != nil {
 		return visitor.VisitPhoneValidationBatchResponse(n.PhoneValidationBatchResponse)
 	}
-	if n.typ == "NumberValidatorCreateBulkResponseRequestID" || n.NumberValidatorCreateBulkResponseRequestID != nil {
-		return visitor.VisitNumberValidatorCreateBulkResponseRequestID(n.NumberValidatorCreateBulkResponseRequestID)
+	if n.typ == "NumberValidatorCreateBulkResponseRequestUUID" || n.NumberValidatorCreateBulkResponseRequestUUID != nil {
+		return visitor.VisitNumberValidatorCreateBulkResponseRequestUUID(n.NumberValidatorCreateBulkResponseRequestUUID)
 	}
 	return fmt.Errorf("type %T does not include a non-empty union type", n)
 }
 
-// Returned when validation runs asynchronously; poll results using `request_id`.
+// Returned when validation runs asynchronously; poll results using `request_uuid`.
 var (
-	numberValidatorCreateBulkResponseRequestIDFieldRequestID = big.NewInt(1 << 0)
+	numberValidatorCreateBulkResponseRequestUUIDFieldRequestUUID = big.NewInt(1 << 0)
 )
 
-type NumberValidatorCreateBulkResponseRequestID struct {
-	// Request ID. Use to poll validation results when `async` is `true`.
-	RequestID *string `json:"request_id,omitempty" url:"request_id,omitempty"`
+type NumberValidatorCreateBulkResponseRequestUUID struct {
+	// ID of the validation request. Pass it as `request_id` to retrieve the results when `async` is `true`.
+	RequestUUID string `json:"request_uuid" url:"request_uuid"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -200,41 +200,41 @@ type NumberValidatorCreateBulkResponseRequestID struct {
 	rawJSON         json.RawMessage
 }
 
-func (n *NumberValidatorCreateBulkResponseRequestID) GetRequestID() *string {
+func (n *NumberValidatorCreateBulkResponseRequestUUID) GetRequestUUID() string {
 	if n == nil {
-		return nil
+		return ""
 	}
-	return n.RequestID
+	return n.RequestUUID
 }
 
-func (n *NumberValidatorCreateBulkResponseRequestID) GetExtraProperties() map[string]interface{} {
+func (n *NumberValidatorCreateBulkResponseRequestUUID) GetExtraProperties() map[string]interface{} {
 	if n == nil {
 		return nil
 	}
 	return n.extraProperties
 }
 
-func (n *NumberValidatorCreateBulkResponseRequestID) require(field *big.Int) {
+func (n *NumberValidatorCreateBulkResponseRequestUUID) require(field *big.Int) {
 	if n.explicitFields == nil {
 		n.explicitFields = big.NewInt(0)
 	}
 	n.explicitFields.Or(n.explicitFields, field)
 }
 
-// SetRequestID sets the RequestID field and marks it as non-optional;
+// SetRequestUUID sets the RequestUUID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (n *NumberValidatorCreateBulkResponseRequestID) SetRequestID(requestID *string) {
-	n.RequestID = requestID
-	n.require(numberValidatorCreateBulkResponseRequestIDFieldRequestID)
+func (n *NumberValidatorCreateBulkResponseRequestUUID) SetRequestUUID(requestUUID string) {
+	n.RequestUUID = requestUUID
+	n.require(numberValidatorCreateBulkResponseRequestUUIDFieldRequestUUID)
 }
 
-func (n *NumberValidatorCreateBulkResponseRequestID) UnmarshalJSON(data []byte) error {
-	type unmarshaler NumberValidatorCreateBulkResponseRequestID
+func (n *NumberValidatorCreateBulkResponseRequestUUID) UnmarshalJSON(data []byte) error {
+	type unmarshaler NumberValidatorCreateBulkResponseRequestUUID
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*n = NumberValidatorCreateBulkResponseRequestID(value)
+	*n = NumberValidatorCreateBulkResponseRequestUUID(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *n)
 	if err != nil {
 		return err
@@ -244,8 +244,8 @@ func (n *NumberValidatorCreateBulkResponseRequestID) UnmarshalJSON(data []byte) 
 	return nil
 }
 
-func (n *NumberValidatorCreateBulkResponseRequestID) MarshalJSON() ([]byte, error) {
-	type embed NumberValidatorCreateBulkResponseRequestID
+func (n *NumberValidatorCreateBulkResponseRequestUUID) MarshalJSON() ([]byte, error) {
+	type embed NumberValidatorCreateBulkResponseRequestUUID
 	var marshaler = struct {
 		embed
 	}{
@@ -255,7 +255,7 @@ func (n *NumberValidatorCreateBulkResponseRequestID) MarshalJSON() ([]byte, erro
 	return json.Marshal(explicitMarshaler)
 }
 
-func (n *NumberValidatorCreateBulkResponseRequestID) String() string {
+func (n *NumberValidatorCreateBulkResponseRequestUUID) String() string {
 	if n == nil {
 		return "<nil>"
 	}

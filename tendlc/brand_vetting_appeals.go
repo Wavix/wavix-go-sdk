@@ -27,10 +27,10 @@ type TenDlcBrandVettingAppealCreateRequest struct {
 	Evidence []string `json:"evidence" url:"-"`
 	// Appeal comment or justification.
 	Explanation *string `json:"explanation,omitempty" url:"-"`
-	// EVP ID.
-	EvpID *string `json:"evp_id,omitempty" url:"-"`
-	// Vetting ID.
-	VettingID *string `json:"vetting_id,omitempty" url:"-"`
+	// Code of the external vetting provider whose vetting is appealed, as returned in the Brand's vettings.
+	EvpID string `json:"evp_id" url:"-"`
+	// ID of the external vetting to appeal, as returned in the Brand's vettings.
+	VettingID string `json:"vetting_id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -73,14 +73,14 @@ func (t *TenDlcBrandVettingAppealCreateRequest) SetExplanation(explanation *stri
 
 // SetEvpID sets the EvpID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (t *TenDlcBrandVettingAppealCreateRequest) SetEvpID(evpID *string) {
+func (t *TenDlcBrandVettingAppealCreateRequest) SetEvpID(evpID string) {
 	t.EvpID = evpID
 	t.require(tenDlcBrandVettingAppealCreateRequestFieldEvpID)
 }
 
 // SetVettingID sets the VettingID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (t *TenDlcBrandVettingAppealCreateRequest) SetVettingID(vettingID *string) {
+func (t *TenDlcBrandVettingAppealCreateRequest) SetVettingID(vettingID string) {
 	t.VettingID = vettingID
 	t.require(tenDlcBrandVettingAppealCreateRequestFieldVettingID)
 }

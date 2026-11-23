@@ -11,7 +11,7 @@ var (
 )
 
 type GetResultsRequest struct {
-	// The `request_id` returned by the asynchronous bulk validation request.
+	// The `request_uuid` returned by the asynchronous bulk validation request.
 	RequestID string `json:"-" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted

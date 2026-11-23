@@ -4043,7 +4043,7 @@ client.NumberValidator.Get(
 <dl>
 <dd>
 
-Validates a batch of phone numbers. When `async` is `true`, returns a `request_id` to poll for results instead of the validation details.
+Validates a batch of phone numbers. When `async` is `true`, returns a `request_uuid` to poll for results instead of the validation details.
 </dd>
 </dl>
 </dd>
@@ -4084,7 +4084,7 @@ client.NumberValidator.CreateBulk(
 <dl>
 <dd>
 
-**phoneNumbers:** `[]string` — List of phone numbers to get detailed information about. Maximum 1000 numbers per request.
+**phoneNumbers:** `[]string` — List of phone numbers to get detailed information about. Maximum 500 numbers per request, or 100000 when `async` is `true`.
     
 </dd>
 </dl>
@@ -5994,7 +5994,7 @@ client.NumberValidator.Results.Get(
 <dl>
 <dd>
 
-**requestID:** `string` — The `request_id` returned by the asynchronous bulk validation request.
+**requestID:** `string` — The `request_uuid` returned by the asynchronous bulk validation request.
     
 </dd>
 </dl>
@@ -8617,6 +8617,8 @@ request := &tendlc.TenDlcBrandVettingAppealCreateRequest{
         Evidence: []string{
             "855dff49-c097-4645-3983-08dcb9856232",
         },
+        EvpID: "AEGIS",
+        VettingID: "48c0ffaa-4e51-4d44-3982-08dcb9856232",
     }
 client.TenDlc.BrandVettingAppeals.Create(
         context.TODO(),
@@ -8669,7 +8671,7 @@ client.TenDlc.BrandVettingAppeals.Create(
 <dl>
 <dd>
 
-**evpID:** `*string` — EVP ID.
+**evpID:** `string` — Code of the external vetting provider whose vetting is appealed, as returned in the Brand's vettings.
     
 </dd>
 </dl>
@@ -8677,7 +8679,7 @@ client.TenDlc.BrandVettingAppeals.Create(
 <dl>
 <dd>
 
-**vettingID:** `*string` — Vetting ID.
+**vettingID:** `string` — ID of the external vetting to appeal, as returned in the Brand's vettings.
     
 </dd>
 </dl>
