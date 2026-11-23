@@ -41,7 +41,7 @@ Use the SDK to:
 ## Installation
 
 ```sh
-go get github.com/wavix/wavix-go-sdk/v2
+go get github.com/wavix/wavix-go-sdk/v3
 ```
 
 **Requirements:** Go 1.23 or later.
@@ -59,8 +59,8 @@ export WAVIX_API_KEY="your-api-key"
 import (
     "os"
 
-    client "github.com/wavix/wavix-go-sdk/v2/client"
-    option "github.com/wavix/wavix-go-sdk/v2/option"
+    client "github.com/wavix/wavix-go-sdk/v3/client"
+    option "github.com/wavix/wavix-go-sdk/v3/option"
 )
 
 c := client.NewClient(option.WithToken(os.Getenv("WAVIX_API_KEY")))
@@ -81,10 +81,10 @@ package example
 import (
     context "context"
 
-    wavixgo "github.com/wavix/wavix-go-sdk/v2"
-    client "github.com/wavix/wavix-go-sdk/v2/client"
-    option "github.com/wavix/wavix-go-sdk/v2/option"
-    smsandmms "github.com/wavix/wavix-go-sdk/v2/smsandmms"
+    wavixgo "github.com/wavix/wavix-go-sdk/v3"
+    client "github.com/wavix/wavix-go-sdk/v3/client"
+    option "github.com/wavix/wavix-go-sdk/v3/option"
+    smsandmms "github.com/wavix/wavix-go-sdk/v3/smsandmms"
 )
 
 func do() {
