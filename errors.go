@@ -103,7 +103,7 @@ func (n *NotFoundError) Unwrap() error {
 	return n.APIError
 }
 
-// Returns when the billing service is temporarily unavailable.
+// Returns when the availability of the phone numbers in the cart can't be checked. The cart isn't changed; retry the request.
 type ServiceUnavailableError struct {
 	*core.APIError
 	Body *ValidationErrorResponse
