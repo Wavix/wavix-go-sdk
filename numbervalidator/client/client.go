@@ -37,7 +37,7 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-// Validates a single phone number and returns line type, carrier, portability, and reachability details. The response's `error_code` is a per-number result code (`000` success; `013` internal error; `021` invalid format; `041` remote timeout; `042` remote query failed; `091` insufficient funds) — distinct from the HTTP status codes below.
+// Validates a single phone number and returns line type, carrier, portability, and reachability details. The response's `error_code` is a per-number result code (`000` success; `013` internal error; `021` invalid format; `041` remote timeout; `042` remote query failed; `091` insufficient funds) — distinct from the HTTP status codes below. Each validation is charged to the account balance; `charge` in the response shows the amount.
 func (c *Client) Get(
 	ctx context.Context,
 	request *v3.GetNumberValidatorRequest,
@@ -54,7 +54,7 @@ func (c *Client) Get(
 	return response.Body, nil
 }
 
-// Validates a batch of phone numbers. When `async` is `true`, returns a `request_uuid` to poll for results instead of the validation details.
+// Validates a batch of phone numbers. When `async` is `true`, returns a `request_uuid` to poll for results instead of the validation details. Each number in the batch is charged to the account balance.
 func (c *Client) CreateBulk(
 	ctx context.Context,
 	request *v3.PhoneValidationRequest,

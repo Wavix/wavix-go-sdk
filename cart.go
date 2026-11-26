@@ -151,13 +151,16 @@ func (r *RemoveCartRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	cartResponseFieldDids     = big.NewInt(1 << 0)
-	cartResponseFieldDocTypes = big.NewInt(1 << 1)
+	cartResponseFieldDids            = big.NewInt(1 << 0)
+	cartResponseFieldUnavailableDids = big.NewInt(1 << 1)
+	cartResponseFieldDocTypes        = big.NewInt(1 << 2)
 )
 
 type CartResponse struct {
-	// List of phone numbers in the cart.
+	// Phone numbers in the cart that are available for purchase.
 	Dids []*AvailableNumber `json:"dids" url:"dids"`
+	// Phone numbers in the cart that are no longer available for purchase. Retrieving the cart doesn't remove them. Empty when every number is available.
+	UnavailableDids []string `json:"unavailable_dids,omitempty" url:"unavailable_dids,omitempty"`
 	// Document types required to activate phone numbers.
 	DocTypes []*DocumentTypeInfo `json:"doc_types" url:"doc_types"`
 
@@ -173,6 +176,13 @@ func (c *CartResponse) GetDids() []*AvailableNumber {
 		return nil
 	}
 	return c.Dids
+}
+
+func (c *CartResponse) GetUnavailableDids() []string {
+	if c == nil {
+		return nil
+	}
+	return c.UnavailableDids
 }
 
 func (c *CartResponse) GetDocTypes() []*DocumentTypeInfo {
@@ -201,6 +211,13 @@ func (c *CartResponse) require(field *big.Int) {
 func (c *CartResponse) SetDids(dids []*AvailableNumber) {
 	c.Dids = dids
 	c.require(cartResponseFieldDids)
+}
+
+// SetUnavailableDids sets the UnavailableDids field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CartResponse) SetUnavailableDids(unavailableDids []string) {
+	c.UnavailableDids = unavailableDids
+	c.require(cartResponseFieldUnavailableDids)
 }
 
 // SetDocTypes sets the DocTypes field and marks it as non-optional;

@@ -20663,6 +20663,8 @@ var (
 	whatsAppMessageListItemFieldContent                = big.NewInt(1 << 7)
 	whatsAppMessageListItemFieldServiceWindowOpenUntil = big.NewInt(1 << 8)
 	whatsAppMessageListItemFieldError                  = big.NewInt(1 << 9)
+	whatsAppMessageListItemFieldCharge                 = big.NewInt(1 << 10)
+	whatsAppMessageListItemFieldCategory               = big.NewInt(1 << 11)
 )
 
 type WhatsAppMessageListItem struct {
@@ -20697,6 +20699,15 @@ type WhatsAppMessageListItem struct {
 	ServiceWindowOpenUntil *time.Time `json:"service_window_open_until,omitempty" url:"service_window_open_until,omitempty"`
 	// Why an `outbound` message wasn't delivered. It's `null` unless `status` is `undelivered`, `expired`, or `rejected`.
 	Error *WhatsAppMessageError `json:"error,omitempty" url:"error,omitempty"`
+	// Amount charged for the message in USD, such as `0.0950`. `0.0000` means the message wasn't charged. `null` means no amount is recorded, for example while the message isn't delivered yet. Returned for outbound messages, and only to users who can view prices.
+	Charge *string `json:"charge,omitempty" url:"charge,omitempty"`
+	// WhatsApp conversation category the message is billed in, or `null` if it isn't known. Returned for outbound messages, and only to users who can view prices. Possible values:
+	//
+	// - `marketing` — Promotions, offers, and other marketing content.
+	// - `utility` — Transactional updates about an order or an account.
+	// - `authentication` — One-time passcodes for verifying a user.
+	// - `service` — Replies sent within a customer service window.
+	Category *WhatsAppMessageListItemCategory `json:"category,omitempty" url:"category,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -20773,6 +20784,20 @@ func (w *WhatsAppMessageListItem) GetError() *WhatsAppMessageError {
 		return nil
 	}
 	return w.Error
+}
+
+func (w *WhatsAppMessageListItem) GetCharge() *string {
+	if w == nil {
+		return nil
+	}
+	return w.Charge
+}
+
+func (w *WhatsAppMessageListItem) GetCategory() *WhatsAppMessageListItemCategory {
+	if w == nil {
+		return nil
+	}
+	return w.Category
 }
 
 func (w *WhatsAppMessageListItem) GetExtraProperties() map[string]interface{} {
@@ -20859,6 +20884,20 @@ func (w *WhatsAppMessageListItem) SetError(error_ *WhatsAppMessageError) {
 	w.require(whatsAppMessageListItemFieldError)
 }
 
+// SetCharge sets the Charge field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageListItem) SetCharge(charge *string) {
+	w.Charge = charge
+	w.require(whatsAppMessageListItemFieldCharge)
+}
+
+// SetCategory sets the Category field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WhatsAppMessageListItem) SetCategory(category *WhatsAppMessageListItemCategory) {
+	w.Category = category
+	w.require(whatsAppMessageListItemFieldCategory)
+}
+
 func (w *WhatsAppMessageListItem) UnmarshalJSON(data []byte) error {
 	type embed WhatsAppMessageListItem
 	var unmarshaler = struct {
@@ -20911,6 +20950,40 @@ func (w *WhatsAppMessageListItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", w)
+}
+
+// WhatsApp conversation category the message is billed in, or `null` if it isn't known. Returned for outbound messages, and only to users who can view prices. Possible values:
+//
+// - `marketing` — Promotions, offers, and other marketing content.
+// - `utility` — Transactional updates about an order or an account.
+// - `authentication` — One-time passcodes for verifying a user.
+// - `service` — Replies sent within a customer service window.
+type WhatsAppMessageListItemCategory string
+
+const (
+	WhatsAppMessageListItemCategoryMarketing      WhatsAppMessageListItemCategory = "marketing"
+	WhatsAppMessageListItemCategoryUtility        WhatsAppMessageListItemCategory = "utility"
+	WhatsAppMessageListItemCategoryAuthentication WhatsAppMessageListItemCategory = "authentication"
+	WhatsAppMessageListItemCategoryService        WhatsAppMessageListItemCategory = "service"
+)
+
+func NewWhatsAppMessageListItemCategoryFromString(s string) (WhatsAppMessageListItemCategory, error) {
+	switch s {
+	case "marketing":
+		return WhatsAppMessageListItemCategoryMarketing, nil
+	case "utility":
+		return WhatsAppMessageListItemCategoryUtility, nil
+	case "authentication":
+		return WhatsAppMessageListItemCategoryAuthentication, nil
+	case "service":
+		return WhatsAppMessageListItemCategoryService, nil
+	}
+	var t WhatsAppMessageListItemCategory
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WhatsAppMessageListItemCategory) Ptr() *WhatsAppMessageListItemCategory {
+	return &w
 }
 
 // Message direction. Possible values:

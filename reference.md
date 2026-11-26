@@ -3973,7 +3973,7 @@ Prompt to play before collecting digits.
 <dl>
 <dd>
 
-Validates a single phone number and returns line type, carrier, portability, and reachability details. The response's `error_code` is a per-number result code (`000` success; `013` internal error; `021` invalid format; `041` remote timeout; `042` remote query failed; `091` insufficient funds) — distinct from the HTTP status codes below.
+Validates a single phone number and returns line type, carrier, portability, and reachability details. The response's `error_code` is a per-number result code (`000` success; `013` internal error; `021` invalid format; `041` remote timeout; `042` remote query failed; `091` insufficient funds) — distinct from the HTTP status codes below. Each validation is charged to the account balance; `charge` in the response shows the amount.
 </dd>
 </dl>
 </dd>
@@ -4043,7 +4043,7 @@ client.NumberValidator.Get(
 <dl>
 <dd>
 
-Validates a batch of phone numbers. When `async` is `true`, returns a `request_uuid` to poll for results instead of the validation details.
+Validates a batch of phone numbers. When `async` is `true`, returns a `request_uuid` to poll for results instead of the validation details. Each number in the batch is charged to the account balance.
 </dd>
 </dl>
 </dd>
@@ -6730,7 +6730,7 @@ client.SmsAndMms.Messages.List(
 <dl>
 <dd>
 
-Sends an SMS or MMS message. MMS is supported for U.S. numbers only. Track delivery using the returned `message_id` and the message status callback. The recipient must be opted in to receive messages from the account; sending to an opted-out number fails.
+Sends an SMS or MMS message. MMS is supported for U.S. numbers only. Track delivery using the returned `message_id` and the message status callback. The recipient must be opted in to receive messages from the account; sending to an opted-out number fails. Each message is charged to the account balance; `charge` in the response shows the amount.
 </dd>
 </dl>
 </dd>
@@ -10318,7 +10318,7 @@ client.TwoFa.Verification.Create(
 <dl>
 <dd>
 
-Resends the OTP for the verification identified by `session_id` over the specified channel. Previously sent codes are invalidated.
+Resends the OTP for the verification identified by `session_id` over the specified channel. Previously sent codes are invalidated. Each code sent is charged to the account balance.
 </dd>
 </dl>
 </dd>

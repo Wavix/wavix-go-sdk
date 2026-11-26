@@ -57,7 +57,7 @@ func (c *Client) Create(
 	return response.Body, nil
 }
 
-// Resends the OTP for the verification identified by `session_id` over the specified channel. Previously sent codes are invalidated.
+// Resends the OTP for the verification identified by `session_id` over the specified channel. Previously sent codes are invalidated. Each code sent is charged to the account balance.
 func (c *Client) Resend(
 	ctx context.Context,
 	request *twofa.TwoFactorVerificationResendRequest,
